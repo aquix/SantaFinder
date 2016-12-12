@@ -6,8 +6,6 @@ const ChunkWebpack = webpack.optimize.CommonsChunkPlugin;
 
 
 module.exports = {
-    debug: true,
-    devtool: 'source-map',
     entry: {
         index: './src/index.ts'
     },
@@ -23,7 +21,7 @@ module.exports = {
                 test: /\.html$/
             },
             {
-                loader: 'ts',
+                loader: 'ts-loader',
                 test: /\.ts$/,
                 exclude: /node_modules/
             },
@@ -39,6 +37,12 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
             template: './src/index.html'
-        })
-    ]
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['common']
+        }),
+    ],
+    resolve: {
+        extensions: [ '', '.js', '.ts' ]
+    }
 };

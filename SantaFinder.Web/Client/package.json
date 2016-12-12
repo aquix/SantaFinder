@@ -6,8 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-
-   "dependencies": {
+  "dependencies": {
     "@angular/common": "~2.3.0",
     "@angular/compiler": "~2.3.0",
     "@angular/core": "~2.3.0",
@@ -16,24 +15,26 @@
     "@angular/platform-browser": "~2.3.0",
     "@angular/platform-browser-dynamic": "~2.3.0",
     "@angular/router": "~3.3.0",
-
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-rc.4",
     "zone.js": "^0.7.2"
-   },
-
-   "devDependencies": {
-     "typescript": "*",
-     "tslint": "*",
-     "typings": "*",
-
-     "webpack": "*",
-     "html-webpack-plugin": "*",
-     "raw-loader": "*",
-     "ts-loader": "*",
-     "sass-loader": "*",
-     "css-loader": "*",
-     "style-loader": "*",
-     "tslint-loader": "*"
-   }
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "awesome-typescript-loader": "^3.0.0-beta.13",
+    "css-loader": "*",
+    "html-webpack-plugin": "*",
+    "node-sass": "^3.13.1",
+    "raw-loader": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "ts-loader": "*",
+    "tslint": "*",
+    "tslint-loader": "*",
+    "typescript": "*",
+    "typings": "*",
+    "webpack": "*",
+    "webpack-merge": "^1.1.1",
+    "webpack-uglify-js-plugin": "^1.1.9"
+  }
 }
