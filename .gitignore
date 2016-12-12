@@ -1,5 +1,6 @@
 ## Project-specific
-Client/dist
+**/Client/dist
+**/Client/typings
 .vscode
 
 ## Ignore Visual Studio temporary files, build results, and
