@@ -4,12 +4,23 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const commonConfig = require('./webpack.config.common');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = merge(commonConfig, {
+     module: {
+        loaders: [{
+            loader: ExtractTextPlugin.extract('css!sass'),
+            test: /\.scss$/,
+            exclude: /node_modules/
+        }]
+    },
+
      plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: false,
             unsafe: true
         }),
+        new ExtractTextPlugin('index.css')
     ],
 
     resolve: {
@@ -24,5 +35,5 @@ module.exports = merge(commonConfig, {
             '@angular/router-deprecated' : '@angular/router-deprecated/bundles/router-deprecated.umd.min.js',
             '@angular/upgrade' : '@angular/upgrade/bundles/upgrade.umd.min.js'
         }
-    },
+    }
 });

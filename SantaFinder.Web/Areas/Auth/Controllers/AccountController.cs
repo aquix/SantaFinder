@@ -13,6 +13,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using SantaFinder.Data.Entities;
+using SantaFinder.Web.Areas.Auth.Managers;
 using SantaFinder.Web.Auth.Models;
 using SantaFinder.Web.Auth.Providers;
 using SantaFinder.Web.Auth.Results;
@@ -24,24 +26,24 @@ namespace SantaFinder.Web.Auth.Controllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private AppUserManager _userManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountController(AppUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        public AppUserManager UserManager
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? Request.GetOwinContext().GetUserManager<AppUserManager>();
             }
             private set
             {
@@ -250,7 +252,7 @@ namespace SantaFinder.Web.Auth.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            User user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
@@ -264,7 +266,7 @@ namespace SantaFinder.Web.Auth.Controllers
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName, user.Id);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -328,7 +330,7 @@ namespace SantaFinder.Web.Auth.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new User() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -357,7 +359,7 @@ namespace SantaFinder.Web.Auth.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new User() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)

@@ -2,8 +2,8 @@
 
 const HtmlWebpack = require('html-webpack-plugin');
 const webpack = require('webpack');
-const ChunkWebpack = webpack.optimize.CommonsChunkPlugin;
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 module.exports = {
     entry: {
@@ -24,11 +24,6 @@ module.exports = {
                 loader: 'ts-loader',
                 test: /\.ts$/,
                 exclude: /node_modules/
-            },
-            {
-                loader: 'style!css!sass',
-                test: /\.scss$/,
-                exclude: /node_modules/
             }
         ]
     },
@@ -38,11 +33,29 @@ module.exports = {
             inject: 'body',
             template: './src/index.html'
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['common']
+        new CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function (module) {
+                return isExternal(module);
+            }
         }),
+        new CopyWebpackPlugin([{
+            from: './src/static'
+        }])
     ],
     resolve: {
-        extensions: [ '', '.js', '.ts' ]
+        extensions: ['', '.js', '.ts']
     }
 };
+
+function isExternal(module) {
+    var userRequest = module.userRequest;
+
+    if (typeof userRequest !== 'string') {
+        return false;
+    }
+
+    return userRequest.indexOf('bower_components') >= 0 ||
+        userRequest.indexOf('node_modules') >= 0 ||
+        userRequest.indexOf('libraries') >= 0;
+}

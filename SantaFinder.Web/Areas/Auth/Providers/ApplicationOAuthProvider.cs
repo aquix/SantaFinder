@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using SantaFinder.Data.Entities;
+using SantaFinder.Web.Areas.Auth.Managers;
 using SantaFinder.Web.Auth.Models;
 
 namespace SantaFinder.Web.Auth.Providers
@@ -29,9 +32,10 @@ namespace SantaFinder.Web.Auth.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var autofacLifetimeScope = Autofac.Integration.Owin.OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
+            var userManager = autofacLifetimeScope.Resolve<AppUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -44,7 +48,7 @@ namespace SantaFinder.Web.Auth.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user.UserName, user.Id);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -86,11 +90,12 @@ namespace SantaFinder.Web.Auth.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName, string userId)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", userName },
+                { "userId", userId }
             };
             return new AuthenticationProperties(data);
         }

@@ -1,0 +1,21 @@
+{
+  "name": "santa-finder.client",
+  "description": "",
+  "main": "./dist/index.js",
+  "authors": [
+    "Uladzislau Klimiankou <vlad.klimenkoff97@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/aquix/SantaFinder",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "install": {
+    "path": "dist/lib"
+  }
+}
