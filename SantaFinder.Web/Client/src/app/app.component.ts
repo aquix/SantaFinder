@@ -4,8 +4,6 @@ import './app.scss';
 
 @Component({
     selector: 'my-app',
-    template: `
-        <router-outlet></router-outlet>
-        `
+    template: require('./app.html')
 })
 export class AppComponent { }
