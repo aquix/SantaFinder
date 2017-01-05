@@ -13,6 +13,8 @@ import { SantaAccountService } from './account/services/santa-account.service';
 import { AccountService } from './account/services/account.service';
 
 import { MainComponent } from './main/main.component';
+import { ClientHomeComponent } from './client/client-home.component';
+import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
@@ -31,6 +33,8 @@ import { SantaRegisterFormComponent } from './account/santa/register/santa-regis
     declarations: [
         AppComponent,
         MainComponent,
+        ClientHomeComponent,
+        SantaHomeComponent,
         AccountComponent,
         ClientAccountComponent,
         ClientLoginFormComponent,

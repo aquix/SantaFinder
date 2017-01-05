@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
+import { Router } from '@angular/router';
 
 import CustomValidators from '../../utils/custom-validators';
 import { SantaAccountService } from '../../services/santa-account.service';
@@ -16,6 +17,7 @@ export class SantaRegisterFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private accountService: SantaAccountService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -34,6 +36,14 @@ export class SantaRegisterFormComponent implements OnInit {
     onSubmitClick({ value }: { value: SantaRegisterModel }) {
         this.accountService.register(value).subscribe(res => {
             console.log('Registered', res);
+            return this.accountService.login({
+                email: value.email,
+                password: value.passwords.password
+            }).subscribe(res => {
+                this.router.navigate(['/santa']);
+            }, err => {
+                console.log('error when login');
+            });
         });
     }
 }

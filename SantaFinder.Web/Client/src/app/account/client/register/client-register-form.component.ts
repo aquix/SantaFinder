@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import CustomValidators from '../../utils/custom-validators';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
+import { Router } from '@angular/router';
 
+import CustomValidators from '../../utils/custom-validators';
 import { ClientAccountService } from '../../services/client-account.service';
 import { ClientRegisterModel } from './client-register.model';
 
@@ -16,6 +17,7 @@ export class ClientRegisterFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private accountService: ClientAccountService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -40,6 +42,14 @@ export class ClientRegisterFormComponent implements OnInit {
     onSubmitClick({ value }: { value: ClientRegisterModel }) {
         this.accountService.register(value).subscribe(res => {
             console.log('Registered', res);
+            return this.accountService.login({
+                email: value.email,
+                password: value.passwords.password
+            }).subscribe(res => {
+                this.router.navigate(['/client']);
+            }, err => {
+                console.log('error when login');
+            });
         });
     }
 }

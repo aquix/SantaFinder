@@ -5,7 +5,9 @@ import { IAuthInfo } from './auth-info';
 export class AuthInfoStorage {
     private _authInfo: IAuthInfo;
 
-    constructor() { }
+    constructor() {
+        console.log('auth info ctor');
+    }
 
     get authInfo() {
         return this._authInfo;

@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './account/services/auth.guard';
 
 import { MainComponent } from './main/main.component';
+import { ClientHomeComponent } from './client/client-home.component';
+import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
@@ -33,6 +35,8 @@ const accountTypeRoutes: Routes = [
 const appRoutes: Routes = [
     { path: '', component: MainComponent, canActivate: [AuthGuard] },
     { path: 'account', component: AccountComponent, children: accountTypeRoutes },
+    { path: 'client', component: ClientHomeComponent, canActivate: [AuthGuard] },
+    { path: 'santa', component: SantaHomeComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 
