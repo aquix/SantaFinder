@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EmailValidators } from 'ng2-validators';
 
-import CustomValidators from '../../utils/custom-validators';
 import { SantaAccountService } from '../../services/santa-account.service';
 import { SantaLoginModel } from './santa-login.model';
 
@@ -23,8 +23,8 @@ export class SantaLoginFormComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.minLength(3)]],
-            password: ['', [CustomValidators.password]]
+            email: ['', [Validators.required, EmailValidators.simple()]],
+            password: ['']
         });
     }
 

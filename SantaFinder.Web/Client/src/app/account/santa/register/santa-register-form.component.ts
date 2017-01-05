@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import CustomValidators from '../../utils/custom-validators';
+import { EmailValidators, PasswordValidators } from 'ng2-validators';
 
+import CustomValidators from '../../utils/custom-validators';
 import { SantaAccountService } from '../../services/santa-account.service';
 import { SantaRegisterModel } from './santa-register.model';
 
@@ -19,12 +20,12 @@ export class SantaRegisterFormComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.minLength(3)]],
+            email: ['', [Validators.required, EmailValidators.simple()]],
             passwords: this.formBuilder.group({
                 password: ['', [CustomValidators.password]],
                 passwordConfirmation: ['']
             }, {
-                validator: CustomValidators.passwordsEqual
+                validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')
             }),
             name: ['', Validators.required]
         });

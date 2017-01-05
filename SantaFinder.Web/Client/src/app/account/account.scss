@@ -1,3 +1,17 @@
 .account-active-type {
     color: green;
 }
+
+.validation.ng-touched {
+    &.ng-valid {
+        border:solid green 2px;
+    }
+
+    &.ng-invalid {
+        border:solid red 2px;
+    }
+}
+
+.error-message {
+    color: red;
+}
