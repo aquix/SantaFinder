@@ -8,14 +8,18 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './account/services/auth.guard';
 import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
+import { ClientAccountService } from './account/services/client-account.service';
+import { SantaAccountService } from './account/services/santa-account.service';
 import { AccountService } from './account/services/account.service';
 
 import { MainComponent } from './main/main.component';
 import { AccountComponent } from './account/account.component';
-import { AccountClientComponent } from './account/client/account-client.component';
-import { AccountSantaComponent } from './account/santa/account-santa.component';
-import { LoginFormComponent } from './account/forms/login/login-form.component';
-import { RegisterFormComponent } from './account/forms/register/register-form.component';
+import { ClientAccountComponent } from './account/client/client-account.component';
+import { SantaAccountComponent } from './account/santa/santa-account.component';
+import { ClientLoginFormComponent } from './account/client/login/client-login-form.component';
+import { ClientRegisterFormComponent } from './account/client/register/client-register-form.component';
+import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
+import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
 
 @NgModule({
     imports: [
@@ -28,16 +32,20 @@ import { RegisterFormComponent } from './account/forms/register/register-form.co
         AppComponent,
         MainComponent,
         AccountComponent,
-        AccountClientComponent,
-        AccountSantaComponent,
-        LoginFormComponent,
-        RegisterFormComponent
+        ClientAccountComponent,
+        ClientLoginFormComponent,
+        ClientRegisterFormComponent,
+        SantaAccountComponent,
+        SantaLoginFormComponent,
+        SantaRegisterFormComponent
     ],
     providers: [
         AuthGuard,
         AuthInfoStorage,
         AuthHttp,
-        AccountService
+        AccountService,
+        ClientAccountService,
+        SantaAccountService
     ],
     bootstrap: [AppComponent]
 })

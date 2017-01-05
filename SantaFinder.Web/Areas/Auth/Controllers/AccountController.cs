@@ -266,7 +266,7 @@ namespace SantaFinder.Web.Auth.Controllers
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName, user.Id);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.Email, user.Id);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else

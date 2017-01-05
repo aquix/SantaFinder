@@ -1,0 +1,52 @@
+<div>
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmitClick(registerForm)">
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" formControlName="email" class="validation" name="email" value="">
+        </div>
+        <div formGroupName="passwords">
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" formControlName="password" class="validation" name="password" value="">
+            </div>
+            <div>
+                <label for="passwordConfirmation">Confirm password:</label>
+                <input type="password" formControlName="passwordConfirmation" name="passwordConfirmation" value="">
+            </div>
+            <div *ngIf="registerForm.controls.passwords.invalid &&
+                        registerForm.controls.passwords.controls.password.valid &&
+                        !registerForm.controls.passwords.controls.passwordConfirmation.pristine">
+                Password doesn't match
+            </div>
+        </div>
+        <div>
+            <label for="name">Your name:</label>
+            <input type="text" formControlName="name" class="validation" name="name" value="">
+        </div>
+        <div formGroupName="address">
+            <div>
+                <label>Address:</label>
+            </div>
+            <div>
+                <label for="city">City:</label>
+                <input type="text" formControlName="city" class="validation" name="city" value="">
+            </div>
+            <div>
+                <label for="street">Street:</label>
+                <input type="text" formControlName="street" class="validation" name="street" value="">
+            </div>
+            <div>
+                <label for="house">House:</label>
+                <input type="text" formControlName="house" class="validation" name="house" value="">
+            </div>
+            <div>
+                <label for="apartment">Apartment:</label>
+                <input type="text" formControlName="apartment" class="validation" name="apartment" value="">
+            </div>
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+    <small>
+        Already have an account? <a [routerLink]="['../login']">Login here</a>
+    </small>
+</div>

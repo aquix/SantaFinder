@@ -1,0 +1,31 @@
+<div>
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmitClick(registerForm)">
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" formControlName="email" class="validation" name="email" value="">
+        </div>
+        <div formGroupName="passwords">
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" formControlName="password" class="validation" name="password" value="">
+            </div>
+            <div>
+                <label for="passwordConfirmation">Confirm password:</label>
+                <input type="password" formControlName="passwordConfirmation" name="passwordConfirmation" value="">
+            </div>
+            <div *ngIf="registerForm.controls.passwords.invalid &&
+                        registerForm.controls.passwords.controls.password.valid &&
+                        !registerForm.controls.passwords.controls.passwordConfirmation.pristine">
+                Password doesn't match
+            </div>
+        </div>
+        <div>
+            <label for="name">Your name:</label>
+            <input type="text" formControlName="name" class="validation" name="name" value="">
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+    <small>
+        Already have an account? <a [routerLink]="['../login']">Login here</a>
+    </small>
+</div>

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'account-santa',
-    template: require('./account-santa.html')
+    template: require('./santa-account.html')
 })
-export class AccountSantaComponent implements OnInit {
+export class SantaAccountComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }

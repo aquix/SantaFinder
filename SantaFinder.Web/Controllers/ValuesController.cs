@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace SantaFinder.Web.Controllers
 {
@@ -13,6 +14,7 @@ namespace SantaFinder.Web.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
+            var userId = User.Identity.GetUserId();
             return new string[] { "value1", "value2" };
         }
 

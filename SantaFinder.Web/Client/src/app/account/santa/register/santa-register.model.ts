@@ -1,5 +1,5 @@
-export interface RegisterModel {
-    username: string;
+export interface SantaRegisterModel {
+    email: string;
     passwords: {
         password: string,
         passwordConfirmation: string

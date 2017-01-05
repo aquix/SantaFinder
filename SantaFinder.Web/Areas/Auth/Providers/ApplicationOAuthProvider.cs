@@ -48,7 +48,7 @@ namespace SantaFinder.Web.Auth.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName, user.Id);
+            AuthenticationProperties properties = CreateProperties(user.Email, user.Id);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -90,11 +90,11 @@ namespace SantaFinder.Web.Auth.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName, string userId)
+        public static AuthenticationProperties CreateProperties(string email, string userId)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName },
+                { "email", email },
                 { "userId", userId }
             };
             return new AuthenticationProperties(data);

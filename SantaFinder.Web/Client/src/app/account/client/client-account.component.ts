@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'account-client',
-    template: require('./account-client.html')
+    template: require('./client-account.html')
 })
-export class AccountClientComponent implements OnInit {
+export class ClientAccountComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }

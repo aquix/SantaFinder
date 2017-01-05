@@ -23,7 +23,7 @@ namespace SantaFinder.Web.Areas.Auth.Managers
             manager.UserValidator = new UserValidator<User>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = false
+                RequireUniqueEmail = true
             };
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
