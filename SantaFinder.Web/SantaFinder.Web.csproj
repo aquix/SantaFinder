@@ -207,14 +207,20 @@
     <Compile Include="App_Start\Startup.WebApi.cs" />
     <Compile Include="Areas\Auth\AuthAreaRegistration.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Auth\Controllers\ClientAccountController.cs" />
+    <Compile Include="Areas\Auth\Controllers\SantaAccountController.cs" />
     <Compile Include="Areas\Auth\Managers\AppUserManager.cs" />
+    <Compile Include="Areas\Auth\Managers\ClientManager.cs" />
+    <Compile Include="Areas\Auth\Managers\SantaManager.cs" />
+    <Compile Include="Areas\Auth\Models\AddressViewModel.cs" />
+    <Compile Include="Areas\Auth\Models\RegisterClientModel.cs" />
+    <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
+    <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Auth\Models\AccountBindingModels.cs" />
-    <Compile Include="Areas\Auth\Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Auth\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Areas\Auth\Results\ChallengeResult.cs" />

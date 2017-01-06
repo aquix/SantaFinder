@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using SantaFinder.Data.Context;
-using SantaFinder.Data.Entities;
 
 namespace SantaFinder.Web.Areas.Auth.Managers
 {
-    public class AppUserManager : UserManager<User>
+    public class AppUserManager<T> : UserManager<T>
+        where T: IdentityUser
     {
-        public AppUserManager(IUserStore<User> store)
-            : base(store) { }
+        public AppUserManager(IUserStore<T> store) : base(store) { }
 
-        public static AppUserManager Create(IDataProtector dataProtector, AppDbContext context)
+        public static AppUserManager<T> Create(IDataProtector dataProtector, AppDbContext context)
         {
-            var manager = new AppUserManager(new UserStore<User>(context));
+            var manager = new AppUserManager<T>(new UserStore<T>(context));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<User>(manager)
+            manager.UserValidator = new UserValidator<T>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -32,9 +33,17 @@ namespace SantaFinder.Web.Areas.Auth.Managers
                 RequireDigit = true
             };
 
-            manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtector);
+            manager.UserTokenProvider = new DataProtectorTokenProvider<T>(dataProtector);
 
             return manager;
+        }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(T user, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await CreateIdentityAsync(user, authenticationType);
+            // Add custom user claims here
+            return userIdentity;
         }
     }
 }

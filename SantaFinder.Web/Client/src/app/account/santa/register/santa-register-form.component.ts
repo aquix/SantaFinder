@@ -4,7 +4,7 @@ import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
 import CustomValidators from '../../utils/custom-validators';
-import { SantaAccountService } from '../../services/santa-account.service';
+import { AccountService } from '../../services/account.service';
 import { SantaRegisterModel } from './santa-register.model';
 import { UserType } from '../../../auth/user-type';
 
@@ -17,7 +17,7 @@ export class SantaRegisterFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private accountService: SantaAccountService,
+        private accountService: AccountService,
         private router: Router
     ) { }
 

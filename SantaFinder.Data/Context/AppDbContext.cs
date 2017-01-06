@@ -15,5 +15,8 @@ namespace SantaFinder.Data.Context
             : base("DefaultConnection", throwIfV1Schema: false) { }
 
         public static AppDbContext Create() => new AppDbContext();
+
+        public IDbSet<Client> Clients { get; set; }
+        public IDbSet<Santa> Santas { get; set; }
     }
 }

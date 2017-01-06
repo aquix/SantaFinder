@@ -5,15 +5,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Autofac;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Areas.Auth.Managers;
-using SantaFinder.Web.Auth.Models;
 
 namespace SantaFinder.Web.Auth.Providers
 {
@@ -34,23 +30,42 @@ namespace SantaFinder.Web.Auth.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var autofacLifetimeScope = Autofac.Integration.Owin.OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
-            var userManager = autofacLifetimeScope.Resolve<AppUserManager>();
+            var clientManager = autofacLifetimeScope.Resolve<AppUserManager<Client>>();
+            var santaManager = autofacLifetimeScope.Resolve<AppUserManager<Santa>>();
+            var userType = context.OwinContext.Get<UserType>("usertype");
 
-            // TODO check user type
-            Debug.Print(context.OwinContext.Get<UserType>("usertype").ToString());
+            ClaimsIdentity oAuthIdentity = null;
+            ClaimsIdentity cookiesIdentity = null;
+            User user;
 
-            User user = await userManager.FindAsync(context.UserName, context.Password);
+            if (userType == UserType.Client)
+            {
+                var client = await clientManager.FindAsync(context.UserName, context.Password);
+                if (client != null)
+                {
+                    oAuthIdentity = await clientManager.GenerateUserIdentityAsync(client, OAuthDefaults.AuthenticationType);
+                    cookiesIdentity = await clientManager.GenerateUserIdentityAsync(client, CookieAuthenticationDefaults.AuthenticationType);
+                }
+
+                user = client;
+            }
+            else
+            {
+                var santa = await santaManager.FindAsync(context.UserName, context.Password);
+                if (santa != null)
+                {
+                    oAuthIdentity = await santaManager.GenerateUserIdentityAsync(santa, OAuthDefaults.AuthenticationType);
+                    cookiesIdentity = await santaManager.GenerateUserIdentityAsync(santa, CookieAuthenticationDefaults.AuthenticationType);
+                }
+
+                user = santa;
+            }
 
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
-
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
 
             AuthenticationProperties properties = CreateProperties(user.Email, user.Id);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);

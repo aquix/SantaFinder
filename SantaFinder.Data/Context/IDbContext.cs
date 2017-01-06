@@ -12,6 +12,8 @@ namespace SantaFinder.Data.Context
     public interface IDbContext
     {
         IDbSet<User> Users { get; set; }
+        IDbSet<Client> Clients { get; set; }
+        IDbSet<Santa> Santas { get; set; }
 
         int SaveChanges();
         Task<int> SaveChangesAsync();

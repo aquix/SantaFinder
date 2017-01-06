@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators } from 'ng2-validators';
 
-import { ClientAccountService } from '../../services/client-account.service';
+import { AccountService } from '../../services/account.service';
 import { LoginModel } from './login.model';
 import { UserType } from '../../../auth/user-type';
 
@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: ClientAccountService
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {

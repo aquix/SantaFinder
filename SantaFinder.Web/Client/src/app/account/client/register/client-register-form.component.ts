@@ -4,7 +4,7 @@ import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
 import CustomValidators from '../../utils/custom-validators';
-import { ClientAccountService } from '../../services/client-account.service';
+import { AccountService } from '../../services/account.service';
 import { ClientRegisterModel } from './client-register.model';
 import { UserType } from '../../../auth/user-type';
 
@@ -17,7 +17,7 @@ export class ClientRegisterFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private accountService: ClientAccountService,
+        private accountService: AccountService,
         private router: Router
     ) { }
 

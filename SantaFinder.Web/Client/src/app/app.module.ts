@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './account/services/auth.guard';
 import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
-import { ClientAccountService } from './account/services/client-account.service';
-import { SantaAccountService } from './account/services/santa-account.service';
 import { AccountService } from './account/services/account.service';
 
 import { MainComponent } from './main/main.component';
@@ -49,9 +47,7 @@ import { LoginFormComponent } from './account/shared/login/login-form.component'
         AuthGuard,
         AuthInfoStorage,
         AuthHttp,
-        AccountService,
-        ClientAccountService,
-        SantaAccountService
+        AccountService
     ],
     bootstrap: [AppComponent]
 })
