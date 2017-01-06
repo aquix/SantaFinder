@@ -22,6 +22,7 @@ import { ClientLoginFormComponent } from './account/client/login/client-login-fo
 import { ClientRegisterFormComponent } from './account/client/register/client-register-form.component';
 import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
+import { LoginFormComponent } from './account/shared/login/login-form.component';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { SantaRegisterFormComponent } from './account/santa/register/santa-regis
         ClientRegisterFormComponent,
         SantaAccountComponent,
         SantaLoginFormComponent,
-        SantaRegisterFormComponent
+        SantaRegisterFormComponent,
+        LoginFormComponent
     ],
     providers: [
         AuthGuard,

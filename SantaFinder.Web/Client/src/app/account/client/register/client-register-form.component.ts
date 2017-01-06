@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { ClientAccountService } from '../../services/client-account.service';
 import { ClientRegisterModel } from './client-register.model';
+import { UserType } from '../../../auth/user-type';
 
 @Component({
     selector: 'register-form',
@@ -45,7 +46,7 @@ export class ClientRegisterFormComponent implements OnInit {
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
-            }).subscribe(res => {
+            }, UserType.client).subscribe(res => {
                 this.router.navigate(['/client']);
             }, err => {
                 console.log('error when login');

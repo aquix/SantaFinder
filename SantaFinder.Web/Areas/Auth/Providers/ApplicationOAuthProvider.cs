@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -35,6 +36,9 @@ namespace SantaFinder.Web.Auth.Providers
             var autofacLifetimeScope = Autofac.Integration.Owin.OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
             var userManager = autofacLifetimeScope.Resolve<AppUserManager>();
 
+            // TODO check user type
+            Debug.Print(context.OwinContext.Get<UserType>("usertype").ToString());
+
             User user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
@@ -69,7 +73,17 @@ namespace SantaFinder.Web.Auth.Providers
             // Resource owner password credentials does not provide a client ID.
             if (context.ClientId == null)
             {
-                context.Validated();
+                var userTypeRaw = context.Parameters.FirstOrDefault(p => p.Key == "usertype").Value?.FirstOrDefault();
+                if (userTypeRaw != null)
+                {
+                    UserType userType;
+                    var isCorrectType = Enum.TryParse(userTypeRaw, out userType);
+                    if (isCorrectType)
+                    {
+                        context.OwinContext.Set("usertype", userType);
+                        context.Validated();
+                    }
+                }
             }
 
             return Task.FromResult<object>(null);

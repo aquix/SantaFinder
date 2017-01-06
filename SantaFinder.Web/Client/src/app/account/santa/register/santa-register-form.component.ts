@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { SantaAccountService } from '../../services/santa-account.service';
 import { SantaRegisterModel } from './santa-register.model';
+import { UserType } from '../../../auth/user-type';
 
 @Component({
     selector: 'register-form',
@@ -39,7 +40,7 @@ export class SantaRegisterFormComponent implements OnInit {
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
-            }).subscribe(res => {
+            }, UserType.santa).subscribe(res => {
                 this.router.navigate(['/santa']);
             }, err => {
                 console.log('error when login');
