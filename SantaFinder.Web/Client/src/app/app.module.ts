@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ImageUploadModule } from 'angular2-image-upload';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -21,13 +22,15 @@ import { ClientRegisterFormComponent } from './account/client/register/client-re
 import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
 import { LoginFormComponent } from './account/shared/login/login-form.component';
+import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        HttpModule
+        HttpModule,
+        ImageUploadModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -41,7 +44,8 @@ import { LoginFormComponent } from './account/shared/login/login-form.component'
         SantaAccountComponent,
         SantaLoginFormComponent,
         SantaRegisterFormComponent,
-        LoginFormComponent
+        LoginFormComponent,
+        PhotoUploaderComponent
     ],
     providers: [
         AuthGuard,

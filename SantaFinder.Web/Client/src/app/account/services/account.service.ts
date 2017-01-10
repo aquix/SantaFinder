@@ -40,12 +40,19 @@ export class AccountService {
         } else {
             let santaRegInfo = <SantaRegisterModel>regInfoRaw;
             registerUri = 'santa/register';
-            registerBody = {
+            let formDataContent = {
                 email: santaRegInfo.email,
                 password: santaRegInfo.passwords.password,
                 confirmPassword: santaRegInfo.passwords.passwordConfirmation,
                 name: santaRegInfo.name,
+                photo: santaRegInfo.photo
             };
+
+            let formData = new FormData();
+            for (let key in formDataContent) {
+                formData.append(key, formDataContent[key]);
+            }
+            registerBody = formData;
         }
 
         return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)

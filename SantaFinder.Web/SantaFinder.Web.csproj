@@ -226,6 +226,8 @@
     <Compile Include="Areas\Auth\Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
+    <Compile Include="Util\FileModel.cs" />
+    <Compile Include="Util\UploadMultipartMediaTypeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -248,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

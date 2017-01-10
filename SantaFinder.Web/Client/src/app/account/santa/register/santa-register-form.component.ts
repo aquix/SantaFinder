@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services/account.service';
 import { SantaRegisterModel } from './santa-register.model';
 import { UserType } from '../../../auth/user-type';
+import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
 
 @Component({
     selector: 'register-form',
@@ -14,8 +15,10 @@ import { UserType } from '../../../auth/user-type';
 })
 export class SantaRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
-
     errorMessage: string;
+
+    @ViewChild(PhotoUploaderComponent)
+    photoUploader: PhotoUploaderComponent;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -42,6 +45,7 @@ export class SantaRegisterFormComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: SantaRegisterModel }) {
+        value.photo = this.photoUploader.photo;
         this.accountService.register(value).subscribe(res => {
             console.log('Registered', res);
             return this.accountService.login({

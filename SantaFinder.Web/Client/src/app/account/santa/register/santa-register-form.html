@@ -26,7 +26,10 @@
             <label for="name">Your name:</label>
             <input type="text" formControlName="name" class="validation" name="name" value="">
         </div>
-        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+        <div>
+            <photo-uploader></photo-uploader>
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid || !photoUploader.photo">Register</button>
     </form>
     <small>
         Already have an account? <a [routerLink]="['../login']">Login here</a>

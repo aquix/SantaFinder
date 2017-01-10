@@ -28,6 +28,7 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
 
         [AllowAnonymous]
         [Route("register")]
+        [HttpPost]
         public async Task<IHttpActionResult> Register(RegisterClientModel model)
         {
             if (!ModelState.IsValid)

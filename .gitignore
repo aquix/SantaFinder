@@ -1,6 +1,7 @@
 ## Project-specific
 **/Client/dist
 **/Client/typings
+**/App_Data/Photos
 .vscode
 
 ## Ignore Visual Studio temporary files, build results, and

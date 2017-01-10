@@ -1,0 +1,13 @@
+<div>
+    <div>
+        <label>{{ caption }}</label>
+    </div>
+    <div *ngIf="preview">
+        <img [src]="preview" class="photo-uploader--preview--image">
+        <button (click)="deleteImage()">X</button>
+    </div>
+    <div>
+        <input #fileInput (change)="onPhotoChanged($event)" type="file" name="photo"
+            value="Choose file">
+    </div>
+</div>

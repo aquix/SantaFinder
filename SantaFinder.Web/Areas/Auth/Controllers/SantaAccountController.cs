@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -28,22 +31,18 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
 
         [AllowAnonymous]
         [Route("register")]
+        [HttpPost]
         public async Task<IHttpActionResult> Register(RegisterSantaModel model)
         {
+            //var model = new RegisterSantaModel();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var santa = new Santa
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                Name = model.Name
-            };
-
             IdentityResult result;
-            var existingUser = await _userManager.FindByEmailAsync(santa.Email);
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
 
             if (existingUser != null)
             {
@@ -51,7 +50,32 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             }
             else
             {
+                var santa = new Santa
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Name = model.Name,
+                    PhotoPath = ""
+                };
+
                 result = await _santaManager.CreateAsync(santa, model.Password);
+
+                if (result.Succeeded)
+                {
+                    var photoPath = HttpContext.Current.Server.MapPath("~/App_Data/Photos");
+                    if (!Directory.Exists(photoPath))
+                    {
+                        Directory.CreateDirectory(photoPath);
+                    }
+
+                    var fileExtension = Path.GetExtension(model.Photo.Filename);
+                    var filename = $"{santa.Id}{fileExtension}";
+
+                    photoPath = Path.Combine(photoPath, filename);
+                    File.WriteAllBytes(photoPath, model.Photo.Content);
+                    santa.PhotoPath = photoPath;
+                    await _santaManager.UpdateAsync(santa);
+                }
             }
 
             if (!result.Succeeded)
