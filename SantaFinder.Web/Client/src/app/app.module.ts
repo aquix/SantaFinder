@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ImageUploadModule } from 'angular2-image-upload';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -48,6 +50,7 @@ import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/
         PhotoUploaderComponent
     ],
     providers: [
+        CookieService,
         AuthGuard,
         AuthInfoStorage,
         AuthHttp,
