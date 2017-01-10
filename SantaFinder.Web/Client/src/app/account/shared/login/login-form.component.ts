@@ -29,6 +29,11 @@ export class LoginFormComponent implements OnInit {
             email: ['', [Validators.required, EmailValidators.simple()]],
             password: ['']
         });
+        this.loginForm.valueChanges.subscribe(data => {
+            if (this.errorMessage) {
+                this.errorMessage = '';
+            }
+        });
     }
 
     onSubmitClick({ value }: { value: LoginModel }) {

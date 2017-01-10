@@ -51,6 +51,7 @@ namespace SantaFinder.Web.Util
                 .As<IUserStore<Santa>>();
             builder.Register(c => ClientManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
             builder.Register(c => SantaManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
+            builder.Register(c => AppUserManager<User>.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
         }
     }
 }

@@ -15,6 +15,8 @@ import { UserType } from '../../../auth/user-type';
 export class ClientRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
 
+    errorMessage: string;
+
     constructor(
         private formBuilder: FormBuilder,
         private accountService: AccountService,
@@ -38,6 +40,11 @@ export class ClientRegisterFormComponent implements OnInit {
                 apartment: ['', [Validators.required]]
             }),
         });
+        this.registerForm.valueChanges.subscribe(data => {
+            if (this.errorMessage) {
+                this.errorMessage = '';
+            }
+        });
     }
 
     onSubmitClick({ value }: { value: ClientRegisterModel }) {
@@ -51,6 +58,9 @@ export class ClientRegisterFormComponent implements OnInit {
             }, err => {
                 console.log('error when login');
             });
+        }, err => {
+            let errors: string[] = err.json()['modelState'][''];
+            this.errorMessage = errors.join('\n');
         });
     }
 }

@@ -17,11 +17,13 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
     public class ClientAccountController : AccountController
     {
         private AppUserManager<Client> _clientManager;
+        private AppUserManager<User> _userManager;
 
-        public ClientAccountController(AppUserManager<Client> clientManager,
+        public ClientAccountController(AppUserManager<Client> clientManager, AppUserManager<User> userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat)
         {
             _clientManager = clientManager;
+            _userManager = userManager;
         }
 
         [AllowAnonymous]
@@ -47,7 +49,17 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
                 }
             };
 
-            IdentityResult result = await _clientManager.CreateAsync(client, model.Password);
+            IdentityResult result;
+            var existingUser = await _userManager.FindByEmailAsync(client.Email);
+
+            if (existingUser != null)
+            {
+                result = IdentityResult.Failed(new[] { "User with this email already exists" });
+            }
+            else
+            {
+                result = await _clientManager.CreateAsync(client, model.Password);
+            }
 
             if (!result.Succeeded)
             {

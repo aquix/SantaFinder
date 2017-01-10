@@ -1,8 +1,11 @@
 <div>
     <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmitClick(registerForm)">
+        <div [hidden]="!errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+        </div>
         <div>
             <label for="email">Email:</label>
-            <input type="text" formControlName="email" class="validation" name="email" value="">
+            <input type="email" formControlName="email" class="validation" name="email" value="">
         </div>
         <div formGroupName="passwords">
             <div>

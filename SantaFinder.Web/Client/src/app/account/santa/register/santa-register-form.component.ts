@@ -15,6 +15,8 @@ import { UserType } from '../../../auth/user-type';
 export class SantaRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
 
+    errorMessage: string;
+
     constructor(
         private formBuilder: FormBuilder,
         private accountService: AccountService,
@@ -32,6 +34,11 @@ export class SantaRegisterFormComponent implements OnInit {
             }),
             name: ['', Validators.required]
         });
+        this.registerForm.valueChanges.subscribe(data => {
+            if (this.errorMessage) {
+                this.errorMessage = '';
+            }
+        });
     }
 
     onSubmitClick({ value }: { value: SantaRegisterModel }) {
@@ -45,6 +52,10 @@ export class SantaRegisterFormComponent implements OnInit {
             }, err => {
                 console.log('error when login');
             });
+        }, err => {
+            console.log(err);
+            let errors: string[] = err.json()['modelState'][''];
+            this.errorMessage = errors.join('\n');
         });
     }
 }
