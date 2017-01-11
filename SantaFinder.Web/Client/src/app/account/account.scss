@@ -1,11 +1,50 @@
 .account {
-    font-family: Arial;
     background-color: #3498DB;
-    padding: 50px;
+
+    main {
+        padding: 50px;
+    }
 }
 
-.account-active-type {
-    color: green;
+.account-navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 20%;
+    background-color: #f3f3f3;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+    }
+
+    &__links {
+        margin: 0;
+        list-style-type: none;
+        overflow: hidden;
+    }
+
+    &__link {
+        float: left;
+
+        a {
+            display: block;
+            color: #666;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+
+            &:hover:not(.account-navbar__link_active) {
+                background-color: #ddd;
+            }
+        }
+
+        &_active {
+            background-color: #FFD54F;
+;
+            color: white;
+        }
+    }
 }
 
 .account-form {
