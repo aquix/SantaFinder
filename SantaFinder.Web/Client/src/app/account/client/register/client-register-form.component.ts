@@ -8,6 +8,8 @@ import { AccountService } from '../../services/account.service';
 import { ClientRegisterModel } from './client-register.model';
 import { UserType } from '../../../auth/user-type';
 
+import './client-register-form.scss';
+
 @Component({
     selector: 'register-form',
     template: require('./client-register-form.html')

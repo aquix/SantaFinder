@@ -1,13 +1,14 @@
-Account page
-<nav>
-    <div>
-        <a [routerLink]="['/account/client']" routerLinkActive="account-active-type">For clients</a>
-    </div>
-    <div>
-        <a [routerLink]="['/account/santa']" routerLinkActive="account-active-type">For santas</a>
-    </div>
-</nav>
+<div class="account">
+    <nav>
+        <div>
+            <a [routerLink]="['/account/client']" routerLinkActive="account-active-type">For clients</a>
+        </div>
+        <div>
+            <a [routerLink]="['/account/santa']" routerLinkActive="account-active-type">For santas</a>
+        </div>
+    </nav>
 
-<main>
-    <router-outlet></router-outlet>
-</main>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</div>

@@ -1,20 +1,26 @@
-<div>
+<div class="account-form client-register-form">
     <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmitClick(registerForm)">
+        <h1 class="account-form__title">
+            New client registration
+        </h1>
         <div [hidden]="!errorMessage" class="error-message">
             <span>{{ errorMessage }}</span>
         </div>
         <div>
-            <label for="email">Email:</label>
-            <input type="email" formControlName="email" class="validation" name="email" value="">
+            <input type="email" formControlName="email"
+                class="account-form__control account-form__control_with-validation" name="email"
+                value="" placeholder="Email">
         </div>
         <div formGroupName="passwords">
             <div>
-                <label for="password">Password:</label>
-                <input type="password" formControlName="password" class="validation" name="password" value="">
+                <input type="password" formControlName="password"
+                    class="account-form__control account-form__control_with-validation" name="password"
+                    value="" placeholder="Password">
             </div>
             <div>
-                <label for="passwordConfirmation">Confirm password:</label>
-                <input type="password" formControlName="passwordConfirmation" name="passwordConfirmation" value="">
+                <input type="password" formControlName="passwordConfirmation"
+                    class="account-form__control" name="passwordConfirmation"
+                    value="" placeholder="Confirm password">
             </div>
             <div *ngIf="registerForm.controls.passwords.invalid &&
                         registerForm.controls.passwords.controls.password.valid &&
@@ -23,33 +29,37 @@
             </div>
         </div>
         <div>
-            <label for="name">Your name:</label>
-            <input type="text" formControlName="name" class="validation" name="name" value="">
+            <input type="text" formControlName="name"
+                class="account-form__control account-form__control_with-validation" name="name"
+                value="" placeholder="Your name">
         </div>
         <div formGroupName="address">
             <div>
-                <label>Address:</label>
+                <label class="account-form__label">Address:</label>
             </div>
             <div>
-                <label for="city">City:</label>
-                <input type="text" formControlName="city" class="validation" name="city" value="">
+                <input type="text" formControlName="city"
+                    class="account-form__control account-form__control_with-validation" name="city"
+                    value="" placeholder="City">
             </div>
             <div>
-                <label for="street">Street:</label>
-                <input type="text" formControlName="street" class="validation" name="street" value="">
-            </div>
-            <div>
-                <label for="house">House:</label>
-                <input type="text" formControlName="house" class="validation" name="house" value="">
-            </div>
-            <div>
-                <label for="apartment">Apartment:</label>
-                <input type="text" formControlName="apartment" class="validation" name="apartment" value="">
+                <input type="text" formControlName="street"
+                    class="account-form__control client-register-form__control_street account-form__control_with-validation" name="street"
+                    value="" placeholder="Street">
+                <input type="text" formControlName="house"
+                    class="account-form__control client-register-form__control_house account-form__control_with-validation" name="house"
+                    value="" placeholder="House">
+                <input type="text" formControlName="apartment"
+                    class="account-form__control client-register-form__control_apart account-form__control_with-validation" name="apartment"
+                    value="" placeholder="Apart.">
             </div>
         </div>
-        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+        <button type="submit" [disabled]="registerForm.invalid"
+            class="account-form__button">
+            Register
+        </button>
     </form>
-    <small>
+    <small class="account-form__hint-text">
         Already have an account? <a [routerLink]="['../login']">Login here</a>
     </small>
 </div>
