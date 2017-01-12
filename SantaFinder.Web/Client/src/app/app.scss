@@ -14,6 +14,23 @@ body {
     height: 100%;
 }
 
+.sf-page {
+    height: 100%;
+
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+
+    main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 50px;
+    }
+}
+
 .sf-button {
     border: solid transparent 2px;
     background: $button-color;

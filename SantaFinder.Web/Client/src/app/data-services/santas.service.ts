@@ -16,19 +16,19 @@ export class SantasService {
             {
                 name: "Santa John",
                 numberOfOrders: 123,
-                photoUrl: `${AppConfig.API_PATH}/test.png`,
+                photoUrl: `${AppConfig.SERVER}/test.png`,
                 rating: 4.5
             },
             {
                 name: "Santa Bill",
                 numberOfOrders: 342,
-                photoUrl: `${AppConfig.API_PATH}/test.png`,
+                photoUrl: `${AppConfig.SERVER}/test.png`,
                 rating: 4.1
             },
             {
                 name: "Santa Claus",
                 numberOfOrders: 786,
-                photoUrl: `${AppConfig.API_PATH}/test.png`,
+                photoUrl: `${AppConfig.SERVER}/test.png`,
                 rating: 2.5
             }
         ];

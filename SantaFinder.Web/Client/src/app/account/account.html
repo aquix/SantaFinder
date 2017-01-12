@@ -1,17 +1,5 @@
-<div class="account">
-    <nav class="account-navbar">
-        <div class="account-navbar__logo">
-            <span><strong>Santa finder</strong></span>
-        </div>
-        <ul class="account-navbar__links">
-            <li class="account-navbar__link">
-                <a [routerLink]="['/account/client']" routerLinkActive="account-navbar__link_active">For clients</a>
-            </li>
-            <li class="account-navbar__link">
-                <a [routerLink]="['/account/santa']" routerLinkActive="account-navbar__link_active">For santas</a>
-            </li>
-        </ul>
-    </nav>
+<div class="sf-page account">
+    <sf-navbar [links]="navbarLinks" [theme]="'blue'"></sf-navbar>
     <main>
         <router-outlet></router-outlet>
     </main>

@@ -13,6 +13,7 @@ import { ClientLoginFormComponent } from './account/client/login/client-login-fo
 import { ClientRegisterFormComponent } from './account/client/register/client-register-form.component';
 import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
+import { LogoutComponent } from './account/logout/logout.component';
 
 const clientAccountRoutes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const santaAccountRoutes: Routes = [
 const accountTypeRoutes: Routes = [
     { path: '', redirectTo: 'client', pathMatch: 'full' },
     { path: 'client', component: ClientAccountComponent, children: clientAccountRoutes },
-    { path: 'santa', component: SantaAccountComponent, children: santaAccountRoutes }
+    { path: 'santa', component: SantaAccountComponent, children: santaAccountRoutes },
+    { path: 'logout', component: LogoutComponent },
 ];
 
 const appRoutes: Routes = [

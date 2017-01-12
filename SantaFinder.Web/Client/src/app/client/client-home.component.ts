@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AccountService } from '../account/services/account.service';
 
+import { Link } from '../shared/navbar/link.model';
 import { SantaViewModel } from '../data-services/view-models/santa.view-model';
 import { SantasService } from '../data-services/santas.service';
 
@@ -11,6 +12,7 @@ import { SantasService } from '../data-services/santas.service';
     template: require('./client-home.html')
 })
 export class ClientHomeComponent implements OnInit {
+    navbarLinks: Link[];
     santaList: SantaViewModel[];
 
     constructor(
@@ -21,10 +23,16 @@ export class ClientHomeComponent implements OnInit {
 
     ngOnInit() {
         this.santaList = this.santasService.getSantas();
-    }
 
-    onLogoutClick() {
-        this.accountService.logout();
-        this.router.navigate(['/']);
+        this.navbarLinks = [
+            {
+                name: 'My profile',
+                routerLink: './profile'
+            },
+            {
+                name: 'Logout',
+                routerLink: '/account/logout'
+            }
+        ];
     }
 }

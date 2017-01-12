@@ -1,19 +1,17 @@
-<nav>
-    <div>
-        <a href="javascript:void(0)" (click)="onLogoutClick()">Logout</a>
-    </div>
-</nav>
-<main>
-    <div>
-        <a [routerLink]="['./order']"><h1>Order</h1></a>
-    </div>
-
-    <div>
-        <a [routerLink]="['./orderhistory']">Order history</a>
-    </div>
-    <aside>
+<div class="sf-page">
+    <sf-navbar [links]="navbarLinks"></sf-navbar>
+    <main>
         <div>
-            <santa-preview-list [data]="santaList"></santa-preview-list>
+            <a [routerLink]="['./order']"><h1>Order</h1></a>
         </div>
-    </aside>
-</main>
+
+        <div>
+            <a [routerLink]="['./orderhistory']">Order history</a>
+        </div>
+        <aside>
+            <div>
+                <santa-preview-list [data]="santaList"></santa-preview-list>
+            </div>
+        </aside>
+    </main>
+</div>

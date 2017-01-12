@@ -14,6 +14,7 @@ import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
 
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { ClientHomeComponent } from './client/client-home.component';
 import { SantaHomeComponent } from './santa/santa-home.component';
@@ -25,6 +26,7 @@ import { ClientRegisterFormComponent } from './account/client/register/client-re
 import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
 import { LoginFormComponent } from './account/shared/login/login-form.component';
+import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
 import { SantaPreviewListComponent } from './client/santa-preview-list/santa-preview-list.component';
 
@@ -37,6 +39,7 @@ import { SantaPreviewListComponent } from './client/santa-preview-list/santa-pre
         ImageUploadModule.forRoot()
     ],
     declarations: [
+        NavbarComponent,
         AppComponent,
         MainComponent,
         ClientHomeComponent,
@@ -49,6 +52,7 @@ import { SantaPreviewListComponent } from './client/santa-preview-list/santa-pre
         SantaLoginFormComponent,
         SantaRegisterFormComponent,
         LoginFormComponent,
+        LogoutComponent,
         PhotoUploaderComponent,
         SantaPreviewListComponent
     ],

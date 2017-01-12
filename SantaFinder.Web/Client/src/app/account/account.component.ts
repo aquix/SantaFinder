@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Link } from '../shared/navbar/link.model';
+
 import './account.scss';
 
 @Component({
@@ -7,7 +9,20 @@ import './account.scss';
     template: require('./account.html')
 })
 export class AccountComponent implements OnInit {
+    navbarLinks: Link[];
+
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.navbarLinks = [
+            {
+                name: 'For clients',
+                routerLink: '/account/client'
+            },
+            {
+                name: 'For santas',
+                routerLink: '/account/santa'
+            }
+        ];
+    }
 }

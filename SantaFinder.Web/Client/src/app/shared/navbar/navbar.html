@@ -1,0 +1,10 @@
+<nav #nav class="sf-navbar">
+    <div class="sf-navbar__logo">
+        <span><strong>Santa finder</strong></span>
+    </div>
+    <ul class="sf-navbar__links">
+        <li *ngFor="let link of links" class="sf-navbar__link">
+            <a [routerLink]="[link.routerLink]" routerLinkActive="sf-navbar__link_active">{{ link.name }}</a>
+        </li>
+    </ul>
+</nav>
