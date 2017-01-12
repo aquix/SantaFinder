@@ -1,4 +1,45 @@
-.photo-uploader--preview--image {
-    width: 150px;
-    height: 150px;
+.photo-uploader {
+    &__caption {
+        color: #777;
+        margin-bottom: 10px;
+    }
+
+    &__preview-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    &__file-input {
+        display: none;
+    }
+
+    &__upload-button {
+        margin: 0 auto;
+    }
+
+    &__delete-button {
+        display: inline-block;
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        margin: -10px 0 0 -15px;
+
+        color: #fff;
+        background: #605F61;
+        font-size: 31px;
+        font-weight: bold;
+        text-decoration: none;
+        line-height: 0px;
+
+        cursor:pointer;
+        border: none;
+        border-radius: 1em;
+        background: #1abc9c;
+
+        &:after {
+            display: inline-block;
+            margin-top: 16px;
+            content: "×";
+        }
+    }
 }

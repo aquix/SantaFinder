@@ -7,7 +7,7 @@ import './photo-uploader.scss';
     template: require('./photo-uploader.html')
 })
 export class PhotoUploaderComponent implements OnInit {
-    @Input() caption: string = 'Upload your photo here';
+    @Input() caption: string = '';
     preview: string;
 
     @ViewChild('fileInput') fileInput: ElementRef;
