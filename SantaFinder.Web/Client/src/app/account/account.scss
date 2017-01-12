@@ -1,7 +1,17 @@
 .account {
     background-color: #3498DB;
+    height: 100%;
+
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
 
     main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         padding: 50px;
     }
 }
@@ -133,6 +143,7 @@
         color: #fff;
         text-align: center;
         border-radius: 6px;
+        font-size: 14px;
 
         position: absolute;
         z-index: 1;
@@ -154,5 +165,6 @@
 }
 
 .error-message {
-    color: red;
+    margin: 10px auto;
+    color: #F44336;
 }
