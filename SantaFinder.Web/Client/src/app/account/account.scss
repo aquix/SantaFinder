@@ -1,5 +1,7 @@
+$account-background-color: #64B5F6;
+
 .account {
-    background-color: #3498DB;
+    background-color: $account-background-color;
     height: 100%;
 
     display: flex;
@@ -21,7 +23,7 @@
     justify-content: space-between;
     margin: 0;
     padding: 0 20%;
-    background-color: #f3f3f3;
+    background-color: #F8F8F8;
 
     &__logo {
         display: flex;
@@ -39,20 +41,22 @@
 
         a {
             display: block;
-            color: #666;
+            color: #777777;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
 
-            &:hover:not(.account-navbar__link_active) {
-                background-color: #ddd;
-            }
-        }
+            transition: 0.5s;
 
-        &_active {
-            background-color: #FFD54F;
-;
-            color: white;
+            &:hover:not(.account-navbar__link_active) {
+                background-color: #E7E7E7;
+                color: #555555;
+            }
+
+            &.account-navbar__link_active {
+                background-color: $account-background-color;
+                color: white;
+            }
         }
     }
 }
