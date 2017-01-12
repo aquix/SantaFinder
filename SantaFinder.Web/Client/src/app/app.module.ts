@@ -12,6 +12,7 @@ import { AuthGuard } from './account/services/auth.guard';
 import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
+import { SantasService } from './data-services/santas.service';
 
 import { MainComponent } from './main/main.component';
 import { ClientHomeComponent } from './client/client-home.component';
@@ -25,6 +26,7 @@ import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
 import { LoginFormComponent } from './account/shared/login/login-form.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
+import { SantaPreviewListComponent } from './client/santa-preview-list/santa-preview-list.component';
 
 @NgModule({
     imports: [
@@ -47,14 +49,16 @@ import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/
         SantaLoginFormComponent,
         SantaRegisterFormComponent,
         LoginFormComponent,
-        PhotoUploaderComponent
+        PhotoUploaderComponent,
+        SantaPreviewListComponent
     ],
     providers: [
         CookieService,
         AuthGuard,
         AuthInfoStorage,
         AuthHttp,
-        AccountService
+        AccountService,
+        SantasService
     ],
     bootstrap: [AppComponent]
 })

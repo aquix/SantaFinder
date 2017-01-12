@@ -1,5 +1,19 @@
-Client home
+<nav>
+    <div>
+        <a href="javascript:void(0)" (click)="onLogoutClick()">Logout</a>
+    </div>
+</nav>
+<main>
+    <div>
+        <a [routerLink]="['./order']"><h1>Order</h1></a>
+    </div>
 
-<div>
-    <a href="javascript:void(0)" (click)="onLogoutClick()">Logout</a>
-</div>
+    <div>
+        <a [routerLink]="['./orderhistory']">Order history</a>
+    </div>
+    <aside>
+        <div>
+            <santa-preview-list [data]="santaList"></santa-preview-list>
+        </div>
+    </aside>
+</main>

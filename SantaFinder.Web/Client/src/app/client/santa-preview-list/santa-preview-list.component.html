@@ -1,0 +1,20 @@
+<div>
+    <ul>
+        <li *ngFor="let santa of data">
+            <div>
+                <img [src]="santa.photoUrl" alt="Santa's photo'">
+            </div>
+            <div>
+                <h2>{{ santa.name }}</h2>
+                <div>
+                    <span>
+                        {{ santa.rating }}
+                    </span>
+                    <span>
+                        {{ santa.numberOfOrders }}
+                    </span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

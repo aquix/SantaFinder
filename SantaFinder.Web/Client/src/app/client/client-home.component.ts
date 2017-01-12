@@ -3,17 +3,25 @@ import { Router } from '@angular/router';
 
 import { AccountService } from '../account/services/account.service';
 
+import { SantaViewModel } from '../data-services/view-models/santa.view-model';
+import { SantasService } from '../data-services/santas.service';
+
 @Component({
-    selector: 'main-page',
+    selector: 'client-main-page',
     template: require('./client-home.html')
 })
 export class ClientHomeComponent implements OnInit {
+    santaList: SantaViewModel[];
+
     constructor(
         private router: Router,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private santasService: SantasService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.santaList = this.santasService.getSantas();
+    }
 
     onLogoutClick() {
         this.accountService.logout();
