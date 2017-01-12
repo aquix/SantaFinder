@@ -1,17 +1,18 @@
-<div class="sf-page">
+<div class="sf-page home-page">
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
-        <div>
-            <a [routerLink]="['./order']"><h1>Order</h1></a>
-        </div>
-
-        <div>
-            <a [routerLink]="['./orderhistory']">Order history</a>
-        </div>
-        <aside>
+        <div class="home-page__order-area">
             <div>
-                <santa-preview-list [data]="santaList"></santa-preview-list>
+                <a [routerLink]="['./order']"><h1>Order</h1></a>
             </div>
+
+            <div>
+                <a [routerLink]="['./orderhistory']">Order history</a>
+            </div>
+        </div>
+        <aside class="home-page__list-area">
+            <h2>Our santas:</h2>
+            <santa-preview-list [data]="santaList" class="santa-preview-list"></santa-preview-list>
         </aside>
     </main>
 </div>

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ImageUploadModule } from 'angular2-image-upload';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { RatingModule } from 'ng2-rating';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -33,10 +34,11 @@ import { SantaPreviewListComponent } from './client/santa-preview-list/santa-pre
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
         HttpModule,
-        ImageUploadModule.forRoot()
+        RatingModule
     ],
     declarations: [
         NavbarComponent,
@@ -64,6 +66,6 @@ import { SantaPreviewListComponent } from './client/santa-preview-list/santa-pre
         AccountService,
         SantasService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

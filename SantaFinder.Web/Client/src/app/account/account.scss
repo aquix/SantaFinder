@@ -2,6 +2,12 @@ $account-background-color: #64B5F6;
 
 .account {
     background-color: $account-background-color;
+
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .account-form {

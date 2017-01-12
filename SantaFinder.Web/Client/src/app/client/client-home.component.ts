@@ -7,6 +7,8 @@ import { Link } from '../shared/navbar/link.model';
 import { SantaViewModel } from '../data-services/view-models/santa.view-model';
 import { SantasService } from '../data-services/santas.service';
 
+import './client-home.scss';
+
 @Component({
     selector: 'client-main-page',
     template: require('./client-home.html')

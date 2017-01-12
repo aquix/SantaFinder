@@ -1,20 +1,26 @@
 <div>
-    <ul>
+    <ul class="santa-preview-list">
         <li *ngFor="let santa of data">
-            <div>
-                <img [src]="santa.photoUrl" alt="Santa's photo'">
-            </div>
-            <div>
-                <h2>{{ santa.name }}</h2>
-                <div>
-                    <span>
-                        {{ santa.rating }}
-                    </span>
-                    <span>
-                        {{ santa.numberOfOrders }}
-                    </span>
+            <div class="santa-preview-item">
+                <div class="santa-preview-item__img">
+                    <img [src]="santa.photoUrl" alt="Santa's photo'">
+                </div>
+                <div class="santa-preview-item__info">
+                    <div class="santa-preview-item__name">{{ santa.name }}</div>
+                    <div class="santa-preview-item__stat">
+                        <span>
+                            <rating [(ngModel)]="santa.rating"
+                                    [max]="5"
+                                    [readonly]="true"></rating>
+                            <!--<star-rating></star-rating>-->
+                        </span>
+                        <span>
+                            <em>{{ santa.numberOfOrders }} orders</em>
+                        </span>
+                    </div>
                 </div>
             </div>
+
         </li>
     </ul>
 </div>
