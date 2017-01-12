@@ -21,11 +21,11 @@
                 <input type="password" formControlName="passwordConfirmation"
                         class="account-form__control" name="passwordConfirmation"
                         value="" placeholder="Confirm password">
-            </div>
-            <div *ngIf="registerForm.controls.passwords.invalid &&
-                        registerForm.controls.passwords.controls.password.valid &&
-                        !registerForm.controls.passwords.controls.passwordConfirmation.pristine">
-                Password doesn't match
+                <span class="error-icon">
+                    <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
+                            src="./exclamation.png" alt="Passwords don't match" class="error-icon__image">
+                    <span class="error-icon__tooltip-text">Passwords don't match</span>
+                </span>
             </div>
         </div>
         <div>
