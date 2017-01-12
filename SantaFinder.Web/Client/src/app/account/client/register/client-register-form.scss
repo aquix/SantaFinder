@@ -1,0 +1,17 @@
+.client-register-form {
+    width: 400px;
+    // TODO move margin to outer block
+    margin: 20px auto;
+}
+
+.client-register-form__control_street {
+    width: 50%;
+}
+
+.client-register-form__control_house {
+    width: 13%;
+}
+
+.client-register-form__control_apart {
+    width: 13%;
+}

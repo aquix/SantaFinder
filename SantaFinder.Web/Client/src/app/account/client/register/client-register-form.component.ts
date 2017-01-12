@@ -1,23 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, transition, style, animate } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
 import CustomValidators from '../../utils/custom-validators';
-import { ClientAccountService } from '../../services/client-account.service';
+import { AccountService } from '../../services/account.service';
 import { ClientRegisterModel } from './client-register.model';
 import { UserType } from '../../../auth/user-type';
 
+import './client-register-form.scss';
+
 @Component({
     selector: 'register-form',
-    template: require('./client-register-form.html')
+    template: require('./client-register-form.html'),
+    animations: [
+        trigger(
+            'errorHint', [
+                transition(':enter', [
+                    style({ transform: 'translateX(100%)', opacity: 0 }),
+                    animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
+                ]),
+                transition(':leave', [
+                    style({ transform: 'translateX(0)', 'opacity': 1 }),
+                    animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
+                ])
+            ]
+        )
+    ]
 })
 export class ClientRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
 
+    errorMessage: string;
+
     constructor(
         private formBuilder: FormBuilder,
-        private accountService: ClientAccountService,
+        private accountService: AccountService,
         private router: Router
     ) { }
 
@@ -28,8 +46,8 @@ export class ClientRegisterFormComponent implements OnInit {
                 password: ['', [CustomValidators.password]],
                 passwordConfirmation: ['']
             }, {
-                validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')
-            }),
+                    validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')
+                }),
             name: ['', Validators.required],
             address: this.formBuilder.group({
                 city: ['', [Validators.required]],
@@ -37,6 +55,11 @@ export class ClientRegisterFormComponent implements OnInit {
                 house: ['', [Validators.required]],
                 apartment: ['', [Validators.required]]
             }),
+        });
+        this.registerForm.valueChanges.subscribe(data => {
+            if (this.errorMessage) {
+                this.errorMessage = '';
+            }
         });
     }
 
@@ -51,6 +74,14 @@ export class ClientRegisterFormComponent implements OnInit {
             }, err => {
                 console.log('error when login');
             });
+        }, err => {
+            let errors: string[] = err.json()['modelState'][''];
+            this.errorMessage = errors.join('\n');
         });
+    }
+
+    arePasswordsMismatched() {
+        return this.registerForm.get('passwords').invalid &&
+            !this.registerForm.get('passwords').get('passwordConfirmation').pristine;
     }
 }

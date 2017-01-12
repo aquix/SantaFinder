@@ -1,31 +1,47 @@
-<div>
-    <form [formGroup]="registerForm" novalidate (ngSubmit)="onSubmitClick(registerForm)">
+<div class="account-form santa-register-form">
+    <form [formGroup]="registerForm" novalidate>
+        <h1 class="account-form__title">
+            New santa registration
+        </h1>
+        <div [hidden]="!errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+        </div>
         <div>
-            <label for="email">Email:</label>
-            <input type="text" formControlName="email" class="validation" name="email" value="">
+            <input type="email" formControlName="email"
+                    class="account-form__control account-form__control_with-validation" name="email"
+                    value="" placeholder="Email">
         </div>
         <div formGroupName="passwords">
             <div>
-                <label for="password">Password:</label>
-                <input type="password" formControlName="password" class="validation" name="password" value="">
+                <input type="password" formControlName="password"
+                        class="account-form__control account-form__control_with-validation" name="password"
+                        value="" placeholder="Password">
             </div>
             <div>
-                <label for="passwordConfirmation">Confirm password:</label>
-                <input type="password" formControlName="passwordConfirmation" name="passwordConfirmation" value="">
-            </div>
-            <div *ngIf="registerForm.controls.passwords.invalid &&
-                        registerForm.controls.passwords.controls.password.valid &&
-                        !registerForm.controls.passwords.controls.passwordConfirmation.pristine">
-                Password doesn't match
+                <input type="password" formControlName="passwordConfirmation"
+                        class="account-form__control" name="passwordConfirmation"
+                        value="" placeholder="Confirm password">
+                <span class="error-icon">
+                    <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
+                            src="./exclamation.png" alt="Passwords don't match" class="error-icon__image">
+                    <span class="error-icon__tooltip-text">Passwords don't match</span>
+                </span>
             </div>
         </div>
         <div>
-            <label for="name">Your name:</label>
-            <input type="text" formControlName="name" class="validation" name="name" value="">
+            <input type="text" formControlName="name"
+                    class="account-form__control account-form__control_with-validation" name="name"
+                    value="" placeholder="Your name">
         </div>
-        <button type="submit" [disabled]="registerForm.invalid">Register</button>
+        <div class="account-form__control santa-register-form__photo-uploader">
+            <photo-uploader></photo-uploader>
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid || !photoUploader.photo"
+                (click)="onSubmitClick(registerForm)" class="sf-button account-form__button">
+            Register
+        </button>
     </form>
-    <small>
+    <small class="account-form__hint-text">
         Already have an account? <a [routerLink]="['../login']">Login here</a>
     </small>
 </div>

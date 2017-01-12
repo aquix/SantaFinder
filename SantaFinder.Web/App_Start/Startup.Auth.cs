@@ -9,7 +9,6 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using SantaFinder.Web.Auth.Providers;
-using SantaFinder.Web.Auth.Models;
 
 namespace SantaFinder.Web
 {

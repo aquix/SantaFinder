@@ -7,6 +7,8 @@ import { IAuthInfo } from '../../auth/auth-info';
 import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
 import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../auth/user-type';
+import { ClientRegisterModel } from '../client/register/client-register.model';
+import { SantaRegisterModel } from '../santa/register/santa-register.model';
 
 /**
  * Implement methods for all account roles
@@ -19,6 +21,43 @@ export class AccountService {
         protected http: Http,
         protected authTokenService: AuthInfoStorage
     ) { }
+
+    register(regInfoRaw: ClientRegisterModel | SantaRegisterModel) {
+        let registerBody = { };
+        let registerUri = '';
+
+        // todo register body for different types
+        if (this.getRegisterModelType(regInfoRaw) === UserType.client) {
+            let clientRegInfo = <ClientRegisterModel>regInfoRaw;
+            registerUri = 'client/register';
+            registerBody = {
+                email: clientRegInfo.email,
+                password: clientRegInfo.passwords.password,
+                confirmPassword: clientRegInfo.passwords.passwordConfirmation,
+                name: clientRegInfo.name,
+                address: clientRegInfo.address
+            };
+        } else {
+            let santaRegInfo = <SantaRegisterModel>regInfoRaw;
+            registerUri = 'santa/register';
+            let formDataContent = {
+                email: santaRegInfo.email,
+                password: santaRegInfo.passwords.password,
+                confirmPassword: santaRegInfo.passwords.passwordConfirmation,
+                name: santaRegInfo.name,
+                photo: santaRegInfo.photo
+            };
+
+            let formData = new FormData();
+            for (let key in formDataContent) {
+                formData.append(key, formDataContent[key]);
+            }
+            registerBody = formData;
+        }
+
+        return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+            .map(res => res.status);
+    }
 
     login(loginInfo: LoginModel, userType: UserType) {
         let headers = new Headers();
@@ -51,5 +90,13 @@ export class AccountService {
         }
 
         return false;
+    }
+
+    private getRegisterModelType(regInfo: ClientRegisterModel | SantaRegisterModel): UserType  {
+        if ((regInfo as any).address !== undefined) {
+            return UserType.client;
+        } else {
+            return UserType.santa;
+        }
     }
 }

@@ -1,0 +1,14 @@
+<div>
+    <div *ngIf="caption" class="photo-uploader__caption">
+        <label>{{ caption }}</label>
+    </div>
+    <div *ngIf="preview">
+        <img [src]="preview" class="photo-uploader__preview-image">
+        <a href="javascript:void(0)" (click)="deleteImage()" class="photo-uploader__delete-button"></a>
+    </div>
+    <div>
+        <input #fileInput (change)="onPhotoChanged($event)" type="file" name="photo"
+            class="photo-uploader__file-input" value="Choose file">
+        <button (click)="fileInput.click();" class="sf-button photo-uploader__upload-button">Upload your photo</button>
+    </div>
+</div>

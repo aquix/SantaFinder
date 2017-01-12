@@ -5,4 +5,5 @@ export interface SantaRegisterModel {
         passwordConfirmation: string
     };
     name: string;
+    photo: File;
 }

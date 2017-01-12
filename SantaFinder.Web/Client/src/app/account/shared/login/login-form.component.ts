@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators } from 'ng2-validators';
 
-import { ClientAccountService } from '../../services/client-account.service';
+import { AccountService } from '../../services/account.service';
 import { LoginModel } from './login.model';
 import { UserType } from '../../../auth/user-type';
+
+import './login-form.scss';
 
 @Component({
     selector: 'login-form',
@@ -14,6 +16,7 @@ import { UserType } from '../../../auth/user-type';
 })
 export class LoginFormComponent implements OnInit {
     @Input() userType: UserType;
+    @Input() title: string = 'Login';
 
     loginForm: FormGroup;
     errorMessage: string;
@@ -21,13 +24,18 @@ export class LoginFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: ClientAccountService
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, EmailValidators.simple()]],
             password: ['']
+        });
+        this.loginForm.valueChanges.subscribe(data => {
+            if (this.errorMessage) {
+                this.errorMessage = '';
+            }
         });
     }
 

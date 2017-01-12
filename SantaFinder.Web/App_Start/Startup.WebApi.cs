@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using SantaFinder.Web.Util;
 
 namespace SantaFinder.Web
 {
@@ -29,6 +30,8 @@ namespace SantaFinder.Web
 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+
+            config.Formatters.Add(new SantaRegisterMultipartMediaTypeFormatter());
 
             app.UseWebApi(config);
         }
