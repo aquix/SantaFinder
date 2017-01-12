@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, trigger, transition, style, animate } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
@@ -9,9 +9,25 @@ import { SantaRegisterModel } from './santa-register.model';
 import { UserType } from '../../../auth/user-type';
 import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
 
+import './santa-register-form.scss';
+
 @Component({
     selector: 'register-form',
-    template: require('./santa-register-form.html')
+    template: require('./santa-register-form.html'),
+    animations: [
+        trigger(
+            'errorHint', [
+                transition(':enter', [
+                    style({ transform: 'translateX(100%)', opacity: 0 }),
+                    animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
+                ]),
+                transition(':leave', [
+                    style({ transform: 'translateX(0)', 'opacity': 1 }),
+                    animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
+                ])
+            ]
+        )
+    ]
 })
 export class SantaRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
@@ -61,5 +77,10 @@ export class SantaRegisterFormComponent implements OnInit {
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });
+    }
+
+    arePasswordsMismatched() {
+        return this.registerForm.get('passwords').invalid &&
+            !this.registerForm.get('passwords').get('passwordConfirmation').pristine;
     }
 }
