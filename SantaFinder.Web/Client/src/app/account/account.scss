@@ -10,68 +10,6 @@ $account-background-color: #64B5F6;
     }
 }
 
-.account-form {
-    background-color: #FFF;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-
-    &__title {
-        text-align: center;
-        color: #777;
-    }
-
-    &__label {
-        float: left;
-        color: #777;
-        margin-left: 10%;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    &__control {
-        text-align: center;
-        background-color: #ECF0F1;
-        border: solid transparent 2px;
-        border-radius: 3px;
-        font-size: 16px;
-        font-weight: 200;
-        padding: 10px 0;
-        margin-bottom: 10px;
-        width: 80%;
-        transition: border .5s;
-
-        &_with-validation.ng-touched {
-            &.ng-valid {
-                border: 2px solid #009688;
-                box-shadow: none;
-            }
-
-            &.ng-invalid {
-                border: 2px solid #EF5350;
-                box-shadow: none;
-            }
-        }
-
-        &:focus {
-            border: 2px solid #3498DB;
-            box-shadow: none;
-        }
-    }
-
-    &__button {
-        width: 250px;
-        margin: 0 auto;
-    }
-
-    &__hint-text {
-        font-size: 12px;
-        color: #444;
-        display: block;
-        margin-top: 12px;
-    }
-}
-
 .error-icon {
     &__image {
         position: absolute;

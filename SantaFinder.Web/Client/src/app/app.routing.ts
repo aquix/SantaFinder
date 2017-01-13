@@ -4,7 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './account/services/auth.guard';
 
 import { MainComponent } from './main/main.component';
-import { ClientHomeComponent } from './client/client-home.component';
+import { ClientComponent } from './client/client.component';
+import { ClientHomeComponent } from './client/home/client-home.component';
+import { ClientOrderComponent } from './client/order/client-order.component';
+import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -34,10 +37,17 @@ const accountTypeRoutes: Routes = [
     { path: 'logout', component: LogoutComponent },
 ];
 
+const clientRoutes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: ClientHomeComponent },
+    { path: 'order', component: ClientOrderComponent },
+    { path: 'orderhistory', component: ClientOrderHistoryComponent }
+];
+
 const appRoutes: Routes = [
     { path: '', component: MainComponent, canActivate: [AuthGuard] },
     { path: 'account', component: AccountComponent, children: accountTypeRoutes },
-    { path: 'client', component: ClientHomeComponent, canActivate: [AuthGuard] },
+    { path: 'client', component: ClientComponent, canActivate: [AuthGuard], children: clientRoutes },
     { path: 'santa', component: SantaHomeComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];

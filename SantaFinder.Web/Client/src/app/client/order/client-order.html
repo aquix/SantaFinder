@@ -1,0 +1,60 @@
+<div class="sf-form order-form">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmitClick(orderForm)" novalidate>
+        <h1 class="sf-form__title">
+            Order
+        </h1>
+        <div formGroupName="address">
+            <div>
+                <label for="">Address</label>
+            </div>
+            <div>
+            <label for="">
+                <input type="checkbox" #useDefaultAddress formControlName="useDefaultAddress"
+                       name="use-default-address">
+                Use profile address
+            </label>
+            </div>
+            <div formGroupName="customAddress" *ngIf="!useDefaultAddress.checked">
+                <div>
+                    <input type="text" formControlName="city" class="sf-form__control sf-form__control_with-validation" name="city"
+                        value="" placeholder="City">
+                </div>
+                <div>
+                    <input type="text" formControlName="street" class="sf-form__control client-register-form__control_street sf-form__control_with-validation"
+                        name="street" value="" placeholder="Street">
+                    <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation"
+                        name="house" value="" placeholder="House">
+                    <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation"
+                        name="apartment" value="" placeholder="Apart.">
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="text" formControlName="childrenNames" class="sf-form__control sf-form__control_with-validation"
+                   placeholder="Names of children">
+        </div>
+        <div>
+            <div>
+                <label for="">Presents</label>
+            </div>
+            <div formArrayName="presents">
+                <div *ngFor="let present of orderForm.controls.presents.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <input type="text" formControlName="presentName" class="sf-form__control">
+                        <input type="checkbox" formControlName="buyBySanta" value="Buy by santa" class="sf-form__control">
+                        <button *ngIf="orderForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
+                                class="sf-button sf-form__button">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="addPresent()" class="sf-button sf-form__button">Add present</button>
+            </div>
+        </div>
+        <div>
+            <button class="sf-button sf-form__button">Order</button>
+        </div>
+    </form>
+</div>

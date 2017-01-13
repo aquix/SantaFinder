@@ -1,8 +1,8 @@
-.home-page {
-    main {
-        display: flex;
-        justify-content: flex-end;
-    }
+.client-home-page {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
 
     &__order-area {
         display: flex;

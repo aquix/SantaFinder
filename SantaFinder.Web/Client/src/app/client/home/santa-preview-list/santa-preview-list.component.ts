@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { SantaViewModel } from '../../data-services/view-models/santa.view-model';
+import { SantaViewModel } from '../../../data-services/view-models/santa.view-model';
 
 import './santa-preview-list.scss';
 

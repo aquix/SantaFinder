@@ -17,7 +17,10 @@ import { SantasService } from './data-services/santas.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
-import { ClientHomeComponent } from './client/client-home.component';
+import { ClientComponent } from './client/client.component';
+import { ClientHomeComponent } from './client/home/client-home.component';
+import { ClientOrderComponent } from './client/order/client-order.component';
+import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -29,7 +32,7 @@ import { SantaRegisterFormComponent } from './account/santa/register/santa-regis
 import { LoginFormComponent } from './account/shared/login/login-form.component';
 import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
-import { SantaPreviewListComponent } from './client/santa-preview-list/santa-preview-list.component';
+import { SantaPreviewListComponent } from './client/home/santa-preview-list/santa-preview-list.component';
 
 @NgModule({
     imports: [
@@ -44,7 +47,10 @@ import { SantaPreviewListComponent } from './client/santa-preview-list/santa-pre
         NavbarComponent,
         AppComponent,
         MainComponent,
+        ClientComponent,
         ClientHomeComponent,
+        ClientOrderComponent,
+        ClientOrderHistoryComponent,
         SantaHomeComponent,
         AccountComponent,
         ClientAccountComponent,
