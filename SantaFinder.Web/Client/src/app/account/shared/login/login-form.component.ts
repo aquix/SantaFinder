@@ -10,7 +10,7 @@ import { UserType } from '../../../auth/user-type';
 
 @Component({
     selector: 'login-form',
-    template: require('./login-form.html'),
+    templateUrl: './login-form.html',
     styleUrls: ['./login-form.scss']
 })
 export class LoginFormComponent implements OnInit {

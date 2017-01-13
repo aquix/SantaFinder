@@ -10,7 +10,8 @@ import { UserType } from '../../../auth/user-type';
 
 @Component({
     selector: 'register-form',
-    template: require('./client-register-form.html'),
+    templateUrl: './client-register-form.html',
+    styleUrls: ['./client-register-form.scss'],
     animations: [
         trigger(
             'errorHint', [
@@ -24,8 +25,7 @@ import { UserType } from '../../../auth/user-type';
                 ])
             ]
         )
-    ],
-    styleUrls: ['./client-register-form.scss']
+    ]
 })
 export class ClientRegisterFormComponent implements OnInit {
     registerForm: FormGroup;

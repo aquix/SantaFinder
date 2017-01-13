@@ -11,7 +11,7 @@ import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.componen
 
 @Component({
     selector: 'register-form',
-    template: require('./santa-register-form.html'),
+    templateUrl: './santa-register-form.html',
     animations: [
         trigger(
             'errorHint', [

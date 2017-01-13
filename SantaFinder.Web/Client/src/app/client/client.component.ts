@@ -4,7 +4,7 @@ import { Link } from '../shared/navbar/link.model';
 
 @Component({
     selector: 'client-page',
-    template: require('./client.html'),
+    templateUrl: './client.html',
     styleUrls: ['./client.scss']
 })
 export class ClientComponent implements OnInit {

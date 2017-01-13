@@ -4,7 +4,7 @@ import { SantaViewModel } from '../../../data-services/view-models/santa.view-mo
 
 @Component({
     selector: 'santa-preview-list',
-    template: require('./santa-preview-list.component.html'),
+    templateUrl: './santa-preview-list.component.html',
     styleUrls: ['./santa-preview-list.scss']
 })
 export class SantaPreviewListComponent implements OnInit {

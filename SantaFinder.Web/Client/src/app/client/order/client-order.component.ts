@@ -10,7 +10,7 @@ import { Present } from './models/present.model';
 
 @Component({
     selector: 'client-order',
-    template: require('./client-order.html'),
+    templateUrl: './client-order.html',
     styleUrls: ['./client-order.scss']
 })
 export class ClientOrderComponent implements OnInit {

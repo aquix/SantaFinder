@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthInfoStorage } from '../auth/auth-info-storage.service';
 
 @Component({
-    template: require('./main.html')
+    templateUrl: './main.html'
 })
 export class MainComponent implements OnInit {
     constructor(

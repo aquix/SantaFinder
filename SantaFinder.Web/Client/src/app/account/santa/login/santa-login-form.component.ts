@@ -3,7 +3,7 @@ import { UserType } from '../../../auth/user-type';
 
 @Component({
     selector: 'santa-login-form',
-    template: require('./santa-login-form.html')
+    templateUrl: './santa-login-form.html'
 })
 export class SantaLoginFormComponent implements OnInit {
     private UserType = UserType;

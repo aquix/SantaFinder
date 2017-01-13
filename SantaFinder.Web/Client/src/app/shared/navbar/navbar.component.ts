@@ -4,7 +4,7 @@ import { Link } from './link.model';
 
 @Component({
     selector: 'sf-navbar',
-    template: require('./navbar.html'),
+    templateUrl: './navbar.html',
     styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {

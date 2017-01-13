@@ -8,7 +8,7 @@ import { SantasService } from '../../data-services/santas.service';
 
 @Component({
     selector: 'client-main-page',
-    template: require('./client-home.html'),
+    templateUrl: './client-home.html',
     styleUrls: ['./client-home.scss']
 })
 export class ClientHomeComponent implements OnInit {

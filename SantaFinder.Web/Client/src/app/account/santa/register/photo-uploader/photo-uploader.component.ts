@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'photo-uploader',
-    template: require('./photo-uploader.html'),
+    templateUrl: './photo-uploader.html',
     styleUrls: ['./photo-uploader.scss']
 })
 export class PhotoUploaderComponent implements OnInit {

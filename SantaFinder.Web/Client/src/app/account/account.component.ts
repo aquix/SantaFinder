@@ -4,7 +4,7 @@ import { Link } from '../shared/navbar/link.model';
 
 @Component({
     selector: 'account-page',
-    template: require('./account.html'),
+    templateUrl: './account.html',
     styleUrls: ['./account.scss']
 })
 export class AccountComponent implements OnInit {

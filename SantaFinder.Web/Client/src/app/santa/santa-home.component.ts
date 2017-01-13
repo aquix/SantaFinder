@@ -5,7 +5,7 @@ import { AccountService } from '../account/services/account.service';
 
 @Component({
     selector: 'main-page',
-    template: require('./santa-home.html')
+    templateUrl: './santa-home.html'
 })
 export class SantaHomeComponent implements OnInit {
     constructor(
