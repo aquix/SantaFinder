@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { Order } from './models/order.model';
 import { Present } from './models/present.model';
 
-import './client-order.scss';
+// import './client-order.scss';
 
 @Component({
     selector: 'client-order',
-    template: require('./client-order.html')
+    template: require('./client-order.html'),
+    styleUrls: ['./client-order.scss']
 })
 export class ClientOrderComponent implements OnInit {
     orderForm: FormGroup;

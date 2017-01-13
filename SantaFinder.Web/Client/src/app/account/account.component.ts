@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
 
-import './account.scss';
-
 @Component({
     selector: 'account-page',
-    template: require('./account.html')
+    template: require('./account.html'),
+    styleUrls: ['./account.scss']
 })
 export class AccountComponent implements OnInit {
     navbarLinks: Link[];

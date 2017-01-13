@@ -8,7 +8,7 @@ const commonConfig = require('./webpack.config.common');
 module.exports = merge(commonConfig, {
     module: {
         loaders: [{
-            loader: 'style!css!sass',
+            loader: 'raw!sass',
             test: /\.scss$/,
             exclude: /node_modules/
         }]

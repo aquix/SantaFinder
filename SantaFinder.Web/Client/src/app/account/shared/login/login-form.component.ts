@@ -8,11 +8,10 @@ import { AccountService } from '../../services/account.service';
 import { LoginModel } from './login.model';
 import { UserType } from '../../../auth/user-type';
 
-import './login-form.scss';
-
 @Component({
     selector: 'login-form',
-    template: require('./login-form.html')
+    template: require('./login-form.html'),
+    styleUrls: ['./login-form.scss']
 })
 export class LoginFormComponent implements OnInit {
     @Input() userType: UserType;

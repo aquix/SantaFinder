@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
-import './photo-uploader.scss';
-
 @Component({
     selector: 'photo-uploader',
-    template: require('./photo-uploader.html')
+    template: require('./photo-uploader.html'),
+    styleUrls: ['./photo-uploader.scss']
 })
 export class PhotoUploaderComponent implements OnInit {
     @Input() caption: string = '';

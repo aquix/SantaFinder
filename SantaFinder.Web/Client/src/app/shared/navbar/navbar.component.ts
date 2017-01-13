@@ -2,11 +2,10 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Link } from './link.model';
 
-import './navbar.scss';
-
 @Component({
     selector: 'sf-navbar',
-    template: require('./navbar.html')
+    template: require('./navbar.html'),
+    styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
     @Input() links: Link[];

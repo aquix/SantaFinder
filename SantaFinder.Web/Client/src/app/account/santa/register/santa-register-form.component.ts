@@ -9,8 +9,6 @@ import { SantaRegisterModel } from './santa-register.model';
 import { UserType } from '../../../auth/user-type';
 import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
 
-import './santa-register-form.scss';
-
 @Component({
     selector: 'register-form',
     template: require('./santa-register-form.html'),
@@ -27,7 +25,8 @@ import './santa-register-form.scss';
                 ])
             ]
         )
-    ]
+    ],
+    styleUrls: ['./santa-register-form.scss']
 })
 export class SantaRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
