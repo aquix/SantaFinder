@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ImageUploadModule } from 'angular2-image-upload';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { AppRoutingModule } from './app.routing';
@@ -31,8 +30,7 @@ import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/
         BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        HttpModule,
-        ImageUploadModule.forRoot()
+        HttpModule
     ],
     declarations: [
         AppComponent,
