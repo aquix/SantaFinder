@@ -12,5 +12,5 @@ export interface Order {
     };
     childrenNames: string;
     presents: Present[];
-    datetime: Date;
+    datetime: string;
 }

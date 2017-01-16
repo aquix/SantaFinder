@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
-
+import * as moment from 'moment/moment';
 import { Order } from './models/order.model';
 import { Present } from './models/present.model';
 
@@ -76,6 +76,8 @@ export class ClientOrderComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: Order }) {
+        let datetime = moment(value.datetime);
+        value.datetime = datetime.toJSON();
         console.log('submit', value);
     }
 }

@@ -56,10 +56,11 @@
                 <label class="sf-form__label">Party time</label>
             </div>
             <div>
-                <input type="text" ng2-datetime-picker formControlName="datetime"
+                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
                        close-on-select="false"
                        first-day-of-week="1"
                        minute-step="10"
+                       min-date="now"
                        class="sf-form__control sf-form__control_with-validation"/>
             </div>
         </div>
