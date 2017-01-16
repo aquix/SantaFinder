@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { RatingModule } from 'ng2-rating';
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -41,7 +42,8 @@ import { SantaPreviewListComponent } from './client/home/santa-preview-list/sant
         ReactiveFormsModule,
         AppRoutingModule,
         HttpModule,
-        RatingModule
+        RatingModule,
+        Ng2DatetimePickerModule
     ],
     declarations: [
         NavbarComponent,

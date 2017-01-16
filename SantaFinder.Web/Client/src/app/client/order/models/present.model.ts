@@ -1,4 +1,4 @@
 export interface Present {
-    presentName: string;
+    name: string;
     buyBySanta: boolean;
 }

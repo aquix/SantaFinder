@@ -1,3 +1,5 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 $button-color: #3498DB;
 
 html {
@@ -8,6 +10,10 @@ body {
     margin: 0;
     height: 100%;
     font-family: Arial;
+}
+
+.clearfix {
+    overflow: hidden;
 }
 
 .app {
@@ -81,6 +87,22 @@ body {
         margin: 0 auto;
     }
 
+    &__checkbox {
+        display:none;
+
+        & + label:before {
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f096";
+            letter-spacing: 10px;
+        }
+
+        &:checked + label:before {
+            content: "\f046";
+            letter-spacing: 8px;
+        }
+    }
+
     &__hint-text {
         font-size: 12px;
         color: #444;
@@ -109,5 +131,30 @@ body {
 
     &:disabled {
         background-color: lighten($button-color, 30%);
+    }
+}
+
+.sf-corner-delete {
+    display: inline-block;
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    margin: -10px 0 0 -15px;
+
+    color: #fff;
+    font-size: 31px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 0px;
+
+    cursor:pointer;
+    border: none;
+    border-radius: 1em;
+    background: #1abc9c;
+
+    &:after {
+        display: inline-block;
+        margin-top: 16px;
+        content: "×";
     }
 }

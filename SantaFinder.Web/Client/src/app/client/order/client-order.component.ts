@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,8 @@ import { Present } from './models/present.model';
 @Component({
     selector: 'client-order',
     templateUrl: './client-order.html',
-    styleUrls: ['./client-order.scss']
+    styleUrls: ['./client-order.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ClientOrderComponent implements OnInit {
     orderForm: FormGroup;
@@ -33,10 +34,28 @@ export class ClientOrderComponent implements OnInit {
                 })
             }),
             childrenNames: [''],
+            datetime: ['', Validators.required],
             presents: this.formBuilder.array([
                 this.initNewPresent()
             ])
         });
+
+        let addressGroup = this.orderForm.get('address');
+        addressGroup.get('useDefaultAddress').valueChanges.subscribe(value => {
+            let customAddressGroup = addressGroup.get('customAddress');
+            let fieldNames = ['city', 'street', 'house', 'apartment'];
+            if (value) {
+                for (let fieldName of fieldNames) {
+                    customAddressGroup.get(fieldName).clearValidators();
+                    customAddressGroup.get(fieldName).updateValueAndValidity();
+                }
+            } else {
+                for (let fieldName of fieldNames) {
+                    customAddressGroup.get(fieldName).setValidators(Validators.required);
+                    customAddressGroup.get(fieldName).updateValueAndValidity();
+                }
+            }
+        })
     }
 
     initNewPresent() {
@@ -56,7 +75,7 @@ export class ClientOrderComponent implements OnInit {
         control.removeAt(i);
     }
 
-    onSubmitClick() {
-
+    onSubmitClick({ value }: { value: Order }) {
+        console.log('submit', value);
     }
 }
