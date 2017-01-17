@@ -30,7 +30,8 @@ namespace SantaFinder.Web.Services
                 ChildrenNames = newOrder.ChildrenNames,
                 Datetime = newOrder.Datetime,
                 UseProfileAddress = newOrder.Address.UseDefaultAddress,
-                Address = new Address()
+                Address = new Address(),
+                Status = OrderStatus.New
             };
 
             if (!order.UseProfileAddress)
@@ -75,12 +76,8 @@ namespace SantaFinder.Web.Services
                 Id = o.Id,
                 Datetime = o.Datetime,
                 Address = GetOrderAddress(o),
-                SantaInfo = new SantaShortInfo
-                {
-                    Id = "123",
-                    Name = "Test santa",
-                    PhotoPath = "test.png"
-                }
+                Status = o.Status,
+                SantaInfo = GetSantaInfo(o)
             });
         }
 
@@ -94,6 +91,21 @@ namespace SantaFinder.Web.Services
             {
                 return order.Address;
             }
-        } 
+        }
+
+        private SantaShortInfo GetSantaInfo(Order order)
+        {
+            if (order.Status == OrderStatus.New)
+            {
+                return null;
+            }
+
+            return new SantaShortInfo
+            {
+                Id = order.Santa.Id,
+                Name = order.Santa.Name,
+                PhotoPath = order.Santa.PhotoPath
+            };
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { SantaShortInfo } from './santa-short-info';
+import { OrderStatus } from './order-status';
 
 export interface OrderShortInfo {
     id: number;
@@ -10,4 +11,5 @@ export interface OrderShortInfo {
         apartment: string;
     };
     santaInfo: SantaShortInfo;
+    status: OrderStatus;
 }

@@ -62,6 +62,7 @@
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderStatus.cs" />
     <Compile Include="Entities\Present.cs" />
     <Compile Include="Entities\Santa.cs" />
     <Compile Include="Entities\User.cs" />
@@ -76,6 +77,14 @@
     <Compile Include="Migrations\201701171214339_AddAddressToOrder.cs" />
     <Compile Include="Migrations\201701171214339_AddAddressToOrder.Designer.cs">
       <DependentUpon>201701171214339_AddAddressToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701171332035_AddSantaToOrder.cs" />
+    <Compile Include="Migrations\201701171332035_AddSantaToOrder.Designer.cs">
+      <DependentUpon>201701171332035_AddSantaToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701171344321_AddOrderStatus.cs" />
+    <Compile Include="Migrations\201701171344321_AddOrderStatus.Designer.cs">
+      <DependentUpon>201701171344321_AddOrderStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701171214339_AddAddressToOrder.resx">
       <DependentUpon>201701171214339_AddAddressToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701171332035_AddSantaToOrder.resx">
+      <DependentUpon>201701171332035_AddSantaToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701171344321_AddOrderStatus.resx">
+      <DependentUpon>201701171344321_AddOrderStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
