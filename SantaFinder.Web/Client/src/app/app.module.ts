@@ -36,6 +36,9 @@ import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
 import { SantaPreviewListComponent } from './client/home/santa-preview-list/santa-preview-list.component';
 
+import { AddressPipe } from './shared/pipes/address.pipe';
+import { DatetimePipe } from './shared/pipes/datetime.pipe';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -65,7 +68,10 @@ import { SantaPreviewListComponent } from './client/home/santa-preview-list/sant
         LoginFormComponent,
         LogoutComponent,
         PhotoUploaderComponent,
-        SantaPreviewListComponent
+        SantaPreviewListComponent,
+
+        AddressPipe,
+        DatetimePipe
     ],
     providers: [
         CookieService,

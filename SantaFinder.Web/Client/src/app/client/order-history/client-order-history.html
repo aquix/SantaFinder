@@ -6,7 +6,7 @@
     <div class="orders-history">
         <ul class="orders-list">
             <li *ngFor="let order of orders">
-                <div class="order-item">
+                <div class="sf-card order-item">
                     <div class="order-item__line order-item__common-info">
                         <div class="order-item__id">
                             # {{ order.id }}
@@ -29,11 +29,11 @@
                     </div>
                     <div class="order-item__line order-item__address">
                         Address:
-                        <span>{{ order.address.city }}</span>
+                        <span>{{ order.address | address }}</span>
                     </div>
                     <div class="order-item__line order-item__datetime">
                         Time:
-                        <span>{{ order.datetime }}</span>
+                        <span>{{ order.datetime | datetime }}</span>
                     </div>
                 </div>
             </li>
