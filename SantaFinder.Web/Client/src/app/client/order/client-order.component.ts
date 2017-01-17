@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment/moment';
 
 import { OrdersService } from '../../data-services/orders.service';
-import { Order } from '../../data-services/view-models/order.view-model';
+import { Order } from '../../data-services/view-models/new-order/order.view-model';
 
 @Component({
     selector: 'client-order',

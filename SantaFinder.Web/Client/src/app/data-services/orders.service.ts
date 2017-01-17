@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AuthHttp } from '../auth/auth-http.service';
-import { Order } from './view-models/order.view-model';
+import { Order } from './view-models/new-order/order.view-model';
 import { AppConfig } from '../app.config';
 
 @Injectable()
@@ -18,5 +18,9 @@ export class OrdersService {
 
             return false;
         });
+    }
+
+    getAll() {
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders`);
     }
 }

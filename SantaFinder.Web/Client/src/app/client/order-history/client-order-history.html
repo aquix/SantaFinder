@@ -1,1 +1,43 @@
-Client order history
+<div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let order of orders">
+            <div>
+                <div>
+                    {{ order.id }}
+                </div>
+                <div>
+                    {{ order.datetime }}
+                </div>
+                <div>
+                    <div>
+                        {{ order.address.city }}
+                    </div>
+                    <div>
+                        {{ order.address.street }}
+                    </div>
+                    <div>
+                        {{ order.address.house }}
+                    </div>
+                    <div>
+                        {{ order.address.apartment }}
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        {{ order.santaInfo.id }}
+                    </div>
+                    <div>
+                        {{ order.santaInfo.name }}
+                    </div>
+                    <div>
+                        {{ order.santaInfo.photoPath }}
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
