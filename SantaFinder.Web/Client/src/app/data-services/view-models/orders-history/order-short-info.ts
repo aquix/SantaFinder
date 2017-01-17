@@ -10,6 +10,7 @@ export interface OrderShortInfo {
         house: string;
         apartment: string;
     };
+    childrenNames: string;
     santaInfo: SantaShortInfo;
     status: OrderStatus;
 }

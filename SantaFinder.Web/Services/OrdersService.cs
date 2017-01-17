@@ -76,6 +76,7 @@ namespace SantaFinder.Web.Services
                 Id = o.Id,
                 Datetime = o.Datetime,
                 Address = GetOrderAddress(o),
+                ChildrenNames = o.ChildrenNames,
                 Status = o.Status,
                 SantaInfo = GetSantaInfo(o)
             });

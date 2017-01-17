@@ -6,7 +6,8 @@ import { OrderStatus } from '../../data-services/view-models/orders-history/orde
 
 @Component({
     selector: 'client-order-history',
-    templateUrl: './client-order-history.html'
+    templateUrl: './client-order-history.html',
+    styleUrls: ['./client-order.scss']
 })
 export class ClientOrderHistoryComponent implements OnInit {
     public orderStatus = OrderStatus;
