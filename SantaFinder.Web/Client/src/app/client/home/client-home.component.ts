@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AccountService } from '../../account/services/account.service';
 
-import { SantaViewModel } from '../../data-services/view-models/santa.view-model';
+import { Santa } from '../../data-services/view-models/santa.view-model';
 import { SantasService } from '../../data-services/santas.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SantasService } from '../../data-services/santas.service';
     styleUrls: ['./client-home.scss']
 })
 export class ClientHomeComponent implements OnInit {
-    santaList: SantaViewModel[];
+    santaList: Santa[];
 
     constructor(
         private router: Router,

@@ -15,6 +15,7 @@ import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
+import { OrdersService } from './data-services/orders.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -72,7 +73,8 @@ import { SantaPreviewListComponent } from './client/home/santa-preview-list/sant
         AuthInfoStorage,
         AuthHttp,
         AccountService,
-        SantasService
+        SantasService,
+        OrdersService
     ],
     bootstrap: [AppComponent],
 })

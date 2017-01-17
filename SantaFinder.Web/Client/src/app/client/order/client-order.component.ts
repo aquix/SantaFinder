@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { EmailValidators, PasswordValidators } from 'ng2-validators';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as moment from 'moment/moment';
-import { Order } from './models/order.model';
-import { Present } from './models/present.model';
 
-// import './client-order.scss';
+import * as moment from 'moment/moment';
+
+import { OrdersService } from '../../data-services/orders.service';
+import { Order } from '../../data-services/view-models/order.view-model';
 
 @Component({
     selector: 'client-order',
@@ -19,7 +18,8 @@ export class ClientOrderComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private ordersService: OrdersService
     ) { }
 
     ngOnInit() {
@@ -55,7 +55,7 @@ export class ClientOrderComponent implements OnInit {
                     customAddressGroup.get(fieldName).updateValueAndValidity();
                 }
             }
-        })
+        });
     }
 
     initNewPresent() {
@@ -78,6 +78,13 @@ export class ClientOrderComponent implements OnInit {
     onSubmitClick({ value }: { value: Order }) {
         let datetime = moment(value.datetime);
         value.datetime = datetime.toJSON();
-        console.log('submit', value);
+
+        this.ordersService.createOrder(value).subscribe(success => {
+            if (success) {
+                this.router.navigate(['../']);
+            } else {
+                console.log('error');
+            }
+        });
     }
 }

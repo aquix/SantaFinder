@@ -1,4 +1,4 @@
-export interface SantaViewModel {
+export interface Santa {
     name: string;
     photoUrl: string;
     rating: number;

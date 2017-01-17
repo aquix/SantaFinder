@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { SantaViewModel } from '../../../data-services/view-models/santa.view-model';
+import { Santa } from '../../../data-services/view-models/santa.view-model';
 
 @Component({
     selector: 'santa-preview-list',
@@ -8,7 +8,7 @@ import { SantaViewModel } from '../../../data-services/view-models/santa.view-mo
     styleUrls: ['./santa-preview-list.scss']
 })
 export class SantaPreviewListComponent implements OnInit {
-    @Input() data: SantaViewModel[];
+    @Input() data: Santa[];
 
     constructor() { }
 

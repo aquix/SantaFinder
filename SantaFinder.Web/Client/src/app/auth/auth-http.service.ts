@@ -10,13 +10,21 @@ export class AuthHttp {
     ) {}
 
     get(url: string, options: RequestOptionsArgs = {}) {
+        this.appendAuthHeaders(options);
+        return this.http.get(url, options);
+    }
+
+    post(url: string, body: any = {}, options: RequestOptionsArgs = {}) {
+        this.appendAuthHeaders(options);
+        return this.http.post(url, body, options);
+    }
+
+    private appendAuthHeaders(options: RequestOptionsArgs) {
         if (!options.headers) {
             options.headers = new Headers();
         }
 
-        options.headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        // options.headers.append('Content-Type', 'application/x-www-form-urlencoded');
         options.headers.append('Authorization', `Bearer ${this.authInfoStorage.authInfo.token}`);
-
-        return this.http.get(url, options);
     }
 }

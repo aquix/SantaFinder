@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AuthHttp } from '../auth/auth-http.service';
-import { SantaViewModel } from './view-models/santa.view-model';
+import { Santa } from './view-models/santa.view-model';
 import { AppConfig } from '../app.config';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class SantasService {
         private authHttp: AuthHttp
     ) { }
 
-    getSantas(startIndex = 0, count = 0): SantaViewModel[] {
+    getSantas(startIndex = 0, count = 0): Santa[] {
         return [
             {
                 name: "Santa John",

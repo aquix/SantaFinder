@@ -1,4 +1,4 @@
-import { Present } from './present.model';
+import { Present } from './present.view-model';
 
 export interface Order {
     address: {
