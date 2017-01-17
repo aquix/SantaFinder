@@ -9,6 +9,7 @@ using System.Web;
 using SantaFinder.Data.Context;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models;
+using SantaFinder.Web.Models.OrderHistory;
 
 namespace SantaFinder.Web.Services
 {
@@ -57,21 +58,42 @@ namespace SantaFinder.Web.Services
                 await _db.SaveChangesAsync();
 
                 return true;
-            } catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
             }
-            
+            catch (DbEntityValidationException e)
+            {
+                return false;
+            }
         }
+
+        public IEnumerable<OrderShortInfo> GetOrdersByClientId(string clientId)
+        {
+            var orders = _db.Orders.Where(o => o.ClientId == clientId);
+
+            var orderList = orders.ToList();
+            return orders.ToList().Select(o => new OrderShortInfo
+            {
+                Id = o.Id,
+                Datetime = o.Datetime,
+                Address = GetOrderAddress(o),
+                SantaInfo = new SantaShortInfo
+                {
+                    Id = "123",
+                    Name = "Test santa",
+                    PhotoPath = "test.png"
+                }
+            });
+        }
+
+        private Address GetOrderAddress(Order order)
+        {
+            if (order.UseProfileAddress)
+            {
+                return order.Client.Address;
+            }
+            else
+            {
+                return order.Address;
+            }
+        } 
     }
 }

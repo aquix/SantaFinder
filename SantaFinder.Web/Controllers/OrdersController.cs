@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using SantaFinder.Web.Models;
+using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
@@ -33,6 +34,12 @@ namespace SantaFinder.Web.Controllers
             {
                 return InternalServerError();
             }
+        }
+
+        [HttpGet]
+        public IEnumerable<OrderShortInfo> GetMyOrders()
+        {
+            return _ordersService.GetOrdersByClientId(User.Identity.GetUserId());
         }
     }
 }
