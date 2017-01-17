@@ -223,10 +223,11 @@
     </Compile>
     <Compile Include="Models\NewOrder.cs" />
     <Compile Include="Models\NewOrderAddress.cs" />
-    <Compile Include="Models\Present.cs" />
+    <Compile Include="Models\NewPresent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Auth\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Areas\Auth\Results\ChallengeResult.cs" />
+    <Compile Include="Services\OrdersService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />

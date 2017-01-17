@@ -1,5 +1,5 @@
 <div class="sf-form order-form">
-    <form [formGroup]="orderForm" (ngSubmit)="onSubmitClick(orderForm)" novalidate>
+    <form [formGroup]="orderForm" novalidate>
         <h1 class="sf-form__title">
             Order
         </h1>
@@ -38,7 +38,7 @@
             <div formArrayName="presents">
                 <div *ngFor="let present of orderForm.controls.presents.controls; let i=index">
                     <div [formGroupName]="i">
-                        <input type="text" formControlName="presentName" class="sf-form__control order-form__present-name">
+                        <input type="text" formControlName="name" class="sf-form__control order-form__present-name">
                         <a *ngIf="orderForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
                             href="javascript:void(0)" class="sf-corner-delete order-form__corner-delete"></a>
                         <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
@@ -65,7 +65,8 @@
             </div>
         </div>
         <div>
-            <button [disabled]="orderForm.invalid" class="sf-button sf-form__button">Order</button>
+            <button type="submit" (click)="onSubmitClick(orderForm)"
+                    [disabled]="orderForm.invalid" class="sf-button sf-form__button">Order</button>
         </div>
     </form>
 </div>

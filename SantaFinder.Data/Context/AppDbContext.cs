@@ -16,7 +16,9 @@ namespace SantaFinder.Data.Context
 
         public static AppDbContext Create() => new AppDbContext();
 
-        public IDbSet<Client> Clients { get; set; }
-        public IDbSet<Santa> Santas { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Santa> Santas { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Present> Presents { get; set; }
     }
 }

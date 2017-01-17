@@ -61,11 +61,21 @@
     <Compile Include="Context\IDbContext.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\Present.cs" />
     <Compile Include="Entities\Santa.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.Designer.cs">
       <DependentUpon>201701061609042_CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701171152326_AddOrderModel.cs" />
+    <Compile Include="Migrations\201701171152326_AddOrderModel.Designer.cs">
+      <DependentUpon>201701171152326_AddOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701171214339_AddAddressToOrder.cs" />
+    <Compile Include="Migrations\201701171214339_AddAddressToOrder.Designer.cs">
+      <DependentUpon>201701171214339_AddAddressToOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701061609042_CreateDatabase.resx">
       <DependentUpon>201701061609042_CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701171152326_AddOrderModel.resx">
+      <DependentUpon>201701171152326_AddOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701171214339_AddAddressToOrder.resx">
+      <DependentUpon>201701171214339_AddAddressToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

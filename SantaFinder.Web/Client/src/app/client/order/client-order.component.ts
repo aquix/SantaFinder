@@ -60,7 +60,7 @@ export class ClientOrderComponent implements OnInit {
 
     initNewPresent() {
         return this.formBuilder.group({
-            presentName: ['', Validators.required],
+            name: ['', Validators.required],
             buyBySanta: [false]
         });
     }

@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 using SantaFinder.Data.Context;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Util
 {
@@ -52,6 +53,9 @@ namespace SantaFinder.Web.Util
             builder.Register(c => ClientManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
             builder.Register(c => SantaManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
             builder.Register(c => AppUserManager<User>.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
+
+            builder.RegisterType<OrdersService>()
+                .AsSelf();
         }
     }
 }
