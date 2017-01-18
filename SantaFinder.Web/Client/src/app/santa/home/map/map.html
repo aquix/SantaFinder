@@ -1,0 +1,16 @@
+<sebm-google-map [latitude]="myLocation.latitude" [longitude]="myLocation.longitude"
+                 [minZoom]="3">
+    <sebm-google-map-marker
+            [latitude]="myLocation.latitude" [longitude]="myLocation.longitude"
+            iconUrl="images/my-location.png"
+            title="Me">
+    </sebm-google-map-marker>
+    <sebm-google-map-marker
+            *ngFor="let order of orders"
+            [latitude]="order.location.latitude" [longitude]="order.location.longitude"
+            (markerClick)="onMarkerClick()">
+        <sebm-google-map-info-window [disableAutoPan]="false">
+            {{ order.id }}
+        </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+</sebm-google-map>

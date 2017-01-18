@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { RatingModule } from 'ng2-rating';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
 import { OrdersService } from './data-services/orders.service';
+import { LocationService } from './shared/services/location.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -28,6 +30,7 @@ import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
+import { MapComponent } from './santa/home/map/map.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
@@ -44,6 +47,8 @@ import { ClientOrderInfoComponent } from './client/order-info/order-info.compone
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
 
+const GMAPS_API_KEY = require('json!../secretconfig.json').gmapsApiKey;
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -52,7 +57,10 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         AppRoutingModule,
         HttpModule,
         RatingModule,
-        Ng2DatetimePickerModule
+        Ng2DatetimePickerModule,
+        AgmCoreModule.forRoot({
+            apiKey: GMAPS_API_KEY
+        })
     ],
     declarations: [
         NavbarComponent,
@@ -64,6 +72,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientOrderHistoryComponent,
         SantaComponent,
         SantaHomeComponent,
+        MapComponent,
         AccountComponent,
         ClientAccountComponent,
         ClientLoginFormComponent,
@@ -90,7 +99,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         AuthHttp,
         AccountService,
         SantasService,
-        OrdersService
+        OrdersService,
+        LocationService
     ],
     bootstrap: [AppComponent],
 })

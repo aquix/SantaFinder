@@ -23,4 +23,8 @@ export class OrdersService {
     getAll() {
         return this.authHttp.get(`${AppConfig.API_PATH}/orders`);
     }
+
+    getOrderLocations() {
+        return this.authHttp.get(`${AppConfig.API_PATH}/orderLocations`);
+    }
 }
