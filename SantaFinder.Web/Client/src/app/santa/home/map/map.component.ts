@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 
 import { OrderLocationInfo } from '../../../data-services/view-models/orders-on-map/order-location-info';
-import { Location } from '../../../data-services/view-models/location';
+import { Location } from '../../../shared/models/location';
 import { LocationService } from '../../../shared/services/location.service';
 import { GeocodingService } from '../../../shared/services/geocoding.service';
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SantaFinder.Web.Models.Shared;
+﻿using SantaFinder.Data.Entities;
 
 namespace SantaFinder.Web.Models.OrdersOnMap
 {

@@ -9,6 +9,8 @@ import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../shared/enums/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
+import { Location } from '../../shared/models/location';
+import { GeocodingService } from '../../shared/services/geocoding.service';
 
 /**
  * Implement methods for all account roles
@@ -18,8 +20,9 @@ export class AccountService {
     protected static TOKEN_PATH = `${AppConfig.SERVER}/token`;
 
     constructor(
-        protected http: Http,
-        protected authTokenService: AuthInfoStorage
+        private http: Http,
+        private authTokenService: AuthInfoStorage,
+        private geocodingService: GeocodingService
     ) { }
 
     register(regInfoRaw: ClientRegisterModel | SantaRegisterModel) {
@@ -30,13 +33,20 @@ export class AccountService {
         if (this.getRegisterModelType(regInfoRaw) === UserType.client) {
             let clientRegInfo = <ClientRegisterModel>regInfoRaw;
             registerUri = 'client/register';
-            registerBody = {
-                email: clientRegInfo.email,
-                password: clientRegInfo.passwords.password,
-                confirmPassword: clientRegInfo.passwords.passwordConfirmation,
-                name: clientRegInfo.name,
-                address: clientRegInfo.address
-            };
+
+            return this.geocodingService.getCoordsFromAddress(clientRegInfo.address).switchMap(location => {
+                registerBody = {
+                    email: clientRegInfo.email,
+                    password: clientRegInfo.passwords.password,
+                    confirmPassword: clientRegInfo.passwords.passwordConfirmation,
+                    name: clientRegInfo.name,
+                    address: clientRegInfo.address,
+                    location: location
+                };
+
+                return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+                    .map(res => res.status);
+            });
         } else {
             let santaRegInfo = <SantaRegisterModel>regInfoRaw;
             registerUri = 'santa/register';
@@ -53,10 +63,10 @@ export class AccountService {
                 formData.append(key, formDataContent[key]);
             }
             registerBody = formData;
-        }
 
-        return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
-            .map(res => res.status);
+            return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+                .map(res => res.status);
+        }
     }
 
     login(loginInfo: LoginModel, userType: UserType) {

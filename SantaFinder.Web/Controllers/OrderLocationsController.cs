@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models.OrdersOnMap;
-using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
@@ -22,27 +18,7 @@ namespace SantaFinder.Web.Controllers
 
         public IEnumerable<OrderLocationInfo> Get()
         {
-            return new List<OrderLocationInfo>
-            {
-                new OrderLocationInfo
-                {
-                    Id = 1,
-                    Location = new Location
-                    {
-                        Latitude = 10.47,
-                        Longitude = -67.033
-                    }
-                },
-                new OrderLocationInfo
-                {
-                    Id = 2,
-                    Location = new Location
-                    {
-                        Latitude = 55.750074, 
-                        Longitude = 37.599910
-                    }
-                }
-            };
+            return _ordersService.GetOrderLocations();
         }
     }
 }

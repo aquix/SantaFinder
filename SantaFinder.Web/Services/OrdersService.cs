@@ -10,6 +10,7 @@ using SantaFinder.Data.Context;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.OrderHistory;
+using SantaFinder.Web.Models.OrdersOnMap;
 
 namespace SantaFinder.Web.Services
 {
@@ -31,12 +32,14 @@ namespace SantaFinder.Web.Services
                 Datetime = newOrder.Datetime,
                 UseProfileAddress = newOrder.Address.UseDefaultAddress,
                 Address = new Address(),
+                Location = new Location(),
                 Status = OrderStatus.New
             };
 
             if (!order.UseProfileAddress)
             {
-                order.Address = newOrder.Address.CustomAddress;
+                order.Address = newOrder.Address.CustomAddress.Line;
+                order.Location = newOrder.Address.CustomAddress.Location;
             };
 
             _db.Orders.Add(order);
@@ -60,7 +63,7 @@ namespace SantaFinder.Web.Services
 
                 return true;
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException)
             {
                 return false;
             }
@@ -82,6 +85,15 @@ namespace SantaFinder.Web.Services
             });
         }
 
+        public IEnumerable<OrderLocationInfo> GetOrderLocations()
+        {
+            return _db.Orders.ToList().Select(o => new OrderLocationInfo
+            {
+                Id = o.Id,
+                Location = GetOrderLocation(o)
+            });
+        }
+
         private Address GetOrderAddress(Order order)
         {
             if (order.UseProfileAddress)
@@ -91,6 +103,18 @@ namespace SantaFinder.Web.Services
             else
             {
                 return order.Address;
+            }
+        }
+
+        private Location GetOrderLocation(Order order)
+        {
+            if (order.UseProfileAddress)
+            {
+                return order.Client.Location;
+            }
+            else
+            {
+                return order.Location;
             }
         }
 

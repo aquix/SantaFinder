@@ -41,13 +41,8 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.Name,
-                Address = new Address
-                {
-                    City = model.Address.City,
-                    Street = model.Address.Street,
-                    House = model.Address.House,
-                    Apartment = model.Address.Apartment
-                }
+                Address = model.Address,
+                Location = model.Location
             };
 
             IdentityResult result;

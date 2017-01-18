@@ -14,6 +14,7 @@ namespace SantaFinder.Data.Entities
         public DateTime Datetime { get; set; }
         public bool UseProfileAddress { get; set; }
         public Address Address { get; set; }
+        public Location Location { get; set; }
         public OrderStatus Status { get; set; }
 
         public virtual IEnumerable<Present> Presents { get; set; }

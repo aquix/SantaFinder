@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../../app.config';
 import { Address } from '../models/address.model';
-import { Location } from '../../data-services/view-models/location';
+import { Location } from '../../shared/models/location';
 
 @Injectable()
 export class GeocodingService {
@@ -33,7 +33,7 @@ export class GeocodingService {
             return {
                 latitude: location.lat,
                 longitude: location.lng
-            }
+            };
         });
     }
 }
