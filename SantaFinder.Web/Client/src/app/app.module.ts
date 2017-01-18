@@ -8,6 +8,8 @@ import { RatingModule } from 'ng2-rating';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
+import { AppConfig } from './app.config';
+
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -21,6 +23,7 @@ import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
 import { OrdersService } from './data-services/orders.service';
 import { LocationService } from './shared/services/location.service';
+import { GeocodingService } from './shared/services/geocoding.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -47,8 +50,6 @@ import { ClientOrderInfoComponent } from './client/order-info/order-info.compone
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
 
-const GMAPS_API_KEY = require('json!../secretconfig.json').gmapsApiKey;
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -59,7 +60,7 @@ const GMAPS_API_KEY = require('json!../secretconfig.json').gmapsApiKey;
         RatingModule,
         Ng2DatetimePickerModule,
         AgmCoreModule.forRoot({
-            apiKey: GMAPS_API_KEY
+            apiKey: AppConfig.GMAPS_API_KEY
         })
     ],
     declarations: [
@@ -100,7 +101,8 @@ const GMAPS_API_KEY = require('json!../secretconfig.json').gmapsApiKey;
         AccountService,
         SantasService,
         OrdersService,
-        LocationService
+        LocationService,
+        GeocodingService
     ],
     bootstrap: [AppComponent],
 })

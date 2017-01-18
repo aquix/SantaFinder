@@ -3,6 +3,7 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { OrderLocationInfo } from '../../../data-services/view-models/orders-on-map/order-location-info';
 import { Location } from '../../../data-services/view-models/location';
 import { LocationService } from '../../../shared/services/location.service';
+import { GeocodingService } from '../../../shared/services/geocoding.service';
 
 @Component({
     selector: 'map',
@@ -18,7 +19,8 @@ export class MapComponent implements OnInit {
     };
 
     constructor(
-        private locationService: LocationService
+        private locationService: LocationService,
+        private geo: GeocodingService
     ) { }
 
     ngOnInit() {
@@ -30,10 +32,6 @@ export class MapComponent implements OnInit {
 
     onMarkerClick() {
         console.log('marker click');
-    }
-
-    onZoomChange(e) {
-        console.log(e);
     }
 
     private locationChanged(loc: Location) {
