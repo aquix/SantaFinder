@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { OrderShortInfo } from '../../data-services/view-models/orders-history/order-short-info';
 import { OrdersService } from '../../data-services/orders.service';
@@ -16,7 +17,8 @@ export class ClientOrderHistoryComponent implements OnInit {
     errorMessage: string;
 
     constructor(
-        private ordersService: OrdersService
+        private ordersService: OrdersService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -27,5 +29,9 @@ export class ClientOrderHistoryComponent implements OnInit {
                 this.errorMessage = res.statusText;
             }
         });
+    }
+
+    onOrderItemClick(order: OrderShortInfo) {
+        this.router.navigate(['/client/orderinfo', order.id]);
     }
 }

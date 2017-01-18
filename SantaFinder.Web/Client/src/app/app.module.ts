@@ -35,6 +35,7 @@ import { LoginFormComponent } from './account/shared/login/login-form.component'
 import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
 import { SantaPreviewListComponent } from './client/home/santa-preview-list/santa-preview-list.component';
+import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
@@ -69,6 +70,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         LogoutComponent,
         PhotoUploaderComponent,
         SantaPreviewListComponent,
+        ClientOrderInfoComponent,
 
         AddressPipe,
         DatetimePipe

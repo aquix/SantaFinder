@@ -33,6 +33,11 @@
             height: 30px;
         }
     }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #E0E0E0;
+    }
 }
 
 .orders-list {

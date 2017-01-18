@@ -8,6 +8,7 @@ import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
+import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
 import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -41,7 +42,8 @@ const clientRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: ClientHomeComponent },
     { path: 'order', component: ClientOrderComponent },
-    { path: 'orderhistory', component: ClientOrderHistoryComponent }
+    { path: 'orderhistory', component: ClientOrderHistoryComponent },
+    { path: 'orderinfo/:id', component: ClientOrderInfoComponent },
 ];
 
 const appRoutes: Routes = [
