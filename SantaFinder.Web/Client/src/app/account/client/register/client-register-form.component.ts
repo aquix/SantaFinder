@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services/account.service';
 import { ClientRegisterModel } from './client-register.model';
-import { UserType } from '../../../auth/user-type';
+import { UserType } from '../../../shared/enums/user-type';
 
 @Component({
     selector: 'register-form',

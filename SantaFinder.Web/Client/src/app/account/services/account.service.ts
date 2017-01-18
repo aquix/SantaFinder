@@ -6,7 +6,7 @@ import { AppConfig } from '../../app.config';
 import { IAuthInfo } from '../../auth/auth-info';
 import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
 import { LoginModel } from '../shared/login/login.model';
-import { UserType } from '../../auth/user-type';
+import { UserType } from '../../shared/enums/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
 
@@ -72,7 +72,8 @@ export class AccountService {
                 token: data['access_token'],
                 tokenType: data['token_type'],
                 email: data['email'],
-                id: data['userId']
+                id: data['userId'],
+                userType: <UserType>(+data['userType'])
             };
 
             this.authTokenService.authInfo = tokenInfo;

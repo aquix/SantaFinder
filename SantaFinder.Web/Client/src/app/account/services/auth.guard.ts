@@ -9,7 +9,7 @@ import { AccountService } from './account.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-    constructor(private authService: AccountService, private router: Router) { }
+    constructor(protected authService: AccountService, protected router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         console.log(`Authorized: ${this.authService.isAuthorized}`);

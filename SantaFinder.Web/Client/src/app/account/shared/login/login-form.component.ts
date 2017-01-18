@@ -6,7 +6,7 @@ import { EmailValidators } from 'ng2-validators';
 
 import { AccountService } from '../../services/account.service';
 import { LoginModel } from './login.model';
-import { UserType } from '../../../auth/user-type';
+import { UserType } from '../../../shared/enums/user-type';
 
 @Component({
     selector: 'login-form',

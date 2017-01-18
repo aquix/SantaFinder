@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthInfoStorage } from '../auth/auth-info-storage.service';
+import { UserType } from '../shared/enums/user-type';
 
 @Component({
     templateUrl: './main.html'
@@ -16,6 +17,13 @@ export class MainComponent implements OnInit {
 
     ngOnInit() {
         console.log('main init');
-        this.router.navigate(['/client']);
+        let userType = this.authInfoStorage.authInfo.userType;
+        let redirectUri = '';
+        if (userType === UserType.client) {
+            redirectUri = '/client';
+        } else {
+            redirectUri = '/santa';
+        }
+        this.router.navigate([redirectUri]);
     }
 }

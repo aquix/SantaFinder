@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { AuthGuard } from './account/services/auth.guard';
+import { ClientAuthGuard } from './account/services/client-auth.guard';
+import { SantaAuthGuard } from './account/services/santa-auth.guard';
+import { OnlyAnonymousGuard } from './account/services/only-anonymous.guard';
 import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
@@ -23,7 +26,8 @@ import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
-import { SantaHomeComponent } from './santa/santa-home.component';
+import { SantaComponent } from './santa/santa.component';
+import { SantaHomeComponent } from './santa/home/santa-home.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
@@ -58,6 +62,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientHomeComponent,
         ClientOrderComponent,
         ClientOrderHistoryComponent,
+        SantaComponent,
         SantaHomeComponent,
         AccountComponent,
         ClientAccountComponent,
@@ -78,6 +83,9 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
     providers: [
         CookieService,
         AuthGuard,
+        ClientAuthGuard,
+        SantaAuthGuard,
+        OnlyAnonymousGuard,
         AuthInfoStorage,
         AuthHttp,
         AccountService,
