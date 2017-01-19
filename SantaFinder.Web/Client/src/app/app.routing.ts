@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
+import { ClientProfileComponent } from './client/profile/client-profile.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaHomeComponent } from './santa/santa-home.component';
 import { AccountComponent } from './account/account.component';
@@ -40,6 +41,7 @@ const accountTypeRoutes: Routes = [
 const clientRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: ClientHomeComponent },
+    { path: 'profile', component: ClientProfileComponent },   
     { path: 'order', component: ClientOrderComponent },
     { path: 'orderhistory', component: ClientOrderHistoryComponent }
 ];

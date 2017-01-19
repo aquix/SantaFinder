@@ -212,6 +212,9 @@
     <Compile Include="Areas\Auth\Managers\AppUserManager.cs" />
     <Compile Include="Areas\Auth\Managers\ClientManager.cs" />
     <Compile Include="Areas\Auth\Managers\SantaManager.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModelChange.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\Passwords.cs" />
     <Compile Include="Areas\Auth\Models\RegisterClientModel.cs" />
     <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />

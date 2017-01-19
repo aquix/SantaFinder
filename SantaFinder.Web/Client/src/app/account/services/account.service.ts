@@ -9,7 +9,8 @@ import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../auth/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
-
+import { ClientProfileChangeModel } from '../../client/profile/client-profile.change-model';
+import { AuthHttp } from '../../auth/auth-http.service'
 /**
  * Implement methods for all account roles
  */
@@ -18,11 +19,12 @@ export class AccountService {
     protected static TOKEN_PATH = `${AppConfig.SERVER}/token`;
 
     constructor(
-        protected http: Http,
-        protected authTokenService: AuthInfoStorage
+        private http: Http,
+        private authTokenService: AuthInfoStorage,
+        private authHttp: AuthHttp
     ) { }
 
-    register(regInfoRaw: ClientRegisterModel | SantaRegisterModel) {
+    register(regInfoRaw: ClientRegisterModel | SantaRegisterModel ) {
         let registerBody = { };
         let registerUri = '';
 
@@ -31,7 +33,7 @@ export class AccountService {
             let clientRegInfo = <ClientRegisterModel>regInfoRaw;
             registerUri = 'client/register';
             registerBody = {
-                email: clientRegInfo.email,
+                email: clientRegInfo.email, 
                 password: clientRegInfo.passwords.password,
                 confirmPassword: clientRegInfo.passwords.passwordConfirmation,
                 name: clientRegInfo.name,
@@ -56,6 +58,19 @@ export class AccountService {
         }
 
         return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+            .map(res => res.status);
+    }
+    
+    getClientData(){
+        let clientChangeUrl = 'client/getClient';
+        return this.authHttp.get(`${AppConfig.API_PATH}/account/${clientChangeUrl}`)
+            .map(res => res.json());
+    }
+
+    changeClientProfile(changeModel: ClientProfileChangeModel){
+        let clientProfile = changeModel;
+        let clientChangeUrl = 'client/profile';
+        return this.authHttp.post(`${AppConfig.API_PATH}/account/${clientChangeUrl}`, clientProfile)
             .map(res => res.status);
     }
 
