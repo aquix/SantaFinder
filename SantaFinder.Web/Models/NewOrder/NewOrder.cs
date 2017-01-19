@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SantaFinder.Data.Entities;
 
 namespace SantaFinder.Web.Models
 {
@@ -9,7 +10,7 @@ namespace SantaFinder.Web.Models
     {
         public NewOrderAddress Address { get; set; }
         public string ChildrenNames { get; set; }
-        public List<Present> Presents { get; set; }
+        public List<NewPresent> Presents { get; set; }
         public DateTime Datetime { get; set; }
     }
 }

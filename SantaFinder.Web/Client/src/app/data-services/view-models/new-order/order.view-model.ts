@@ -1,14 +1,10 @@
 import { Present } from './present.view-model';
+import { Address } from '../../../shared/models/address.model';
 
-export interface Order {
+export interface NewOrderViewModel {
     address: {
         useDefaultAddress: boolean;
-        customAddress: {
-            city: string;
-            street: string;
-            house: string;
-            apartment: string;
-        }
+        customAddress: Address;
     };
     childrenNames: string;
     presents: Present[];

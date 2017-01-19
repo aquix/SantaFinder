@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment/moment';
 
 import { OrdersService } from '../../data-services/orders.service';
-import { Order } from '../../data-services/view-models/order.view-model';
+import { NewOrderViewModel } from '../../data-services/view-models/new-order/order.view-model';
 
 @Component({
     selector: 'client-order',
@@ -60,7 +60,7 @@ export class ClientOrderComponent implements OnInit {
 
     initNewPresent() {
         return this.formBuilder.group({
-            presentName: ['', Validators.required],
+            name: ['', Validators.required],
             buyBySanta: [false]
         });
     }
@@ -75,7 +75,7 @@ export class ClientOrderComponent implements OnInit {
         control.removeAt(i);
     }
 
-    onSubmitClick({ value }: { value: Order }) {
+    onSubmitClick({ value }: { value: NewOrderViewModel }) {
         let datetime = moment(value.datetime);
         value.datetime = datetime.toJSON();
 

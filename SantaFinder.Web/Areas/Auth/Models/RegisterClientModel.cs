@@ -10,5 +10,6 @@ namespace SantaFinder.Web.Areas.Auth.Models
     {
         public string Name { get; set; }
         public Address Address { get; set; }
+        public Location Location { get; set; }
     }
 }

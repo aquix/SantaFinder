@@ -5,8 +5,9 @@ using System.Web;
 
 namespace SantaFinder.Web.Models
 {
-    public class NewOrderAddress
+    public class NewPresent
     {
-        public bool UseDefaultAddress { get; set; }
+        public string Name { get; set; }
+        public bool BuyBySanta { get; set; }
     }
 }

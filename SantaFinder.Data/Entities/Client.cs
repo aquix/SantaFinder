@@ -12,5 +12,6 @@ namespace SantaFinder.Data.Entities
     {
         public string Name { get; set; }
         public Address Address { get; set; }
+        public Location Location { get; set; }
     }
 }

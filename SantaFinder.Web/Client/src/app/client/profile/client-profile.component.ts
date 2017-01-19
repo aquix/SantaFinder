@@ -7,7 +7,7 @@ import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { ClientProfileModel } from './client-profile.model';
 import { ClientProfileChangeModel } from './client-profile.change-model';
-import { UserType } from '../../auth/user-type';
+import { UserType } from '../../shared/enums/user-type';
 
 @Component({
     selector: 'client-profile',

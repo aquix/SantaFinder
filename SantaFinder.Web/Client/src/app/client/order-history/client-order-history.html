@@ -1,1 +1,42 @@
-Client order history
+<div class="orders-history-wrapper">
+    <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <div class="orders-history">
+        <ul class="orders-list">
+            <li *ngFor="let order of orders">
+                <div class="sf-card order-item" (click)="onOrderItemClick(order)">
+                    <div class="order-item__line order-item__common-info">
+                        <div class="order-item__id">
+                            # {{ order.id }}
+                        </div>
+                        <div>
+                            {{ orderStatus[order.status] }}
+                        </div>
+                        <div *ngIf="order.status !== orderStatus.new" class="order-item__line order-item__santa-info">
+                            <div>
+                                <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
+                            </div>
+                            <div>
+                                {{ order.santaInfo.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-item__line order-item__chidren-names">
+                        For:
+                        <span>{{ order.childrenNames }}</span>
+                    </div>
+                    <div class="order-item__line order-item__address">
+                        Address:
+                        <span>{{ order.address | address }}</span>
+                    </div>
+                    <div class="order-item__line order-item__datetime">
+                        Time:
+                        <span>{{ order.datetime | datetime }}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

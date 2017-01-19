@@ -219,17 +219,23 @@
     <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
+    <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewOrder.cs" />
-    <Compile Include="Models\NewOrderAddress.cs" />
-    <Compile Include="Models\Present.cs" />
+    <Compile Include="Models\NewOrder\NewOrder.cs" />
+    <Compile Include="Models\NewOrder\NewOrderAddress.cs" />
+    <Compile Include="Models\NewOrder\NewPresent.cs" />
+    <Compile Include="Models\OrderHistory\OrderShortInfo.cs" />
+    <Compile Include="Models\OrderHistory\SantaShortInfo.cs" />
+    <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
+    <Compile Include="Models\Shared\AddressWithLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Auth\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Areas\Auth\Results\ChallengeResult.cs" />
+    <Compile Include="Services\OrdersService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />

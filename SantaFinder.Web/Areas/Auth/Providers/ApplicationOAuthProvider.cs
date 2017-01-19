@@ -67,7 +67,7 @@ namespace SantaFinder.Web.Auth.Providers
                 return;
             }
 
-            AuthenticationProperties properties = CreateProperties(user.Email, user.Id);
+            AuthenticationProperties properties = CreateProperties(user.Email, user.Id, userType);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -119,12 +119,13 @@ namespace SantaFinder.Web.Auth.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string email, string userId)
+        public static AuthenticationProperties CreateProperties(string email, string userId, UserType userType)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "email", email },
-                { "userId", userId }
+                { "userId", userId },
+                { "userType", ((int)userType).ToString() }
             };
             return new AuthenticationProperties(data);
         }
