@@ -2,17 +2,22 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { OrdersService } from '../../data-services/orders.service';
 import { OrderLocationInfo } from '../../data-services/view-models/orders-on-map/order-location-info';
+import { SelectOrderService } from './services/select-order.service';
 
 @Component({
-    selector: 'main-page',
+    selector: 'santa-home',
     templateUrl: './santa-home.html',
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./santa-home.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [SelectOrderService]
 })
 export class SantaHomeComponent implements OnInit {
+    selectedOrderIndex: number = -1;
     orders: OrderLocationInfo[];
 
     constructor(
         private ordersService: OrdersService,
+        private selectOrderService: SelectOrderService
     ) { }
 
     ngOnInit() {
@@ -23,5 +28,16 @@ export class SantaHomeComponent implements OnInit {
                 console.log('error', res);
             }
         });
+
+        this.selectOrderService.selectedOrder$.subscribe(id => {
+            let orderIndex = this.orders.findIndex(o => o.id === id);
+            this.selectedOrderIndex = orderIndex;
+            console.log('home event ' + id);
+        });
+    }
+
+    onOrderItemClick(orderId: number, index: number) {
+        this.selectedOrderIndex = index;
+        this.selectOrderService.selectOrder(orderId);
     }
 }

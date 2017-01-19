@@ -1,4 +1,19 @@
-<map [orders]="orders"></map>
-<aside>
-    list of orders
-</aside>
+<div class="santa-home-page">
+    <map class="map" [orders]="orders"></map>
+    <aside class="orders-aside">
+        <div class="map-order-list">
+            <ul>
+                <li *ngFor="let order of orders; let i = index" class="map-order-list__order-item"
+                    (click)="onOrderItemClick(order.id, i)"
+                    [ngClass]="{'map-order-list__order-item_selected': (i === selectedOrderIndex)}">
+                    <div>
+                        {{ order.address | address }}
+                    </div>
+                    <div>
+                        {{ order.datetime | datetime }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>

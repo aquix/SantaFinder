@@ -90,7 +90,9 @@ namespace SantaFinder.Web.Services
             return _db.Orders.ToList().Select(o => new OrderLocationInfo
             {
                 Id = o.Id,
-                Location = GetOrderLocation(o)
+                Location = GetOrderLocation(o),
+                Address = GetOrderAddress(o),
+                Datetime = o.Datetime
             });
         }
 

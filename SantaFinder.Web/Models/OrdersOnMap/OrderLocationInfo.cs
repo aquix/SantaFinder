@@ -1,4 +1,5 @@
-﻿using SantaFinder.Data.Entities;
+﻿using System;
+using SantaFinder.Data.Entities;
 
 namespace SantaFinder.Web.Models.OrdersOnMap
 {
@@ -6,5 +7,7 @@ namespace SantaFinder.Web.Models.OrdersOnMap
     {
         public int Id { get; set; }
         public Location Location { get; set; }
+        public Address Address { get; set; }
+        public DateTime Datetime { get; set; }
     }
 }
