@@ -10,7 +10,39 @@
                             (markerClick)="onMarkerClick(i, order.id)">
         <sebm-google-map-info-window #orderInfoWindow [disableAutoPan]="true"
                                      (infoWindowClose)="onWindowClosed()">
-            <a [routerLink]="['../orderdetails', order.id]">More info</a>
+            <div>
+                <div *ngIf="orderFullInfo" class="order-full-info">
+                    <div class="order-full-info__line order-full-info__name">
+                        {{ orderFullInfo.clientName }}
+                    </div>
+                    <div class="order-full-info__line">
+                        <div>
+                            Presents:
+                        </div>
+                        <div>
+                            <ul>
+                                <li *ngFor="let present of orderFullInfo.presents"
+                                    [ngClass]="{'order-full-info__present_buy-by-client': !present.buyBySanta}">
+                                    {{ present.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order-full-info__line">
+                        For: {{ orderFullInfo.childrenNames }}
+                    </div>
+                    <div class="order-full-info__line order-full-info__button-line">
+                        <button class="sf-button order-full-info__button">Get order</button>
+                    </div>
+
+                    <div class="order-full-info__line order-full-info__moreinfo-line">
+                        <a [routerLink]="['../orderdetails', order.id]">More info</a>
+                    </div>
+                </div>
+                <div *ngIf="!orderFullInfo">
+                    Loading...
+                </div>
+            </div>
         </sebm-google-map-info-window>
     </sebm-google-map-marker>
 </sebm-google-map>

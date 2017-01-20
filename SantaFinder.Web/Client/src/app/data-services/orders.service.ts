@@ -46,6 +46,16 @@ export class OrdersService {
         return this.authHttp.get(`${AppConfig.API_PATH}/orderLocations`);
     }
 
+    getOrderFullInfo(id: number) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => {
+            if (res.status === 200) {
+                return res.json();
+            } else {
+                return null;
+            }
+        });
+    }
+
     private createOrderSendRequest(order: NewOrder) {
         return this.authHttp.post(`${AppConfig.API_PATH}/orders`, order).map(res => {
             if (res.status === 200) {

@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, EventEmitter, ViewChildren, ViewChild, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, ViewChild, QueryList } from '@angular/core';
 import { SebmGoogleMapMarker, SebmGoogleMapInfoWindow, MarkerManager, GoogleMapsAPIWrapper, } from 'angular2-google-maps/core';
+import { Observable } from 'rxjs/Observable';
 
 import { OrderLocationInfo } from '../../../data-services/view-models/orders-on-map/order-location-info';
 import { Location } from '../../../shared/models/location';
 import { LocationService } from '../../../shared/services/location.service';
 import { GeocodingService } from '../../../shared/services/geocoding.service';
 import { SelectOrderService } from '../services/select-order.service';
-
+import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
 
 @Component({
     selector: 'map',
@@ -16,6 +17,7 @@ import { SelectOrderService } from '../services/select-order.service';
 })
 export class MapComponent implements OnInit {
     @Input() orders: OrderLocationInfo[];
+    @Input() getOrderDetails: (id: number) => Observable<OrderFullInfo>;
 
     @ViewChildren('orderMarker') markers: QueryList<SebmGoogleMapMarker>;
     @ViewChildren('orderInfoWindow') infoWindows: QueryList<SebmGoogleMapInfoWindow>;
@@ -24,6 +26,8 @@ export class MapComponent implements OnInit {
         latitude: 0,
         longitude: 0
     };
+
+    orderFullInfo: OrderFullInfo;
 
     constructor(
         private locationService: LocationService,
@@ -48,6 +52,11 @@ export class MapComponent implements OnInit {
 
             let windowIndex = this.orders.findIndex(o => o.id === id);
             this.infoWindows.find((w, i) => i === windowIndex).open();
+
+            this.orderFullInfo = null;
+            this.getOrderDetails(id).subscribe(fullInfo => {
+                this.orderFullInfo = fullInfo;
+            });
         });
     }
 

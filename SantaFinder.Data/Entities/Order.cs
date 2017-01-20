@@ -17,7 +17,7 @@ namespace SantaFinder.Data.Entities
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
 
-        public virtual IEnumerable<Present> Presents { get; set; }
+        public virtual ICollection<Present> Presents { get; set; }
         public string ClientId { get; set; }
         public virtual Client Client { get; set; }
         public string SantaId { get; set; }

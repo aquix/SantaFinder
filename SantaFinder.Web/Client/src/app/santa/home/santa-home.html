@@ -1,5 +1,5 @@
 <div class="santa-home-page">
-    <map class="map" [orders]="orders"></map>
+    <map class="map" [orders]="orders" [getOrderDetails]="getOrderDetails.bind(this)"></map>
     <aside class="orders-aside">
         <div class="map-order-list">
             <ul>

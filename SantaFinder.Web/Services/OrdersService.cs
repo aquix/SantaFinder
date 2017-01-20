@@ -11,6 +11,7 @@ using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
+using SantaFinder.Web.Models.Shared;
 
 namespace SantaFinder.Web.Services
 {
@@ -40,7 +41,13 @@ namespace SantaFinder.Web.Services
             {
                 order.Address = newOrder.Address.CustomAddress.Line;
                 order.Location = newOrder.Address.CustomAddress.Location;
-            };
+            }
+            else
+            {
+                var me = await _db.Clients.FindAsync(userId);
+                order.Address = me?.Address;
+                order.Location = me?.Location;
+            }
 
             _db.Orders.Add(order);
             try
@@ -69,16 +76,16 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public IEnumerable<OrderShortInfo> GetOrdersByClientId(string clientId)
+        public async Task<IEnumerable<OrderShortInfo>> GetOrdersByClientId(string clientId)
         {
             var orders = _db.Orders.Where(o => o.ClientId == clientId);
 
-            var orderList = orders.ToList();
-            return orders.ToList().Select(o => new OrderShortInfo
+            var orderList = await orders.ToListAsync();
+            return orderList.Select(o => new OrderShortInfo
             {
                 Id = o.Id,
                 Datetime = o.Datetime,
-                Address = GetOrderAddress(o),
+                Address = o.Address,
                 ChildrenNames = o.ChildrenNames,
                 Status = o.Status,
                 SantaInfo = GetSantaInfo(o)
@@ -87,13 +94,40 @@ namespace SantaFinder.Web.Services
 
         public IEnumerable<OrderLocationInfo> GetOrderLocations()
         {
-            return _db.Orders.ToList().Select(o => new OrderLocationInfo
+            return _db.Orders.Select(o => new OrderLocationInfo
             {
                 Id = o.Id,
-                Location = GetOrderLocation(o),
-                Address = GetOrderAddress(o),
+                Location = o.Location,
+                Address = o.Address,
                 Datetime = o.Datetime
             });
+        }
+
+        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+        {
+            var order = await _db.Orders.FindAsync(id);
+            if (order != null)
+            {
+                return new OrderFullInfo
+                {
+                    Id = order.Id,
+                    ClientName = order.Client.Name,
+                    Address = order.Address,
+                    ChildrenNames = order.ChildrenNames,
+                    Datetime = order.Datetime,
+                    Location = order.Location,
+                    Presents = order.Presents.Select(p => new PresentInfo
+                    {
+                        Name = p.Name,
+                        BuyBySanta = p.BuyBySanta
+                    }),
+                    Status = order.Status
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private Address GetOrderAddress(Order order)

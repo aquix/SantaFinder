@@ -224,11 +224,12 @@
     </Compile>
     <Compile Include="Models\NewOrder\NewOrder.cs" />
     <Compile Include="Models\NewOrder\NewOrderAddress.cs" />
-    <Compile Include="Models\NewOrder\NewPresent.cs" />
     <Compile Include="Models\OrderHistory\OrderShortInfo.cs" />
     <Compile Include="Models\OrderHistory\SantaShortInfo.cs" />
+    <Compile Include="Models\OrdersOnMap\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
+    <Compile Include="Models\Shared\PresentInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Auth\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Areas\Auth\Results\ChallengeResult.cs" />

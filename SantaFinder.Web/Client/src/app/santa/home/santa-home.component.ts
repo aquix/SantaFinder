@@ -39,4 +39,8 @@ export class SantaHomeComponent implements OnInit {
         this.selectedOrderIndex = index;
         this.selectOrderService.selectOrder(orderId);
     }
+
+    getOrderDetails(id: number) {
+        return this.ordersService.getOrderFullInfo(id);
+    }
 }
