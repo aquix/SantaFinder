@@ -32,7 +32,6 @@ export class SantaHomeComponent implements OnInit {
         this.selectOrderService.selectedOrder$.subscribe(id => {
             let orderIndex = this.orders.findIndex(o => o.id === id);
             this.selectedOrderIndex = orderIndex;
-            console.log('home event ' + id);
         });
     }
 

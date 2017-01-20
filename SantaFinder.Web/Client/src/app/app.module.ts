@@ -33,6 +33,7 @@ import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
+import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
 import { MapComponent } from './santa/home/map/map.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -73,6 +74,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientOrderHistoryComponent,
         SantaComponent,
         SantaHomeComponent,
+        SantaOrderDetailsComponent,
         MapComponent,
         AccountComponent,
         ClientAccountComponent,
