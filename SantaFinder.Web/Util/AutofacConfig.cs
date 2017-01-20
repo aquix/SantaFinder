@@ -56,6 +56,8 @@ namespace SantaFinder.Web.Util
 
             builder.RegisterType<OrdersService>()
                 .AsSelf();
+            builder.RegisterType<SantaOrdersService>()
+                .AsSelf();
         }
     }
 }

@@ -5,10 +5,24 @@ using System.Web;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models.Shared;
 
-namespace SantaFinder.Web.Models.OrdersOnMap
+namespace SantaFinder.Web.Models.Shared
 {
     public class OrderFullInfo
     {
+        public OrderFullInfo() { }
+
+        public OrderFullInfo(Order order)
+        {
+            Id = order.Id;
+            ClientName = order.Client.Name;
+            Address = order.Address;
+            ChildrenNames = order.ChildrenNames;
+            Datetime = order.Datetime;
+            Location = order.Location;
+            Presents = order.Presents.Select(p => new PresentInfo(p));
+            Status = order.Status;
+        }
+
         public int Id { get; set; }
         public string ClientName { get; set; }
         public string ChildrenNames { get; set; }
