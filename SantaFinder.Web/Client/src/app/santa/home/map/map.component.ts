@@ -19,6 +19,8 @@ export class MapComponent implements OnInit {
     @Input() orders: OrderLocationInfo[];
     @Input() getOrderDetails: (id: number) => Observable<OrderFullInfo>;
 
+    @Output() takeOrderHandler: EventEmitter<number> = new EventEmitter();
+
     @ViewChildren('orderMarker') markers: QueryList<SebmGoogleMapMarker>;
     @ViewChildren('orderInfoWindow') infoWindows: QueryList<SebmGoogleMapInfoWindow>;
 
@@ -67,6 +69,10 @@ export class MapComponent implements OnInit {
     onWindowClosed() {
         // TODO change selectOrderIndex in service to -1
         // but this event fires on each window.close(), not only on user click
+    }
+
+    onTakeOrderBtnClick(orderId: number) {
+        this.takeOrderHandler.emit(orderId);
     }
 
     private locationChanged(loc: Location) {

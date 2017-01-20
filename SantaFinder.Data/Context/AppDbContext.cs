@@ -20,14 +20,5 @@ namespace SantaFinder.Data.Context
         public DbSet<Santa> Santas { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Present> Presents { get; set; }
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Order>()
-        //        .HasMany(o => o.Presents)
-        //        .WithRequired();
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
     }
 }

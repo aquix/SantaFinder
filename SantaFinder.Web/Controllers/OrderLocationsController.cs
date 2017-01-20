@@ -16,9 +16,9 @@ namespace SantaFinder.Web.Controllers
             _ordersService = ordersService;
         }
 
-        public IEnumerable<OrderLocationInfo> Get()
+        public IEnumerable<OrderLocationInfo> GetAvailableOrders()
         {
-            return _ordersService.GetOrderLocations();
+            return _ordersService.GetAvailableOrderLocations();
         }
     }
 }

@@ -92,9 +92,11 @@ namespace SantaFinder.Web.Services
             });
         }
 
-        public IEnumerable<OrderLocationInfo> GetOrderLocations()
+        public IEnumerable<OrderLocationInfo> GetAvailableOrderLocations()
         {
-            return _db.Orders.Select(o => new OrderLocationInfo
+            return _db.Orders
+                .Where(o => o.Status == OrderStatus.New)
+                .Select(o => new OrderLocationInfo
             {
                 Id = o.Id,
                 Location = o.Location,
@@ -127,6 +129,22 @@ namespace SantaFinder.Web.Services
             else
             {
                 return null;
+            }
+        }
+
+        public async Task<bool> TakeOrder(string santaId, int orderId)
+        {
+            var order = await _db.Orders.FindAsync(orderId);
+            
+            if (order.Status == OrderStatus.New)
+            {
+                ApproveOrder(order, santaId);
+                _db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -167,6 +185,12 @@ namespace SantaFinder.Web.Services
                 Name = order.Santa.Name,
                 PhotoPath = order.Santa.PhotoPath
             };
+        }
+
+        private void ApproveOrder(Order order, string santaId)
+        {
+            order.Status = OrderStatus.Approved;
+            order.SantaId = santaId;
         }
     }
 }

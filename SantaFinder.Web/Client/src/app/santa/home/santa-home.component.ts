@@ -43,4 +43,16 @@ export class SantaHomeComponent implements OnInit {
     getOrderDetails(id: number) {
         return this.ordersService.getOrderFullInfo(id);
     }
+
+    takeOrder(id: number) {
+        this.ordersService.takeOrder(id).subscribe(success => {
+            if (success) {
+                let orderIndex = this.orders.findIndex(o => o.id === id);
+                this.orders.splice(orderIndex, 1);
+                console.log('success');
+            } else {
+                console.log('error');
+            }
+        })
+    }
 }

@@ -56,6 +56,10 @@ export class OrdersService {
         });
     }
 
+    takeOrder(id: number) {
+        return this.authHttp.post(`${AppConfig.API_PATH}/manageOrders/${id}`).map(res => res.json());
+    }
+
     private createOrderSendRequest(order: NewOrder) {
         return this.authHttp.post(`${AppConfig.API_PATH}/orders`, order).map(res => {
             if (res.status === 200) {

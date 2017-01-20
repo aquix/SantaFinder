@@ -1,5 +1,7 @@
 <div class="santa-home-page">
-    <map class="map" [orders]="orders" [getOrderDetails]="getOrderDetails.bind(this)"></map>
+    <map class="map" [orders]="orders"
+         [getOrderDetails]="getOrderDetails.bind(this)"
+         (takeOrderHandler)="takeOrder($event)"></map>
     <aside class="orders-aside">
         <div class="map-order-list">
             <ul>

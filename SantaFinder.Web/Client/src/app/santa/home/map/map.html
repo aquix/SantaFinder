@@ -32,7 +32,10 @@
                         For: {{ orderFullInfo.childrenNames }}
                     </div>
                     <div class="order-full-info__line order-full-info__button-line">
-                        <button class="sf-button order-full-info__button">Get order</button>
+                        <button class="sf-button order-full-info__button"
+                                (click)="onTakeOrderBtnClick(orderFullInfo.id)">
+                            Take order
+                        </button>
                     </div>
 
                     <div class="order-full-info__line order-full-info__moreinfo-line">
