@@ -228,6 +228,7 @@
     <Compile Include="Models\NewOrder\NewOrderAddress.cs" />
     <Compile Include="Models\OrderHistory\OrderShortInfo.cs" />
     <Compile Include="Models\OrderHistory\SantaShortInfo.cs" />
+    <Compile Include="Models\SantaOrders\MyOrderPreview.cs" />
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />

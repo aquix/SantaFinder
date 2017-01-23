@@ -14,6 +14,14 @@ export class SantaComponent implements OnInit {
     ngOnInit() {
         this.navbarLinks = [
             {
+                name: 'Home',
+                routerLink: './home'
+            },
+            {
+                name: 'My orders',
+                routerLink: './myorders'
+            },
+            {
                 name: 'My profile',
                 routerLink: './profile'
             },

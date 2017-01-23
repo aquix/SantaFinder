@@ -14,6 +14,7 @@ import { ClientOrderHistoryComponent } from './client/order-history/client-order
 import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
+import { SantaMyOrdersComponent } from './santa/my-orders/santa-my-orders.component';
 import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -54,7 +55,8 @@ const clientRoutes: Routes = [
 const santaRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: SantaHomeComponent },
-    { path: 'orderdetails/:id', component: SantaOrderDetailsComponent }
+    { path: 'orderdetails/:id', component: SantaOrderDetailsComponent },
+    { path: 'myorders', component: SantaMyOrdersComponent }
 ];
 
 const appRoutes: Routes = [

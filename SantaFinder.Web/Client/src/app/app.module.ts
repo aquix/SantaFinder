@@ -22,6 +22,7 @@ import { AuthInfoStorage } from './auth/auth-info-storage.service';
 import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
 import { OrdersService } from './data-services/orders.service';
+import { SantaOrdersService } from './data-services/santa-orders.service';
 import { LocationService } from './shared/services/location.service';
 import { GeocodingService } from './shared/services/geocoding.service';
 
@@ -34,6 +35,9 @@ import { ClientOrderHistoryComponent } from './client/order-history/client-order
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
 import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
+import { SantaMyOrdersComponent } from './santa/my-orders/santa-my-orders.component';
+import { SantaMyOrderListComponent } from './santa/my-orders/my-order-list/santa-my-order-list.component';
+import { SantaMyOrderDetailsComponent } from './santa/my-orders/my-order-details/santa-my-order-details.component';
 import { MapComponent } from './santa/home/map/map.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
@@ -75,6 +79,9 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         SantaComponent,
         SantaHomeComponent,
         SantaOrderDetailsComponent,
+        SantaMyOrdersComponent,
+        SantaMyOrderListComponent,
+        SantaMyOrderDetailsComponent,
         MapComponent,
         AccountComponent,
         ClientAccountComponent,
@@ -102,6 +109,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         AuthHttp,
         AccountService,
         SantasService,
+        SantaOrdersService,
         OrdersService,
         LocationService,
         GeocodingService

@@ -1,0 +1,29 @@
+.my-order-list {
+    ul {
+        list-style: none;
+    }
+
+    &__order-item {
+        cursor: pointer;
+
+        padding: 15px 0;
+
+        border-bottom: 1px solid #ccc;
+
+        &:hover {
+            background-color: #f6f6f6;
+            font-size: 18px;
+            transition: font-size 0.3s ease, background-color 0.3s ease;
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    &__order-item_selected {
+        background-color: darken(#f6f6f6, 10%);
+        font-size: 18px;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+    }
+ }

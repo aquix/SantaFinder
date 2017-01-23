@@ -1,0 +1,11 @@
+<div *ngIf="order">
+    <div>
+        {{ order.id }}
+    </div>
+    <div>
+        {{ order.clientName }}
+    </div>
+</div>
+<div *ngIf="!order" class="no-order-info">
+    <div>Select order from left pane</div>
+</div>
