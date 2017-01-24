@@ -19,6 +19,11 @@ export class AuthHttp {
         return this.http.post(url, body, options);
     }
 
+    put(url: string, body: any = {}, options: RequestOptionsArgs = {}) {
+        this.appendAuthHeaders(options);
+        return this.http.put(url, body, options);
+    }
+
     private appendAuthHeaders(options: RequestOptionsArgs) {
         if (!options.headers) {
             options.headers = new Headers();

@@ -1,3 +1,5 @@
+import { Address } from '../../../shared/models/address.model';
+
 export interface ClientRegisterModel {
     email: string;
     passwords: {
@@ -6,10 +8,5 @@ export interface ClientRegisterModel {
     };
 
     name: string;
-    address: {
-        city: string,
-        street: string,
-        house: string,
-        apartment: string
-    };
+    address: Address;
 }

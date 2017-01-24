@@ -10,6 +10,8 @@ using SantaFinder.Data.Context;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.OrderHistory;
+using SantaFinder.Web.Models.OrdersOnMap;
+using SantaFinder.Web.Models.Shared;
 
 namespace SantaFinder.Web.Services
 {
@@ -31,13 +33,21 @@ namespace SantaFinder.Web.Services
                 Datetime = newOrder.Datetime,
                 UseProfileAddress = newOrder.Address.UseDefaultAddress,
                 Address = new Address(),
+                Location = new Location(),
                 Status = OrderStatus.New
             };
 
             if (!order.UseProfileAddress)
             {
-                order.Address = newOrder.Address.CustomAddress;
-            };
+                order.Address = newOrder.Address.CustomAddress.Line;
+                order.Location = newOrder.Address.CustomAddress.Location;
+            }
+            else
+            {
+                var me = await _db.Clients.FindAsync(userId);
+                order.Address = me?.Address;
+                order.Location = me?.Location;
+            }
 
             _db.Orders.Add(order);
             try
@@ -60,26 +70,82 @@ namespace SantaFinder.Web.Services
 
                 return true;
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException)
             {
                 return false;
             }
         }
 
-        public IEnumerable<OrderShortInfo> GetOrdersByClientId(string clientId)
+        public async Task<IEnumerable<OrderShortInfo>> GetOrdersByClientId(string clientId)
         {
             var orders = _db.Orders.Where(o => o.ClientId == clientId);
 
-            var orderList = orders.ToList();
-            return orders.ToList().Select(o => new OrderShortInfo
+            var orderList = await orders.ToListAsync();
+            return orderList.Select(o => new OrderShortInfo
             {
                 Id = o.Id,
                 Datetime = o.Datetime,
-                Address = GetOrderAddress(o),
+                Address = o.Address,
                 ChildrenNames = o.ChildrenNames,
                 Status = o.Status,
                 SantaInfo = GetSantaInfo(o)
             });
+        }
+
+        public IEnumerable<OrderLocationInfo> GetAvailableOrderLocations()
+        {
+            return _db.Orders
+                .Where(o => o.Status == OrderStatus.New)
+                .Select(o => new OrderLocationInfo
+            {
+                Id = o.Id,
+                Location = o.Location,
+                Address = o.Address,
+                Datetime = o.Datetime
+            });
+        }
+
+        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+        {
+            var order = await _db.Orders.FindAsync(id);
+            if (order != null)
+            {
+                return new OrderFullInfo
+                {
+                    Id = order.Id,
+                    ClientName = order.Client.Name,
+                    Address = order.Address,
+                    ChildrenNames = order.ChildrenNames,
+                    Datetime = order.Datetime,
+                    Location = order.Location,
+                    Presents = order.Presents.Select(p => new PresentInfo
+                    {
+                        Name = p.Name,
+                        BuyBySanta = p.BuyBySanta
+                    }),
+                    Status = order.Status
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> TakeOrder(string santaId, int orderId)
+        {
+            var order = await _db.Orders.FindAsync(orderId);
+            
+            if (order.Status == OrderStatus.New)
+            {
+                ApproveOrder(order, santaId);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private Address GetOrderAddress(Order order)
@@ -91,6 +157,18 @@ namespace SantaFinder.Web.Services
             else
             {
                 return order.Address;
+            }
+        }
+
+        private Location GetOrderLocation(Order order)
+        {
+            if (order.UseProfileAddress)
+            {
+                return order.Client.Location;
+            }
+            else
+            {
+                return order.Location;
             }
         }
 
@@ -107,6 +185,12 @@ namespace SantaFinder.Web.Services
                 Name = order.Santa.Name,
                 PhotoPath = order.Santa.PhotoPath
             };
+        }
+
+        private void ApproveOrder(Order order, string santaId)
+        {
+            order.Status = OrderStatus.Approved;
+            order.SantaId = santaId;
         }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Context\IDbContext.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderStatus.cs" />
     <Compile Include="Entities\Present.cs" />
@@ -86,6 +87,10 @@
     <Compile Include="Migrations\201701171344321_AddOrderStatus.Designer.cs">
       <DependentUpon>201701171344321_AddOrderStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701181421538_AddLocationToClientsAndOrders.cs" />
+    <Compile Include="Migrations\201701181421538_AddLocationToClientsAndOrders.Designer.cs">
+      <DependentUpon>201701181421538_AddLocationToClientsAndOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701171344321_AddOrderStatus.resx">
       <DependentUpon>201701171344321_AddOrderStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701181421538_AddLocationToClientsAndOrders.resx">
+      <DependentUpon>201701181421538_AddLocationToClientsAndOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

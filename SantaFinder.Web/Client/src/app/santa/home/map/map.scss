@@ -1,0 +1,38 @@
+.sebm-google-map-container {
+    height: 100%;
+}
+
+.order-full-info {
+    display: flex;
+    flex-direction: column;
+
+    &__line {
+        margin: 5px;
+    }
+
+    &__button-line {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__moreinfo-line {
+        display: flex;
+        justify-content: center;
+        margin-left: 26px;
+    }
+
+    &__name {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &__present_buy-by-client {
+        color: #9E9E9E;
+    }
+
+    &__button {
+        font-size: 14px;
+        line-height: 10px;
+        margin-left: 20px;
+    }
+}

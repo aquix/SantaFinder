@@ -1,0 +1,17 @@
+<div class="my-order-list-area">
+    <div class="my-order-list">
+        <ul>
+            <li *ngFor="let order of orders; let i = index" class="my-order-list__order-item"
+                (click)="onOrderItemClick(order.id, i)"
+                [ngClass]="{'my-order-list__order-item_selected': (i === selectedOrderIndex)}">
+                <div>
+                    {{ order.address | address }}
+                </div>
+                <div>
+                    {{ order.datetime | datetime }}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="my-order-list-area__empty" (click)="onEmptyAreaClick()"></div>
+</div>

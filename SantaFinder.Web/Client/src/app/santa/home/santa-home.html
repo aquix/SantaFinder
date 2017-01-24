@@ -1,1 +1,21 @@
-Santa home
+<div class="santa-home-page">
+    <map class="map" [orders]="orders"
+         [getOrderDetails]="getOrderDetails.bind(this)"
+         (takeOrderHandler)="takeOrder($event)"></map>
+    <aside class="orders-aside">
+        <div class="map-order-list">
+            <ul>
+                <li *ngFor="let order of orders; let i = index" class="map-order-list__order-item"
+                    (click)="onOrderItemClick(order.id, i)"
+                    [ngClass]="{'map-order-list__order-item_selected': (i === selectedOrderIndex)}">
+                    <div>
+                        {{ order.address | address }}
+                    </div>
+                    <div>
+                        {{ order.datetime | datetime }}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>

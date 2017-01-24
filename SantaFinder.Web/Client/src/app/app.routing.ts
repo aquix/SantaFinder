@@ -10,10 +10,14 @@ import { MainComponent } from './main/main.component';
 import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
+import { ClientProfileComponent } from './client/profile/client-profile.component';
+import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
+import { SantaMyOrdersComponent } from './santa/my-orders/santa-my-orders.component';
+import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
@@ -45,6 +49,7 @@ const accountTypeRoutes: Routes = [
 const clientRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: ClientHomeComponent },
+    { path: 'profile', component: ClientProfileComponent },
     { path: 'order', component: ClientOrderComponent },
     { path: 'orderhistory', component: ClientOrderHistoryComponent },
     { path: 'orderinfo/:id', component: ClientOrderInfoComponent },
@@ -52,7 +57,10 @@ const clientRoutes: Routes = [
 
 const santaRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: SantaHomeComponent }
+    { path: 'home', component: SantaHomeComponent },
+    { path: 'orderdetails/:id', component: SantaOrderDetailsComponent },
+    { path: 'myorders', component: SantaMyOrdersComponent },
+    { path: 'profile', component: SantaProfileComponent }
 ];
 
 const appRoutes: Routes = [
