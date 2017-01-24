@@ -38,9 +38,4 @@ export class SantaMyOrdersComponent implements OnInit {
             console.log(`error in orderinfo ${err}`);
         });
     }
-
-    onEmptyAreaClick() {
-        this.orderDetails = null;
-        console.log('empty click');
-    }
 }

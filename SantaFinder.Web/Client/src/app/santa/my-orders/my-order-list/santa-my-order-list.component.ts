@@ -11,11 +11,18 @@ export class SantaMyOrderListComponent implements OnInit {
     @Input() orders: SantaOrderPreview[];
     @Output() orderClick: EventEmitter<number> = new EventEmitter();
 
+    selectedOrderIndex: number = -1;
+
     constructor() { }
 
     ngOnInit() { }
 
-    onOrderItemClick(id: number) {
+    onOrderItemClick(id: number, index: number) {
         this.orderClick.emit(id);
+        this.selectedOrderIndex = index;
+    }
+
+    onEmptyAreaClick() {
+        this.onOrderItemClick(-1, -1);
     }
 }

@@ -1,7 +1,6 @@
 <div class="santa-my-orders">
     <aside class="santa-my-order-list">
         <santa-my-order-list class="santa-my-order-list__items-area" [orders]="orders" (orderClick)="onSelectOrder($event)"></santa-my-order-list>
-        <div class="santa-my-order-list__empty-area" (click)="onEmptyAreaClick()"></div>
     </aside>
     <div class="santa-my-order-details">
         <santa-my-order-details [order]="orderDetails"></santa-my-order-details>

@@ -6,13 +6,6 @@
 .santa-my-order-list {
     flex: 1;
     margin-right: 5%;
-
-    display: flex;
-    flex-direction: column;
-
-    &__empty-area {
-        flex: 1;
-    }
 }
 
 .santa-my-order-details {
