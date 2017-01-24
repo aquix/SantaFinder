@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Areas.Auth.Managers;
 using SantaFinder.Web.Areas.Auth.Models;
+using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
@@ -55,6 +56,63 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             else
             {
                 result = await _clientManager.CreateAsync(client, model.Password);
+            }
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        [Route("getClient")]
+        public ClientModel GetClientModel()
+        {
+            var id = User.Identity.GetUserId();
+            var user = _clientManager.FindById(id);
+
+            var clientViewModel = new ClientModel
+            {
+                Email = user.Email,
+                Name = user.Name,
+                Address = user.Address
+            };
+
+            return clientViewModel;
+        }
+
+        [Route("profile")]
+        [HttpPost]
+        public async Task<IHttpActionResult> ChangeProfile(ClientModelChange model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var id = User.Identity.GetUserId();
+            var existingUser = _clientManager.FindById(id);
+
+            IdentityResult result;
+
+            if (existingUser != null)
+            {
+                existingUser.UserName = model.Email;
+                existingUser.Email = model.Email;
+                existingUser.Name = model.Name;
+                existingUser.Address.City = model.Address.City;
+                existingUser.Address.Street = model.Address.Street;
+                existingUser.Address.House = model.Address.House;
+                existingUser.Address.Apartment = model.Address.Apartment;
+
+                result = await _clientManager.UpdateAsync(existingUser);
+
+                await _clientManager.ChangePasswordAsync(id, model.Passwords.OldPassword, model.Passwords.Password);
+            }
+            else
+            {
+                result = IdentityResult.Failed(new[] { "Update failed" });
             }
 
             if (!result.Succeeded)

@@ -1,0 +1,55 @@
+<div class="sf-form santa-profile-form">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmitClick(profileForm)" novalidate>
+        <h1 class="sf-form__title">
+            Your Profile
+        </h1>
+        <div [hidden]="!errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+        </div>
+        <div>
+            <input type="email" formControlName="email"
+                    class="sf-form__control sf-form__control_with-validation" name="email"
+                    value="" placeholder="Email">
+        </div>
+        <div formGroupName="passwords">
+            <div>
+                <label class="sf-form__label">Password change:</label>
+            </div>
+            <div>
+                <input type="password" formControlName="oldPassword"
+                    class="sf-form__control sf-form__control_with-validation" name="oldPassword"
+                    value="" placeholder="Old Password">
+            </div>
+            <div>
+                <input type="password" formControlName="password"
+                        class="sf-form__control sf-form__control_with-validation" name="password"
+                        value="" placeholder="Password">
+            </div>
+            <div>
+                <input type="password" formControlName="passwordConfirmation"
+                        class="sf-form__control" name="passwordConfirmation"
+                        value="" placeholder="Confirm password">
+                <span class="error-icon">
+                    <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
+                            src="./exclamation.png" alt="Passwords don't match" class="error-icon__image">
+                    <span class="error-icon__tooltip-text">Passwords don't match</span>
+                </span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label class="sf-form__label">Name:</label>
+            </div>
+            <input type="text" formControlName="name"
+                class="sf-form__control sf-form__control_with-validation" name="name"
+                value="" placeholder="Your name">
+        </div>
+        
+        <button type="submit"
+            class="sf-button sf-form__button">
+            Change
+        </button>
+        
+    </form>
+
+</div>

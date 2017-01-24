@@ -31,6 +31,7 @@ import { MainComponent } from './main/main.component';
 import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
+import { ClientProfileComponent } from './client/profile/client-profile.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaComponent } from './santa/santa.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
@@ -51,6 +52,7 @@ import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
 import { SantaPreviewListComponent } from './client/home/santa-preview-list/santa-preview-list.component';
 import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
+import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
@@ -75,6 +77,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientComponent,
         ClientHomeComponent,
         ClientOrderComponent,
+        ClientProfileComponent,
+        SantaProfileComponent,
         ClientOrderHistoryComponent,
         SantaComponent,
         SantaHomeComponent,
