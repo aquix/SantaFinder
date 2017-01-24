@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using SantaFinder.Data.Entities;
 using SantaFinder.Web.Areas.Auth.Managers;
 using SantaFinder.Web.Areas.Auth.Models;
+using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
@@ -76,6 +77,58 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
                     santa.PhotoPath = photoPath;
                     await _santaManager.UpdateAsync(santa);
                 }
+            }
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        [Route("getSanta")]
+        public SantaModel GetSantaModel()
+        {
+            var id = User.Identity.GetUserId();
+            var user = _santaManager.FindById(id);
+
+            var santaViewModel = new SantaModel
+            {
+                Email = user.Email,
+                Name = user.Name
+            };
+
+            return santaViewModel;
+        }
+
+        [Route("profile")]
+        [HttpPost]
+        public async Task<IHttpActionResult> ChangeProfile(SantaModelChange model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var id = User.Identity.GetUserId();
+            var existingUser = _santaManager.FindById(id);
+
+            IdentityResult result;
+
+            if (existingUser != null)
+            {
+                existingUser.UserName = model.Email;
+                existingUser.Email = model.Email;
+                existingUser.Name = model.Name;              
+
+                result = await _santaManager.UpdateAsync(existingUser);
+
+                await _santaManager.ChangePasswordAsync(id, model.Passwords.OldPassword, model.Passwords.Password);
+            }
+            else
+            {
+                result = IdentityResult.Failed(new[] { "Update failed" });
             }
 
             if (!result.Succeeded)

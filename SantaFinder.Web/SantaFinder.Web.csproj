@@ -215,6 +215,8 @@
     <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModel.cs" />
     <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModelChange.cs" />
     <Compile Include="Areas\Auth\Models\ChangeProfile\Passwords.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaModelChange.cs" />
     <Compile Include="Areas\Auth\Models\RegisterClientModel.cs" />
     <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
