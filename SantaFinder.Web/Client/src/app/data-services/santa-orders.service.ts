@@ -24,4 +24,20 @@ export class SantaOrdersService {
             return ('error' + JSON.stringify(err));
         });
     }
+
+    completeOrder(id: number) {
+        return this.authHttp.put(`${AppConfig.API_PATH}/santaOrders/complete/${id}`).map(res => {
+            return res.json();
+        }, err => {
+            return ('error' + JSON.stringify(err));
+        });
+    }
+
+    discardOrder(id: number) {
+        return this.authHttp.put(`${AppConfig.API_PATH}/santaOrders/discard/${id}`).map(res => {
+            return res.json();
+        }, err => {
+            return ('error' + JSON.stringify(err));
+        });
+    }
 }

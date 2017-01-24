@@ -13,6 +13,7 @@ using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
+    //[RoutePrefix("api/santaOrders")]
     [Authorize]
     public class SantaOrdersController : ApiController
     {
@@ -33,6 +34,20 @@ namespace SantaFinder.Web.Controllers
         public async Task<OrderFullInfo> GetDetails(int id)
         {
             return await _santaOrdersService.GetDetails(id);
+        }
+
+        [HttpPut]
+        [Route("api/santaOrders/complete/{id}")]
+        public async Task<bool> CompleteOrder(int id)
+        {
+            return await _santaOrdersService.CompleteOrder(id);
+        }
+
+        [HttpPut]
+        [Route("api/santaOrders/discard/{id}")]
+        public async Task<bool> DiscardOrder(int id)
+        {
+            return await _santaOrdersService.DiscardOrder(id);
         }
     }
 }

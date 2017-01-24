@@ -1,9 +1,57 @@
-<div *ngIf="order">
-    <div>
-        {{ order.id }}
+<div *ngIf="order" class="my-order-detailed-info">
+    <div class="my-order-detailed-info__header">
+        <div>
+            {{ order.status }}
+        </div>
+        <h2>
+            Client name: {{ order.clientName }}
+        </h2>
+        <h3>
+            {{ order.datetime | datetime}}
+        </h3>
     </div>
-    <div>
-        {{ order.clientName }}
+    <div class="my-order-detailed-info__info-blocks">
+        <div class="my-order-detailed-info__first-info-block">
+            <div class="my-order-address">
+                <div class="my-order-address__map">
+                    <sebm-google-map [latitude]="order.location.latitude"
+                                    [longitude]="order.location.longitude"
+                                    [zoom]="12">
+                        <sebm-google-map-marker [latitude]="order.location.latitude"
+                                                [longitude]="order.location.longitude"
+                                                title="Order location">
+                        </sebm-google-map-marker>
+                    </sebm-google-map>
+                </div>
+                <div class="my-order-address__text">
+                    {{ order.address | address }}
+                </div>
+            </div>
+        </div>
+        <div class="my-order-detailed-info__second-info-block">
+            <div class="my-order-detailed-info__row">
+                Children: {{ order.childrenNames }}
+            </div>
+            <div class="my-order-detailed-info__row">
+                Presents:
+                <ul class="my-order-detailed-info__presents">
+                    <li *ngFor="let present of order.presents"
+                        [ngClass]="{'my-order-detailed-info__present-buy-by-client': !present.buyBySanta}">
+                        {{ present.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="my-order-detailed-info__actions my-order-detailed-info__row">
+        <button *ngIf="canCompleteOrder()" (click)="onCompleteClick()"
+                class="sf-button my-order-button my-order-complete-button">
+            Mark as completed
+        </button>
+        <button *ngIf="canDiscardOrder()" (click)="onDiscardClick()"
+                class="sf-button my-order-button my-order-discard-button">
+            Discard
+        </button>
     </div>
 </div>
 <div *ngIf="!order" class="no-order-info">

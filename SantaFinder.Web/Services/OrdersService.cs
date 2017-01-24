@@ -139,7 +139,7 @@ namespace SantaFinder.Web.Services
             if (order.Status == OrderStatus.New)
             {
                 ApproveOrder(order, santaId);
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
                 return true;
             }
             else

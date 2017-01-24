@@ -6,5 +6,5 @@ export interface SantaOrderPreview {
     clientName: string;
     datetime: Date;
     address: Address;
-    orderStatus: OrderStatus;
+    status: OrderStatus;
 }
