@@ -8,6 +8,6 @@ export interface OrderFullInfo {
     datetime: Date;
     address: Address;
     location: Location;
-    orderStatus: OrderStatus;
+    status: OrderStatus;
     clientName: string;
 }

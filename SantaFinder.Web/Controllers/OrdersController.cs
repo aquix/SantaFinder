@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
+using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers

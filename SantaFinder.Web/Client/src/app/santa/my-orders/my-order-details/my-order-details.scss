@@ -1,0 +1,56 @@
+.no-order-info {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-order-detailed-info {
+    display: flex;
+    flex-direction: column;
+
+    &__info-blocks {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    &__present-buy-by-client {
+        color: #9E9E9E;
+    }
+
+    &__first-info-block {
+        padding-right: 10px;
+    }
+
+    &__row {
+        padding: 5px 0;
+    }
+
+    &__actions {
+        padding-top: 30px;
+        display: flex;
+    }
+}
+
+.my-order-button {
+    margin-right: 20px;
+}
+
+.my-order-complete-button {
+    background-color: #4CAF50;
+}
+
+.my-order-discard-button {
+    background-color: #EF5350;
+}
+
+.my-order-address {
+    &__map {
+        padding-bottom: 10px;
+    }
+}
+
+.sebm-google-map-container {
+    width: 300px;
+    height: 300px;
+}
