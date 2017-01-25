@@ -56,6 +56,7 @@ import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
+import { SantaOrderStatusPipe } from './santa/my-orders/my-order-list/santa-order-status.pipe';
 
 @NgModule({
     imports: [
@@ -101,7 +102,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientOrderInfoComponent,
 
         AddressPipe,
-        DatetimePipe
+        DatetimePipe,
+        SantaOrderStatusPipe
     ],
     providers: [
         CookieService,

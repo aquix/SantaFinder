@@ -14,6 +14,8 @@ export class SantaMyOrderDetailsComponent implements OnInit {
     @Output() completeClick: EventEmitter<number> = new EventEmitter();
     @Output() discardClick: EventEmitter<number> = new EventEmitter();
 
+    OrderStatus = OrderStatus;
+
     constructor() { }
 
     ngOnInit() { }
@@ -27,6 +29,10 @@ export class SantaMyOrderDetailsComponent implements OnInit {
     }
 
     canCompleteOrder() {
+        if (this.order.status !== OrderStatus.Approved) {
+            return false;
+        }
+
         let now = moment();
         let orderTime = moment(this.order.datetime);
         if (now.isAfter(orderTime)) {
@@ -38,5 +44,16 @@ export class SantaMyOrderDetailsComponent implements OnInit {
 
     canDiscardOrder() {
         return this.order.status === OrderStatus.Approved;
+    }
+
+    getStatusColor(status: OrderStatus) {
+        switch (status) {
+        case OrderStatus.Approved:
+            return 'order-status-approved';
+        case OrderStatus.New:
+            return 'order-status-new';
+        case OrderStatus.Completed:
+            return 'order-status-completed';
+        }
     }
 }

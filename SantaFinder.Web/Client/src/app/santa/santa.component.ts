@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
 
 @Component({
     selector: 'santa-page',
-    templateUrl: 'santa.html'
+    templateUrl: 'santa.html',
+    styleUrls: ['./santa.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class SantaComponent implements OnInit {
     navbarLinks: Link[];

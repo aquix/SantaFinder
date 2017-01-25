@@ -11,12 +11,13 @@
 .my-order-list {
     ul {
         list-style: none;
+        padding-left: 0;
     }
 
     &__order-item {
         cursor: pointer;
 
-        padding: 15px 0;
+        padding: 15px;
 
         border-bottom: 1px solid #ccc;
 

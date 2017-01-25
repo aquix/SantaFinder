@@ -49,6 +49,7 @@ export class SantaMyOrdersComponent implements OnInit {
         this.santaOrdersService.discardOrder(id).subscribe(res => {
             // TODO reload only modified order
             this.loadOrders();
+            this.orderDetails = null;
         }, err => {
             console.log(err);
         });
