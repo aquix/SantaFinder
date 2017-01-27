@@ -1,6 +1,6 @@
 <div>
     <ul class="santa-preview-list">
-        <li *ngFor="let santa of data">
+        <li *ngFor="let santa of data | paginate: paginationConfig">
             <div class="santa-preview-item">
                 <div class="santa-preview-item__img">
                     <img [src]="santa.photoUrl" alt="Santa's photo'">
@@ -23,4 +23,5 @@
 
         </li>
     </ul>
+    <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
 </div>

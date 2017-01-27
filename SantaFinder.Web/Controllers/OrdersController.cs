@@ -39,9 +39,9 @@ namespace SantaFinder.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrderShortInfo>> GetMyOrders()
+        public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
         {
-            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId());
+            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
         }
         
         [HttpGet]

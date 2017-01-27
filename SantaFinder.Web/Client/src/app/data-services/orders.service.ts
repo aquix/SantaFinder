@@ -38,8 +38,11 @@ export class OrdersService {
 
     }
 
-    getAll() {
-        return this.authHttp.get(`${AppConfig.API_PATH}/orders`);
+    getAll(count: number, page: number) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders?count=${count}&page=${page}`)
+            .map(res => res.json(), err => {
+                return ('error' + JSON.stringify(err));
+            });
     }
 
     getOrderLocations() {

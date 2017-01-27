@@ -25,9 +25,9 @@ namespace SantaFinder.Web.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SantaOrderPreview> GetAll()
+        public async Task<PagedResponse<SantaOrderPreview>> GetAll(SantaOrderStatusFilter filter, int count, int page = 0)
         {
-            return _santaOrdersService.GetAllOrders(User.Identity.GetUserId());
+            return await _santaOrdersService.GetAllOrders(User.Identity.GetUserId(), filter, count, page);
         }
 
         [HttpGet]
@@ -40,7 +40,7 @@ namespace SantaFinder.Web.Controllers
         [Route("api/santaOrders/complete/{id}")]
         public async Task<bool> CompleteOrder(int id)
         {
-            return await _santaOrdersService.CompleteOrder(id);
+            return await _santaOrdersService.CompleteOrder(User.Identity.GetUserId(), id);
         }
 
         [HttpPut]

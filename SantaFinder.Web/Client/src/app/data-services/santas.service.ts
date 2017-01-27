@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { AuthHttp } from '../auth/auth-http.service';
-import { Santa } from './view-models/santa.view-model';
 import { AppConfig } from '../app.config';
 
 @Injectable()
@@ -11,26 +10,11 @@ export class SantasService {
         private authHttp: AuthHttp
     ) { }
 
-    getSantas(startIndex = 0, count = 0): Santa[] {
-        return [
-            {
-                name: "Santa John",
-                numberOfOrders: 123,
-                photoUrl: `${AppConfig.SERVER}/test.png`,
-                rating: 4.5
-            },
-            {
-                name: "Santa Bill",
-                numberOfOrders: 342,
-                photoUrl: `${AppConfig.SERVER}/test.png`,
-                rating: 4.1
-            },
-            {
-                name: "Santa Claus",
-                numberOfOrders: 786,
-                photoUrl: `${AppConfig.SERVER}/test.png`,
-                rating: 2.5
-            }
-        ];
+    getSantas(count, page = 0) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/santas?count=${count}&page=${page}`).map(res => {
+            return res.json();
+        }, err => {
+            return ('error' + JSON.stringify(err));
+        });
     }
 }
