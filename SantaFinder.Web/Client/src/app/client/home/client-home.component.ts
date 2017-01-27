@@ -21,6 +21,8 @@ export class ClientHomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.santaList = this.santasService.getSantas();
+        this.santasService.getSantas().subscribe(res => {
+            this.santaList = res;
+        }, console.log);
     }
 }

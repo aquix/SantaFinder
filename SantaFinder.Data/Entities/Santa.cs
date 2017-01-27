@@ -14,5 +14,7 @@ namespace SantaFinder.Data.Entities
     {
         public string Name { get; set; }
         public string PhotoPath { get; set; }
+        public int NumberOfOrders { get; set; }
+        public float? Rating { get; set; }
     }
 }

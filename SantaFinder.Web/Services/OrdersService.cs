@@ -148,6 +148,24 @@ namespace SantaFinder.Web.Services
             }
         }
 
+        public async Task<bool> RateOrder(int id, float rating)
+        {
+            var order = await _db.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return false;
+            }
+
+            // Update santa's rating;
+            var santa = order.Santa;
+            santa.Rating = GetNewSantaRating(santa, rating, order.Rating ?? 0);
+
+            order.Rating = rating;
+
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
         private Address GetOrderAddress(Order order)
         {
             if (order.UseProfileAddress)
@@ -191,6 +209,13 @@ namespace SantaFinder.Web.Services
         {
             order.Status = OrderStatus.Approved;
             order.SantaId = santaId;
+        }
+
+        private float GetNewSantaRating(Santa santa, float newRating, float oldRating = 0)
+        {
+            var numberOfOrders = santa.NumberOfOrders;
+            var santaRating = santa.Rating ?? 0;
+            return (numberOfOrders * santaRating - oldRating + newRating) / numberOfOrders;
         }
     }
 }

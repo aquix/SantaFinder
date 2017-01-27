@@ -47,12 +47,16 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> CompleteOrder(int orderId)
+        public async Task<bool> CompleteOrder(string santaId, int orderId)
         {
             var order = await _db.Orders.FindAsync(orderId);
             if (order != null)
             {
                 order.Status = OrderStatus.Completed;
+
+                var me = await _db.Santas.FindAsync(santaId);
+                me.NumberOfOrders++;
+
                 await _db.SaveChangesAsync();
                 return true;
             }

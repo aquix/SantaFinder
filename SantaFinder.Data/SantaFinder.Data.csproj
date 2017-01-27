@@ -91,6 +91,14 @@
     <Compile Include="Migrations\201701181421538_AddLocationToClientsAndOrders.Designer.cs">
       <DependentUpon>201701181421538_AddLocationToClientsAndOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701261254358_AddSantaOrdersCount.cs" />
+    <Compile Include="Migrations\201701261254358_AddSantaOrdersCount.Designer.cs">
+      <DependentUpon>201701261254358_AddSantaOrdersCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701270810141_AddRatingToOrderAndSanta.cs" />
+    <Compile Include="Migrations\201701270810141_AddRatingToOrderAndSanta.Designer.cs">
+      <DependentUpon>201701270810141_AddRatingToOrderAndSanta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -116,6 +124,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701181421538_AddLocationToClientsAndOrders.resx">
       <DependentUpon>201701181421538_AddLocationToClientsAndOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701261254358_AddSantaOrdersCount.resx">
+      <DependentUpon>201701261254358_AddSantaOrdersCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701270810141_AddRatingToOrderAndSanta.resx">
+      <DependentUpon>201701270810141_AddRatingToOrderAndSanta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

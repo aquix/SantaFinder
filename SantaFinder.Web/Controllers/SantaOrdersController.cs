@@ -40,7 +40,7 @@ namespace SantaFinder.Web.Controllers
         [Route("api/santaOrders/complete/{id}")]
         public async Task<bool> CompleteOrder(int id)
         {
-            return await _santaOrdersService.CompleteOrder(id);
+            return await _santaOrdersService.CompleteOrder(User.Identity.GetUserId(), id);
         }
 
         [HttpPut]
