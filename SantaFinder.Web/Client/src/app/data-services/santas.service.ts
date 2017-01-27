@@ -10,8 +10,8 @@ export class SantasService {
         private authHttp: AuthHttp
     ) { }
 
-    getSantas(startIndex = 0, count = 0) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/santas`).map(res => {
+    getSantas(count, page = 0) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/santas?count=${count}&page=${page}`).map(res => {
             return res.json();
         }, err => {
             return ('error' + JSON.stringify(err));

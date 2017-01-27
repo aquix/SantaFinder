@@ -9,8 +9,8 @@ export class SantaOrdersService {
         private authHttp: AuthHttp
     ) { }
 
-    getAll() {
-        return this.authHttp.get(`${AppConfig.API_PATH}/santaOrders`).map(res => {
+    getAll(filter, count, page = 0) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/santaOrders?filter=${filter}&count=${count}&page=${page}`).map(res => {
             return res.json();
         }, err => {
             return ('error' + JSON.stringify(err));

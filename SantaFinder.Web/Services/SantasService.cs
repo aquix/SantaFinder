@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using SantaFinder.Data.Context;
 using SantaFinder.Web.Models.Santas;
+using SantaFinder.Web.Models.Shared;
 
 namespace SantaFinder.Web.Services
 {
@@ -17,16 +19,27 @@ namespace SantaFinder.Web.Services
             _db = db;
         }
 
-        public IEnumerable<SantaInfoForClient> GetAllSantas()
+        public async Task<PagedResponse<SantaInfoForClient>> GetAllSantas(int count, int page)
         {
-            return _db.Santas.Select(s => new SantaInfoForClient
+            var santas = await _db.Santas
+                .OrderByDescending(s => s.Rating)
+                .Skip(page * count)
+                .Take(count)
+                .Select(s => new SantaInfoForClient
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    NumberOfOrders = s.NumberOfOrders,
+                    PhotoPath = s.PhotoPath,
+                    Rating = s.Rating
+                })
+                .ToListAsync();
+
+            return new PagedResponse<SantaInfoForClient>
             {
-                Id = s.Id,
-                Name = s.Name,
-                NumberOfOrders = s.NumberOfOrders,
-                PhotoPath = s.PhotoPath,
-                Rating = s.Rating
-            });
+                Items = santas,
+                TotalCount =  await _db.Santas.CountAsync()
+            };
         }
     }
 }

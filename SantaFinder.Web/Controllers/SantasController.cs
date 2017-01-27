@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using SantaFinder.Web.Models.Santas;
+using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
@@ -19,9 +20,9 @@ namespace SantaFinder.Web.Controllers
             _santasService = santasService;
         }
 
-        public IEnumerable<SantaInfoForClient> Get()
+        public async Task<PagedResponse<SantaInfoForClient>> Get(int count, int page = 0)
         {
-            return _santasService.GetAllSantas();
+            return await _santasService.GetAllSantas(count, page);
         }
     }
 }

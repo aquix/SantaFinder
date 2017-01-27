@@ -76,20 +76,31 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<IEnumerable<OrderShortInfo>> GetOrdersByClientId(string clientId)
+        public async Task<PagedResponse<OrderShortInfo>> GetOrdersByClientId(string clientId, int count, int page)
         {
-            var orders = _db.Orders.Where(o => o.ClientId == clientId);
+            var allOrdersForClient = _db.Orders
+                .Where(o => o.ClientId == clientId);
 
-            var orderList = await orders.ToListAsync();
-            return orderList.Select(o => new OrderShortInfo
+            var orders = (await allOrdersForClient
+                .OrderByDescending(o => o.Datetime)
+                .Skip(page * count)
+                .Take(count)
+                .ToListAsync())
+                .Select(o => new OrderShortInfo
+                {
+                    Id = o.Id,
+                    Datetime = o.Datetime,
+                    Address = o.Address,
+                    ChildrenNames = o.ChildrenNames,
+                    Status = o.Status,
+                    SantaInfo = GetSantaInfo(o)
+                });
+
+            return new PagedResponse<OrderShortInfo>
             {
-                Id = o.Id,
-                Datetime = o.Datetime,
-                Address = o.Address,
-                ChildrenNames = o.ChildrenNames,
-                Status = o.Status,
-                SantaInfo = GetSantaInfo(o)
-            });
+                Items = orders,
+                TotalCount = await allOrdersForClient.CountAsync()
+            };
         }
 
         public IEnumerable<OrderLocationInfo> GetAvailableOrderLocations()

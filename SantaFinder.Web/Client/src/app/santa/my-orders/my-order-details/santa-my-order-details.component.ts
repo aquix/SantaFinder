@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment/moment';
 
 import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
 import { OrderStatus } from '../../../shared/enums/order-status';
+import { SantaOrdersService } from '../../../data-services/santa-orders.service';
+import { SantaOrdersListService } from '../santa-orders-list.service';
 
 @Component({
     selector: 'santa-my-order-details',
@@ -10,22 +12,39 @@ import { OrderStatus } from '../../../shared/enums/order-status';
     styleUrls: ['./my-order-details.scss']
 })
 export class SantaMyOrderDetailsComponent implements OnInit {
-    @Input() order: OrderFullInfo;
-    @Output() completeClick: EventEmitter<number> = new EventEmitter();
-    @Output() discardClick: EventEmitter<number> = new EventEmitter();
+    order: OrderFullInfo;
 
     OrderStatus = OrderStatus;
 
-    constructor() { }
+    constructor(
+        private santaOrdersService: SantaOrdersService,
+        private santaOrdersListService: SantaOrdersListService
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.santaOrdersListService.orderDetails.subscribe(data => {
+            this.order = data;
+        });
+    }
 
     onCompleteClick() {
-        this.completeClick.emit(this.order.id);
+        this.santaOrdersService.completeOrder(this.order.id).subscribe(res => {
+            // TODO reload only modified order
+            this.santaOrdersListService.loadOrders(1);
+            this.santaOrdersListService.selectOrder(-1);
+        }, err => {
+            console.log(err);
+        });
     }
 
     onDiscardClick() {
-        this.discardClick.emit(this.order.id);
+        this.santaOrdersService.discardOrder(this.order.id).subscribe(res => {
+            // TODO reload only modified order
+            this.santaOrdersListService.loadOrders(1);
+            this.santaOrdersListService.selectOrder(-1);
+        }, err => {
+            console.log(err);
+        });
     }
 
     canCompleteOrder() {

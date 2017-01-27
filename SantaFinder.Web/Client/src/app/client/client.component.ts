@@ -16,6 +16,10 @@ export class ClientComponent implements OnInit {
     ngOnInit() {
         this.navbarLinks = [
             {
+                name: 'Main',
+                routerLink: './home'
+            },
+            {
                 name: 'My profile',
                 routerLink: './profile'
             },
