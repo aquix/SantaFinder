@@ -1,1 +1,85 @@
-order info {{ id }}
+<div class="sf-form present-info-form">
+    <form [formGroup]="presentInfoForm" novalidate>
+        <div class="error-message" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+        <h1 class="sf-form__title">
+            Present Info
+        </h1>
+        <div>
+            <div>
+                <label class="sf-form__label">Client Name:</label>
+            </div>
+            <input type="text" formControlName="clientName"
+                class="sf-form__control sf-form__control_with-validation" name="clientName"
+                value="" placeholder="Client Name">
+        </div>   
+        <div>
+            <div>
+                <label class="sf-form__label">Children Name:</label>
+            </div>
+            <input type="text" formControlName="childrenNames"
+                class="sf-form__control sf-form__control_with-validation" name="childrenNames"
+                value="" placeholder="Children Name">
+        </div>  
+        <div>
+            <div class="clearfix">
+                <label class="sf-form__label">Datetime:</label>
+            </div>
+            <div>
+                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
+                       close-on-select="false"
+                       first-day-of-week="1"
+                       minute-step="10"
+                       min-date="now"
+                       class="sf-form__control sf-form__control_with-validation"/>
+            </div>
+        </div>
+        <div formGroupName="address">
+            <div>
+                <label class="sf-form__label">Address:</label>
+            </div>
+            <div>
+                <input type="text" formControlName="city"
+                    class="sf-form__control sf-form__control_with-validation" name="city"
+                    value="" placeholder="City">
+            </div>
+            <div>
+                <input type="text" formControlName="street"
+                    class="sf-form__control client-register-form__control_street sf-form__control_with-validation" name="street"
+                    value="" placeholder="Street">
+                <input type="text" formControlName="house"
+                    class="sf-form__control client-register-form__control_house sf-form__control_with-validation" name="house"
+                    value="" placeholder="House">
+                <input type="text" formControlName="apartment"
+                    class="sf-form__control client-register-form__control_apart sf-form__control_with-validation" name="apartment"
+                    value="" placeholder="Apart.">
+            </div>
+        </div>
+
+        <div class="present-info-form__presents">
+            <div class="clearfix">
+                <label class="sf-form__label">Presents</label>
+            </div>
+            <div formArrayName="presents">
+                <div *ngFor="let present of presentInfoForm.controls.presents.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <input type="text" formControlName="name" class="sf-form__control present-info-form__present-name">
+                        <a *ngIf="presentInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
+                            href="javascript:void(0)" class="sf-corner-delete present-info-form__corner-delete"></a>
+                        <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
+                               class="sf-form__checkbox"/>
+                        <label [for]="'present' + i">Buy by santa</label>
+                    </div>
+                </div>
+            </div> 
+            <div>
+                <button (click)="addPresent()" class="sf-button present-info-form__add-present-btn">Add present</button>
+            </div>           
+        </div>
+        <div>
+            <button type="submit" (click)="onSubmitClick(orderForm)"
+                     class="sf-button sf-form__button">Order</button>
+        </div>
+    </form>
+</div>

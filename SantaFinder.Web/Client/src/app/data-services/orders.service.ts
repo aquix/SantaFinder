@@ -5,6 +5,7 @@ import { NewOrderViewModel } from './view-models/new-order/order.view-model';
 import { GeocodingService } from '../shared/services/geocoding.service';
 import { AppConfig } from '../app.config';
 import { NewOrder } from './view-models/new-order/new-order';
+import { OrderFullInfo } from '../client/order-info/order-info';
 
 @Injectable()
 export class OrdersService {
@@ -49,11 +50,18 @@ export class OrdersService {
     getOrderFullInfo(id: number) {
         return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => {
             if (res.status === 200) {
-                return res.json();
+                return res;
             } else {
                 return null;
             }
         });
+    }
+
+    changePresent(changeModel: OrderFullInfo, id : number){
+        let presentForm = changeModel;
+        let presentChangeUrl = 'client/presents';
+        return this.authHttp.post(`${AppConfig.API_PATH}/orders/${presentChangeUrl}`, presentForm, id)
+            .map(res => res.status);
     }
 
     takeOrder(id: number) {

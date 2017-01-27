@@ -60,12 +60,18 @@ export class ClientProfileComponent implements OnInit {
 
         this.accountService.getClientData().subscribe(res => {
             console.log(res);
-            this.profileForm.get('email').setValue(res.email);
-            this.profileForm.get('name').setValue(res.name);
-            this.profileForm.get('address.city').setValue(res.address.city);
-            this.profileForm.get('address.street').setValue(res.address.street);
-            this.profileForm.get('address.house').setValue(res.address.house);
-            this.profileForm.get('address.apartment').setValue(res.address.apartment);
+             let formData = {
+                email: res.email,
+                passwords: {
+                    oldPassword: '',
+                    password: '',
+                    passwordConfirmation: ''
+                },
+                name: res.name,
+                address: res.address
+            };
+            console.log(res);
+            this.profileForm.setValue(formData);
         });
 
     }

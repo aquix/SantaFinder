@@ -132,6 +132,46 @@ namespace SantaFinder.Web.Services
             }
         }
 
+        public async Task<bool> ChangePresent(OrderFullInfo model, int Id)
+        {
+            var order = await _db.Orders.FindAsync(Id);
+
+            if(order != null)
+            {
+                order.Id = model.Id;
+                order.Client.Name = model.ClientName;
+                order.ChildrenNames = model.ChildrenNames;
+                order.Datetime = model.Datetime;
+                order.Address = model.Address;
+                order.Status = model.Status;
+            }
+            _db.Orders.Add(order);
+            try
+            {
+                var itemsAffected = await _db.SaveChangesAsync();
+                if (itemsAffected == 0)
+                {
+                    return false;
+                }
+
+                var presents = model.Presents.Select(p => new Present
+                {
+                    OrderId = order.Id,
+                    Name = p.Name,
+                    BuyBySanta = p.BuyBySanta
+                });
+
+                _db.Presents.AddRange(presents);
+                await _db.SaveChangesAsync();
+
+                return true;
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> TakeOrder(string santaId, int orderId)
         {
             var order = await _db.Orders.FindAsync(orderId);
