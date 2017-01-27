@@ -15,7 +15,7 @@ import { PagedResponse } from '../../shared/models/paged-response';
 export class ClientOrderHistoryComponent implements OnInit {
     public orderStatus = OrderStatus;
 
-    orders: OrderShortInfo[];
+    orders: OrderShortInfo[] = [];
     errorMessage: string;
 
     paginationConfig: PaginationInstance = {

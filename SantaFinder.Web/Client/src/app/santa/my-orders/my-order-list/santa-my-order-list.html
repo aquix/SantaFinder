@@ -6,7 +6,7 @@
             </select>
         </div>
     </div>
-    <div class="my-order-list">
+    <div *ngIf="orders.length > 0" class="my-order-list">
         <ul>
             <li *ngFor="let order of (orders | paginate: paginationConfig); let i = index" class="my-order-list__order-item"
                 (click)="onOrderItemClick(i)"
@@ -20,6 +20,9 @@
             </li>
         </ul>
         <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <div *ngIf="orders.length === 0" class="sf-empty-list-placeholder">
+        No orders :(
     </div>
     <div class="my-order-list-area__empty" (click)="onEmptyAreaClick()"></div>
 </div>

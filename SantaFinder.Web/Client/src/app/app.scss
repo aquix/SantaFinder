@@ -29,7 +29,7 @@ body {
 
     main {
         flex: 1;
-        padding: 50px;
+        padding: 5%;
     }
 }
 
@@ -188,6 +188,15 @@ body {
             outline: none;
         }
     }
+}
+
+.sf-empty-list-placeholder {
+    font-size: 18px;
+    color: #9E9E9E;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .order-status-approved {

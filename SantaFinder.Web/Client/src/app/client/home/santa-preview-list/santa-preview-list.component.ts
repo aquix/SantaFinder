@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaginationInstance } from 'ng2-pagination';
 
 import { Santa } from '../../../data-services/view-models/santa.view-model';
@@ -11,7 +11,7 @@ import { PagedResponse } from '../../../shared/models/paged-response';
     styleUrls: ['./santa-preview-list.scss']
 })
 export class SantaPreviewListComponent implements OnInit {
-    @Input() data: Santa[];
+    santas: Santa[] = [];
 
     paginationConfig: PaginationInstance = {
         currentPage: 1,
@@ -35,7 +35,7 @@ export class SantaPreviewListComponent implements OnInit {
         this.santasService.getSantas(this.paginationConfig.itemsPerPage,
                 this.paginationConfig.currentPage - 1)
             .subscribe((res: PagedResponse<Santa>) => {
-                this.data = res.items;
+                this.santas = res.items;
                 this.paginationConfig.totalItems = res.totalCount;
             }, console.log);
     }

@@ -13,7 +13,7 @@ import { SelectOrderService } from './services/select-order.service';
 })
 export class SantaHomeComponent implements OnInit {
     selectedOrderIndex: number = -1;
-    orders: OrderLocationInfo[];
+    orders: OrderLocationInfo[] = [];
 
     constructor(
         private ordersService: OrdersService,
