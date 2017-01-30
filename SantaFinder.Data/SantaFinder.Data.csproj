@@ -31,11 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -44,6 +44,34 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -59,14 +87,10 @@
   <ItemGroup>
     <Compile Include="Context\AppDbContext.cs" />
     <Compile Include="Context\IDbContext.cs" />
-    <Compile Include="Entities\Address.cs" />
-    <Compile Include="Entities\Client.cs" />
-    <Compile Include="Entities\Location.cs" />
-    <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\OrderStatus.cs" />
-    <Compile Include="Entities\Present.cs" />
-    <Compile Include="Entities\Santa.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Identity\AppRoleManager.cs" />
+    <Compile Include="Identity\AppUserManager.cs" />
+    <Compile Include="Identity\ClientManager.cs" />
+    <Compile Include="Identity\SantaManager.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.Designer.cs">
       <DependentUpon>201701061609042_CreateDatabase.cs</DependentUpon>
@@ -98,6 +122,14 @@
     <Compile Include="Migrations\201701270810141_AddRatingToOrderAndSanta.cs" />
     <Compile Include="Migrations\201701270810141_AddRatingToOrderAndSanta.Designer.cs">
       <DependentUpon>201701270810141_AddRatingToOrderAndSanta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701300919381_AddRoles.cs" />
+    <Compile Include="Migrations\201701300919381_AddRoles.Designer.cs">
+      <DependentUpon>201701300919381_AddRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701300924165_ApplyRolesForExistingUsers.cs" />
+    <Compile Include="Migrations\201701300924165_ApplyRolesForExistingUsers.Designer.cs">
+      <DependentUpon>201701300924165_ApplyRolesForExistingUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +163,18 @@
     <EmbeddedResource Include="Migrations\201701270810141_AddRatingToOrderAndSanta.resx">
       <DependentUpon>201701270810141_AddRatingToOrderAndSanta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701300919381_AddRoles.resx">
+      <DependentUpon>201701300919381_AddRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701300924165_ApplyRolesForExistingUsers.resx">
+      <DependentUpon>201701300924165_ApplyRolesForExistingUsers.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SantaFinder.Entities\SantaFinder.Entities.csproj">
+      <Project>{06dd33fa-0cdc-435e-8f09-6a30fb362fd3}</Project>
+      <Name>SantaFinder.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

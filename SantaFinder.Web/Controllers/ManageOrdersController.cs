@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Data.Identity;
+using SantaFinder.Entities;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers

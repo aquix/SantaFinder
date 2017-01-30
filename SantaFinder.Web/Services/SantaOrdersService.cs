@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using SantaFinder.Data.Context;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Models.OrdersOnMap;
+using SantaFinder.Entities;
 using SantaFinder.Web.Models.SantaOrders;
 using SantaFinder.Web.Models.Shared;
 

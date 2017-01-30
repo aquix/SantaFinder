@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using SantaFinder.Data.Context;
 using SantaFinder.Web.Models.Santas;
 using SantaFinder.Web.Models.Shared;

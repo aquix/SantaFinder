@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Services;
 

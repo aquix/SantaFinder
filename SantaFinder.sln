@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantaFinder.Web", "SantaFin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantaFinder.Data", "SantaFinder.Data\SantaFinder.Data.csproj", "{D5669F81-9EF7-4E0F-B141-B4532D2DB4E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantaFinder.Entities", "SantaFinder.Entities\SantaFinder.Entities.csproj", "{06DD33FA-0CDC-435E-8F09-6A30FB362FD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D5669F81-9EF7-4E0F-B141-B4532D2DB4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5669F81-9EF7-4E0F-B141-B4532D2DB4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5669F81-9EF7-4E0F-B141-B4532D2DB4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06DD33FA-0CDC-435E-8F09-6A30FB362FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06DD33FA-0CDC-435E-8F09-6A30FB362FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06DD33FA-0CDC-435E-8F09-6A30FB362FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06DD33FA-0CDC-435E-8F09-6A30FB362FD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

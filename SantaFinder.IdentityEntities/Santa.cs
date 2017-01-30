@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace SantaFinder.Data.Entities
+namespace SantaFinder.IdentityEntities
 {
     [Table("Santas")]
     public class Santa : User

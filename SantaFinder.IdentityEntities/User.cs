@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace SantaFinder.Data.Entities
+namespace SantaFinder.IdentityEntities
 {
     public class User : IdentityUser
     {
-        
     }
 }

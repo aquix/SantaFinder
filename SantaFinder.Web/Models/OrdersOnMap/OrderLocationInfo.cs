@@ -1,5 +1,5 @@
 ﻿using System;
-using SantaFinder.Data.Entities;
+using SantaFinder.Entities;
 
 namespace SantaFinder.Web.Models.OrdersOnMap
 {

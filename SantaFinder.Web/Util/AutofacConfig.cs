@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -13,9 +10,9 @@ using Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using SantaFinder.Data.Context;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
 using SantaFinder.Web.Services;
+using SantaFinder.Entities;
+using SantaFinder.Data.Identity;
 
 namespace SantaFinder.Web.Util
 {
@@ -53,6 +50,7 @@ namespace SantaFinder.Web.Util
             builder.Register(c => ClientManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
             builder.Register(c => SantaManager.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
             builder.Register(c => AppUserManager<User>.Create(c.Resolve<IDataProtector>(), c.Resolve<AppDbContext>()));
+            builder.Register(c => AppRoleManager.Create(c.Resolve<AppDbContext>()));
 
             builder.RegisterType<OrdersService>()
                 .AsSelf();

@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
 using SantaFinder.Data.Context;
+using SantaFinder.Entities;
 
-namespace SantaFinder.Web.Areas.Auth.Managers
+namespace SantaFinder.Data.Identity
 {
     public class AppUserManager<T> : UserManager<T>
         where T: IdentityUser
     {
+        private Dictionary<Type, string> roles = new Dictionary<Type, string> {
+            { typeof(Client), "client" },
+            { typeof(Santa), "santa" }
+        };
+
         public AppUserManager(IUserStore<T> store) : base(store) { }
 
         public static AppUserManager<T> Create(IDataProtector dataProtector, AppDbContext context)
@@ -44,6 +48,17 @@ namespace SantaFinder.Web.Areas.Auth.Managers
             var userIdentity = await CreateIdentityAsync(user, authenticationType);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public async override Task<IdentityResult> CreateAsync(T user, string password)
+        {
+            var result = await base.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                result = await AddToRoleAsync(user.Id, roles[typeof(T)]);
+            }
+
+            return result;
         }
     }
 }
