@@ -1,37 +1,26 @@
 namespace SantaFinder.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
     using Context;
     using Entities;
     using Identity;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Microsoft.Owin.Security.DataProtection;
 
     public partial class ApplyRolesForExistingUsers : DbMigration
     {
         public override void Up()
         {
-            if (System.Diagnostics.Debugger.IsAttached == false)
-                System.Diagnostics.Debugger.Launch();
-
             var db = new AppDbContext();
-            var clientIds = db.Clients.Select(c => c.Id).ToList();
-            var santaIds = db.Santas.Select(s => s.Id).ToList();
-            var ids = (string.Join(", ", clientIds));
-            
-            File.WriteAllText("D:\\out.txt", ids);
-            var userManager = AppUserManager<User>.Create(new MockDataProtector(), db);
-            foreach (var clientId in clientIds)
+            var userManager = new AppUserManager<User>(new UserStore<User>(db));
+
+            foreach (var clientId in db.Clients.Select(c => c.Id).ToList())
             {
                 userManager.AddToRole(clientId, "client");
             }
 
-            foreach (var santaId in santaIds)
+            foreach (var santaId in db.Santas.Select(s => s.Id).ToList())
             {
                 userManager.AddToRole(santaId, "santa");
             }
@@ -39,19 +28,18 @@ namespace SantaFinder.Data.Migrations
 
         public override void Down()
         {
-        }
-    }
+            var db = new AppDbContext();
+            var userManager = new AppUserManager<User>(new UserStore<User>(db));
 
-    public class MockDataProtector : IDataProtector
-    {
-        public byte[] Protect(byte[] userData)
-        {
-            return userData;
-        }
+            foreach (var clientId in db.Clients.Select(c => c.Id).ToList())
+            {
+                userManager.RemoveFromRole(clientId, "client");
+            }
 
-        public byte[] Unprotect(byte[] protectedData)
-        {
-            return protectedData;
+            foreach (var santaId in db.Santas.Select(s => s.Id).ToList())
+            {
+                userManager.RemoveFromRole(santaId, "santa");
+            }
         }
     }
 }

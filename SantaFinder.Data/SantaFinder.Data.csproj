@@ -89,8 +89,6 @@
     <Compile Include="Context\IDbContext.cs" />
     <Compile Include="Identity\AppRoleManager.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
-    <Compile Include="Identity\ClientManager.cs" />
-    <Compile Include="Identity\SantaManager.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.cs" />
     <Compile Include="Migrations\201701061609042_CreateDatabase.Designer.cs">
       <DependentUpon>201701061609042_CreateDatabase.cs</DependentUpon>

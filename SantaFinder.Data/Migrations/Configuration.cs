@@ -28,12 +28,10 @@ namespace SantaFinder.Data.Migrations
             //    );
             //
 
-            context.Roles.AddOrUpdate(
+            context.Roles.AddOrUpdate(r => r.Name,
                 new IdentityRole { Name = "santa" },
                 new IdentityRole { Name = "client" }
             );
-
-            
         }
     }
 }
