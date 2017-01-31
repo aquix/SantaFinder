@@ -6,6 +6,7 @@ using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
+    [Authorize(Roles = "client")]
     public class SantasController : ApiController
     {
         private SantasService _santasService;

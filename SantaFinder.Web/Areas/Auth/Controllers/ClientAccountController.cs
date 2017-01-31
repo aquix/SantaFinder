@@ -10,6 +10,7 @@ using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [RoutePrefix("api/account/client")]
+    [Authorize(Roles ="client")]
     public class ClientAccountController : AccountController
     {
         private AppUserManager<Client> _clientManager;

@@ -101,5 +101,27 @@ namespace SantaFinder.Web.Services
                 return false;
             }
         }
+
+        public async Task<bool> TakeOrder(string santaId, int orderId)
+        {
+            var order = await _db.Orders.FindAsync(orderId);
+
+            if (order.Status == OrderStatus.New)
+            {
+                ApproveOrder(order, santaId);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void ApproveOrder(Order order, string santaId)
+        {
+            order.Status = OrderStatus.Approved;
+            order.SantaId = santaId;
+        }
     }
 }

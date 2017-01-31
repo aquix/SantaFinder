@@ -5,7 +5,7 @@ using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "santa")]
     public class OrderLocationsController : ApiController
     {
         private OrdersService _ordersService;

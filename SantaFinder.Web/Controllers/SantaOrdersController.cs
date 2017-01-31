@@ -7,8 +7,7 @@ using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
-    //[RoutePrefix("api/santaOrders")]
-    [Authorize]
+    [Authorize(Roles = "santa")]
     public class SantaOrdersController : ApiController
     {
         private SantaOrdersService _santaOrdersService;
@@ -42,6 +41,14 @@ namespace SantaFinder.Web.Controllers
         public async Task<bool> DiscardOrder(int id)
         {
             return await _santaOrdersService.DiscardOrder(id);
+        }
+
+        [HttpPut]
+        [Route("api/santaOrders/take/{id}")]
+        public async Task<bool> TakeOrder(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            return await _santaOrdersService.TakeOrder(userId, id);
         }
     }
 }

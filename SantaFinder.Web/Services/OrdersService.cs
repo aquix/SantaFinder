@@ -140,21 +140,7 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> TakeOrder(string santaId, int orderId)
-        {
-            var order = await _db.Orders.FindAsync(orderId);
-            
-            if (order.Status == OrderStatus.New)
-            {
-                ApproveOrder(order, santaId);
-                await _db.SaveChangesAsync();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        
 
         public async Task<bool> RateOrder(int id, float rating)
         {
@@ -213,11 +199,7 @@ namespace SantaFinder.Web.Services
             };
         }
 
-        private void ApproveOrder(Order order, string santaId)
-        {
-            order.Status = OrderStatus.Approved;
-            order.SantaId = santaId;
-        }
+        
 
         private float GetNewSantaRating(Santa santa, float newRating, float oldRating = 0)
         {

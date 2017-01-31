@@ -218,7 +218,7 @@
     <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
-    <Compile Include="Controllers\ManageOrdersController.cs" />
+    <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SantaOrdersController.cs" />

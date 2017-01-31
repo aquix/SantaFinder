@@ -17,26 +17,6 @@ namespace SantaFinder.Web.Controllers
         {
             _ordersService = ordersService;
         }
-
-        [HttpPost]
-        public async Task<IHttpActionResult> CreateOrder(NewOrder order)
-        {
-            var success = await _ordersService.CreateOrder(order, User.Identity.GetUserId());
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return InternalServerError();
-            }
-        }
-
-        [HttpGet]
-        public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
-        {
-            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
-        }
         
         [HttpGet]
         public async Task<OrderFullInfo> GetOrderFullInfo(int id)
