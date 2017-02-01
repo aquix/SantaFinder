@@ -1,10 +1,11 @@
 <div class="client-home-page">
     <div class="client-home-page__order-area">
-        <div>
-            <a [routerLink]="['../order']"><h1>Order</h1></a>
+        <div class="round-button">
+            <div class="round-button__circle">
+                <a [routerLink]="['../order']" class="round-button__text">Order</a>
+            </div>
         </div>
-
-        <div>
+        <div class="order-history">
             <a [routerLink]="['../orderhistory']">Order history</a>
         </div>
     </div>

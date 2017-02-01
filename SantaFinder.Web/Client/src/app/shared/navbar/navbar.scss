@@ -11,6 +11,10 @@ $blue-background-color: #64B5F6;
     &__logo {
         display: flex;
         align-items: center;
+
+        img {
+            width: 80%;
+        }
     }
 
     &__links {
@@ -50,7 +54,6 @@ $blue-background-color: #64B5F6;
     background-color: #F8F8F8;
 
     .sf-navbar__link {
-
         a {
             color: #777777;
 
