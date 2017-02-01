@@ -18,7 +18,8 @@ namespace SantaFinder.Web.Controllers
 
         public async Task<PagedResponse<SantaInfoForClient>> Get(int count, int page = 0)
         {
-            return await _santasService.GetAllSantas(count, page);
+            var serverUrl = Request.RequestUri.GetLeftPart(System.UriPartial.Authority);
+            return await _santasService.GetAllSantas(count, page, serverUrl);
         }
     }
 }

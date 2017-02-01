@@ -4,7 +4,7 @@
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string PhotoPath { get; set; }
+        public string PhotoUrl { get; set; }
         public float? Rating { get; set; }
         public int NumberOfOrders { get; set; }
     }

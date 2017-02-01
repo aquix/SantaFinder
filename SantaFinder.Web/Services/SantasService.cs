@@ -16,7 +16,7 @@ namespace SantaFinder.Web.Services
             _db = db;
         }
 
-        public async Task<PagedResponse<SantaInfoForClient>> GetAllSantas(int count, int page)
+        public async Task<PagedResponse<SantaInfoForClient>> GetAllSantas(int count, int page, string serverUri)
         {
             var santas = await _db.Santas
                 .OrderByDescending(s => s.Rating)
@@ -27,7 +27,7 @@ namespace SantaFinder.Web.Services
                     Id = s.Id,
                     Name = s.Name,
                     NumberOfOrders = s.NumberOfOrders,
-                    PhotoPath = s.PhotoPath,
+                    PhotoUrl = serverUri + "/static/santaPhotos/" + s.Id,
                     Rating = s.Rating
                 })
                 .ToListAsync();

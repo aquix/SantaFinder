@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\SantaOrdersController.cs" />
     <Compile Include="Controllers\SantasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,9 +245,11 @@
     <Compile Include="Services\OrdersService.cs" />
     <Compile Include="Services\SantaOrdersService.cs" />
     <Compile Include="Services\SantasService.cs" />
+    <Compile Include="Services\StaticService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />
+    <Compile Include="Util\FileResult.cs" />
     <Compile Include="Util\UploadMultipartMediaTypeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
