@@ -39,6 +39,7 @@
     "raw-loader": "*",
     "sass-loader": "*",
     "style-loader": "*",
+    "to-string-loader": "^1.1.5",
     "ts-loader": "*",
     "tslint": "*",
     "tslint-loader": "*",
