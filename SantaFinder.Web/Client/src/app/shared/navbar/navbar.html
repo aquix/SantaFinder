@@ -2,9 +2,12 @@
     <div class="sf-navbar__logo">
         <a routerLink="['']"><img src="/logo.png" alt="Santa finder"></a>
     </div>
-    <ul class="sf-navbar__links">
+    <ul [ngClass]="{ 'links-visible': showLinks }" class="sf-navbar__links" (click)="showLinks = false">
         <li *ngFor="let link of links" class="sf-navbar__link">
             <a [routerLink]="[link.routerLink]" routerLinkActive="sf-navbar__link_active">{{ link.name }}</a>
         </li>
     </ul>
+    <div #openIcon class="sf-navbar__open-icon">
+        <a href="javascript:void(0);" (click)="showLinks = !showLinks">☰</a>
+    </div>
 </nav>

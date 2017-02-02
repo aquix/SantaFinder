@@ -20,6 +20,9 @@ export class NavbarComponent implements OnInit {
     }
 
     @ViewChild('nav') nav: ElementRef;
+    @ViewChild('openIcon') openIcon: ElementRef;
+
+    showLinks = false;
 
     private themes = [
         'blue'

@@ -12,11 +12,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-bottom: 50px;
     }
 
     &__list-area {
         flex: 1;
-        min-width: 200px;
+        min-width: 360px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -74,5 +75,12 @@
     a {
         color: gray;
     }
+}
 
+@media only screen and (max-width:1160px) and (max-device-width:1160px) {
+    .client-home-page {
+        &__list-area {
+            flex: 2;
+        }
+    }
 }
