@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SantaFinder.Entities;
+using SantaFinder.Web.Models.OrderHistory;
 
 namespace SantaFinder.Web.Models.Shared
 {

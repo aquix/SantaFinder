@@ -70,22 +70,16 @@
             <div>
                 <label class="sf-form__label">Address:</label>
             </div>
-            <p *ngIf="fulladdress">                
-                <input type="text" formControlName="city"
-                    class="sf-form__control " name="city"
-                    value="" placeholder="City" disabled>
-                    <span class="error-icon"><input type="image" (click)="changeAddress()" src="./edit.png" class="edit-label"></span>  
-                <input type="text" formControlName="street"
-                    class="sf-form__control client-register-form__control_street" name="street"
-                    value="" placeholder="Street" disabled>
-                <input type="text" formControlName="house"
-                    class="sf-form__control client-register-form__control_house " name="house"
-                    value="" placeholder="House" disabled>
-                <input type="text" formControlName="apartment"
-                    class="sf-form__control client-register-form__control_apart " name="apartment"
-                    value="" placeholder="Apart." disabled>
-            </p>
-            <p *ngIf="!fulladdress">                
+            <div *ngIf="fulladdress">               
+                <div *ngIf="order" class = "order-address">
+             <div>City: {{order.address.city}}</div>                
+            </div> 
+                
+
+                    
+        </div>
+        </div>
+            <div *ngIf="!fulladdress">                
                 <input type="text" formControlName="city"
                     class="sf-form__control form-change" name="city"
                     value="" placeholder="City">
@@ -99,10 +93,10 @@
                 <input type="text" formControlName="apartment"
                     class="sf-form__control client-register-form__control_apart form-change" name="apartment"
                     value="" placeholder="Apart.">
-            </p>
+            </div>
             
         </div>
-        </div>
+        
         
         <div class="present-info-form__presents">
             <div class="clearfix">
@@ -130,6 +124,7 @@
         <div *ngIf="order">
             <div *ngIf="order.status !== orderStatus.new">
             <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
+            {{order.status}}
             </div>
         </div>
                
