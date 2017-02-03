@@ -3,9 +3,9 @@
         {{ errorMessage }}
     </div>
 
-    <div class="orders-history">
+    <div *ngIf="orders.length > 0" class="orders-history">
         <ul class="orders-list">
-            <li *ngFor="let order of orders">
+            <li *ngFor="let order of orders | paginate: paginationConfig">
                 <div class="sf-card order-item" (click)="onOrderItemClick(order)">
                     <div class="order-item__line order-item__common-info">
                         <div class="order-item__id">
@@ -38,5 +38,11 @@
                 </div>
             </li>
         </ul>
+        <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <div *ngIf="orders.length === 0" class="sf-empty-list-placeholder">
+        <div>
+            You have no orders yet
+        </div>
     </div>
 </div>

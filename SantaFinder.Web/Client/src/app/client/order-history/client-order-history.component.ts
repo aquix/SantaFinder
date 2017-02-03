@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaginationInstance } from 'ng2-pagination';
 
 import { OrderShortInfo } from '../../data-services/view-models/orders-history/order-short-info';
 import { OrdersService } from '../../data-services/orders.service';
 import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
+import { PagedResponse } from '../../shared/models/paged-response';
 
 @Component({
     selector: 'client-order-history',
@@ -13,8 +15,13 @@ import { OrderStatus } from '../../data-services/view-models/orders-history/orde
 export class ClientOrderHistoryComponent implements OnInit {
     public orderStatus = OrderStatus;
 
-    orders: OrderShortInfo[];
+    orders: OrderShortInfo[] = [];
     errorMessage: string;
+
+    paginationConfig: PaginationInstance = {
+        currentPage: 1,
+        itemsPerPage: 5
+    };
 
     constructor(
         private ordersService: OrdersService,
@@ -22,16 +29,26 @@ export class ClientOrderHistoryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.ordersService.getAll().subscribe(res => {
-            if (res.status === 200) {
-                this.orders = res.json();
-            } else {
-                this.errorMessage = res.statusText;
-            }
-        });
+        this.loadCurrentPage();
     }
 
     onOrderItemClick(order: OrderShortInfo) {
         this.router.navigate(['/client/orderinfo', order.id]);
     }
+
+    onPageChanged(page: number) {
+         this.paginationConfig.currentPage = page;
+         this.loadCurrentPage();
+    }
+
+    private loadCurrentPage() {
+        this.ordersService.getAll(this.paginationConfig.itemsPerPage,
+                this.paginationConfig.currentPage - 1)
+            .subscribe((res: PagedResponse<OrderShortInfo>) => {
+                this.orders = res.items;
+                this.paginationConfig.totalItems = res.totalCount;
+            }, err => {
+                this.errorMessage = err;
+            });
+    };
 }

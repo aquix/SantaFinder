@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using SantaFinder.Data.Entities;
 using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "santa")]
     public class OrderLocationsController : ApiController
     {
         private OrdersService _ordersService;

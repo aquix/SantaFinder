@@ -13,7 +13,7 @@ import { SelectOrderService } from './services/select-order.service';
 })
 export class SantaHomeComponent implements OnInit {
     selectedOrderIndex: number = -1;
-    orders: OrderLocationInfo[];
+    orders: OrderLocationInfo[] = [];
 
     constructor(
         private ordersService: OrdersService,
@@ -49,10 +49,9 @@ export class SantaHomeComponent implements OnInit {
             if (success) {
                 let orderIndex = this.orders.findIndex(o => o.id === id);
                 this.orders.splice(orderIndex, 1);
-                console.log('success');
             } else {
-                console.log('error');
+                console.log('error taking order');
             }
-        })
+        });
     }
 }

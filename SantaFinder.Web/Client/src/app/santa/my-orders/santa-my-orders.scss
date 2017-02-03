@@ -1,6 +1,13 @@
+.santa-my-orders-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .santa-my-orders {
     display: flex;
-    height: 100%;
+    width: 60%;
 }
 
 .santa-my-order-list {
@@ -9,5 +16,5 @@
 }
 
 .santa-my-order-details {
-    flex: 3;
+    flex: 2;
 }

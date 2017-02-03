@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SantaFinder.Web.Areas.Auth.Models
+﻿namespace SantaFinder.Web.Areas.Auth.Models
 {
     public abstract class RegisterModelBase
     {

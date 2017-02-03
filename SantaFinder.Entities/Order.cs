@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SantaFinder.Data.Entities
+namespace SantaFinder.Entities
 {
     public class Order
     {
@@ -16,6 +12,7 @@ namespace SantaFinder.Data.Entities
         public Address Address { get; set; }
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
+        public float? Rating { get; set; }
 
         public virtual ICollection<Present> Presents { get; set; }
         public string ClientId { get; set; }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using SantaFinder.Data.Context;
-using SantaFinder.Data.Entities;
+using SantaFinder.Entities;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
@@ -76,20 +73,31 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<IEnumerable<OrderShortInfo>> GetOrdersByClientId(string clientId)
+        public async Task<PagedResponse<OrderShortInfo>> GetOrdersByClientId(string clientId, int count, int page)
         {
-            var orders = _db.Orders.Where(o => o.ClientId == clientId);
+            var allOrdersForClient = _db.Orders
+                .Where(o => o.ClientId == clientId);
 
-            var orderList = await orders.ToListAsync();
-            return orderList.Select(o => new OrderShortInfo
+            var orders = (await allOrdersForClient
+                .OrderByDescending(o => o.Datetime)
+                .Skip(page * count)
+                .Take(count)
+                .ToListAsync())
+                .Select(o => new OrderShortInfo
+                {
+                    Id = o.Id,
+                    Datetime = o.Datetime,
+                    Address = o.Address,
+                    ChildrenNames = o.ChildrenNames,
+                    Status = o.Status,
+                    SantaInfo = GetSantaInfo(o)
+                });
+
+            return new PagedResponse<OrderShortInfo>
             {
-                Id = o.Id,
-                Datetime = o.Datetime,
-                Address = o.Address,
-                ChildrenNames = o.ChildrenNames,
-                Status = o.Status,
-                SantaInfo = GetSantaInfo(o)
-            });
+                Items = orders,
+                TotalCount = await allOrdersForClient.CountAsync()
+            };
         }
 
         public IEnumerable<OrderLocationInfo> GetAvailableOrderLocations()
@@ -167,20 +175,22 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> TakeOrder(string santaId, int orderId)
+        public async Task<bool> RateOrder(int id, float rating)
         {
-            var order = await _db.Orders.FindAsync(orderId);
-            
-            if (order.Status == OrderStatus.New)
-            {
-                ApproveOrder(order, santaId);
-                await _db.SaveChangesAsync();
-                return true;
-            }
-            else
+            var order = await _db.Orders.FindAsync(id);
+            if (order == null)
             {
                 return false;
             }
+
+            // Update santa's rating;
+            var santa = order.Santa;
+            santa.Rating = GetNewSantaRating(santa, rating, order.Rating ?? 0);
+
+            order.Rating = rating;
+
+            await _db.SaveChangesAsync();
+            return true;
         }
 
         private Address GetOrderAddress(Order order)
@@ -227,10 +237,13 @@ namespace SantaFinder.Web.Services
             };
         }
 
-        private void ApproveOrder(Order order, string santaId)
+        
+
+        private float GetNewSantaRating(Santa santa, float newRating, float oldRating = 0)
         {
-            order.Status = OrderStatus.Approved;
-            order.SantaId = santaId;
+            var numberOfOrders = santa.NumberOfOrders;
+            var santaRating = santa.Rating ?? 0;
+            return (numberOfOrders * santaRating - oldRating + newRating) / numberOfOrders;
         }
     }
 }

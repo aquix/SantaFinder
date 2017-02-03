@@ -7,6 +7,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { RatingModule } from 'ng2-rating';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import {Ng2PaginationModule} from 'ng2-pagination';
 
 import { AppConfig } from './app.config';
 
@@ -68,7 +69,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         Ng2DatetimePickerModule,
         AgmCoreModule.forRoot({
             apiKey: AppConfig.GMAPS_API_KEY
-        })
+        }),
+        Ng2PaginationModule
     ],
     declarations: [
         NavbarComponent,

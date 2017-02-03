@@ -39,8 +39,11 @@ export class OrdersService {
 
     }
 
-    getAll() {
-        return this.authHttp.get(`${AppConfig.API_PATH}/orders`);
+    getAll(count: number, page: number) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/clientOrders?count=${count}&page=${page}`)
+            .map(res => res.json(), err => {
+                return ('error' + JSON.stringify(err));
+            });
     }
 
     getOrderLocations() {
@@ -59,11 +62,11 @@ export class OrdersService {
     }
 
     takeOrder(id: number) {
-        return this.authHttp.post(`${AppConfig.API_PATH}/manageOrders/${id}`).map(res => res.json());
+        return this.authHttp.put(`${AppConfig.API_PATH}/santaOrders/take/${id}`).map(res => res.json());
     }
 
     private createOrderSendRequest(order: NewOrder) {
-        return this.authHttp.post(`${AppConfig.API_PATH}/orders`, order).map(res => {
+        return this.authHttp.post(`${AppConfig.API_PATH}/clientOrders`, order).map(res => {
             if (res.status === 200) {
                 return true;
             }

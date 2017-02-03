@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Models.SantaOrders;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 
 namespace SantaFinder.Web.Controllers
 {
-    //[RoutePrefix("api/santaOrders")]
-    [Authorize]
+    [Authorize(Roles = "santa")]
     public class SantaOrdersController : ApiController
     {
         private SantaOrdersService _santaOrdersService;
@@ -25,9 +18,9 @@ namespace SantaFinder.Web.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SantaOrderPreview> GetAll()
+        public async Task<PagedResponse<SantaOrderPreview>> GetAll(SantaOrderStatusFilter filter, int count, int page = 0)
         {
-            return _santaOrdersService.GetAllOrders(User.Identity.GetUserId());
+            return await _santaOrdersService.GetAllOrders(User.Identity.GetUserId(), filter, count, page);
         }
 
         [HttpGet]
@@ -40,7 +33,7 @@ namespace SantaFinder.Web.Controllers
         [Route("api/santaOrders/complete/{id}")]
         public async Task<bool> CompleteOrder(int id)
         {
-            return await _santaOrdersService.CompleteOrder(id);
+            return await _santaOrdersService.CompleteOrder(User.Identity.GetUserId(), id);
         }
 
         [HttpPut]
@@ -48,6 +41,14 @@ namespace SantaFinder.Web.Controllers
         public async Task<bool> DiscardOrder(int id)
         {
             return await _santaOrdersService.DiscardOrder(id);
+        }
+
+        [HttpPut]
+        [Route("api/santaOrders/take/{id}")]
+        public async Task<bool> TakeOrder(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            return await _santaOrdersService.TakeOrder(userId, id);
         }
     }
 }

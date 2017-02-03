@@ -41,7 +41,7 @@ export class ClientProfileComponent implements OnInit {
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],           
+            email: ['', [Validators.required, EmailValidators.simple()]],
             passwords: this.formBuilder.group({
                 oldPassword: ['', [CustomValidators.password]],
                 password: ['', [CustomValidators.password]],
@@ -55,12 +55,11 @@ export class ClientProfileComponent implements OnInit {
                 street: ['', [Validators.required]],
                 house: ['', [Validators.required]],
                 apartment: ['', [Validators.required]]
-            }),
+            })
         });
 
         this.accountService.getClientData().subscribe(res => {
-            console.log(res);
-             let formData = {
+            let formData = {
                 email: res.email,
                 passwords: {
                     oldPassword: '',
@@ -70,10 +69,8 @@ export class ClientProfileComponent implements OnInit {
                 name: res.name,
                 address: res.address
             };
-            console.log(res);
             this.profileForm.setValue(formData);
         });
-
     }
 
     onSubmitClick({ value }: { value: ClientProfileChangeModel }) {

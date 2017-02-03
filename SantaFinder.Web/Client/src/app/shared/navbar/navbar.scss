@@ -1,9 +1,12 @@
 $page-background-color: white;
 $blue-background-color: #64B5F6;
+$text-color: #777777;
+$navbar-color: #F8F8F8;
 
 .sf-navbar {
     display: flex;
     justify-content: space-between;
+    flex-flow: row wrap;
     margin: 0;
     padding: 0 20%;
     background-color: #F8F8F8;
@@ -11,10 +14,17 @@ $blue-background-color: #64B5F6;
     &__logo {
         display: flex;
         align-items: center;
+
+        padding: 2px 0;
+
+        img {
+            width: 80%;
+        }
     }
 
     &__links {
         margin: 0;
+        padding-left: 0;
         list-style-type: none;
         overflow: hidden;
     }
@@ -44,15 +54,23 @@ $blue-background-color: #64B5F6;
             }
         }
     }
+
+    &__open-icon {
+        a {
+            font-size: 1.5em;
+            text-decoration: none;
+            color: $text-color;
+        }
+        display: none;
+    }
 }
 
 .sf-navbar.blue {
-    background-color: #F8F8F8;
+    background-color: $navbar-color;
 
     .sf-navbar__link {
-
         a {
-            color: #777777;
+            color: $text-color;
 
             &:hover:not(.sf-navbar__link_active) {
                 background-color: #E7E7E7;
@@ -63,6 +81,40 @@ $blue-background-color: #64B5F6;
                 background-color: $blue-background-color;
                 color: white;
             }
+        }
+    }
+}
+
+@media only screen and (max-width:680px) and (max-device-width:680px) {
+    .sf-navbar {
+        padding: 0 5%;
+
+        &__links {
+            visibility: hidden;
+            opacity: 0;
+
+            background: white;
+            position: absolute;
+            width: 100%;
+            margin-top: 39px;
+            left: 0;
+
+            transition: visibility 0.5s, opacity 0.5s;
+
+            &.links-visible {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        &__link {
+            float: none;
+            background-color: $navbar-color;
+        }
+
+        &__open-icon {
+            display: flex;
+            align-items: center;
         }
     }
 }

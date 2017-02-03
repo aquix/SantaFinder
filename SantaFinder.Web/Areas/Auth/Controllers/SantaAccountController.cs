@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Data.Identity;
+using SantaFinder.Entities;
 using SantaFinder.Web.Areas.Auth.Models;
 using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [RoutePrefix("api/account/santa")]
+    [Authorize(Roles = "santa")]
     public class SantaAccountController : AccountController
     {
         private AppUserManager<Santa> _santaManager;
