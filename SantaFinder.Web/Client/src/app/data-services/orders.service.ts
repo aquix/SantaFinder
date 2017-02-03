@@ -48,19 +48,13 @@ export class OrdersService {
     }
 
     getOrderFullInfo(id: number) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => {
-            if (res.status === 200) {
-                return res;
-            } else {
-                return null;
-            }
-        });
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => res.json(), err => `My error is ${err}`);
     }
 
-    changePresent(changeModel: OrderFullInfo, id : number){
-        let presentForm = changeModel;
-        let presentChangeUrl = 'client/presents';
-        return this.authHttp.post(`${AppConfig.API_PATH}/orders/${presentChangeUrl}`, presentForm, id)
+    changeOrder(changeModel: OrderFullInfo){
+        let orderForm = changeModel;
+        let orderChangeUrl = 'client/order';
+        return this.authHttp.post(`${AppConfig.API_PATH}/orders/${orderChangeUrl}`, orderForm)        
             .map(res => res.status);
     }
 

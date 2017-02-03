@@ -1,85 +1,145 @@
 <div class="sf-form present-info-form">
-    <form [formGroup]="presentInfoForm" novalidate>
-        <div class="error-message" *ngIf="errorMessage">
+    <form [formGroup]="orderInfoForm" novalidate>
+        <div class="error-message orders-error" *ngIf="errorMessage">
             {{ errorMessage }}
         </div>
         <h1 class="sf-form__title">
             Present Info
         </h1>
-        <div>
+        <div class = "form-info">
             <div>
                 <label class="sf-form__label">Client Name:</label>
             </div>
-            <input type="text" formControlName="clientName"
-                class="sf-form__control sf-form__control_with-validation" name="clientName"
+                <p *ngIf="clientName">
+                <input type="text" formControlName="clientName"
+                    class="sf-form__control" name="clientName"
+                    value="" placeholder="Client Name" disabled>
+                <span class="error-icon"><input type="image" (click)="changeClientName()" src="./edit.png" class="edit-label"></span>                   
+                </p>
+                <p *ngIf="!clientName">
+                  <input type="text" formControlName="clientName"
+                class="sf-form__control form-change" name="clientName"
                 value="" placeholder="Client Name">
+                <span class="error-icon"><input type="image" (click)="changeClientName()" src="./edit.png" class="edit-label"></span> 
+                </p>
         </div>   
-        <div>
+        <div class = "form-info">
             <div>
                 <label class="sf-form__label">Children Name:</label>
             </div>
+            <p *ngIf="children">
             <input type="text" formControlName="childrenNames"
-                class="sf-form__control sf-form__control_with-validation" name="childrenNames"
+                class="sf-form__control" name="childrenNames"
+                value="" placeholder="Children Name" disabled>
+            <span class="error-icon"><input type="image" (click)="changeChildrenName()" src="./edit.png" class="edit-label"></span>                     
+            </p>
+            <p *ngIf="!children">
+                <input type="text" formControlName="childrenNames"
+                class="sf-form__control form-change" name="childrenNames"
                 value="" placeholder="Children Name">
+            <span class="error-icon"><input type="image" (click)="changeChildrenName()" src="./edit.png" class="edit-label"></span>                   
+            </p>
         </div>  
-        <div>
+        <div class = "form-info">
             <div class="clearfix">
                 <label class="sf-form__label">Datetime:</label>
             </div>
             <div>
+                <p *ngIf="datetime">
                 <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
                        close-on-select="false"
                        first-day-of-week="1"
                        minute-step="10"
                        min-date="now"
-                       class="sf-form__control sf-form__control_with-validation"/>
+                       class="sf-form__control" disabled/>
+                <span class="error-icon"><input type="image" (click)="changeDataTime()" src="./edit.png" class="edit-label-date"></span>    
+                </p>
+                <p *ngIf="!datetime">
+                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
+                       close-on-select="false"
+                       first-day-of-week="1"
+                       minute-step="10"
+                       min-date="now"
+                       class="sf-form__control form-change" />
+                <span class="error-icon"><input type="image" (click)="changeDataTime()" src="./edit.png" class="edit-label-date"></span>    
+                </p>
             </div>
         </div>
+        <div class = "form-info">
         <div formGroupName="address">
             <div>
                 <label class="sf-form__label">Address:</label>
             </div>
-            <div>
+            <p *ngIf="fulladdress">                
                 <input type="text" formControlName="city"
-                    class="sf-form__control sf-form__control_with-validation" name="city"
-                    value="" placeholder="City">
-            </div>
-            <div>
+                    class="sf-form__control " name="city"
+                    value="" placeholder="City" disabled>
+                    <span class="error-icon"><input type="image" (click)="changeAddress()" src="./edit.png" class="edit-label"></span>  
                 <input type="text" formControlName="street"
-                    class="sf-form__control client-register-form__control_street sf-form__control_with-validation" name="street"
+                    class="sf-form__control client-register-form__control_street" name="street"
+                    value="" placeholder="Street" disabled>
+                <input type="text" formControlName="house"
+                    class="sf-form__control client-register-form__control_house " name="house"
+                    value="" placeholder="House" disabled>
+                <input type="text" formControlName="apartment"
+                    class="sf-form__control client-register-form__control_apart " name="apartment"
+                    value="" placeholder="Apart." disabled>
+            </p>
+            <p *ngIf="!fulladdress">                
+                <input type="text" formControlName="city"
+                    class="sf-form__control form-change" name="city"
+                    value="" placeholder="City">
+                    <span class="error-icon"><input type="image" (click)="changeAddress()" src="./edit.png" class="edit-label"></span>  
+                <input type="text" formControlName="street"
+                    class="sf-form__control client-register-form__control_street form-change" name="street"
                     value="" placeholder="Street">
                 <input type="text" formControlName="house"
-                    class="sf-form__control client-register-form__control_house sf-form__control_with-validation" name="house"
+                    class="sf-form__control client-register-form__control_house form-change" name="house"
                     value="" placeholder="House">
                 <input type="text" formControlName="apartment"
-                    class="sf-form__control client-register-form__control_apart sf-form__control_with-validation" name="apartment"
+                    class="sf-form__control client-register-form__control_apart form-change" name="apartment"
                     value="" placeholder="Apart.">
-            </div>
+            </p>
+            
         </div>
-
+        </div>
+        
         <div class="present-info-form__presents">
             <div class="clearfix">
                 <label class="sf-form__label">Presents</label>
             </div>
+              
             <div formArrayName="presents">
-                <div *ngFor="let present of presentInfoForm.controls.presents.controls; let i=index">
+                <div *ngFor="let present of orderInfoForm.controls.presents.controls; let i=index">
+                    <!--<span class="error-icon"><input type="image" (click)="changeAddress()" src="./edit.png" class="edit-label"></span>  -->
                     <div [formGroupName]="i">
                         <input type="text" formControlName="name" class="sf-form__control present-info-form__present-name">
-                        <a *ngIf="presentInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
+                        <a *ngIf="orderInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
                             href="javascript:void(0)" class="sf-corner-delete present-info-form__corner-delete"></a>
                         <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
                                class="sf-form__checkbox"/>
-                        <label [for]="'present' + i">Buy by santa</label>
+                        <label [for]="'present' + i">Buy by santa</label>                   
+                        
                     </div>
                 </div>
             </div> 
             <div>
                 <button (click)="addPresent()" class="sf-button present-info-form__add-present-btn">Add present</button>
-            </div>           
+            </div>                     
         </div>
+        <div *ngIf="order">
+            <div *ngIf="order.status !== orderStatus.new">
+            <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
+            </div>
+        </div>
+               
         <div>
-            <button type="submit" (click)="onSubmitClick(orderForm)"
-                     class="sf-button sf-form__button">Order</button>
+            <button type="submit" (click)="onSubmitClick(orderInfoForm)"
+                     class="sf-button sf-form__button">Order</button>      
         </div>
-    </form>
+    </form>  
 </div>
+<div>
+    <button (click)="onReturnClick()"
+            class="sf-button sf-form__button back-button">Back</button>  
+</div> 

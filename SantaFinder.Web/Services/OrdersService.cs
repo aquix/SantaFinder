@@ -18,7 +18,7 @@ namespace SantaFinder.Web.Services
     public class OrdersService
     {
         private IDbContext _db;
-
+        AppDbContext dbContext = new AppDbContext();
         public OrdersService(IDbContext db)
         {
             _db = db;
@@ -108,6 +108,7 @@ namespace SantaFinder.Web.Services
         public async Task<OrderFullInfo> GetOrderFullInfo(int id)
         {
             var order = await _db.Orders.FindAsync(id);
+
             if (order != null)
             {
                 return new OrderFullInfo
@@ -123,7 +124,8 @@ namespace SantaFinder.Web.Services
                         Name = p.Name,
                         BuyBySanta = p.BuyBySanta
                     }),
-                    Status = order.Status
+                    Status = order.Status,
+                    SantaInfo = GetSantaInfo(order)                      
                 };
             }
             else
@@ -132,20 +134,21 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> ChangePresent(OrderFullInfo model, int Id)
+        public async Task<bool> ChangeOrder(OrderFullInfo model)
         {
-            var order = await _db.Orders.FindAsync(Id);
+            var order = await _db.Orders.FindAsync(model.Id);
 
             if(order != null)
             {
-                order.Id = model.Id;
                 order.Client.Name = model.ClientName;
                 order.ChildrenNames = model.ChildrenNames;
                 order.Datetime = model.Datetime;
                 order.Address = model.Address;
                 order.Status = model.Status;
+                
             }
-            _db.Orders.Add(order);
+            
+
             try
             {
                 var itemsAffected = await _db.SaveChangesAsync();
@@ -154,14 +157,6 @@ namespace SantaFinder.Web.Services
                     return false;
                 }
 
-                var presents = model.Presents.Select(p => new Present
-                {
-                    OrderId = order.Id,
-                    Name = p.Name,
-                    BuyBySanta = p.BuyBySanta
-                });
-
-                _db.Presents.AddRange(presents);
                 await _db.SaveChangesAsync();
 
                 return true;
@@ -216,7 +211,12 @@ namespace SantaFinder.Web.Services
         {
             if (order.Status == OrderStatus.New)
             {
-                return null;
+                return new SantaShortInfo
+                {
+                    Id = "",
+                    Name = "",
+                    PhotoPath = ""
+                };
             }
 
             return new SantaShortInfo

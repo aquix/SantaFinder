@@ -34,6 +34,29 @@
     }
 }
 
+.edit-label{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
+    margin-left: 10px;
+    visibility: hidden;
+}
+
+.edit-label-date{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin-top: -48px;
+    margin-left: 170px;
+    visibility: hidden;
+}
+
+.form-info:hover{
+    .edit-label{ visibility: visible; }
+    .edit-label-date{ visibility: visible;}
+}
+
 .client-register-form__control_street {
     width: 50%;
 }
@@ -44,4 +67,15 @@
 
 .client-register-form__control_apart {
     width: 13%;
+}
+
+.form-change{
+    background-color: #ffffff;
+}
+.back-button{
+    width: 200px;
+    float: right;
+}
+.orders-error{
+    color: red;
 }

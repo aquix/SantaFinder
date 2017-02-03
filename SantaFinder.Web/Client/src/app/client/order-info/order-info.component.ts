@@ -8,6 +8,7 @@ import * as moment from 'moment/moment';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../../data-services/orders.service';
 import { OrderFullInfo } from './order-info';
+import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -16,10 +17,17 @@ import 'rxjs/add/operator/switchMap';
     styleUrls: ['./present-info.scss'],
 })
 export class ClientOrderInfoComponent implements OnInit {
+    public orderStatus = OrderStatus;
     id: number;
     order: OrderFullInfo;
     errorMessage: string;
-    presentInfoForm: FormGroup;
+    orderInfoForm: FormGroup;
+    clientName: boolean = true;
+    children: boolean = true;
+    datetime: boolean = true;
+    fulladdress: boolean = true;
+    present: boolean = true;
+    image: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -29,9 +37,9 @@ export class ClientOrderInfoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.presentInfoForm = this.formBuilder.group({
+        this.orderInfoForm = this.formBuilder.group({
             clientName: ['', [Validators.required]], 
-            childrenNames: ['', [Validators.required]], 
+            childrenNames: ['',  [Validators.required]], 
             datetime: ['', [Validators.required]],
             address: this.formBuilder.group({
                 city: ['', [Validators.required]],
@@ -41,27 +49,28 @@ export class ClientOrderInfoComponent implements OnInit {
             }),           
             presents: this.formBuilder.array([
                 this.initNewPresent()
-            ])                    
+            ]),
+            santaName: [''],                       
         });
 
         this.route.params.subscribe(params => {
             this.id = params['id'];
+            
         });
-        this.ordersService.getOrderFullInfo(this.id).subscribe(res => {
-            if (res !== null) {
-                this.order = res.json();
-                let formData = {
+        this.ordersService.getOrderFullInfo(this.id).subscribe(order => {
+            this.order = order
+            let formData = {  
                 clientName: this.order.clientName,
                 childrenNames: this.order.childrenNames,
                 datetime: this.order.datetime,
                 address: this.order.address,
-                presents: this.order.presents
+                presents: this.order.presents,
+                santaName: this.order.santaInfo.name     
             };
-            console.log(res);
-            this.presentInfoForm.setValue(formData);
-            } else {
-                this.errorMessage = res.statusText;
-            }
+            console.log(this.order);
+            this.orderInfoForm.setValue(formData);
+        }, err => {
+            this.errorMessage = err;
         });
     }
 
@@ -73,18 +82,18 @@ export class ClientOrderInfoComponent implements OnInit {
     }
 
     addPresent() {
-        const presentsControl = <FormArray>this.presentInfoForm.get('presents');
+        const presentsControl = <FormArray>this.orderInfoForm.get('presents');
         presentsControl.push(this.initNewPresent());
     }
 
     removePresent(i: number) {
-        const control = <FormArray>this.presentInfoForm.controls['presents'];
+        const control = <FormArray>this.orderInfoForm.controls['presents'];
         control.removeAt(i);
     }
 
-    onSubmitClick({ value, id }: { value: OrderFullInfo, id: number }) {
-
-        this.ordersService.changePresent(value, id).subscribe(success => {
+    onSubmitClick({ value }: { value: OrderFullInfo }) {
+        value.id = this.id;
+        this.ordersService.changeOrder(value).subscribe(success => {
             if (success) {
                 this.router.navigate(['../']);
             } else {
@@ -93,4 +102,45 @@ export class ClientOrderInfoComponent implements OnInit {
         });
     }
 
+    onReturnClick() {
+        this.router.navigate(['/client/orderhistory']);   
+    }
+     
+    changeClientName(){
+        if(this.order.status === 0)
+            this.clientName=!this.clientName;
+        else
+            this.errorMessage = "order can't be changed";  
+    }
+
+    changeChildrenName(){
+        if(this.order.status === 0)
+            this.children=!this.children;
+        else
+            this.errorMessage = "order can't be changed";    
+    }
+
+    changeDataTime(){
+        if(this.order.status === 0)
+            this.datetime=!this.datetime;
+        else
+            this.errorMessage = "order can't be changed";  
+    }
+
+    changeAddress(){
+        if(this.order.status === 0)
+            this.fulladdress=!this.fulladdress;
+        else
+            this.errorMessage = "order can't be changed";  
+    }
+
+    changePresent(){
+        if(this.order.status === 0)
+            this.present=!this.present;
+        else
+            this.errorMessage = "order can't be changed";  
+    }
+
+
+    
 }

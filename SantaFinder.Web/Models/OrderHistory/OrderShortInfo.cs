@@ -14,5 +14,6 @@ namespace SantaFinder.Web.Models.OrderHistory
         public string ChildrenNames { get; set; }
         public OrderStatus Status { get; set; }
         public SantaShortInfo SantaInfo { get; set; }
+
     }
 }

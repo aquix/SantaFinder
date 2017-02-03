@@ -10,6 +10,12 @@
     width: 500px;
 }
 
+.orders-error{
+    position: absolute;
+    top: 7%;
+    color: red;
+}
+
 .order-item {
     display: flex;
     flex-direction: column;

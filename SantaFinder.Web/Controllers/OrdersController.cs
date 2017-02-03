@@ -15,6 +15,7 @@ using SantaFinder.Web.Services;
 namespace SantaFinder.Web.Controllers
 {
     [Authorize]
+    [RoutePrefix("api/orders/client")]
     public class OrdersController : ApiController
     {
         private OrdersService _ordersService;
@@ -51,10 +52,10 @@ namespace SantaFinder.Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/orders/client/presents")]
-        public async Task<IHttpActionResult> ChangePresent(OrderFullInfo model, int id)
+        [Route("order")]
+        public async Task<IHttpActionResult> ChangeOrder(OrderFullInfo model)
         {
-            var success =  await _ordersService.ChangePresent(model, id);
+            var success =  await _ordersService.ChangeOrder(model);
             if (success)
             {
                 return Ok();
