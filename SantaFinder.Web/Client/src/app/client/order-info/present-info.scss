@@ -51,7 +51,8 @@
     margin-left: 170px;
     visibility: hidden;
 }
-
+.form-info{
+}
 .form-info:hover{
     .edit-label{ visibility: visible; }
     .edit-label-date{ visibility: visible;}
@@ -78,4 +79,21 @@
 }
 .orders-error{
     color: red;
+}
+.order-form{
+    position: relative;
+    left: 10%;
+}
+.l{
+    position: relative;
+    left: 25%;
+    top: 30px;
+}
+.change-button{
+    position: relative;
+    left: 45%;
+    top: -50px;
+}
+.f-height{
+    height: 80px;
 }

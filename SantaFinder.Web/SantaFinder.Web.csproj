@@ -236,6 +236,7 @@
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
+    <Compile Include="Models\Shared\OrderPostInfo.cs" />
     <Compile Include="Models\Shared\PagedResponse.cs" />
     <Compile Include="Models\Shared\PresentInfo.cs" />
     <Compile Include="Models\Shared\SantaOrderStatusFilter.cs" />

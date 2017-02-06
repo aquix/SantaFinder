@@ -8,6 +8,7 @@ import * as moment from 'moment/moment';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../../data-services/orders.service';
 import { OrderFullInfo } from './order-info';
+import { OrderPostInfo } from './order-post-info';
 import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
 import 'rxjs/add/operator/switchMap';
 
@@ -20,6 +21,7 @@ export class ClientOrderInfoComponent implements OnInit {
     public orderStatus = OrderStatus;
     id: number;
     order: OrderFullInfo;
+    order_post: OrderPostInfo;
     errorMessage: string;
     orderInfoForm: FormGroup;
     clientName: boolean = true;
@@ -91,7 +93,7 @@ export class ClientOrderInfoComponent implements OnInit {
         control.removeAt(i);
     }
 
-    onSubmitClick({ value }: { value: OrderFullInfo }) {
+    onSubmitClick({ value }: { value: OrderPostInfo }) {
         value.id = this.id;
         this.ordersService.changeOrder(value).subscribe(success => {
             if (success) {
@@ -140,7 +142,4 @@ export class ClientOrderInfoComponent implements OnInit {
         else
             this.errorMessage = "order can't be changed";  
     }
-
-
-    
 }

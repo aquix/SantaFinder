@@ -6,55 +6,57 @@
         <h1 class="sf-form__title">
             Present Info
         </h1>
-        <div class = "form-info">
-            <div>
+        <div class = "form-info f-height">
+            <div class="clearfix">
                 <label class="sf-form__label">Client Name:</label>
             </div>
-                <p *ngIf="clientName">
-                <input type="text" formControlName="clientName"
-                    class="sf-form__control" name="clientName"
-                    value="" placeholder="Client Name" disabled>
-                <span class="error-icon"><input type="image" (click)="changeClientName()" src="./edit.png" class="edit-label"></span>                   
-                </p>
-                <p *ngIf="!clientName">
+                <div *ngIf="clientName">
+                <div *ngIf="order" class = "order-form">
+                    <div class="sf-form__control">Client name: {{order.clientName}}</div> 
+                </div>
+                <span class="error-icon"><input type="image" (click)="changeClientName()" src="./edit.png" class="edit-label change-button"></span>                   
+                </div>
+                <div *ngIf="!clientName">
                   <input type="text" formControlName="clientName"
                 class="sf-form__control form-change" name="clientName"
                 value="" placeholder="Client Name">
                 <span class="error-icon"><input type="image" (click)="changeClientName()" src="./edit.png" class="edit-label"></span> 
-                </p>
+                </div>
         </div>   
-        <div class = "form-info">
-            <div>
+        <div class = "form-info f-height">
+            <div class="clearfix">
                 <label class="sf-form__label">Children Name:</label>
             </div>
-            <p *ngIf="children">
-            <input type="text" formControlName="childrenNames"
-                class="sf-form__control" name="childrenNames"
-                value="" placeholder="Children Name" disabled>
-            <span class="error-icon"><input type="image" (click)="changeChildrenName()" src="./edit.png" class="edit-label"></span>                     
-            </p>
-            <p *ngIf="!children">
+            <div *ngIf="children">
+            <div *ngIf="order" class = "order-form">
+                <div class="sf-form__control">Children name: {{order.childrenNames}}</div> 
+            </div>
+            <span class="error-icon"><input type="image" (click)="changeChildrenName()" src="./edit.png" class="edit-label change-button"></span>                     
+            </div>
+            <div *ngIf="!children">
                 <input type="text" formControlName="childrenNames"
                 class="sf-form__control form-change" name="childrenNames"
                 value="" placeholder="Children Name">
             <span class="error-icon"><input type="image" (click)="changeChildrenName()" src="./edit.png" class="edit-label"></span>                   
-            </p>
+            </div>
         </div>  
         <div class = "form-info">
             <div class="clearfix">
                 <label class="sf-form__label">Datetime:</label>
             </div>
             <div>
-                <p *ngIf="datetime">
-                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
+                <div *ngIf="datetime">
+                <div *ngIf="order" class = "order-form">
+                    <div ng2-datetime-picker 
                        close-on-select="false"
                        first-day-of-week="1"
                        minute-step="10"
                        min-date="now"
-                       class="sf-form__control" disabled/>
+                       class="sf-form__control">{{order.datetime}}</div> 
+                </div>
                 <span class="error-icon"><input type="image" (click)="changeDataTime()" src="./edit.png" class="edit-label-date"></span>    
-                </p>
-                <p *ngIf="!datetime">
+                </div>
+                <div *ngIf="!datetime">
                 <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
                        close-on-select="false"
                        first-day-of-week="1"
@@ -62,24 +64,25 @@
                        min-date="now"
                        class="sf-form__control form-change" />
                 <span class="error-icon"><input type="image" (click)="changeDataTime()" src="./edit.png" class="edit-label-date"></span>    
-                </p>
+                </div>
             </div>
         </div>
         <div class = "form-info">
         <div formGroupName="address">
             <div>
-                <label class="sf-form__label">Address:</label>
+                <label class="sf-form__label">Address:</label> 
             </div>
             <div *ngIf="fulladdress">               
-                <div *ngIf="order" class = "order-address">
-             <div>City: {{order.address.city}}</div>                
-            </div> 
-                
-
-                    
+             <div *ngIf="order" class = "order-form">          
+                <span class="error-icon"><input type="image" (click)="changeAddress()" src="./edit.png" class="edit-label l"></span>      
+                <div class="sf-form__control">City: {{order.address.city}}</div> 
+                <div class="sf-form__control">Street: {{order.address.street}}</div>
+                <div class="sf-form__control">House: {{order.address.house}}</div>
+                <div class="sf-form__control">Apartment: {{order.address.apartment}}</div>
+            </div>                                 
         </div>
-        </div>
-            <div *ngIf="!fulladdress">                
+            <div *ngIf="!fulladdress">      
+                <div *ngIf="order" class = "order-address">          
                 <input type="text" formControlName="city"
                     class="sf-form__control form-change" name="city"
                     value="" placeholder="City">
@@ -93,10 +96,11 @@
                 <input type="text" formControlName="apartment"
                     class="sf-form__control client-register-form__control_apart form-change" name="apartment"
                     value="" placeholder="Apart.">
+                </div>    
             </div>
             
         </div>
-        
+        </div>
         
         <div class="present-info-form__presents">
             <div class="clearfix">
@@ -124,7 +128,7 @@
         <div *ngIf="order">
             <div *ngIf="order.status !== orderStatus.new">
             <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
-            {{order.status}}
+            {{order.santaInfo.name}}
             </div>
         </div>
                

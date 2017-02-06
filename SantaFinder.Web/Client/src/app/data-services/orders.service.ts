@@ -6,6 +6,7 @@ import { GeocodingService } from '../shared/services/geocoding.service';
 import { AppConfig } from '../app.config';
 import { NewOrder } from './view-models/new-order/new-order';
 import { OrderFullInfo } from '../client/order-info/order-info';
+import { OrderPostInfo } from '../client/order-info/order-post-info';
 
 @Injectable()
 export class OrdersService {
@@ -54,7 +55,7 @@ export class OrdersService {
         return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => res.json(), err => `My error is ${err}`);
     }
 
-    changeOrder(changeModel: OrderFullInfo){
+    changeOrder(changeModel: OrderPostInfo){
         let orderForm = changeModel;
         let orderChangeUrl = 'client/order';
         return this.authHttp.post(`${AppConfig.API_PATH}/orders/${orderChangeUrl}`, orderForm)        

@@ -142,7 +142,7 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> ChangeOrder(OrderFullInfo model)
+        public async Task<bool> ChangeOrder(OrderPostInfo model)
         {
             var order = await _db.Orders.FindAsync(model.Id);
 
@@ -153,9 +153,8 @@ namespace SantaFinder.Web.Services
                 order.Datetime = model.Datetime;
                 order.Address = model.Address;
                 order.Status = model.Status;
-                
+                order.Presents = model.Presents;
             }
-            
 
             try
             {

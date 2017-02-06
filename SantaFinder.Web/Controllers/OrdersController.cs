@@ -27,7 +27,7 @@ namespace SantaFinder.Web.Controllers
 
         [HttpPost]
         [Route("order")]
-        public async Task<IHttpActionResult> ChangeOrder(OrderFullInfo model)
+        public async Task<IHttpActionResult> ChangeOrder(OrderPostInfo model)
         {
             var success =  await _ordersService.ChangeOrder(model);
             if (success)
