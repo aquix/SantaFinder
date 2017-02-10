@@ -29,7 +29,7 @@ export class ClientOrderInfoComponent implements OnInit {
     datetime: boolean = true;
     fulladdress: boolean = true;
     present: boolean = true;
-    image: any;
+    rating: string ='';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -94,7 +94,8 @@ export class ClientOrderInfoComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: OrderPostInfo }) {
-        value.id = this.id;
+        value = this.order;
+        value.santaInfo.rating = this.rating;
         this.ordersService.changeOrder(value).subscribe(success => {
             if (success) {
                 this.router.navigate(['../']);
@@ -103,6 +104,11 @@ export class ClientOrderInfoComponent implements OnInit {
             }
         });
     }
+
+    private ratingRadio(element: HTMLInputElement): void {
+        this.rating = `${element.value}`
+    }
+
 
     onReturnClick() {
         this.router.navigate(['/client/orderhistory']);   

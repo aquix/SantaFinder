@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace SantaFinder.Web.Services
     public class OrdersService
     {
         private IDbContext _db;
+
         AppDbContext dbContext = new AppDbContext();
         public OrdersService(IDbContext db)
         {
@@ -153,7 +155,22 @@ namespace SantaFinder.Web.Services
                 order.Datetime = model.Datetime;
                 order.Address = model.Address;
                 order.Status = model.Status;
-                order.Presents = model.Presents;
+                var res = model.Presents.ToList();
+                //don't have id ?
+                //for (int i = 0; i < res.Count; i++)
+                //{
+                //    order.Presents.Add(res[i]);
+                //}
+                //maybe like this, without another method (RateOrder)  ? 
+                if (model.Status != OrderStatus.New && model.SantaInfo.Rating != "")
+                {
+                    var santa = order.Santa;
+                    float rating = (float)Convert.ToDouble(model.SantaInfo.Rating);
+                    santa.Rating = GetNewSantaRating(santa, rating, order.Rating ?? 0);
+
+                    order.Rating = rating;
+                }
+
             }
 
             try

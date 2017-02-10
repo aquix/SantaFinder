@@ -19,5 +19,6 @@ namespace SantaFinder.Web.Models.Shared
         public OrderStatus Status { get; set; }
         public virtual ICollection<Present> Presents { get; set; }
         public SantaShortInfo SantaInfo { get; set; }
+        public string Rating { get; set; }
     }
 }

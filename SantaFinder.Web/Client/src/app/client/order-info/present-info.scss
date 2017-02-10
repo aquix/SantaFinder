@@ -97,3 +97,87 @@
 .f-height{
     height: 80px;
 }
+
+#reviewStars-input input:checked ~ label, #reviewStars-input label, #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+  background: url('http://positivecrash.com/wp-content/uploads/ico-s71a7fdede6.png') no-repeat;
+}
+
+#reviewStars-input {
+  
+  overflow: hidden;
+  *zoom: 1;
+  
+  position: relative;
+  float: left;
+    top: -60px;
+    left: 140px;
+}
+
+#reviewStars-input input {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  
+  width: 43px;
+  height: 40px;
+  
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
+
+#reviewStars-input input:checked ~ label {
+  background-position: 0 -40px;
+  height: 40px;
+  width: 43px;
+}
+
+#reviewStars-input label {
+  background-position: 0 0;
+  height: 40px;
+  width: 43px;
+  float: right;
+  cursor: pointer;
+  margin-right: 10px;
+  
+  position: relative;
+  z-index: 1;
+}
+
+#reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+  background-position: 0 -40px;
+  height: 40px;
+  width: 43px;
+}
+
+#reviewStars-input #s1 {
+  left: 0px;
+}
+#reviewStars-input #s2 {
+  left: 53px;
+}
+#reviewStars-input #s3 {
+  left: 106px;
+}
+#reviewStars-input #s4 {
+  left: 159px;
+}
+#reviewStars-input #s5 {
+  left: 212px;
+}
+#reviewStars-input #s6 {
+  left: 265px;
+}
+
+.santa-photo{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: -120px;
+    top: 20px;
+}
+.santa-info{
+    position: relative;
+    top: -80px;
+    left: 65px;
+    font-size: 16pt;
+}

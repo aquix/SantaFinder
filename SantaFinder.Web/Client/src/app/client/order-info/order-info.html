@@ -82,7 +82,7 @@
             </div>                                 
         </div>
             <div *ngIf="!fulladdress">      
-                <div *ngIf="order" class = "order-address">          
+                <div *ngIf="order" class = "order-address">    
                 <input type="text" formControlName="city"
                     class="sf-form__control form-change" name="city"
                     value="" placeholder="City">
@@ -104,7 +104,7 @@
         
         <div class="present-info-form__presents">
             <div class="clearfix">
-                <label class="sf-form__label">Presents</label>
+                <label class="sf-form__label">Presents:</label>
             </div>
               
             <div formArrayName="presents">
@@ -116,8 +116,7 @@
                             href="javascript:void(0)" class="sf-corner-delete present-info-form__corner-delete"></a>
                         <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
                                class="sf-form__checkbox"/>
-                        <label [for]="'present' + i">Buy by santa</label>                   
-                        
+                        <label [for]="'present' + i">Buy by santa</label>                                          
                     </div>
                 </div>
             </div> 
@@ -127,11 +126,29 @@
         </div>
         <div *ngIf="order">
             <div *ngIf="order.status !== orderStatus.new">
-            <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
-            {{order.santaInfo.name}}
+            <div class="clearfix">
+                <label class="sf-form__label">Santa Info:</label>
+            </div>        
+            <img class = "santa-photo" [src]="order.santaInfo.photoPath" alt="Santa's photo'">
+                <div class = "santa-info">Santa name: {{order.santaInfo.name}}</div>
+                <div id="reviewStars-input">
+                    <input id="star-4" type="radio" name="reviewStars" (click)="rating='5'"/>
+                    <label title="gorgeous" for="star-4"></label>
+
+                    <input id="star-3" type="radio" name="reviewStars" (click)="rating='4'"/>
+                    <label title="good" for="star-3"></label>
+
+                    <input id="star-2" type="radio" name="reviewStars" (click)="rating='3'"/>
+                    <label title="regular" for="star-2"></label>
+
+                    <input id="star-1" type="radio" name="reviewStars" (click)="rating='2'"/>
+                    <label title="poor" for="star-1"></label>
+
+                    <input id="star-0" type="radio" name="reviewStars" (click)="rating='1'"/>
+                    <label title="bad" for="star-0"></label>              
+                </div> 
             </div>
         </div>
-               
         <div>
             <button type="submit" (click)="onSubmitClick(orderInfoForm)"
                      class="sf-button sf-form__button">Order</button>      
