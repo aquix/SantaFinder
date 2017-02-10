@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using SantaFinder.Data.Context;
@@ -37,6 +39,39 @@ namespace SantaFinder.Web.Services
                 Items = santas,
                 TotalCount =  await _db.Santas.CountAsync()
             };
+        }
+
+        public async Task<SantaFullInfoForClient> GetSantaFullInfo(string id, string serverUri)
+        {
+            var santa = await _db.Santas.FindAsync(id);
+            var feedbacks = await LoadNextFeedbacks(id);
+
+            return new SantaFullInfoForClient
+            {
+                Name = santa.Name,
+                PhotoUrl = serverUri + "/static/santaPhotos/" + santa.Id,
+                NumberOfOrders = santa.NumberOfOrders,
+                Rating = santa.Rating ?? 0,
+                Feedbacks = feedbacks
+            };
+        }
+
+        public async Task<IEnumerable<FeedbackItem>> LoadNextFeedbacks(string santaId, int startIndex = 0)
+        {
+            const int feedbacksCount = 10;
+
+            return await _db.Orders
+                .Where(o => o.SantaId == santaId)
+                .OrderByDescending(o => o.Datetime)
+                .Skip(startIndex)
+                .Take(feedbacksCount)
+                .Select(o => new FeedbackItem
+                {
+                    ClientName = o.Client.Name,
+                    Rating = o.Rating ?? 0,
+                    Datetime = o.Datetime
+                })
+                .ToListAsync();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using SantaFinder.Web.Models.Santas;
 using SantaFinder.Web.Models.Shared;
@@ -18,7 +20,7 @@ namespace SantaFinder.Web.Controllers
 
         public async Task<PagedResponse<SantaInfoForClient>> Get(int count, int page = 0)
         {
-            var serverUrl = Request.RequestUri.GetLeftPart(System.UriPartial.Authority);
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
             return await _santasService.GetAllSantas(count, page, serverUrl);
         }
     }

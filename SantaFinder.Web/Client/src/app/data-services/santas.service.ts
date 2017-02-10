@@ -17,4 +17,20 @@ export class SantasService {
             return ('error' + JSON.stringify(err));
         });
     }
-}
+
+    getSantaFullInfo(santaId: string) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/santaFullInfo/${santaId}`).map(res => {
+            return res.json();
+        }, err => {
+            return ('error' + JSON.stringify(err));
+        });
+    }
+
+    loadNextFeedbacks(santaId: string, startIndex: number) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/santaFullInfo/${santaId}/loadFeedbacks?startIndex=${startIndex}`).map(res => {
+            return res.json();
+        }, err => {
+            return ('error' + JSON.stringify(err));
+        });
+    }
+ }

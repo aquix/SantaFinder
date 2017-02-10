@@ -4,10 +4,14 @@
     padding-left: 0;
 }
 
+.santa-preview-item-wrapper {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
 .santa-preview-item {
     display: flex;
     width: 100%;
-
 
     &__img {
         margin: 5px;
