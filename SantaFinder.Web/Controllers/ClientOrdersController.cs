@@ -14,6 +14,7 @@ using SantaFinder.Web.Services;
 namespace SantaFinder.Web.Controllers
 {
     [Authorize(Roles = "client")]
+    [RoutePrefix("api/clientOrders")]
     public class ClientOrdersController : ApiController
     {
         private OrdersService _ordersService;
@@ -41,6 +42,13 @@ namespace SantaFinder.Web.Controllers
         public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
         {
             return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
+        }
+
+        [HttpPut]
+        [Route("{orderId}")]
+        public async Task<bool> RateOrder(int orderId, float rating)
+        {
+            return await _ordersService.RateOrder(orderId, rating);
         }
     }
 }
