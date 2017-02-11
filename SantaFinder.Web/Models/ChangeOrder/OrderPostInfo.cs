@@ -9,11 +9,10 @@ namespace SantaFinder.Web.Models.ChangeOrder
     public class OrderPostInfo
     {
         public int Id { get; set; }
-        public string ClientName { get; set; }
         public string ChildrenNames { get; set; }
         public DateTime Datetime { get; set; }
         public bool UseProfileAddress { get; set; }
         public NewOrderAddress Address { get; set; }
-        public IEnumerable<Present> Presents { get; set; }
+        public IEnumerable<ChangedPresentInfo> Presents { get; set; }
     }
 }

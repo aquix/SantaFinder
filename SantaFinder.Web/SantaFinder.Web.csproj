@@ -220,7 +220,6 @@
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
     <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SantaFullInfoController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Controllers\SantaOrdersController.cs" />
@@ -228,6 +227,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChangeOrder\ChangedPresentInfo.cs" />
     <Compile Include="Models\NewOrder\NewOrder.cs" />
     <Compile Include="Models\NewOrder\NewOrderAddress.cs" />
     <Compile Include="Models\OrderHistory\OrderShortInfo.cs" />
@@ -239,7 +239,7 @@
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
-    <Compile Include="Models\Shared\OrderPostInfo.cs" />
+    <Compile Include="Models\ChangeOrder\OrderPostInfo.cs" />
     <Compile Include="Models\Shared\PagedResponse.cs" />
     <Compile Include="Models\Shared\PresentInfo.cs" />
     <Compile Include="Models\Shared\SantaOrderStatusFilter.cs" />
@@ -250,6 +250,7 @@
     <Compile Include="Services\SantaOrdersService.cs" />
     <Compile Include="Services\SantasService.cs" />
     <Compile Include="Services\StaticService.cs" />
+    <Compile Include="Services\Utils\ChangedPresentsComparer.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />

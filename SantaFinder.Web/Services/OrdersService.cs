@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
 using SantaFinder.Web.Models;
+using SantaFinder.Web.Models.ChangeOrder;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Models.Shared;
+using SantaFinder.Web.Services.Utils;
 
 namespace SantaFinder.Web.Services
 {
@@ -148,29 +150,58 @@ namespace SantaFinder.Web.Services
         {
             var order = await _db.Orders.FindAsync(model.Id);
 
-            if(order != null)
+            if (order == null)
             {
-                order.Client.Name = model.ClientName;
-                order.ChildrenNames = model.ChildrenNames;
-                order.Datetime = model.Datetime;
-                order.Address = model.Address;
-                order.Status = model.Status;
-                var res = model.Presents.ToList();
-                //don't have id ?
-                //for (int i = 0; i < res.Count; i++)
-                //{
-                //    order.Presents.Add(res[i]);
-                //}
-                //maybe like this, without another method (RateOrder)  ?
-                if (model.Status != OrderStatus.New && model.SantaInfo.Rating != "")
+                return false;
+            }
+
+            order.ChildrenNames = model.ChildrenNames;
+            order.Datetime = model.Datetime;
+
+            if (!model.Address.UseDefaultAddress)
+            {
+                order.Address = model.Address.CustomAddress.Line;
+                order.Location = model.Address.CustomAddress.Location;
+            }
+            else
+            {
+                order.Address = order.Client?.Address;
+                order.Location = order.Client?.Location;
+            }
+
+            // Update presents
+            var presentsInDb = order.Presents.Select(o => new ChangedPresentInfo
+            {
+                Id = o.Id,
+                Name = o.Name,
+                BuyBySanta = o.BuyBySanta
+            });
+
+            var presentsToRemove = presentsInDb.Except(model.Presents, new ChangedPresentsComparer());
+            var presentsToEdit = presentsInDb.Intersect(model.Presents, new ChangedPresentsComparer());
+            var presentsToAdd = model.Presents.Except(presentsInDb, new ChangedPresentsComparer());
+
+            foreach (var present in presentsToRemove)
+            {
+                var presentInDb = order.Presents.FirstOrDefault(p => p.Id == present.Id);
+                _db.Presents.Remove(presentInDb);
+            }
+
+            foreach (var present in presentsToEdit)
+            {
+                var presentInDb = _db.Presents.FirstOrDefault(p => p.Id == present.Id);
+                presentInDb.Name = present.Name;
+                presentInDb.BuyBySanta = present.BuyBySanta;
+            }
+
+            foreach (var present in presentsToAdd)
+            {
+                _db.Presents.Add(new Present
                 {
-                    var santa = order.Santa;
-                    float rating = (float)Convert.ToDouble(model.SantaInfo.Rating);
-                    santa.Rating = GetNewSantaRating(santa, rating, order.Rating ?? 0);
-
-                    order.Rating = rating;
-                }
-
+                    Name = present.Name,
+                    BuyBySanta = present.BuyBySanta,
+                    OrderId = order.Id
+                });
             }
 
             try
@@ -180,8 +211,6 @@ namespace SantaFinder.Web.Services
                 {
                     return false;
                 }
-
-                await _db.SaveChangesAsync();
 
                 return true;
             }

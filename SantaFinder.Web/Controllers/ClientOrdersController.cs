@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using SantaFinder.Web.Models;
+using SantaFinder.Web.Models.ChangeOrder;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
@@ -24,6 +25,19 @@ namespace SantaFinder.Web.Controllers
             _ordersService = ordersService;
         }
 
+        [HttpGet]
+        public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
+        {
+            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+        {
+            return await _ordersService.GetOrderFullInfo(id);
+        }
+
         [HttpPost]
         public async Task<IHttpActionResult> CreateOrder(NewOrder order)
         {
@@ -38,17 +52,26 @@ namespace SantaFinder.Web.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
-        {
-            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
-        }
-
         [HttpPut]
-        [Route("{orderId}")]
+        [Route("{orderId}/rate")]
         public async Task<bool> RateOrder(int orderId, float rating)
         {
             return await _ordersService.RateOrder(orderId, rating);
+        }
+
+        [HttpPut]
+        [Route("change")]
+        public async Task<IHttpActionResult> ChangeOrder(OrderPostInfo model)
+        {
+            var success = await _ordersService.ChangeOrder(model);
+            if (success)
+            {
+                return Ok();
+            }
+            else
+            {
+                return InternalServerError();
+            }
         }
     }
 }
