@@ -135,7 +135,7 @@ namespace SantaFinder.Web.Services
                         BuyBySanta = p.BuyBySanta
                     }),
                     Status = order.Status,
-                    SantaInfo = GetSantaInfo(order)                      
+                    SantaInfo = GetSantaInfo(order)
                 };
             }
             else
@@ -161,7 +161,7 @@ namespace SantaFinder.Web.Services
                 //{
                 //    order.Presents.Add(res[i]);
                 //}
-                //maybe like this, without another method (RateOrder)  ? 
+                //maybe like this, without another method (RateOrder)  ?
                 if (model.Status != OrderStatus.New && model.SantaInfo.Rating != "")
                 {
                     var santa = order.Santa;
@@ -252,8 +252,6 @@ namespace SantaFinder.Web.Services
                 PhotoPath = order.Santa.PhotoPath
             };
         }
-
-        
 
         private float GetNewSantaRating(Santa santa, float newRating, float oldRating = 0)
         {
