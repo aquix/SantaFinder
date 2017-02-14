@@ -6,14 +6,14 @@ using SantaFinder.Web.Models.ChangeOrder;
 
 namespace SantaFinder.Web.Services.Utils
 {
-    public class ChangedPresentsComparer : IEqualityComparer<ChangedPresentInfo>
+    public class ChangedPresentsComparer : IEqualityComparer<PresentInfoForEdit>
     {
-        public bool Equals(ChangedPresentInfo x, ChangedPresentInfo y)
+        public bool Equals(PresentInfoForEdit x, PresentInfoForEdit y)
         {
             return x.Id == y.Id;
         }
 
-        public int GetHashCode(ChangedPresentInfo obj)
+        public int GetHashCode(PresentInfoForEdit obj)
         {
             return obj.Id;
         }

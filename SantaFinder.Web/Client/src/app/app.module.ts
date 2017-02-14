@@ -58,6 +58,8 @@ import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
+import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
+import { ClientOrdersService } from './data-services/client-orders.service';
 
 @NgModule({
     imports: [
@@ -103,6 +105,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         SantaPreviewListComponent,
         ClientOrderInfoComponent,
         ClientSantaInfoComponent,
+        SantaPreviewCardComponent,
 
         AddressPipe,
         DatetimePipe
@@ -119,6 +122,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         SantasService,
         SantaOrdersService,
         OrdersService,
+        ClientOrdersService,
         LocationService,
         GeocodingService
     ],

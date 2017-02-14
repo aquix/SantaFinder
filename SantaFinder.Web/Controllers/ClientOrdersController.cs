@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using SantaFinder.Entities;
 using SantaFinder.Web.Models;
 using SantaFinder.Web.Models.ChangeOrder;
 using SantaFinder.Web.Models.OrderHistory;
@@ -28,14 +29,46 @@ namespace SantaFinder.Web.Controllers
         [HttpGet]
         public async Task<PagedResponse<OrderShortInfo>> GetMyOrders(int count, int page = 0)
         {
-            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page);
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+            return await _ordersService.GetOrdersByClientId(User.Identity.GetUserId(), count, page, serverUrl);
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+        public async Task<OrderFullInfoForEditing> Get(int id)
         {
-            return await _ordersService.GetOrderFullInfo(id);
+            // TODO move it to service
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+            var order = await _ordersService.GetOrder(id);
+            var orderViewModel = new OrderFullInfoForEditing
+            {
+                Id = order.Id,
+                Address = order.Address,
+                ChildrenNames = order.ChildrenNames,
+                Datetime = order.Datetime,
+                Location = order.Location,
+                Presents = order.Presents.Select(p => new PresentInfoForEdit
+                {
+                    Id = p.Id,
+                    BuyBySanta = p.BuyBySanta,
+                    Name = p.Name
+                }),
+                
+                Status = order.Status
+            };
+
+            if (orderViewModel.Status != OrderStatus.New)
+            {
+                orderViewModel.SantaInfo = new Models.Santas.SantaInfoForClient
+                {
+                    Id = order.Santa.Id,
+                    Name = order.Santa.Name,
+                    NumberOfOrders = order.Santa.NumberOfOrders,
+                    PhotoUrl = serverUrl + "/static/santaPhotos/" + order.Santa.Id,
+                    Rating = order.Santa.Rating
+                };
+            }
+
+            return orderViewModel;
         }
 
         [HttpPost]
@@ -60,10 +93,10 @@ namespace SantaFinder.Web.Controllers
         }
 
         [HttpPut]
-        [Route("change")]
-        public async Task<IHttpActionResult> ChangeOrder(OrderPostInfo model)
+        [Route("{orderId}/change")]
+        public async Task<IHttpActionResult> ChangeOrder(int orderId, OrderPostInfo model)
         {
-            var success = await _ordersService.ChangeOrder(model);
+            var success = await _ordersService.ChangeOrder(orderId, model);
             if (success)
             {
                 return Ok();

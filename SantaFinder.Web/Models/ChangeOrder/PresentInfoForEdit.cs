@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SantaFinder.Web.Models.ChangeOrder
 {
-    public class ChangedPresentInfo
+    public class PresentInfoForEdit
     {
         public int Id { get; set; }
         public string Name { get; set; }

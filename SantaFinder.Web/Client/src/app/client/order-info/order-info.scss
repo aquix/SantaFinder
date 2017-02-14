@@ -1,0 +1,49 @@
+.order-info-form {
+    position: relative;
+
+    &__santa-info {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        text-align: initial;
+    }
+}
+
+.edit-buttons {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.edit-button {
+    background-color: #9E9E9E;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    img {
+        width: 32px;
+        height: 32px;
+    }
+
+    &:disabled {
+        background-color: #BDBDBD;
+        cursor: inherit;
+    }
+}
+
+.cancel-button {
+    @extend .edit-button;
+    border-bottom-left-radius: 0;
+}
+
+.save-button {
+    @extend .edit-button;
+    border-top-right-radius: 0;
+    margin-right: -5px;
+}

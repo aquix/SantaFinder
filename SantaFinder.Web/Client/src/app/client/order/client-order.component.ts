@@ -10,7 +10,7 @@ import { NewOrderViewModel } from '../../data-services/view-models/new-order/ord
 @Component({
     selector: 'client-order',
     templateUrl: './client-order.html',
-    styleUrls: ['./client-order.scss'],
+    styleUrls: ['../shared/styles/order-form.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ClientOrderComponent implements OnInit {
