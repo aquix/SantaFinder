@@ -13,7 +13,9 @@ export class ClientOrdersService {
     ) { }
 
     getOrder(id: number) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/clientOrders/${id}`).map(res => res.json(), err => `My error is ${err}`);
+        return this.authHttp
+            .get(`${AppConfig.API_PATH}/clientOrders/${id}`)
+            .map(res => res.json(), err => `My error is ${err}`);
     }
 
     changeOrder(id: number, changeModel: OrderFullInfoForEditing){
@@ -31,5 +33,11 @@ export class ClientOrdersService {
             return this.authHttp.put(`${AppConfig.API_PATH}/clientOrders/${id}/change`, model)
                 .map(res => res.status);
         });
+    }
+
+    rate(id: number, rating: number) {
+        return this.authHttp
+            .put(`${AppConfig.API_PATH}/clientOrders/${id}/rate?rating=${rating}`)
+            .map(res => res.json(), err => `My error is ${err}`);
     }
 }

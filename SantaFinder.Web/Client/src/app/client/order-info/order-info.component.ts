@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { NewOrderViewModel } from '../../data-services/view-models/new-order/order.view-model';
 import { Router } from '@angular/router';
+import { Rating } from 'ng2-rating';
 
 import * as moment from 'moment/moment';
 
@@ -17,8 +17,9 @@ import { OrderFullInfoForEditing } from '../../data-services/view-models/change-
     selector: 'order-info-page',
     templateUrl: './order-info.html',
     styleUrls: ['../shared/styles/order-form.scss', './order-info.scss'],
+    encapsulation: ViewEncapsulation.None
 })
-export class ClientOrderInfoComponent implements OnInit {
+export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     OrderStatus = OrderStatus;
 
     id: number;
@@ -26,10 +27,13 @@ export class ClientOrderInfoComponent implements OnInit {
     orderInfoForm: FormGroup;
     orderStatus: OrderStatus;
     santaInfo: Santa = null;
+    rating: number;
 
     editMode: boolean = false;
     somethingChanged: boolean = false;
     formPreviousState: OrderPostInfo;
+
+    @ViewChild('ratingControl') ratingControl: Rating;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -65,6 +69,10 @@ export class ClientOrderInfoComponent implements OnInit {
                 presents: order.presents,
             };
 
+            if (order.rating) {
+                this.rating = order.rating;
+            }
+
             this.santaInfo = order.santaInfo;
             this.orderStatus = order.status;
             this.orderInfoForm.controls['presents'] = this.formBuilder.array(
@@ -75,6 +83,15 @@ export class ClientOrderInfoComponent implements OnInit {
         }, err => {
             this.errorMessage = err;
         });
+    }
+
+    ngAfterViewInit() {
+        if (this.ratingControl) {
+            this.ratingControl.registerOnChange(() => {
+                this.rating = this.ratingControl.hovered;
+                this.clientOrdersService.rate(this.id, this.rating).subscribe(result => console.log);
+            });
+        }
     }
 
     initNewPresent() {
@@ -125,6 +142,9 @@ export class ClientOrderInfoComponent implements OnInit {
         );
         this.orderInfoForm.patchValue(this.formPreviousState);
         this.disableEditing();
+    }
+
+    private rateOrder() {
     }
 
     private disableEditing() {

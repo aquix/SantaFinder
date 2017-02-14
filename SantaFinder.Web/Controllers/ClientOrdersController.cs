@@ -53,7 +53,8 @@ namespace SantaFinder.Web.Controllers
                     Name = p.Name
                 }),
                 
-                Status = order.Status
+                Status = order.Status,
+                Rating = order.Rating
             };
 
             if (orderViewModel.Status != OrderStatus.New)
@@ -87,7 +88,7 @@ namespace SantaFinder.Web.Controllers
 
         [HttpPut]
         [Route("{orderId}/rate")]
-        public async Task<bool> RateOrder(int orderId, float rating)
+        public async Task<bool> RateOrder(int orderId, int rating)
         {
             return await _ordersService.RateOrder(orderId, rating);
         }

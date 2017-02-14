@@ -220,7 +220,7 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> RateOrder(int id, float rating)
+        public async Task<bool> RateOrder(int id, int rating)
         {
             var order = await _db.Orders.FindAsync(id);
             if (order == null)

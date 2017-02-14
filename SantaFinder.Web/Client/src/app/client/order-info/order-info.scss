@@ -1,11 +1,32 @@
 .order-info-form {
     position: relative;
+    background-color: #EFEBE9;
 
     &__santa-info {
         display: flex;
         text-align: center;
         justify-content: center;
         text-align: initial;
+    }
+
+    &__rating {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+
+        &_hidden {
+            display: none;
+        }
+    }
+
+    &__rating-text {
+        padding-top: 7px;
+        padding-right: 15px;
+
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #777;
     }
 }
 
@@ -16,7 +37,7 @@
 }
 
 .edit-button {
-    background-color: #9E9E9E;
+    background-color: #D7CCC8;
     border: none;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;

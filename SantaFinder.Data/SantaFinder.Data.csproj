@@ -129,6 +129,10 @@
     <Compile Include="Migrations\201701300924165_ApplyRolesForExistingUsers.Designer.cs">
       <DependentUpon>201701300924165_ApplyRolesForExistingUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702141045024_ChangeOrderRatingFromFloatToInt.cs" />
+    <Compile Include="Migrations\201702141045024_ChangeOrderRatingFromFloatToInt.Designer.cs">
+      <DependentUpon>201702141045024_ChangeOrderRatingFromFloatToInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701300924165_ApplyRolesForExistingUsers.resx">
       <DependentUpon>201701300924165_ApplyRolesForExistingUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702141045024_ChangeOrderRatingFromFloatToInt.resx">
+      <DependentUpon>201702141045024_ChangeOrderRatingFromFloatToInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

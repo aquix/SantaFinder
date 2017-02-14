@@ -17,6 +17,12 @@
     <div *ngIf="orderStatus !== OrderStatus.new && santaInfo" class="order-info-form__santa-info">
         <santa-preview-card [santa]="santaInfo"></santa-preview-card>
     </div>
+    <div [ngClass]="{'order-info-form__rating_hidden': orderStatus !== OrderStatus.completed}"
+         class="order-info-form__rating">
+        <span class="order-info-form__rating-text">Rate this order:</span>
+        <rating #ratingControl [(ngModel)]="rating"
+                [max]="5"></rating>
+    </div>
     <form [formGroup]="orderInfoForm" novalidate>
         <div class="error-message orders-error" *ngIf="errorMessage">
             {{ errorMessage }}
@@ -30,15 +36,15 @@
             </div>
             <div>
                 <input type="text" formControlName="city" class="sf-form__control sf-form__control_with-validation" name="city" value=""
-                    placeholder="City">
+                    placeholder="City" />
             </div>
             <div>
                 <input type="text" formControlName="street" class="sf-form__control client-register-form__control_street sf-form__control_with-validation"
-                    name="street" value="" placeholder="Street">
-                    <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation"
-                        name="house" value="" placeholder="House">
-                        <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation"
-                            name="apartment" value="" placeholder="Apart.">
+                    name="street" value="" placeholder="Street" />
+                <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation"
+                    name="house" value="" placeholder="House" />
+                <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation"
+                    name="apartment" value="" placeholder="Apart." />
             </div>
         </div>
         <div>
@@ -51,8 +57,8 @@
             <div formArrayName="presents">
                 <div *ngFor="let present of orderInfoForm.controls.presents.controls; let i=index">
                     <div [formGroupName]="i">
-                        <input type="text" formControlName="id" hidden>
-                        <input type="text" formControlName="name" class="sf-form__control order-form__present-name">
+                        <input type="text" formControlName="id" hidden />
+                        <input type="text" formControlName="name" class="sf-form__control order-form__present-name" />
                         <a *ngIf="editMode && orderInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)" href="javascript:void(0)"
                             class="sf-corner-delete order-form__corner-delete"></a>
                             <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i" class="sf-form__checkbox" />

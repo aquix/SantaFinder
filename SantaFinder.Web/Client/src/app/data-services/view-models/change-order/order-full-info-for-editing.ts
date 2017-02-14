@@ -12,4 +12,5 @@ export interface OrderFullInfoForEditing {
     status: OrderStatus;
     presents: PresentInfoForEditing[];
     santaInfo: Santa;
+    rating: number;
 }

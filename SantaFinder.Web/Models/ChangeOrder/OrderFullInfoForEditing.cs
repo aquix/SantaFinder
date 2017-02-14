@@ -19,5 +19,6 @@ namespace SantaFinder.Web.Models.ChangeOrder
         public OrderStatus Status { get; set; }
         public IEnumerable<PresentInfoForEdit> Presents { get; set; }
         public SantaInfoForClient SantaInfo { get; set; }
+        public int? Rating { get; set; }
     }
 }

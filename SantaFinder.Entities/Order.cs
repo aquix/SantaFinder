@@ -12,7 +12,7 @@ namespace SantaFinder.Entities
         public Address Address { get; set; }
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
-        public float? Rating { get; set; }
+        public int? Rating { get; set; }
 
         public virtual ICollection<Present> Presents { get; set; }
         public string ClientId { get; set; }
