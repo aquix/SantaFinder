@@ -1,13 +1,11 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Rating } from 'ng2-rating';
-
 import * as moment from 'moment/moment';
 
-import { ActivatedRoute } from '@angular/router';
 import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
-import 'rxjs/add/operator/switchMap';
 import { Santa } from '../../data-services/view-models/santa.view-model';
 import { ClientOrdersService } from '../../data-services/client-orders.service';
 import { OrderPostInfo } from '../../data-services/view-models/change-order/order-post-info';

@@ -15,7 +15,9 @@
         </div>
     </div>
     <div *ngIf="orderStatus !== OrderStatus.new && santaInfo" class="order-info-form__santa-info">
-        <santa-preview-card [santa]="santaInfo"></santa-preview-card>
+        <a [routerLink]="['/client/santainfo', santaInfo.id]" class="transparent-link">
+            <santa-preview-card [santa]="santaInfo"></santa-preview-card>
+        </a>
     </div>
     <div [ngClass]="{'order-info-form__rating_hidden': orderStatus !== OrderStatus.completed}"
          class="order-info-form__rating">

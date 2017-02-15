@@ -30,6 +30,11 @@ ul {
     display: none;
 }
 
+.transparent-link {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
 .sf-page {
     display: flex;
     min-height: 100%;
@@ -37,7 +42,7 @@ ul {
 
     main {
         flex: 1;
-        padding: 5%;
+        padding: 50px 5%;
         height: 90%;
     }
 }

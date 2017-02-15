@@ -8,6 +8,7 @@ import { RatingModule } from 'ng2-rating';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 import { AppConfig } from './app.config';
 
@@ -73,7 +74,8 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         AgmCoreModule.forRoot({
             apiKey: AppConfig.GMAPS_API_KEY
         }),
-        Ng2PaginationModule
+        Ng2PaginationModule,
+        InfiniteScrollModule
     ],
     declarations: [
         NavbarComponent,

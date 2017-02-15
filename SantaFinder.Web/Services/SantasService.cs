@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using SantaFinder.Data.Context;
+using SantaFinder.Entities;
 using SantaFinder.Web.Models.Santas;
 using SantaFinder.Web.Models.Shared;
 
@@ -62,6 +63,7 @@ namespace SantaFinder.Web.Services
 
             return await _db.Orders
                 .Where(o => o.SantaId == santaId)
+                .Where(o => o.Status == OrderStatus.Completed)
                 .OrderByDescending(o => o.Datetime)
                 .Skip(startIndex)
                 .Take(feedbacksCount)
