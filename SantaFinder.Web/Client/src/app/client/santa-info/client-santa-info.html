@@ -22,8 +22,12 @@
             <div class="santa-rates__header">
                 Feedbacks:
             </div>
-            <ul class="feedback-list">
-                <li *ngFor="let feedback of santaInfo.feedbacks" class="feedback-list__item">
+            <ul infinite-scroll (scrolled)="onFeedbacksBottomReached()"
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="300"
+                [scrollWindow]="false"
+                class="feedback-list with-pretty-scrollbar">
+                <li *ngFor="let feedback of feedbacks" class="feedback-list__item">
                     <div class="feedback-card">
                         <div class="feedback-card__text">
                             <div class="feedback-card__name">

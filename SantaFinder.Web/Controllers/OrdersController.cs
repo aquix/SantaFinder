@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
-using SantaFinder.Web.Models;
-using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 
@@ -17,11 +19,11 @@ namespace SantaFinder.Web.Controllers
         {
             _ordersService = ordersService;
         }
-        
-        [HttpGet]
-        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+
+        public async Task<OrderFullInfo> Get(int id)
         {
-            return await _ordersService.GetOrderFullInfo(id);
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+            return await _ordersService.GetOrderFullInfo(id, serverUrl);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SantaFinder.Entities;
+using SantaFinder.Web.Models.OrderHistory;
 
 namespace SantaFinder.Web.Models.Shared
 {
@@ -30,5 +31,6 @@ namespace SantaFinder.Web.Models.Shared
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
         public virtual IEnumerable<PresentInfo> Presents { get; set; }
+        public SantaShortInfo SantaInfo { get; set; }
     }
 }

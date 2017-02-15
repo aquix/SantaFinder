@@ -1,5 +1,5 @@
-import { SantaShortInfo } from './santa-short-info';
 import { OrderStatus } from './order-status';
+import { Santa } from '../santa.view-model';
 
 export interface OrderShortInfo {
     id: number;
@@ -11,6 +11,6 @@ export interface OrderShortInfo {
         apartment: string;
     };
     childrenNames: string;
-    santaInfo: SantaShortInfo;
+    santaInfo: Santa;
     status: OrderStatus;
 }

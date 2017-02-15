@@ -1,0 +1,19 @@
+<div class="santa-preview-card">
+    <div class="santa-preview-card__img">
+        <img [src]="santa.photoUrl" alt="Santa's photo'">
+    </div>
+    <div class="santa-preview-card__info">
+        <div class="santa-preview-card__name">{{ santa.name }}</div>
+        <div class="santa-preview-card__stat">
+            <span>
+                <rating [(ngModel)]="santa.rating"
+                        [max]="5"
+                        [readonly]="true"></rating>
+                <!--<star-rating></star-rating>-->
+            </span>
+            <span>
+                <em>{{ santa.numberOfOrders }} orders</em>
+            </span>
+        </div>
+    </div>
+</div>

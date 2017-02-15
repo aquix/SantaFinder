@@ -2,25 +2,7 @@
     <ul class="santa-preview-list">
         <li *ngFor="let santa of santas | paginate: paginationConfig">
             <a [routerLink]="['../santainfo', santa.id]" class="santa-preview-item-wrapper">
-                <div class="santa-preview-item">
-                    <div class="santa-preview-item__img">
-                        <img [src]="santa.photoUrl" alt="Santa's photo'">
-                    </div>
-                    <div class="santa-preview-item__info">
-                        <div class="santa-preview-item__name">{{ santa.name }}</div>
-                        <div class="santa-preview-item__stat">
-                            <span>
-                                <rating [(ngModel)]="santa.rating"
-                                        [max]="5"
-                                        [readonly]="true"></rating>
-                                <!--<star-rating></star-rating>-->
-                            </span>
-                            <span>
-                                <em>{{ santa.numberOfOrders }} orders</em>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                <santa-preview-card [santa]="santa"></santa-preview-card>
             </a>
         </li>
     </ul>

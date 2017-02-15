@@ -3,7 +3,8 @@
     public class SantaShortInfo
     {
         public string Id { get; set; }
-        public string PhotoPath { get; set; }
+        public string PhotoUrl { get; set; }
         public string Name { get; set; }
+        public string Rating { get; set; }
     }
 }

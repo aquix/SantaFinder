@@ -1,5 +1,5 @@
 <div class="orders-history-wrapper">
-    <div class="error-message" *ngIf="errorMessage">
+    <div class="error-message orders-error" *ngIf="errorMessage">
         {{ errorMessage }}
     </div>
 
@@ -16,7 +16,7 @@
                         </div>
                         <div *ngIf="order.status !== orderStatus.new" class="order-item__line order-item__santa-info">
                             <div>
-                                <img [src]="order.santaInfo.photoPath" alt="Santa's photo'">
+                                <img [src]="order.santaInfo.photoUrl" alt="Santa's photo'">
                             </div>
                             <div>
                                 {{ order.santaInfo.name }}

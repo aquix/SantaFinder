@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -6,9 +7,11 @@ using System.Threading.Tasks;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
 using SantaFinder.Web.Models;
+using SantaFinder.Web.Models.ChangeOrder;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Models.Shared;
+using SantaFinder.Web.Services.Utils;
 
 namespace SantaFinder.Web.Services
 {
@@ -16,6 +19,7 @@ namespace SantaFinder.Web.Services
     {
         private IDbContext _db;
 
+        AppDbContext dbContext = new AppDbContext();
         public OrdersService(IDbContext db)
         {
             _db = db;
@@ -73,7 +77,15 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<PagedResponse<OrderShortInfo>> GetOrdersByClientId(string clientId, int count, int page)
+        public async Task<Order> GetOrder(int id)
+        {
+            return await _db.Orders
+                .Include(o => o.Presents)
+                .Include(o => o.Santa)
+                .FirstOrDefaultAsync(o => o.Id == id);
+        }
+
+        public async Task<PagedResponse<OrderShortInfo>> GetOrdersByClientId(string clientId, int count, int page, string serverUri)
         {
             var allOrdersForClient = _db.Orders
                 .Where(o => o.ClientId == clientId);
@@ -90,7 +102,7 @@ namespace SantaFinder.Web.Services
                     Address = o.Address,
                     ChildrenNames = o.ChildrenNames,
                     Status = o.Status,
-                    SantaInfo = GetSantaInfo(o)
+                    SantaInfo = GetSantaInfo(o, serverUri)
                 });
 
             return new PagedResponse<OrderShortInfo>
@@ -113,9 +125,10 @@ namespace SantaFinder.Web.Services
             });
         }
 
-        public async Task<OrderFullInfo> GetOrderFullInfo(int id)
+        public async Task<OrderFullInfo> GetOrderFullInfo(int id, string serverUri)
         {
             var order = await _db.Orders.FindAsync(id);
+
             if (order != null)
             {
                 return new OrderFullInfo
@@ -131,7 +144,8 @@ namespace SantaFinder.Web.Services
                         Name = p.Name,
                         BuyBySanta = p.BuyBySanta
                     }),
-                    Status = order.Status
+                    Status = order.Status,
+                    SantaInfo = GetSantaInfo(order, serverUri)
                 };
             }
             else
@@ -140,9 +154,73 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        
+        public async Task<bool> ChangeOrder(int id, OrderPostInfo model)
+        {
+            var order = await _db.Orders.FindAsync(id);
 
-        public async Task<bool> RateOrder(int id, float rating)
+            if (order == null)
+            {
+                return false;
+            }
+
+            order.ChildrenNames = model.ChildrenNames;
+            order.Datetime = model.Datetime;
+
+            order.Address = model.Address.Line;
+            order.Location = model.Address.Location;
+
+            // Update presents
+            var presentsInDb = order.Presents.Select(o => new PresentInfoForEdit
+            {
+                Id = o.Id,
+                Name = o.Name,
+                BuyBySanta = o.BuyBySanta
+            });
+
+            var presentsToRemove = presentsInDb.Except(model.Presents, new ChangedPresentsComparer());
+            var presentsToEdit = presentsInDb.Intersect(model.Presents, new ChangedPresentsComparer());
+            var presentsToAdd = model.Presents.Except(presentsInDb, new ChangedPresentsComparer());
+
+            foreach (var present in presentsToRemove)
+            {
+                var presentInDb = order.Presents.FirstOrDefault(p => p.Id == present.Id);
+                _db.Presents.Remove(presentInDb);
+            }
+
+            foreach (var present in presentsToEdit)
+            {
+                var presentInDb = _db.Presents.FirstOrDefault(p => p.Id == present.Id);
+                presentInDb.Name = present.Name;
+                presentInDb.BuyBySanta = present.BuyBySanta;
+            }
+
+            foreach (var present in presentsToAdd)
+            {
+                _db.Presents.Add(new Present
+                {
+                    Name = present.Name,
+                    BuyBySanta = present.BuyBySanta,
+                    OrderId = order.Id
+                });
+            }
+
+            try
+            {
+                var itemsAffected = await _db.SaveChangesAsync();
+                if (itemsAffected == 0)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> RateOrder(int id, int rating)
         {
             var order = await _db.Orders.FindAsync(id);
             if (order == null)
@@ -184,22 +262,25 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        private SantaShortInfo GetSantaInfo(Order order)
+        private SantaShortInfo GetSantaInfo(Order order, string serverUri)
         {
             if (order.Status == OrderStatus.New)
             {
-                return null;
+                return new SantaShortInfo
+                {
+                    Id = "",
+                    Name = "",
+                    PhotoUrl = ""
+                };
             }
 
             return new SantaShortInfo
             {
                 Id = order.Santa.Id,
                 Name = order.Santa.Name,
-                PhotoPath = order.Santa.PhotoPath
+                PhotoUrl = serverUri + "/static/santaPhotos/" + order.Santa.Id
             };
         }
-
-        
 
         private float GetNewSantaRating(Santa santa, float newRating, float oldRating = 0)
         {

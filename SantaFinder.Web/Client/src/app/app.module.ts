@@ -7,7 +7,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { RatingModule } from 'ng2-rating';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import {Ng2PaginationModule} from 'ng2-pagination';
+import { Ng2PaginationModule } from 'ng2-pagination';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 import { AppConfig } from './app.config';
 
@@ -58,6 +59,8 @@ import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
+import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
+import { ClientOrdersService } from './data-services/client-orders.service';
 
 @NgModule({
     imports: [
@@ -71,7 +74,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         AgmCoreModule.forRoot({
             apiKey: AppConfig.GMAPS_API_KEY
         }),
-        Ng2PaginationModule
+        Ng2PaginationModule,
+        InfiniteScrollModule
     ],
     declarations: [
         NavbarComponent,
@@ -103,6 +107,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         SantaPreviewListComponent,
         ClientOrderInfoComponent,
         ClientSantaInfoComponent,
+        SantaPreviewCardComponent,
 
         AddressPipe,
         DatetimePipe
@@ -119,6 +124,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         SantasService,
         SantaOrdersService,
         OrdersService,
+        ClientOrdersService,
         LocationService,
         GeocodingService
     ],

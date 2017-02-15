@@ -50,13 +50,7 @@ export class OrdersService {
     }
 
     getOrderFullInfo(id: number) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => {
-            if (res.status === 200) {
-                return res.json();
-            } else {
-                return null;
-            }
-        });
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => res.json(), err => `My error is ${err}`);
     }
 
     takeOrder(id: number) {
