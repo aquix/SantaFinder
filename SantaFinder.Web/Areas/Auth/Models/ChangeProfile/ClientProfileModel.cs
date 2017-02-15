@@ -2,10 +2,9 @@
 
 namespace SantaFinder.Web.Areas.Auth.Models.ChangeProfile
 {
-    public class ClientModelChange
+    public class ClientProfileModel
     {
         public string Email { get; set; }
-        public Passwords Passwords { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; }
     }

@@ -1,18 +1,17 @@
 import { Component, OnInit, trigger, transition, style, animate } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EmailValidators, PasswordValidators } from 'ng2-validators';
+import { EmailValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
 import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { ClientProfileModel } from './client-profile.model';
-import { ClientProfileChangeModel } from './client-profile.change-model';
-import { UserType } from '../../shared/enums/user-type';
+import { ClientProfileChangeModel } from './client-profile-change.model';
 
 @Component({
     selector: 'client-profile',
     templateUrl: './client-profile.html',
-    styleUrls: ['./client-profile.scss'],
+    styleUrls: ['./client-profile.scss', '../../shared/profile-form/profile-form.scss'],
     animations: [
         trigger(
             'errorHint', [
@@ -42,34 +41,24 @@ export class ClientProfileComponent implements OnInit {
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
             email: ['', [Validators.required, EmailValidators.simple()]],
-            passwords: this.formBuilder.group({
-                oldPassword: ['', [CustomValidators.password]],
-                password: ['', [CustomValidators.password]],
-                passwordConfirmation: ['']
-            }, {
-                    validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')
-                }),
             name: ['', Validators.required],
             address: this.formBuilder.group({
                 city: ['', [Validators.required]],
                 street: ['', [Validators.required]],
                 house: ['', [Validators.required]],
                 apartment: ['', [Validators.required]]
-            })
+            }),
+            password: ['', [CustomValidators.password]],
+            newPassword: this.formBuilder.group({
+                password: ['', [CustomValidators.notRequiredPassword]],
+                passwordConfirmation: ['']
+            }, {
+                validator: CustomValidators.notRequiredPasswordWithConfirmation('password', 'passwordConfirmation')
+            }),
         });
 
-        this.accountService.getClientData().subscribe(res => {
-            let formData = {
-                email: res.email,
-                passwords: {
-                    oldPassword: '',
-                    password: '',
-                    passwordConfirmation: ''
-                },
-                name: res.name,
-                address: res.address
-            };
-            this.profileForm.setValue(formData);
+        this.accountService.getClientData().subscribe((res: ClientProfileModel) => {
+            this.profileForm.patchValue(res);
         });
     }
 
@@ -83,7 +72,7 @@ export class ClientProfileComponent implements OnInit {
     }
 
     arePasswordsMismatched() {
-        return this.profileForm.get('passwords').invalid &&
-            !this.profileForm.get('passwords').get('passwordConfirmation').pristine;
+        return this.profileForm.get('newPassword').invalid &&
+            !this.profileForm.get('newPassword').get('passwordConfirmation').pristine;
     }
 }

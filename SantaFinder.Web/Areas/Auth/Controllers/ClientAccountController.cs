@@ -62,61 +62,33 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             return Ok();
         }
 
-        [Route("getClient")]
-        public ClientModel GetClientModel()
+        [HttpGet]
+        [Route("profile")]
+        public async Task<ClientProfileModel> GetProfile()
         {
             var id = User.Identity.GetUserId();
-            var user = _clientManager.FindById(id);
+            var user = await _clientManager.FindByIdAsync(id);
 
-            var clientViewModel = new ClientModel
+            return new ClientProfileModel
             {
                 Email = user.Email,
                 Name = user.Name,
                 Address = user.Address
             };
-
-            return clientViewModel;
         }
 
-        [Route("profile")]
         [HttpPost]
-        public async Task<IHttpActionResult> ChangeProfile(ClientModelChange model)
+        [Route("profile")]
+        public async Task<IHttpActionResult> ChangeProfile(ClientProfileChangeModel model)
         {
-            if (!ModelState.IsValid)
+            return await ChangeProfileInternal(_clientManager, model, user =>
             {
-                return BadRequest(ModelState);
-            }
-
-            var id = User.Identity.GetUserId();
-            var existingUser = _clientManager.FindById(id);
-
-            IdentityResult result;
-
-            if (existingUser != null)
-            {
-                existingUser.UserName = model.Email;
-                existingUser.Email = model.Email;
-                existingUser.Name = model.Name;
-                existingUser.Address.City = model.Address.City;
-                existingUser.Address.Street = model.Address.Street;
-                existingUser.Address.House = model.Address.House;
-                existingUser.Address.Apartment = model.Address.Apartment;
-
-                result = await _clientManager.UpdateAsync(existingUser);
-
-                await _clientManager.ChangePasswordAsync(id, model.Passwords.OldPassword, model.Passwords.Password);
-            }
-            else
-            {
-                result = IdentityResult.Failed(new[] { "Update failed" });
-            }
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+                var client = user as Client;
+                client.Email = model.Email;
+                client.UserName = model.Email;
+                client.Name = model.Name;
+                client.Address = model.Address;
+            });
         }
     }
 }

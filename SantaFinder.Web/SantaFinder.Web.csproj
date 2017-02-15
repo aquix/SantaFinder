@@ -209,11 +209,12 @@
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\ClientAccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\SantaAccountController.cs" />
-    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModel.cs" />
-    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientModelChange.cs" />
-    <Compile Include="Areas\Auth\Models\ChangeProfile\Passwords.cs" />
-    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaModel.cs" />
-    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaModelChange.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientProfileModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\ClientProfileChangeModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\IProfileChangeModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\NewPasswordModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaProfileModel.cs" />
+    <Compile Include="Areas\Auth\Models\ChangeProfile\SantaProfileChangeModel.cs" />
     <Compile Include="Areas\Auth\Models\RegisterClientModel.cs" />
     <Compile Include="Areas\Auth\Models\RegisterModelBase.cs" />
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />

@@ -82,13 +82,14 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             return Ok();
         }
 
-        [Route("getSanta")]
-        public SantaModel GetSantaModel()
+        [HttpGet]
+        [Route("profile")]
+        public SantaProfileModel GetProfile()
         {
             var id = User.Identity.GetUserId();
             var user = _santaManager.FindById(id);
 
-            var santaViewModel = new SantaModel
+            var santaViewModel = new SantaProfileModel
             {
                 Email = user.Email,
                 Name = user.Name
@@ -97,41 +98,17 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             return santaViewModel;
         }
 
-        [Route("profile")]
         [HttpPost]
-        public async Task<IHttpActionResult> ChangeProfile(SantaModelChange model)
+        [Route("profile")]
+        public async Task<IHttpActionResult> ChangeProfile(SantaProfileChangeModel model)
         {
-            if (!ModelState.IsValid)
+            return await ChangeProfileInternal(_santaManager, model, user =>
             {
-                return BadRequest(ModelState);
-            }
-
-            var id = User.Identity.GetUserId();
-            var existingUser = _santaManager.FindById(id);
-
-            IdentityResult result;
-
-            if (existingUser != null)
-            {
-                existingUser.UserName = model.Email;
-                existingUser.Email = model.Email;
-                existingUser.Name = model.Name;              
-
-                result = await _santaManager.UpdateAsync(existingUser);
-
-                await _santaManager.ChangePasswordAsync(id, model.Passwords.OldPassword, model.Passwords.Password);
-            }
-            else
-            {
-                result = IdentityResult.Failed(new[] { "Update failed" });
-            }
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+                var santa = user as Santa;
+                santa.Email = model.Email;
+                santa.UserName = model.Email;
+                santa.Name = model.Name;
+            });
         }
     }
 }

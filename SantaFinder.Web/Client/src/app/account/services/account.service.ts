@@ -9,11 +9,10 @@ import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../shared/enums/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
-import { Location } from '../../shared/models/location';
 import { GeocodingService } from '../../shared/services/geocoding.service';
 import { AuthHttp } from '../../auth/auth-http.service';
-import { ClientProfileChangeModel } from '../../client/profile/client-profile.change-model';
-import { SantaProfileChangeModel } from '../../santa/profile/santa-profile.change-model';
+import { ClientProfileChangeModel } from '../../client/profile/client-profile-change.model';
+import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
 
 /**
  * Implement methods for all account roles
@@ -71,30 +70,24 @@ export class AccountService {
                 .map(res => res.status);
         }
     }
-    
+
     getClientData(){
-        let clientChangeUrl = 'client/getClient';
-        return this.authHttp.get(`${AppConfig.API_PATH}/account/${clientChangeUrl}`)
+        return this.authHttp.get(`${AppConfig.API_PATH}/account/client/profile`)
             .map(res => res.json());
     }
 
     getSantaData(){
-        let santaChangeUrl = 'santa/getSanta';
-        return this.authHttp.get(`${AppConfig.API_PATH}/account/${santaChangeUrl}`)
+        return this.authHttp.get(`${AppConfig.API_PATH}/account/santa/profile`)
             .map(res => res.json());
     }
 
     changeClientProfile(changeModel: ClientProfileChangeModel){
-        let clientProfile = changeModel;
-        let clientChangeUrl = 'client/profile';
-        return this.authHttp.post(`${AppConfig.API_PATH}/account/${clientChangeUrl}`, clientProfile)
+        return this.authHttp.post(`${AppConfig.API_PATH}/account/client/profile`, changeModel)
             .map(res => res.status);
     }
 
     changeSantaProfile(changeModel: SantaProfileChangeModel){
-        let santaProfile = changeModel;
-        let santaChangeUrl = 'santa/profile';
-        return this.authHttp.post(`${AppConfig.API_PATH}/account/${santaChangeUrl}`, santaProfile)
+        return this.authHttp.post(`${AppConfig.API_PATH}/account/santa/profile`, changeModel)
             .map(res => res.status);
     }
 

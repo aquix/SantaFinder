@@ -45,7 +45,7 @@ export class SantaRegisterFormComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             email: ['', [Validators.required, EmailValidators.simple()]],
             passwords: this.formBuilder.group({
-                password: ['', [CustomValidators.password]],
+                password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']
             }, {
                 validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')

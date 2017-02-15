@@ -1,6 +1,5 @@
 export interface ClientProfileModel {
     email: string;
-
     name: string;
     address: {
         city: string,
