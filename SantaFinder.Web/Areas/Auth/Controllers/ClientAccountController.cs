@@ -87,7 +87,8 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
                 client.Email = model.Email;
                 client.UserName = model.Email;
                 client.Name = model.Name;
-                client.Address = model.Address;
+                client.Address = model.Address.Line;
+                client.Location = model.Address.Location;
             });
         }
     }

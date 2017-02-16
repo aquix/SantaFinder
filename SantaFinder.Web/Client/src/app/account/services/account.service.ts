@@ -11,8 +11,8 @@ import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
 import { GeocodingService } from '../../shared/services/geocoding.service';
 import { AuthHttp } from '../../auth/auth-http.service';
-import { ClientProfileChangeModel } from '../../client/profile/client-profile-change.model';
 import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
+import { ClientProfileChangeModel } from '../../data-services/view-models/change-profile/client-profile-change.model';
 
 /**
  * Implement methods for all account roles
@@ -81,7 +81,7 @@ export class AccountService {
             .map(res => res.json());
     }
 
-    changeClientProfile(changeModel: ClientProfileChangeModel){
+    changeClientProfile(changeModel: ClientProfileChangeModel) {
         return this.authHttp.post(`${AppConfig.API_PATH}/account/client/profile`, changeModel)
             .map(res => res.status);
     }

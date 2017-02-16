@@ -2,8 +2,8 @@ export interface SantaProfileChangeModel {
     email: string;
     name: string;
     password: string;
-    passwords: {
-        newPassword: string,
-        newPasswordConfirmation: string
+    newPassword: {
+        password: string,
+        passwordConfirmation: string
     };
 }

@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { ClientProfileModel } from './client-profile.model';
-import { ClientProfileChangeModel } from './client-profile-change.model';
+import { ClientProfileChangeFormModel } from './client-profile-change.form-model';
+import { ClientProfileChangeModel } from '../../data-services/view-models/change-profile/client-profile-change.model';
+import { GeocodingService } from '../../shared/services/geocoding.service';
 
 @Component({
     selector: 'client-profile',
@@ -35,7 +37,8 @@ export class ClientProfileComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private accountService: AccountService,
-        private router: Router
+        private router: Router,
+        private geocodingService: GeocodingService
     ) { }
 
     ngOnInit() {
@@ -62,12 +65,25 @@ export class ClientProfileComponent implements OnInit {
         });
     }
 
-    onSubmitClick({ value }: { value: ClientProfileChangeModel }) {
-        this.accountService.changeClientProfile(value).subscribe(res => {
-            this.router.navigate(['/client']);
-        }, err => {
-            let errors: string[] = err.json()['modelState'][''];
-            this.errorMessage = errors.join('\n');
+    onSubmitClick({ value }: { value: ClientProfileChangeFormModel }) {
+        this.geocodingService.getCoordsFromAddress(value.address).subscribe(location => {
+            let model: ClientProfileChangeModel = {
+                email: value.email,
+                name: value.name,
+                address: {
+                    line: value.address,
+                    location: location
+                },
+                password: value.password,
+                newPassword: value.newPassword
+            };
+
+            this.accountService.changeClientProfile(model).subscribe(res => {
+                this.router.navigate(['/client']);
+            }, err => {
+                let errors: string[] = err.json()['modelState'][''];
+                this.errorMessage = errors.join('\n');
+            });
         });
     }
 
