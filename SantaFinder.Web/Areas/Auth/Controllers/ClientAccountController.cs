@@ -17,7 +17,7 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
         private AppUserManager<User> _userManager;
 
         public ClientAccountController(AppUserManager<Client> clientManager, AppUserManager<User> userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat, userManager)
         {
             _clientManager = clientManager;
             _userManager = userManager;

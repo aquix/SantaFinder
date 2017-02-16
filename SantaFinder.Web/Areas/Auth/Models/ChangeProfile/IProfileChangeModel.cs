@@ -8,6 +8,7 @@ namespace SantaFinder.Web.Areas.Auth.Models.ChangeProfile
 {
     public interface IProfileChangeModel
     {
+        string Email { get; set; }
         string Password { get; set; }
         NewPasswordModel NewPassword { get; set; }
     }

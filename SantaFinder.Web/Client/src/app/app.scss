@@ -223,6 +223,12 @@ ul {
 .error-message {
     margin: 10px auto;
     color: #F44336;
+
+    animation: blinker 0.6s linear 2 forwards;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 
 .sf-card {

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using SantaFinder.Data.Identity;
 using SantaFinder.Entities;
 using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
+using SantaFinder.Web.Areas.Auth.Utils;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
@@ -15,65 +17,89 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
     {
         private const string LocalLoginProvider = "Local";
 
-        public ISecureDataFormat<AuthenticationTicket> _accessTokenFormat;
+        private ISecureDataFormat<AuthenticationTicket> _accessTokenFormat;
+        private AppUserManager<User> _commonUserManager;
 
-        public AccountController(ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        public AccountController(ISecureDataFormat<AuthenticationTicket> accessTokenFormat, AppUserManager<User> commonUserManager)
         {
             _accessTokenFormat = accessTokenFormat;
+            _commonUserManager = commonUserManager;
         }
 
         protected async Task<IHttpActionResult> ChangeProfileInternal<T>(UserManager<T> userManager, IProfileChangeModel model, Action<User> updateModel)
-            where T: User
+            where T : User
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var id = User.Identity.GetUserId();
-            var user = await userManager.FindByIdAsync(id);
-
-            IdentityResult result;
-
-            if (user != null)
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                if (await userManager.CheckPasswordAsync(user, model.Password))
+                IdentityResult result;
+                try
                 {
-                    updateModel(user);
+                    var id = User.Identity.GetUserId();
+                    var user = await userManager.FindByIdAsync(id);
 
-                    if (!string.IsNullOrEmpty(model.NewPassword.Password) && !string.IsNullOrEmpty(model.NewPassword.PasswordConfirmation))
+                    if (user != null)
                     {
-                        if (model.NewPassword.Password == model.NewPassword.PasswordConfirmation)
+                        if (await userManager.CheckPasswordAsync(user, model.Password))
                         {
-                            result = await userManager.ChangePasswordAsync(user.Id, model.Password, model.NewPassword.Password);
+                            updateModel(user);
+
+                            if (!string.IsNullOrEmpty(model.NewPassword.Password) && !string.IsNullOrEmpty(model.NewPassword.PasswordConfirmation))
+                            {
+                                if (model.NewPassword.Password == model.NewPassword.PasswordConfirmation)
+                                {
+                                    result = await userManager.ChangePasswordAsync(user.Id, model.Password, model.NewPassword.Password);
+                                    if (!result.Succeeded)
+                                    {
+                                        throw new ChangeProfileException(result);
+                                    }
+                                }
+                                else
+                                {
+                                    throw new ChangeProfileException(IdentityResult.Failed(new[] { "Passwords don't match" }));
+                                }
+                            }
                         }
                         else
                         {
-                            result = IdentityResult.Failed(new[] { "Password don't match" });
-                            return GetErrorResult(result);
+                            throw new ChangeProfileException(IdentityResult.Failed(new[] { "Incorrect password" }));
+                        }
+
+                        var existingUserWithThisEmail = await _commonUserManager.FindByEmailAsync(user.Email);
+                        if (existingUserWithThisEmail != null && existingUserWithThisEmail.Id != user.Id)
+                        {
+                            throw new ChangeProfileException(IdentityResult.Failed(new[] { "User with this email already exists" }));
+                        }
+
+                        result = await userManager.UpdateAsync(user);
+                        if (!result.Succeeded)
+                        {
+                            throw new ChangeProfileException(result);
                         }
                     }
+                    else
+                    {
+                        throw new ChangeProfileException(IdentityResult.Failed(new[] { "User does not exists" }));
+                    }
 
+                    scope.Complete();
+                    return Ok();
                 }
-                else
+                catch (ChangeProfileException ex)
                 {
-                    result = IdentityResult.Failed(new[] { "Incorrect password" });
-                    return GetErrorResult(result);
+                    scope.Dispose();
+                    return GetErrorResult(ex.Result);
                 }
-
-                result = await userManager.UpdateAsync(user);
+                catch (Exception ex)
+                {
+                    scope.Dispose();
+                    return GetErrorResult(IdentityResult.Failed(ex.Message));
+                }
             }
-            else
-            {
-                result = IdentityResult.Failed(new[] { "User does not exist" });
-            }
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
         }
 
         #region Helpers
