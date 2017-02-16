@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Rating } from 'ng2-rating';
@@ -93,11 +93,22 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     }
 
     initNewPresent() {
-        return this.formBuilder.group({
+        let presentControl = this.formBuilder.group({
             id: [0],
             name: [{ value: '', disabled: !this.editMode }, Validators.required],
             buyBySanta: [{ value: false, disabled: !this.editMode }]
         });
+
+
+        // Don't know why but FormArray doesn't watch validity of element
+        // And this hack because of this
+        presentControl.valueChanges.subscribe(() => {
+            setTimeout(() => {
+                this.orderInfoForm.updateValueAndValidity();
+            }, 40);
+        });
+
+        return presentControl;
     }
 
     addPresent() {
@@ -140,9 +151,6 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
         );
         this.orderInfoForm.patchValue(this.formPreviousState);
         this.disableEditing();
-    }
-
-    private rateOrder() {
     }
 
     private disableEditing() {
