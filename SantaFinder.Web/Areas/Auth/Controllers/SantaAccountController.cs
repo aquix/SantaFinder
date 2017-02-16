@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Formatting;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Data.Identity;
+using SantaFinder.Entities;
 using SantaFinder.Web.Areas.Auth.Models;
+using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [RoutePrefix("api/account/santa")]
+    [Authorize(Roles = "santa")]
     public class SantaAccountController : AccountController
     {
         private AppUserManager<Santa> _santaManager;
         private AppUserManager<User> _userManager;
 
         public SantaAccountController(AppUserManager<Santa> santaManager, AppUserManager<User> userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat, userManager)
         {
             _santaManager = santaManager;
             _userManager = userManager;
@@ -84,6 +80,35 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("profile")]
+        public SantaProfileModel GetProfile()
+        {
+            var id = User.Identity.GetUserId();
+            var user = _santaManager.FindById(id);
+
+            var santaViewModel = new SantaProfileModel
+            {
+                Email = user.Email,
+                Name = user.Name
+            };
+
+            return santaViewModel;
+        }
+
+        [HttpPost]
+        [Route("profile")]
+        public async Task<IHttpActionResult> ChangeProfile(SantaProfileChangeModel model)
+        {
+            return await ChangeProfileInternal(_santaManager, model, user =>
+            {
+                var santa = user as Santa;
+                santa.Email = model.Email;
+                santa.UserName = model.Email;
+                santa.Name = model.Name;
+            });
         }
     }
 }

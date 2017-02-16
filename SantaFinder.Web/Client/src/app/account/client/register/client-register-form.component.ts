@@ -6,13 +6,12 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services/account.service';
 import { ClientRegisterModel } from './client-register.model';
-import { UserType } from '../../../auth/user-type';
-
-import './client-register-form.scss';
+import { UserType } from '../../../shared/enums/user-type';
 
 @Component({
     selector: 'register-form',
-    template: require('./client-register-form.html'),
+    templateUrl: './client-register-form.html',
+    styleUrls: ['./client-register-form.scss'],
     animations: [
         trigger(
             'errorHint', [
@@ -43,7 +42,7 @@ export class ClientRegisterFormComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             email: ['', [Validators.required, EmailValidators.simple()]],
             passwords: this.formBuilder.group({
-                password: ['', [CustomValidators.password]],
+                password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']
             }, {
                     validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')

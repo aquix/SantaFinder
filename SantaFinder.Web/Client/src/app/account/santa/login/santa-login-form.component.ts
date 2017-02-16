@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserType } from '../../../auth/user-type';
+import { UserType } from '../../../shared/enums/user-type';
 
 @Component({
     selector: 'santa-login-form',
-    template: require('./santa-login-form.html')
+    templateUrl: './santa-login-form.html'
 })
 export class SantaLoginFormComponent implements OnInit {
     private UserType = UserType;

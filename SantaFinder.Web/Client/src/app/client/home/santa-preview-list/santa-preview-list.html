@@ -1,0 +1,13 @@
+<div *ngIf="santas.length > 0">
+    <ul class="santa-preview-list">
+        <li *ngFor="let santa of santas | paginate: paginationConfig">
+            <a [routerLink]="['../santainfo', santa.id]" class="santa-preview-item-wrapper">
+                <santa-preview-card [santa]="santa"></santa-preview-card>
+            </a>
+        </li>
+    </ul>
+    <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+</div>
+<div *ngIf="santas.length === 0" class="sf-empty-list-placeholder">
+    No santas :(
+</div>

@@ -1,0 +1,16 @@
+<div class="client-home-page">
+    <div class="client-home-page__order-area">
+        <div class="round-button">
+            <div class="round-button__circle">
+                <a [routerLink]="['../order']" class="round-button__text">Order</a>
+            </div>
+        </div>
+        <div class="order-history">
+            <a [routerLink]="['../orderhistory']">Order history</a>
+        </div>
+    </div>
+    <aside class="client-home-page__list-area">
+        <h2>Our santas:</h2>
+        <santa-preview-list class="santa-preview-list"></santa-preview-list>
+    </aside>
+</div>

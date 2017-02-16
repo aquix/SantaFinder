@@ -1,0 +1,72 @@
+<div class="sf-form order-form">
+    <form [formGroup]="orderForm" novalidate>
+        <h1 class="sf-form__title">
+            Order
+        </h1>
+        <div formGroupName="address" class="order-form__address">
+            <div class="clearfix">
+                <label class="sf-form__label">Address</label>
+            </div>
+            <div>
+                <input type="checkbox" #useDefaultAddress formControlName="useDefaultAddress" id="use-default-address"
+                    name="use-default-address" class="sf-form__checkbox">
+                <label for="use-default-address">Use profile address</label>
+            </div>
+            <div formGroupName="customAddress" *ngIf="!useDefaultAddress.checked">
+                <div>
+                    <input type="text" formControlName="city" class="sf-form__control sf-form__control_with-validation" name="city"
+                        value="" placeholder="City">
+                </div>
+                <div>
+                    <input type="text" formControlName="street" class="sf-form__control client-register-form__control_street sf-form__control_with-validation"
+                        name="street" value="" placeholder="Street">
+                    <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation"
+                        name="house" value="" placeholder="House">
+                    <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation"
+                        name="apartment" value="" placeholder="Apart.">
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="text" formControlName="childrenNames" class="sf-form__control"
+                   placeholder="Names of children">
+        </div>
+        <div class="order-form__presents">
+            <div class="clearfix">
+                <label class="sf-form__label">Presents</label>
+            </div>
+            <div formArrayName="presents">
+                <div *ngFor="let present of orderForm.controls.presents.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <input type="text" formControlName="name" class="sf-form__control order-form__present-name">
+                        <a *ngIf="orderForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
+                            href="javascript:void(0)" class="sf-corner-delete order-form__corner-delete"></a>
+                        <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
+                               class="sf-form__checkbox"/>
+                        <label [for]="'present' + i">Buy by santa</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="addPresent()" class="sf-button order-form__add-present-btn">Add present</button>
+            </div>
+        </div>
+        <div>
+            <div class="clearfix">
+                <label class="sf-form__label">Party time</label>
+            </div>
+            <div>
+                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly"
+                       close-on-select="false"
+                       first-day-of-week="1"
+                       minute-step="10"
+                       min-date="now"
+                       class="sf-form__control sf-form__control_with-validation"/>
+            </div>
+        </div>
+        <div>
+            <button type="submit" (click)="onSubmitClick(orderForm)"
+                    [disabled]="orderForm.invalid" class="sf-button sf-form__button">Order</button>
+        </div>
+    </form>
+</div>

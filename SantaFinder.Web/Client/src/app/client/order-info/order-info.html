@@ -1,0 +1,88 @@
+<div class="sf-form order-form order-info-form">
+    <div class="edit-buttons" *ngIf="orderStatus === OrderStatus.new">
+        <div *ngIf="!editMode">
+            <button class="edit-button" (click)="enableEditing()">
+                <img src="/images/edit.png" alt="Edit" />
+            </button>
+        </div>
+        <div *ngIf="editMode">
+            <button class="save-button" (click)="saveChanges()" [disabled]="orderInfoForm.invalid">
+                <img src="/images/order-save.png" alt="Save" />
+            </button>
+            <button class="cancel-button" (click)="cancelChanges()">
+                <img src="/images/order-cancel.png" alt="Cancel" />
+            </button>
+        </div>
+    </div>
+    <div *ngIf="orderStatus !== OrderStatus.new && santaInfo" class="order-info-form__santa-info">
+        <a [routerLink]="['/client/santainfo', santaInfo.id]" class="transparent-link">
+            <santa-preview-card [santa]="santaInfo"></santa-preview-card>
+        </a>
+    </div>
+    <div [ngClass]="{'order-info-form__rating_hidden': orderStatus !== OrderStatus.completed}"
+         class="order-info-form__rating">
+        <span class="order-info-form__rating-text">Rate this order:</span>
+        <rating #ratingControl [(ngModel)]="rating"
+                [max]="5"></rating>
+    </div>
+    <form [formGroup]="orderInfoForm" novalidate>
+        <div class="error-message orders-error" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+        <h1 class="sf-form__title">
+            Order Info
+        </h1>
+        <div formGroupName="address" class="order-form__address">
+            <div class="clearfix">
+                <label class="sf-form__label">Address</label>
+            </div>
+            <div>
+                <input type="text" formControlName="city" class="sf-form__control sf-form__control_with-validation" name="city" value=""
+                    placeholder="City" />
+            </div>
+            <div>
+                <input type="text" formControlName="street" class="sf-form__control client-register-form__control_street sf-form__control_with-validation"
+                    name="street" value="" placeholder="Street" />
+                <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation"
+                    name="house" value="" placeholder="House" />
+                <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation"
+                    name="apartment" value="" placeholder="Apart." />
+            </div>
+        </div>
+        <div>
+            <input type="text" formControlName="childrenNames" class="sf-form__control" placeholder="Names of children">
+        </div>
+        <div class="order-form__presents">
+            <div class="clearfix">
+                <label class="sf-form__label">Presents</label>
+            </div>
+            <div formArrayName="presents">
+                <div *ngFor="let present of orderInfoForm.controls.presents.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <input type="text" formControlName="id" hidden />
+                        <input type="text" formControlName="name" class="sf-form__control order-form__present-name" />
+                        <a *ngIf="editMode && orderInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)" href="javascript:void(0)"
+                            class="sf-corner-delete order-form__corner-delete"></a>
+                            <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i" class="sf-form__checkbox" />
+                            <label [for]="'present' + i">Buy by santa</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="editMode">
+                <button (click)="addPresent()" class="sf-button order-form__add-present-btn">Add present</button>
+            </div>
+        </div>
+        <div>
+            <div class="clearfix">
+                <label class="sf-form__label">Party time</label>
+            </div>
+            <div>
+                <input type="text" ng2-datetime-picker formControlName="datetime" readonly="readonly" close-on-select="false" first-day-of-week="1"
+                    minute-step="10" min-date="now" class="sf-form__control sf-form__control_with-validation" />
+            </div>
+        </div>
+        <div>
+            <button *ngIf="!editMode && somethingChanged" (click)="onSubmitClick(orderInfoForm)" class="sf-button sf-form__button">Submit changes</button>
+        </div>
+    </form>
+</div>

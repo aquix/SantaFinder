@@ -9,7 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = merge(commonConfig, {
      module: {
         loaders: [{
-            loader: ExtractTextPlugin.extract('css!sass'),
+            loaders: [ExtractTextPlugin.extract('style', 'css'), 'to-string', 'css', 'sass'],
             test: /\.scss$/,
             exclude: /node_modules/
         }]

@@ -1,0 +1,122 @@
+$header-text: #616161;
+$second-text: #9E9E9E;
+
+.client-santa-info-page {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.santa-info {
+    max-width: 400px;
+
+    &__photo {
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__name {
+        color: $header-text;
+        font-size: 2em;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__orders-count {
+        color: $second-text;
+    }
+}
+
+.santa-rates {
+    min-width: 310px;
+    padding-left: 5%;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        color: $header-text;
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    &__placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    &__placeholder-text {
+        color: $second-text;
+        font-size: 1.1em;
+    }
+}
+
+.feedback-list {
+    height: 70vh;
+    overflow: auto;
+    padding-right: 5px;
+
+    &__item {
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.feedback-card {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 25px;
+
+    background-color: #FAFAFA;
+    border-radius: 5px;
+
+    &__name {
+        color: #616161;
+        font-size: 1.2em;
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
+
+    &__date {
+        color: $second-text;
+    }
+
+    &__text {
+        padding-right: 50px;
+    }
+}
+
+.with-pretty-scrollbar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.with-pretty-scrollbar::-webkit-scrollbar
+{
+	width: 7px;
+	background-color: #F5F5F5;
+}
+
+.with-pretty-scrollbar::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #9E9E9E;
+}

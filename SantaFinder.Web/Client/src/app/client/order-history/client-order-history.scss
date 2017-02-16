@@ -1,0 +1,52 @@
+.orders-history-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orders-history {
+    width: 500px;
+}
+
+.orders-error{
+    position: absolute;
+    top: 7%;
+    color: red;
+}
+
+.order-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px auto;
+    padding-left: 30px;
+
+    &__common-info {
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__line {
+        margin: 5px 0;
+    }
+
+    &__santa-info {
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #E0E0E0;
+    }
+}
+
+.orders-list {
+    list-style: none;
+    padding-left: 0;
+}

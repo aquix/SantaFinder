@@ -1,0 +1,51 @@
+<sebm-google-map [latitude]="myLocation.latitude" [longitude]="myLocation.longitude"
+                 [minZoom]="3">
+    <sebm-google-map-marker
+            [latitude]="myLocation.latitude" [longitude]="myLocation.longitude"
+            iconUrl="images/my-location.png"
+            title="Me">
+    </sebm-google-map-marker>
+    <sebm-google-map-marker #orderMarker *ngFor="let order of orders; let i = index"
+                            [latitude]="order.location.latitude" [longitude]="order.location.longitude"
+                            (markerClick)="onMarkerClick(i, order.id)">
+        <sebm-google-map-info-window #orderInfoWindow [disableAutoPan]="true"
+                                     (infoWindowClose)="onWindowClosed()">
+            <div>
+                <div *ngIf="orderFullInfo" class="order-full-info">
+                    <div class="order-full-info__line order-full-info__name">
+                        {{ orderFullInfo.clientName }}
+                    </div>
+                    <div class="order-full-info__line">
+                        <div>
+                            Presents:
+                        </div>
+                        <div>
+                            <ul>
+                                <li *ngFor="let present of orderFullInfo.presents"
+                                    [ngClass]="{'order-full-info__present_buy-by-client': !present.buyBySanta}">
+                                    {{ present.name }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order-full-info__line">
+                        For: {{ orderFullInfo.childrenNames }}
+                    </div>
+                    <div class="order-full-info__line order-full-info__button-line">
+                        <button class="sf-button order-full-info__button"
+                                (click)="onTakeOrderBtnClick(orderFullInfo.id)">
+                            Take order
+                        </button>
+                    </div>
+
+                    <div class="order-full-info__line order-full-info__moreinfo-line">
+                        <a [routerLink]="['../orderdetails', order.id]">More info</a>
+                    </div>
+                </div>
+                <div *ngIf="!orderFullInfo">
+                    Loading...
+                </div>
+            </div>
+        </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+</sebm-google-map>

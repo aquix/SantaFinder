@@ -1,0 +1,55 @@
+<div class="client-santa-info-page" *ngIf="santaInfo">
+    <div class="santa-info">
+        <div class="santa-info__photo">
+            <img [src]="santaInfo.photoUrl" alt="Santa's photo">
+        </div>
+        <div class="santa-info__details">
+            <div class="santa-info__name">
+                {{ santaInfo.name }}
+            </div>
+            <div class="santa-info__rating">
+                <rating [(ngModel)]="santaInfo.rating"
+                        [max]="5"
+                        [readonly]="true"></rating>
+            </div>
+            <div class="santa-info__orders-count">
+                <em>{{ santaInfo.numberOfOrders }} orders</em>
+            </div>
+        </div>
+    </div>
+    <div class="santa-rates">
+        <div *ngIf="santaInfo.feedbacks.length > 0">
+            <div class="santa-rates__header">
+                Feedbacks:
+            </div>
+            <ul infinite-scroll (scrolled)="onFeedbacksBottomReached()"
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="300"
+                [scrollWindow]="false"
+                class="feedback-list with-pretty-scrollbar">
+                <li *ngFor="let feedback of feedbacks" class="feedback-list__item">
+                    <div class="feedback-card">
+                        <div class="feedback-card__text">
+                            <div class="feedback-card__name">
+                                {{ feedback.clientName }}
+                            </div>
+                            <div class="feedback-card__date">
+                                <em>{{ feedback.datetime | datetime }}</em>
+                            </div>
+                        </div>
+                        <div class="feedback-card__rating">
+                            <rating [(ngModel)]="feedback.rating"
+                                    [max]="5"
+                                    [readonly]="true"></rating>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="santaInfo.feedbacks.length === 0" class="santa-rates__placeholder">
+            <div class="santa-rates__placeholder-text">
+                No feedbacks yet
+            </div>
+        </div>
+    </div>
+</div>

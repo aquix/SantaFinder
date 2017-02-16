@@ -1,0 +1,28 @@
+<div class="my-order-list-area">
+    <div class="my-order-list-filter">
+        <div class="sf-select">
+            <select [ngModel]="defaultFilter" (change)="onFilterChanged($event.target.value)">
+                <option *ngFor="let filter of filters" [value]="filter.value">{{ filter.name }}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="orders.length > 0" class="my-order-list">
+        <ul>
+            <li *ngFor="let order of (orders | paginate: paginationConfig); let i = index" class="my-order-list__order-item"
+                (click)="onOrderItemClick(i)"
+                [ngClass]="{'my-order-list__order-item_selected': (i === selectedOrderIndex)}">
+                <div>
+                    {{ order.address | address }}
+                </div>
+                <div>
+                    {{ order.datetime | datetime }}
+                </div>
+            </li>
+        </ul>
+        <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <div *ngIf="orders.length === 0" class="sf-empty-list-placeholder">
+        No orders :(
+    </div>
+    <div class="my-order-list-area__empty" (click)="onEmptyAreaClick()"></div>
+</div>

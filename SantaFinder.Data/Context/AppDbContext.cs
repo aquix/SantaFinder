@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using SantaFinder.Data.Entities;
+using SantaFinder.Entities;
 
 namespace SantaFinder.Data.Context
 {
@@ -16,7 +11,9 @@ namespace SantaFinder.Data.Context
 
         public static AppDbContext Create() => new AppDbContext();
 
-        public IDbSet<Client> Clients { get; set; }
-        public IDbSet<Santa> Santas { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Santa> Santas { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Present> Presents { get; set; }
     }
 }

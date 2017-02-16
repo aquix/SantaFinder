@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SantaFinder.Web.Util;
+﻿using SantaFinder.Web.Util;
 
 namespace SantaFinder.Web.Areas.Auth.Models
 {

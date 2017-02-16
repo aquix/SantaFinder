@@ -1,7 +1,10 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 $button-color: #3498DB;
 
 html {
     height: 100%;
+    min-width: 320px;
 }
 
 body {
@@ -10,11 +13,121 @@ body {
     font-family: Arial;
 }
 
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.clearfix {
+    overflow: hidden;
+}
+
 .app {
     height: 100%;
 }
 
+.hidden {
+    display: none;
+}
+
+.transparent-link {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
+.sf-page {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+
+    main {
+        flex: 1;
+        padding: 50px 5%;
+        height: 90%;
+    }
+}
+
+.sf-form {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+
+    &__title {
+        text-align: center;
+        color: #777;
+    }
+
+    &__label {
+        float: left;
+        color: #777;
+        margin-left: 10%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    &__control {
+        text-align: center;
+        background-color: #ECF0F1;
+        border: solid transparent 2px;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        width: 80%;
+        transition: border .5s;
+
+        &_with-validation.ng-touched {
+            &.ng-valid {
+                border: 2px solid #009688;
+                box-shadow: none;
+            }
+
+            &.ng-invalid {
+                border: 2px solid #EF5350;
+                box-shadow: none;
+            }
+        }
+
+        &:focus {
+            border: 2px solid #3498DB;
+            box-shadow: none;
+        }
+    }
+
+    &__button {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    &__checkbox {
+        display:none;
+
+        & + label:before {
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f096";
+            letter-spacing: 10px;
+        }
+
+        &:checked + label:before {
+            content: "\f046";
+            letter-spacing: 8px;
+        }
+    }
+
+    &__hint-text {
+        font-size: 12px;
+        color: #444;
+        display: block;
+        margin-top: 12px;
+    }
+}
+
 .sf-button {
+    cursor: pointer;
+
     border: solid transparent 2px;
     background: $button-color;
     color: #ffffff;
@@ -35,4 +148,135 @@ body {
     &:disabled {
         background-color: lighten($button-color, 30%);
     }
+}
+
+.sf-corner-delete {
+    display: inline-block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin: -10px 0 0 -15px;
+
+    color: #fff;
+    font-size: 31px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 0px;
+
+    cursor: pointer;
+    border: none;
+    border-radius: 1em;
+    background: #1abc9c;
+
+    &:after {
+        display: inline-block;
+        margin-top: 16px;
+        content: "×";
+    }
+}
+
+.error-icon {
+    &__image {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        margin-top: 6px;
+        margin-left: -40px;
+    }
+
+    &:hover &__tooltip-text {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__tooltip-text {
+        $tooltipColor: #424242;
+
+        margin-top: 2px;
+        padding: 10px;
+        visibility: hidden;
+        background-color: $tooltipColor;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        font-size: 14px;
+
+        position: absolute;
+        z-index: 1;
+
+        opacity: 0;
+        transition: opacity 1s;
+
+        &:after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent $tooltipColor transparent transparent;
+        }
+    }
+}
+
+.error-message {
+    margin: 10px auto;
+    color: #F44336;
+
+    animation: blinker 0.6s linear 2 forwards;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+.sf-card {
+    padding: 10px;
+    border: none;
+    border-radius: 1em;
+    background: #EEEEEE;
+}
+
+.sf-select {
+   border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("/images/select-arrow.png") no-repeat 90% 50%;
+
+    select {
+        padding: 5px 8px;
+        width: 130%;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        background-image: none;
+        -webkit-appearance: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.sf-empty-list-placeholder {
+    font-size: 18px;
+    color: #9E9E9E;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-status-approved {
+    color: #4CAF50;
+}
+
+.order-status-completed {
+    color: #9E9E9E;
+}
+
+.order-status-new {
+    color: #03A9F4;
 }

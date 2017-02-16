@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,8 +7,8 @@ using Autofac;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Data.Identity;
+using SantaFinder.Entities;
 
 namespace SantaFinder.Web.Auth.Providers
 {
@@ -67,7 +66,7 @@ namespace SantaFinder.Web.Auth.Providers
                 return;
             }
 
-            AuthenticationProperties properties = CreateProperties(user.Email, user.Id);
+            AuthenticationProperties properties = CreateProperties(user.Email, user.Id, userType);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -119,12 +118,13 @@ namespace SantaFinder.Web.Auth.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string email, string userId)
+        public static AuthenticationProperties CreateProperties(string email, string userId, UserType userType)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "email", email },
-                { "userId", userId }
+                { "userId", userId },
+                { "userType", ((int)userType).ToString() }
             };
             return new AuthenticationProperties(data);
         }

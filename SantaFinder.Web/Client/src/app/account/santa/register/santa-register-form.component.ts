@@ -6,14 +6,12 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services/account.service';
 import { SantaRegisterModel } from './santa-register.model';
-import { UserType } from '../../../auth/user-type';
+import { UserType } from '../../../shared/enums/user-type';
 import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
-
-import './santa-register-form.scss';
 
 @Component({
     selector: 'register-form',
-    template: require('./santa-register-form.html'),
+    templateUrl: './santa-register-form.html',
     animations: [
         trigger(
             'errorHint', [
@@ -27,7 +25,8 @@ import './santa-register-form.scss';
                 ])
             ]
         )
-    ]
+    ],
+    styleUrls: ['./santa-register-form.scss']
 })
 export class SantaRegisterFormComponent implements OnInit {
     registerForm: FormGroup;
@@ -46,7 +45,7 @@ export class SantaRegisterFormComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             email: ['', [Validators.required, EmailValidators.simple()]],
             passwords: this.formBuilder.group({
-                password: ['', [CustomValidators.password]],
+                password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']
             }, {
                 validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')

@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using SantaFinder.Data.Entities;
-using SantaFinder.Web.Areas.Auth.Managers;
+using SantaFinder.Data.Identity;
+using SantaFinder.Entities;
 using SantaFinder.Web.Areas.Auth.Models;
+using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [RoutePrefix("api/account/client")]
+    [Authorize(Roles ="client")]
     public class ClientAccountController : AccountController
     {
         private AppUserManager<Client> _clientManager;
         private AppUserManager<User> _userManager;
 
         public ClientAccountController(AppUserManager<Client> clientManager, AppUserManager<User> userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat, userManager)
         {
             _clientManager = clientManager;
             _userManager = userManager;
@@ -41,13 +38,8 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.Name,
-                Address = new Address
-                {
-                    City = model.Address.City,
-                    Street = model.Address.Street,
-                    House = model.Address.House,
-                    Apartment = model.Address.Apartment
-                }
+                Address = model.Address,
+                Location = model.Location
             };
 
             IdentityResult result;
@@ -68,6 +60,36 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("profile")]
+        public async Task<ClientProfileModel> GetProfile()
+        {
+            var id = User.Identity.GetUserId();
+            var user = await _clientManager.FindByIdAsync(id);
+
+            return new ClientProfileModel
+            {
+                Email = user.Email,
+                Name = user.Name,
+                Address = user.Address
+            };
+        }
+
+        [HttpPost]
+        [Route("profile")]
+        public async Task<IHttpActionResult> ChangeProfile(ClientProfileChangeModel model)
+        {
+            return await ChangeProfileInternal(_clientManager, model, user =>
+            {
+                var client = user as Client;
+                client.Email = model.Email;
+                client.UserName = model.Email;
+                client.Name = model.Name;
+                client.Address = model.Address.Line;
+                client.Location = model.Address.Location;
+            });
         }
     }
 }
