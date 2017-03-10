@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './account/services/auth.guard';
 import { ClientAuthGuard } from './account/services/client-auth.guard';
 import { SantaAuthGuard } from './account/services/santa-auth.guard';
+import { AdminAuthGuard } from './account/services/admin-auth.guard';
 import { OnlyAnonymousGuard } from './account/services/only-anonymous.guard';
 import { AuthHttp } from './auth/auth-http.service';
 import { AuthInfoStorage } from './auth/auth-info-storage.service';
@@ -32,10 +33,13 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
+import { AdminHomeComponent } from './admin/home/admin-home.component';
+import { ClientListComponent } from './admin/clients/client-list.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientProfileComponent } from './client/profile/client-profile.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
 import { SantaComponent } from './santa/santa.component';
+import { AdminComponent } from './admin/admin.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
 import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
 import { SantaMyOrdersComponent } from './santa/my-orders/santa-my-orders.component';
@@ -45,10 +49,13 @@ import { MapComponent } from './santa/home/map/map.component';
 import { AccountComponent } from './account/account.component';
 import { ClientAccountComponent } from './account/client/client-account.component';
 import { SantaAccountComponent } from './account/santa/santa-account.component';
+import { AdminAccountComponent} from './account/admin/admin-account.compont';
 import { ClientLoginFormComponent } from './account/client/login/client-login-form.component';
 import { ClientRegisterFormComponent } from './account/client/register/client-register-form.component';
 import { SantaLoginFormComponent } from './account/santa/login/santa-login-form.component';
 import { SantaRegisterFormComponent } from './account/santa/register/santa-register-form.component';
+import { AdminLoginFormComponent } from './account/admin/login/admin-login-form.component';
+import { AdminRegisterFormComponent } from './account/admin/register/admin-register-form.component';
 import { LoginFormComponent } from './account/shared/login/login-form.component';
 import { LogoutComponent } from './account/logout/logout.component';
 import { PhotoUploaderComponent } from './account/santa/register/photo-uploader/photo-uploader.component';
@@ -83,11 +90,14 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         MainComponent,
         ClientComponent,
         ClientHomeComponent,
+        AdminHomeComponent,
         ClientOrderComponent,
         ClientProfileComponent,
         SantaProfileComponent,
         ClientOrderHistoryComponent,
         SantaComponent,
+        AdminComponent,
+        ClientListComponent,
         SantaHomeComponent,
         SantaOrderDetailsComponent,
         SantaMyOrdersComponent,
@@ -101,6 +111,9 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         SantaAccountComponent,
         SantaLoginFormComponent,
         SantaRegisterFormComponent,
+        AdminAccountComponent,
+        AdminLoginFormComponent,
+        AdminRegisterFormComponent,
         LoginFormComponent,
         LogoutComponent,
         PhotoUploaderComponent,
@@ -117,6 +130,7 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         AuthGuard,
         ClientAuthGuard,
         SantaAuthGuard,
+        AdminAuthGuard,
         OnlyAnonymousGuard,
         AuthInfoStorage,
         AuthHttp,

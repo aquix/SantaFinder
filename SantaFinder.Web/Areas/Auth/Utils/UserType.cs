@@ -1,5 +1,6 @@
 ﻿public enum UserType
 {
     Client,
-    Santa
+    Santa,
+    Admin
 }

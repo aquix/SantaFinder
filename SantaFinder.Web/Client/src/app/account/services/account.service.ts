@@ -9,6 +9,7 @@ import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../shared/enums/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
+import { AdminRegisterModel } from '../admin/register/admin-register.model';
 import { GeocodingService } from '../../shared/services/geocoding.service';
 import { AuthHttp } from '../../auth/auth-http.service';
 import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
@@ -28,7 +29,7 @@ export class AccountService {
         private geocodingService: GeocodingService
     ) { }
 
-    register(regInfoRaw: ClientRegisterModel | SantaRegisterModel ) {
+    register(regInfoRaw: ClientRegisterModel | SantaRegisterModel | AdminRegisterModel) {
         let registerBody = { };
         let registerUri = '';
 
@@ -45,11 +46,10 @@ export class AccountService {
                     address: clientRegInfo.address,
                     location: location
                 };
-
                 return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
                     .map(res => res.status);
             });
-        } else {
+        } else if (this.getRegisterModelType(regInfoRaw) === UserType.santa) {
             let santaRegInfo = <SantaRegisterModel>regInfoRaw;
             registerUri = 'santa/register';
             let formDataContent = {
@@ -65,8 +65,21 @@ export class AccountService {
                 formData.append(key, formDataContent[key]);
             }
             registerBody = formData;
-
             return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+                .map(res => res.status);
+        }
+        else if (this.getRegisterModelType(regInfoRaw) === UserType.admin) {
+            let adminRegInfo = <AdminRegisterModel>regInfoRaw;
+            registerUri = 'admin/register';
+            let formDataContent = {
+                email: adminRegInfo.email,
+                password: adminRegInfo.passwords.password,
+                confirmPassword: adminRegInfo.passwords.passwordConfirmation,
+                name: adminRegInfo.name,
+            };
+
+            console.log(formDataContent);
+            return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, formDataContent)
                 .map(res => res.status);
         }
     }
@@ -125,11 +138,14 @@ export class AccountService {
         return false;
     }
 
-    private getRegisterModelType(regInfo: ClientRegisterModel | SantaRegisterModel): UserType  {
+    private getRegisterModelType(regInfo: ClientRegisterModel | SantaRegisterModel | AdminRegisterModel): UserType  {
         if ((regInfo as any).address !== undefined) {
             return UserType.client;
-        } else {
-            return UserType.santa;
+        } else  {
+            if((regInfo as any).photo !== undefined)
+                return UserType.santa;
+            else
+                return UserType.admin;
         }
     }
 }

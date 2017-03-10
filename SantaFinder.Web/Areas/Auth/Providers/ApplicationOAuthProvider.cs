@@ -9,6 +9,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using SantaFinder.Data.Identity;
 using SantaFinder.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace SantaFinder.Web.Auth.Providers
 {
@@ -39,7 +40,7 @@ namespace SantaFinder.Web.Auth.Providers
 
             if (userType == UserType.Client)
             {
-                var client = await clientManager.FindAsync(context.UserName, context.Password);
+                var client = clientManager.Find(context.UserName, context.Password);
                 if (client != null)
                 {
                     oAuthIdentity = await clientManager.GenerateUserIdentityAsync(client, OAuthDefaults.AuthenticationType);

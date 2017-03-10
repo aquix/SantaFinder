@@ -40,4 +40,12 @@ export class ClientOrdersService {
             .put(`${AppConfig.API_PATH}/clientOrders/${id}/rate?rating=${rating}`)
             .map(res => res.json(), err => `My error is ${err}`);
     }
+
+    getClientList(count: number, page: number) {
+        return this.authHttp.get(`${AppConfig.API_PATH}/clientOrders/list?count=${count}&page=${page}`)
+            .map(res => res.json(), err => {
+                return ('error' + JSON.stringify(err));
+            });
+    }
+
 }

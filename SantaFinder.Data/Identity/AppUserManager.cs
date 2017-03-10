@@ -16,7 +16,8 @@ namespace SantaFinder.Data.Identity
     {
         private Dictionary<Type, string> roles = new Dictionary<Type, string> {
             { typeof(Client), "client" },
-            { typeof(Santa), "santa" }
+            { typeof(Santa), "santa" },
+            { typeof(Admin), "admin" }
         };
 
         public AppUserManager(IUserStore<T> store) : base(store) { }

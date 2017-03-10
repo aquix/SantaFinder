@@ -12,6 +12,7 @@ using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.OrdersOnMap;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services.Utils;
+using SantaFinder.Web.Models.UsersList;
 
 namespace SantaFinder.Web.Services
 {
@@ -108,6 +109,29 @@ namespace SantaFinder.Web.Services
             return new PagedResponse<OrderShortInfo>
             {
                 Items = orders,
+                TotalCount = await allOrdersForClient.CountAsync()
+            };
+        }
+        public async Task<PagedResponse<ClientInfo>> GetClientList(string clientId, int count, int page, string serverUri)
+        {
+            var allOrdersForClient = _db.Clients
+                .Where(o => o.Id == clientId);
+
+            var clients = (await allOrdersForClient
+                .Skip(page * count)
+                .Take(count)
+                .ToListAsync())
+                .Select(o => new ClientInfo
+                {
+
+                    Email = o.Email,
+                    Name = o.Name,
+                    Address = o.Address
+                });
+
+            return new PagedResponse<ClientInfo>
+            {
+                Items = clients,
                 TotalCount = await allOrdersForClient.CountAsync()
             };
         }

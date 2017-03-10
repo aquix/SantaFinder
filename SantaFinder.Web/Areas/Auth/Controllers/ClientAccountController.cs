@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -6,6 +7,7 @@ using SantaFinder.Data.Identity;
 using SantaFinder.Entities;
 using SantaFinder.Web.Areas.Auth.Models;
 using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
+
 
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {

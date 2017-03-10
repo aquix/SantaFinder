@@ -12,6 +12,7 @@ using SantaFinder.Web.Models.ChangeOrder;
 using SantaFinder.Web.Models.OrderHistory;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
+using SantaFinder.Web.Models.UsersList;
 
 namespace SantaFinder.Web.Controllers
 {
@@ -106,6 +107,14 @@ namespace SantaFinder.Web.Controllers
             {
                 return InternalServerError();
             }
+        }
+
+        [HttpGet]
+        [Route("list")]
+        public async Task<PagedResponse<ClientInfo>> GetClientsList(int count, int page = 0)
+        {
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+            return await _ordersService.GetClientList(User.Identity.GetUserId(), count, page, serverUrl);
         }
     }
 }

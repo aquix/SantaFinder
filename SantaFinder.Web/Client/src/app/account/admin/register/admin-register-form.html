@@ -1,0 +1,45 @@
+<div class="sf-form admin-register-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmitClick(registerForm)" novalidate>
+        <h1 class="sf-form__title">
+            New admin registration
+        </h1>
+        <div [hidden]="!errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+        </div>
+        <div>
+            <input type="email" formControlName="email"
+                class="sf-form__control sf-form__control_with-validation" name="email"
+                value="" placeholder="Email">
+        </div>
+        <div formGroupName="passwords">
+            <div>
+                <input type="password" formControlName="password"
+                    class="sf-form__control sf-form__control_with-validation" name="password"
+                    value="" placeholder="Password">
+            </div>
+            <div>
+                <input type="password" formControlName="passwordConfirmation"
+                    class="sf-form__control" name="passwordConfirmation"
+                    value="" placeholder="Confirm password">
+                <span class="error-icon">
+                    <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
+                            src="/images/exclamation.png" alt="Passwords don't match" class="error-icon__image">
+                    <span class="error-icon__tooltip-text">Passwords don't match</span>
+                </span>
+
+            </div>
+        </div>
+        <div>
+            <input type="text" formControlName="name"
+                class="sf-form__control sf-form__control_with-validation" name="name"
+                value="" placeholder="Your name">
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid"
+            class="sf-button sf-form__button">
+            Register
+        </button>
+    </form>
+    <small class="sf-form__hint-text">
+        Already have an account? <a [routerLink]="['../login']">Login here</a>
+    </small>
+</div>
