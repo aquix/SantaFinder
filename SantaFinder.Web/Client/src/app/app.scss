@@ -280,3 +280,14 @@ ul {
 .order-status-new {
     color: #03A9F4;
 }
+
+.app-notification {
+    position: fixed;
+    top: 5%;
+    right: 0;
+    transition: 0.5s;
+
+    &_hidden {
+        right: -300px;
+    }
+}

@@ -1,3 +1,9 @@
 <div class="app">
+    <button (click)="onTestNotificationButtonClick()">Click me</button>
+    <sf-notification #appNotification
+                     class="app-notification" [ngClass]="{'app-notification_hidden': !isNotificationVisible}"
+                     text="Hello world" [type]="0"
+                     (close)="hideNotification()">
+    </sf-notification>
     <router-outlet></router-outlet>
 </div>

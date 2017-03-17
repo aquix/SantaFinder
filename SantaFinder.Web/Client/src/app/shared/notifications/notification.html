@@ -1,0 +1,12 @@
+<div class="sf-notification"
+     [ngClass]="getTypeClassName()">
+    <div class="sf-notification__picture">
+
+    </div>
+    <div class="sf-notification__body">
+        {{ text }}
+    </div>
+    <div class="sf-notification__close-button">
+        <button (click)="onCloseButtonClick()">x</button>
+    </div>
+</div>

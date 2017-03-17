@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms'
+import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -25,8 +25,10 @@ import { AccountService } from './account/services/account.service';
 import { SantasService } from './data-services/santas.service';
 import { OrdersService } from './data-services/orders.service';
 import { SantaOrdersService } from './data-services/santa-orders.service';
+import { ClientOrdersService } from './data-services/client-orders.service';
 import { LocationService } from './shared/services/location.service';
 import { GeocodingService } from './shared/services/geocoding.service';
+import { NotificationsService } from './shared/notifications/notifications.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -56,11 +58,11 @@ import { SantaPreviewListComponent } from './client/home/santa-preview-list/sant
 import { ClientOrderInfoComponent } from './client/order-info/order-info.component';
 import { ClientSantaInfoComponent } from './client/santa-info/client-santa-info.component';
 import { SantaProfileComponent } from './santa/profile/santa-profile.component';
+import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
+import { NotificationComponent } from './shared/notifications/notification.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
-import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
-import { ClientOrdersService } from './data-services/client-orders.service';
 
 @NgModule({
     imports: [
@@ -108,6 +110,7 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         ClientOrderInfoComponent,
         ClientSantaInfoComponent,
         SantaPreviewCardComponent,
+        NotificationComponent,
 
         AddressPipe,
         DatetimePipe
@@ -126,7 +129,8 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         OrdersService,
         ClientOrdersService,
         LocationService,
-        GeocodingService
+        GeocodingService,
+        NotificationsService
     ],
     bootstrap: [AppComponent],
 })

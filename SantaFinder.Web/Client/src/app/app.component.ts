@@ -1,4 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
+import { NotificationsService } from './shared/notifications/notifications.service';
+import { NotificationComponent } from './shared/notifications/notification.component';
 
 @Component({
     selector: 'my-app',
@@ -6,4 +8,49 @@ import { Component, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./app.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+    @ViewChild('appNotification') appNotification: NotificationComponent;
+    isNotificationVisible: boolean = false;
+
+    private notificationsStack: string[] = [];
+    private currentNotificationTimeout: number;
+
+    constructor(
+        private notificationsService: NotificationsService
+    ) { }
+
+    ngOnInit() {
+        this.notificationsService.subscribe(html => {
+            if (this.isNotificationVisible) {
+                this.notificationsStack.push(html);
+            } else {
+                this.showNotification(html);
+            }
+
+        });
+    }
+
+    onTestNotificationButtonClick() {
+        this.notificationsService.notify('New order successfully created');
+    }
+
+    private showNotification(html: string) {
+        this.isNotificationVisible = true;
+        this.appNotification.text = html;
+
+        setTimeout(() => {
+            this.hideNotification();
+        }, 3000);
+    }
+
+    hideNotification() {
+        clearTimeout(this.currentNotificationTimeout);
+        this.isNotificationVisible = false;
+        if (this.notificationsStack.length > 0) {
+            setTimeout(() => {
+                let nextNotification = this.notificationsStack.shift();
+                this.showNotification(nextNotification);
+            }, 1000);
+        }
+    }
+}

@@ -11,8 +11,6 @@ import { Link } from '../shared/navbar/link.model';
 export class ClientComponent implements OnInit {
     navbarLinks: Link[];
 
-    constructor() { }
-
     ngOnInit() {
         this.navbarLinks = [
             {
