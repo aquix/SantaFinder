@@ -75,15 +75,13 @@ namespace SantaFinder.Web.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> CreateOrder(NewOrder order)
         {
-            var success = await _ordersService.CreateOrder(order, User.Identity.GetUserId());
-            if (success)
-            {
-                return Ok();
-            }
-            else
+            var newOrderId = await _ordersService.CreateOrder(order, User.Identity.GetUserId());
+            if (newOrderId == -1)
             {
                 return InternalServerError();
             }
+
+            return Json(newOrderId);
         }
 
         [HttpPut]

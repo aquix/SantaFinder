@@ -7,6 +7,7 @@ import * as moment from 'moment/moment';
 import { OrdersService } from '../../data-services/orders.service';
 import { NewOrderViewModel } from '../../data-services/view-models/new-order/order.view-model';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationType } from '../../shared/notifications/notification-type.enum';
 
 @Component({
     selector: 'client-order',
@@ -82,10 +83,19 @@ export class ClientOrderComponent implements OnInit {
         value.datetime = datetime.toJSON();
 
         this.ordersService.createOrder(value).subscribe(orderId => {
-            let redirectUrl = `/client/orderhistory`;
-            this.notificationsService.notify(`New order successfully created.
-                Click [here](${redirectUrl}) for more details`);
+            let redirectUrl = `/client/orderinfo/${orderId}`;
+            this.notificationsService.notify({
+                type: NotificationType.success,
+                content: `New order successfully created.
+                    Click [here](${redirectUrl}) for more details`
+            });
             this.router.navigate(['../']);
-        }, console.log);
+        }, err => {
+            console.log(err);
+            this.notificationsService.notify({
+                type: NotificationType.error,
+                content: err
+            });
+        });
     }
 }

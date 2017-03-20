@@ -25,7 +25,7 @@ namespace SantaFinder.Web.Services
             _db = db;
         }
 
-        public async Task<bool> CreateOrder(NewOrder newOrder, string userId)
+        public async Task<int> CreateOrder(NewOrder newOrder, string userId)
         {
             var order = new Order
             {
@@ -56,7 +56,7 @@ namespace SantaFinder.Web.Services
                 var itemsAffected = await _db.SaveChangesAsync();
                 if (itemsAffected == 0)
                 {
-                    return false;
+                    return -1;
                 }
 
                 var presents = newOrder.Presents.Select(p => new Present
@@ -69,11 +69,11 @@ namespace SantaFinder.Web.Services
                 _db.Presents.AddRange(presents);
                 await _db.SaveChangesAsync();
 
-                return true;
+                return order.Id;
             }
             catch (DbEntityValidationException)
             {
-                return false;
+                return -1;
             }
         }
 

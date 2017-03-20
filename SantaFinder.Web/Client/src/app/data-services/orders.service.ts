@@ -59,11 +59,7 @@ export class OrdersService {
 
     private createOrderSendRequest(order: NewOrder) {
         return this.authHttp.post(`${AppConfig.API_PATH}/clientOrders`, order).map(res => {
-            if (res.status === 200) {
-                return true;
-            }
-
-            return false;
+            return res.json();
         });
     }
 }

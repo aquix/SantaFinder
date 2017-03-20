@@ -12,7 +12,7 @@
     }
 
     position: relative;
-    max-width: 300px;
+    max-width: 250px;
     min-height: 70px;
     max-height: 150px;
     display: flex;
@@ -32,17 +32,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 10px 30px 10px 10px;
     }
 
     &__close-button {
         position: absolute;
         color: #777;
-        font: 14px/100% arial, sans-serif;
-        right: 5px;
+        font: 18px/100% arial, sans-serif;
         text-decoration: none;
         text-shadow: 0 1px 0 #fff;
-        top: 5px;
+        top: 15px;
+        right: 15px;
 
         &:after {
             content: '✖';

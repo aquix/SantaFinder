@@ -5,6 +5,8 @@ import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
 import { OrderStatus } from '../../../shared/enums/order-status';
 import { SantaOrdersService } from '../../../data-services/santa-orders.service';
 import { SantaOrdersListService } from '../santa-orders-list.service';
+import { NotificationsService } from '../../../shared/notifications/notifications.service';
+import { NotificationType } from '../../../shared/notifications/notification-type.enum';
 
 @Component({
     selector: 'santa-my-order-details',
@@ -18,7 +20,8 @@ export class SantaMyOrderDetailsComponent implements OnInit {
 
     constructor(
         private santaOrdersService: SantaOrdersService,
-        private santaOrdersListService: SantaOrdersListService
+        private santaOrdersListService: SantaOrdersListService,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
@@ -30,6 +33,10 @@ export class SantaMyOrderDetailsComponent implements OnInit {
     onCompleteClick() {
         this.santaOrdersService.completeOrder(this.order.id).subscribe(res => {
             // TODO reload only modified order
+            this.notificationsService.notify({
+                type: NotificationType.info,
+                content: `Order #${this.order.id} marked as completed`
+            });
             this.santaOrdersListService.loadOrders(1);
             this.santaOrdersListService.selectOrder(-1);
         }, err => {
@@ -40,6 +47,10 @@ export class SantaMyOrderDetailsComponent implements OnInit {
     onDiscardClick() {
         this.santaOrdersService.discardOrder(this.order.id).subscribe(res => {
             // TODO reload only modified order
+            this.notificationsService.notify({
+                type: NotificationType.info,
+                content: `Order #${this.order.id} discarded`
+            });
             this.santaOrdersListService.loadOrders(1);
             this.santaOrdersListService.selectOrder(-1);
         }, err => {

@@ -9,6 +9,8 @@ import { ClientProfileModel } from './client-profile.model';
 import { ClientProfileChangeFormModel } from './client-profile-change.form-model';
 import { ClientProfileChangeModel } from '../../data-services/view-models/change-profile/client-profile-change.model';
 import { GeocodingService } from '../../shared/services/geocoding.service';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationType } from '../../shared/notifications/notification-type.enum';
 
 @Component({
     selector: 'client-profile',
@@ -38,7 +40,8 @@ export class ClientProfileComponent implements OnInit {
         private formBuilder: FormBuilder,
         private accountService: AccountService,
         private router: Router,
-        private geocodingService: GeocodingService
+        private geocodingService: GeocodingService,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
@@ -79,6 +82,10 @@ export class ClientProfileComponent implements OnInit {
             };
 
             this.accountService.changeClientProfile(model).subscribe(res => {
+                this.notificationsService.notify({
+                    type: NotificationType.info,
+                    content: `Profile settings successfully changed`
+                });
                 this.router.navigate(['/client']);
             }, err => {
                 let errors: string[] = err.json()['modelState'][''];

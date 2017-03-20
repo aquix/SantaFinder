@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { NotificationsService } from './shared/notifications/notifications.service';
 import { NotificationComponent } from './shared/notifications/notification.component';
-import { DomSanitizer } from "@angular/platform-browser";
+import { NotificationType } from './shared/notifications/notification-type.enum';
+import { NotificationViewModel } from './shared/notifications/notification.model';
 
 @Component({
     selector: 'my-app',
@@ -13,49 +14,25 @@ export class AppComponent implements OnInit {
     @ViewChild('appNotification') appNotification: NotificationComponent;
     isNotificationVisible: boolean = false;
 
-    private notificationsStack: string[] = [];
+    private notificationsStack: NotificationViewModel[] = [];
     private currentNotificationTimeout: number;
-    private currentNotificationText: string;
 
     constructor(
         private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
-        this.notificationsService.subscribe(html => {
+        this.notificationsService.subscribe(notification => {
             if (this.isNotificationVisible) {
-                this.notificationsStack.push(html);
+                this.notificationsStack.push(notification);
             } else {
-                this.showNotification(html);
+                this.showNotification(notification);
             }
-
         });
     }
 
-    onTestNotificationButtonClick() {
-        let redirectUrl = `/client/orderInfo`;
-        this.notificationsService.notify(`New order successfully created.
-            Click [here](${redirectUrl}) for more details`);
-    }
-
-    private showNotification(html: string) {
-        this.isNotificationVisible = true;
-        this.appNotification.content = html;
-
-        this.currentNotificationTimeout = window.setTimeout(() => {
-            this.hideNotification();
-        }, 3000);
-    }
-
-    hideNotification() {
-        clearTimeout(this.currentNotificationTimeout);
-        this.isNotificationVisible = false;
-        if (this.notificationsStack.length > 0) {
-            setTimeout(() => {
-                let nextNotification = this.notificationsStack.shift();
-                this.showNotification(nextNotification);
-            }, 1000);
-        }
+    onNotificationCloseButtonClick() {
+        this.hideNotification();
     }
 
     onNotificationMouseOver() {
@@ -66,5 +43,25 @@ export class AppComponent implements OnInit {
         this.currentNotificationTimeout = window.setTimeout(() => {
             this.hideNotification();
         }, 1500);
+    }
+
+    private hideNotification() {
+        clearTimeout(this.currentNotificationTimeout);
+        this.isNotificationVisible = false;
+        if (this.notificationsStack.length > 0) {
+            setTimeout(() => {
+                let nextNotification = this.notificationsStack.shift();
+                this.showNotification(nextNotification);
+            }, 1000);
+        }
+    }
+
+    private showNotification(notification: NotificationViewModel) {
+        this.isNotificationVisible = true;
+        this.appNotification.data = notification;
+
+        this.currentNotificationTimeout = window.setTimeout(() => {
+            this.hideNotification();
+        }, 3000);
     }
 }

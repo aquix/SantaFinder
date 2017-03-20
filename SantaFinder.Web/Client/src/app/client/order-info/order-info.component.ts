@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Rating } from 'ng2-rating';
@@ -10,6 +10,8 @@ import { Santa } from '../../data-services/view-models/santa.view-model';
 import { ClientOrdersService } from '../../data-services/client-orders.service';
 import { OrderPostInfo } from '../../data-services/view-models/change-order/order-post-info';
 import { OrderFullInfoForEditing } from '../../data-services/view-models/change-order/order-full-info-for-editing';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationType } from '../../shared/notifications/notification-type.enum';
 
 @Component({
     selector: 'order-info-page',
@@ -37,7 +39,8 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
         private formBuilder: FormBuilder,
         private clientOrdersService: ClientOrdersService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
@@ -126,8 +129,16 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     onSubmitClick({ value }: { value: OrderFullInfoForEditing }) {
         this.clientOrdersService.changeOrder(this.id, value).subscribe(success => {
             if (success) {
+                this.notificationsService.notify({
+                    type: NotificationType.info,
+                    content: `Order info updated`
+                });
                 this.router.navigate(['../']);
             } else {
+                this.notificationsService.notify({
+                    type: NotificationType.error,
+                    content: `An error occurred during updating order info`
+                });
                 console.log('error');
             }
         });
