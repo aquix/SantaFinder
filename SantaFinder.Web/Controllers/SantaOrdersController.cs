@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using SantaFinder.Web.Hubs;
 using SantaFinder.Web.Models.SantaOrders;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
@@ -48,7 +49,9 @@ namespace SantaFinder.Web.Controllers
         public async Task<bool> TakeOrder(int id)
         {
             var userId = User.Identity.GetUserId();
-            return await _santaOrdersService.TakeOrder(userId, id);
+            var result = await _santaOrdersService.TakeOrder(userId, id);
+
+            return result;
         }
     }
 }

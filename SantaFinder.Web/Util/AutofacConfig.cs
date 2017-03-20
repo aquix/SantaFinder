@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Web;
 using Autofac;
+using Autofac.Integration.SignalR;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataProtection;
@@ -25,6 +26,7 @@ namespace SantaFinder.Web.Util
             RegisterTypes(builder, app);
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterHubs(Assembly.GetExecutingAssembly());
 
             return builder.Build();
         }

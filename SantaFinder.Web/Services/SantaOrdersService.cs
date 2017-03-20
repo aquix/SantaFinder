@@ -3,7 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
+using SantaFinder.Web.Hubs;
 using SantaFinder.Web.Models.SantaOrders;
+using SantaFinder.Web.Models.ServerNotifications;
 using SantaFinder.Web.Models.Shared;
 
 namespace SantaFinder.Web.Services
@@ -110,6 +112,13 @@ namespace SantaFinder.Web.Services
             {
                 ApproveOrder(order, santaId);
                 await _db.SaveChangesAsync();
+
+                NotificationsHub.SendNotificationToUser(order.ClientId, new Notification
+                {
+                    Type = NotificationType.Success,
+                    Content = $"Order #{orderId} accepted by santa {order.Santa?.Name}"
+                });
+
                 return true;
             }
             else

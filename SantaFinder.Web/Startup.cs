@@ -19,6 +19,7 @@ namespace SantaFinder.Web
             ConfigureCors(app);
             ConfigureAuth(app);
             ConfigureWebApi(app, config);
+            ConfigureSignalR(app, autofacContainer);
         }
     }
 }
