@@ -4,9 +4,13 @@
 
     </div>
     <div class="sf-notification__body">
-        {{ text }}
+        <markdown [data]="content">
+        </markdown>
     </div>
-    <div class="sf-notification__close-button">
-        <button (click)="onCloseButtonClick()">x</button>
-    </div>
+    <a href="javascript:void(0)"
+       class="sf-notification__close-button"
+       (click)="onCloseButtonClick()"
+       (mouseover)="onMouseOver()"
+       (mouseleave)="onMouseLeave()">
+    </a>
 </div>

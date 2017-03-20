@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { NotificationsService } from './shared/notifications/notifications.service';
 import { NotificationComponent } from './shared/notifications/notification.component';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
     selector: 'my-app',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
     private notificationsStack: string[] = [];
     private currentNotificationTimeout: number;
+    private currentNotificationText: string;
 
     constructor(
         private notificationsService: NotificationsService
@@ -31,14 +33,16 @@ export class AppComponent implements OnInit {
     }
 
     onTestNotificationButtonClick() {
-        this.notificationsService.notify('New order successfully created');
+        let redirectUrl = `/client/orderInfo`;
+        this.notificationsService.notify(`New order successfully created.
+            Click [here](${redirectUrl}) for more details`);
     }
 
     private showNotification(html: string) {
         this.isNotificationVisible = true;
-        this.appNotification.text = html;
+        this.appNotification.content = html;
 
-        setTimeout(() => {
+        this.currentNotificationTimeout = window.setTimeout(() => {
             this.hideNotification();
         }, 3000);
     }
@@ -52,5 +56,15 @@ export class AppComponent implements OnInit {
                 this.showNotification(nextNotification);
             }, 1000);
         }
+    }
+
+    onNotificationMouseOver() {
+        clearTimeout(this.currentNotificationTimeout);
+    }
+
+    onNotificationMouseLeave() {
+        this.currentNotificationTimeout = window.setTimeout(() => {
+            this.hideNotification();
+        }, 1500);
     }
 }

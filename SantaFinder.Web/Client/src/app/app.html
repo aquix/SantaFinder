@@ -3,7 +3,10 @@
     <sf-notification #appNotification
                      class="app-notification" [ngClass]="{'app-notification_hidden': !isNotificationVisible}"
                      text="Hello world" [type]="0"
-                     (close)="hideNotification()">
+                     (close)="hideNotification()"
+                     (mouseover)="onNotificationMouseOver()"
+                     (mouseleave)="onNotificationMouseLeave()">
+        {{currentNotificationText}}
     </sf-notification>
     <router-outlet></router-outlet>
 </div>

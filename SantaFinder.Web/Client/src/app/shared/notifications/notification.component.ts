@@ -8,8 +8,10 @@ import { NotificationType } from './notification-type.enum';
 })
 export class NotificationComponent implements OnInit {
     @Input() type: NotificationType;
-    @Input() text: string;
+    @Input() content: string = "";
     @Output() close: EventEmitter<void> = new EventEmitter<void>();
+    @Output() mouseover: EventEmitter<void> = new EventEmitter<void>();
+    @Output() mouseleave: EventEmitter<void> = new EventEmitter<void>();
 
     constructor() { }
 
@@ -21,5 +23,13 @@ export class NotificationComponent implements OnInit {
 
     onCloseButtonClick() {
         this.close.emit();
+    }
+
+    onMouseOver() {
+        this.mouseover.emit();
+    }
+
+    onMouseLeave() {
+        this.mouseleave.emit();
     }
 }

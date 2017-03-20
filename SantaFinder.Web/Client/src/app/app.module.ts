@@ -9,6 +9,7 @@ import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { MarkdownModule } from 'angular2-markdown';
 
 import { AppConfig } from './app.config';
 
@@ -77,7 +78,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
             apiKey: AppConfig.GMAPS_API_KEY
         }),
         Ng2PaginationModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        MarkdownModule.forRoot()
     ],
     declarations: [
         NavbarComponent,
