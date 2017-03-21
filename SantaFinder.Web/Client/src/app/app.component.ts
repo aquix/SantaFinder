@@ -1,8 +1,10 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { NotificationsService } from './shared/notifications/notifications.service';
 import { NotificationComponent } from './shared/notifications/notification.component';
-import { NotificationType } from './shared/notifications/notification-type.enum';
 import { NotificationViewModel } from './shared/notifications/notification.model';
+import { SignalR, BroadcastEventListener } from 'ng2-signalr/lib';
+import 'expose-loader?jQuery!jquery';
+import '../../node_modules/signalr/jquery.signalR.js';
 
 @Component({
     selector: 'my-app',
@@ -18,7 +20,8 @@ export class AppComponent implements OnInit {
     private currentNotificationTimeout: number;
 
     constructor(
-        private notificationsService: NotificationsService
+        private notificationsService: NotificationsService,
+        private signalR: SignalR
     ) { }
 
     ngOnInit() {
@@ -28,6 +31,16 @@ export class AppComponent implements OnInit {
             } else {
                 this.showNotification(notification);
             }
+        });
+
+        console.log('signalr connection...');
+        this.signalR.connect().then((c) => {
+            console.log('signalr connected...');
+
+            let onNotificationReceived$ = c.listenFor('notify');
+            onNotificationReceived$.subscribe((notification: NotificationViewModel) => {
+                this.notificationsService.notify(notification);
+            });
         });
     }
 

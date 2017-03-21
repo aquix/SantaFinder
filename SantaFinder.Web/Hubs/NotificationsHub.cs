@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using SantaFinder.Data.Context;
-using SantaFinder.Web.Hubs.Models;
 using SantaFinder.Web.Models.ServerNotifications;
 
 namespace SantaFinder.Web.Hubs
@@ -44,7 +44,7 @@ namespace SantaFinder.Web.Hubs
                 collectionToAdd?.Add(Context.ConnectionId, Context.User.Identity.GetUserId());
             }
 
-            Console.WriteLine($"User connected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
+            Debug.Print($"User connected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
 
             return base.OnConnected();
         }
@@ -54,7 +54,7 @@ namespace SantaFinder.Web.Hubs
             _clients.Remove(Context.ConnectionId);
             _santas.Remove(Context.ConnectionId);
 
-            Console.WriteLine($"User diconnected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
+            Debug.Print($"User diconnected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
 
             return base.OnDisconnected(stopCalled);
         }

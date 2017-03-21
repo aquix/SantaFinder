@@ -244,6 +244,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\INotificationsHub.cs" />
+    <Compile Include="Hubs\NotificationsHub.cs" />
     <Compile Include="Models\ChangeOrder\PresentInfoForEdit.cs" />
     <Compile Include="Models\ChangeOrder\OrderFullInfoForEditing.cs" />
     <Compile Include="Models\NewOrder\NewOrder.cs" />
@@ -254,6 +256,8 @@
     <Compile Include="Models\Santas\FeedbackItem.cs" />
     <Compile Include="Models\Santas\SantaFullInfoForClient.cs" />
     <Compile Include="Models\Santas\SantaInfoForClient.cs" />
+    <Compile Include="Models\ServerNotifications\Notification.cs" />
+    <Compile Include="Models\ServerNotifications\NotificationType.cs" />
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
@@ -273,7 +277,8 @@
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />
     <Compile Include="Util\FileResult.cs" />
-    <Compile Include="Util\SignalRContractResolver.cs" />
+    <Compile Include="Util\SignalR\SignalRContractResolver.cs" />
+    <Compile Include="Util\SignalR\CustomUserIdProvider.cs" />
     <Compile Include="Util\UploadMultipartMediaTypeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
