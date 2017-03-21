@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 import { SantaOrdersService } from '../../data-services/santa-orders.service';
 import { SantaOrderPreview } from '../../data-services/view-models/santa-orders/santa-order-preview.model';

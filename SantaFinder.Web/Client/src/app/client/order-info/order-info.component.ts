@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Rating } from 'ng2-rating';
+import { Rating } from 'ngx-rating';
 import * as moment from 'moment/moment';
 
 import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';

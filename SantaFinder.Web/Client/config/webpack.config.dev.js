@@ -7,14 +7,24 @@ const commonConfig = require('./webpack.config.common');
 
 module.exports = merge(commonConfig, {
     module: {
-        loaders: [{
-            loader: 'raw!sass',
+        rules: [{
+            use: [
+                {
+                    loader: 'raw-loader'
+                },
+                {
+                    loader: 'sass-loader'
+                }
+            ],
             test: /\.scss$/,
             exclude: /node_modules/
-        }]
+        }],
+
+        noParse: [
+            /google-libphonenumber\/dist/
+        ]
     },
 
-    debug: true,
     devtool: 'source-map',
 
     devServer: {

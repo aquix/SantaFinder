@@ -1,8 +1,9 @@
 {
   "name": "santa-finder.client",
-  "dependencies": {},
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.5.0+20170314181206"
+  },
   "globalDependencies": {
-    "node": "registry:env/node#6.0.0+20161105011511"
     "jquery": "registry:dt/jquery",
     "node": "registry:env/node",
     "signalr": "registry:dt/signalr"

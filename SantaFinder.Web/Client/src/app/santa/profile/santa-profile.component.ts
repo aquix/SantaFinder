@@ -43,7 +43,7 @@ export class SantaProfileComponent implements OnInit {
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             name: ['', Validators.required],
             password: ['', [CustomValidators.password]],
             newPassword: this.formBuilder.group({
