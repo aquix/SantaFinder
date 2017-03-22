@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             password: ['']
         });
         this.loginForm.valueChanges.subscribe(data => {

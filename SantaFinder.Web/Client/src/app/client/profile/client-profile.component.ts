@@ -46,7 +46,7 @@ export class ClientProfileComponent implements OnInit {
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             name: ['', Validators.required],
             address: this.formBuilder.group({
                 city: ['', [Validators.required]],

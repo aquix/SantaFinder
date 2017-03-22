@@ -40,7 +40,7 @@ export class ClientRegisterFormComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             passwords: this.formBuilder.group({
                 password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']

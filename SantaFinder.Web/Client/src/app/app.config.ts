@@ -1,4 +1,4 @@
-const GMAPS_API_KEY = require('json!../secretconfig.json').gmapsApiKey;
+const GMAPS_API_KEY = require('json-loader!../secretconfig.json').gmapsApiKey;
 
 export class AppConfig {
     public static SERVER = 'http://localhost:9001';
