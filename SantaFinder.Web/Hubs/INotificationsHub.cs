@@ -10,5 +10,6 @@ namespace SantaFinder.Web.Hubs
     public interface INotificationsHub
     {
         void Notify(Notification notification);
+        void Test(int number);
     }
 }

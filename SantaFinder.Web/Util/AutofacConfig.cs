@@ -14,6 +14,9 @@ using SantaFinder.Data.Context;
 using SantaFinder.Web.Services;
 using SantaFinder.Entities;
 using SantaFinder.Data.Identity;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Infrastructure;
+using SantaFinder.Web.Hubs;
 
 namespace SantaFinder.Web.Util
 {
@@ -62,6 +65,19 @@ namespace SantaFinder.Web.Util
                 .AsSelf();
             builder.RegisterType<StaticService>()
                 .AsSelf();
+        }
+
+        public static ContainerBuilder RegisterHubTypes(AutofacDependencyResolver resolver)
+        {
+            var builder = new ContainerBuilder();
+            builder.Register(context => resolver.Resolve<IConnect‌​ionManager>()
+                                                .GetHub‌​Context<NotificationsHub>()
+            ).ExternallyOwned();
+
+            builder.RegisterType<NotificationsHubHelper>()
+                .AsSelf();
+
+            return builder;
         }
     }
 }

@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 using Owin;
 using SantaFinder.Web.Util;
 using SantaFinder.Web.Util.SignalR;
+using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security.OAuth;
+using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace SantaFinder.Web
 {
@@ -21,14 +24,25 @@ namespace SantaFinder.Web
 
             var resolver = new Autofac.Integration.SignalR.AutofacDependencyResolver(container);
             resolver.Register(typeof(JsonSerializer), () => serializer);
+            resolver.Register(typeof(IUserIdProvider), () => new CustomUserIdProvider());
 
-            var userIdProvider = new CustomUserIdProvider();
-            resolver.Register(typeof(IUserIdProvider), () => userIdProvider);
+            AutofacConfig.RegisterHubTypes(resolver).Update(container);
 
-            app.MapSignalR(new HubConfiguration
+            app.Map("/signalr", map =>
             {
-                Resolver = resolver
+                map.UseCors(CorsOptions.AllowAll);
+
+                map.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
+                {
+                    Provider = new QueryStringOAuthBearerProvider()
+                });
+
+                map.RunSignalR(new HubConfiguration
+                {
+                    Resolver = resolver
+                });
             });
+
         }
     }
 }

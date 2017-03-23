@@ -282,6 +282,7 @@ ul {
 }
 
 .app-notification {
+    z-index: 100;
     position: fixed;
     top: 5%;
     right: 0;

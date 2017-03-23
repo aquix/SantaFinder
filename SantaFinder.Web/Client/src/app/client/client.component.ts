@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
+import { NotificationsHub } from "../shared/signalr/notifications-hub";
 
 @Component({
     selector: 'client-page',
@@ -10,6 +11,10 @@ import { Link } from '../shared/navbar/link.model';
 })
 export class ClientComponent implements OnInit {
     navbarLinks: Link[];
+
+    constructor(
+        private notificationsHub: NotificationsHub
+    ) { }
 
     ngOnInit() {
         this.navbarLinks = [

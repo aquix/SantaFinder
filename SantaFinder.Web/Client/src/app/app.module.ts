@@ -10,7 +10,6 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MarkdownModule } from 'angular2-markdown';
-import { SignalRModule } from 'ng2-signalr';
 
 import { AppConfig } from './app.config';
 
@@ -31,6 +30,7 @@ import { ClientOrdersService } from './data-services/client-orders.service';
 import { LocationService } from './shared/services/location.service';
 import { GeocodingService } from './shared/services/geocoding.service';
 import { NotificationsService } from './shared/notifications/notifications.service';
+import { NotificationsHub } from './shared/signalr/notifications-hub';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -80,13 +80,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         }),
         Ng2PaginationModule,
         InfiniteScrollModule,
-        MarkdownModule.forRoot(),
-        SignalRModule.configure({
-            hubName: 'NotificationsHub',
-            qs: { },
-            url: AppConfig.SERVER,
-            logging: false
-        })
+        MarkdownModule.forRoot()
     ],
     declarations: [
         NavbarComponent,
@@ -139,7 +133,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientOrdersService,
         LocationService,
         GeocodingService,
-        NotificationsService
+        NotificationsService,
+        NotificationsHub
     ],
     bootstrap: [AppComponent],
 })

@@ -2,9 +2,6 @@ import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { NotificationsService } from './shared/notifications/notifications.service';
 import { NotificationComponent } from './shared/notifications/notification.component';
 import { NotificationViewModel } from './shared/notifications/notification.model';
-import { SignalR, BroadcastEventListener } from 'ng2-signalr/lib';
-import 'expose-loader?jQuery!jquery';
-import '../../node_modules/signalr/jquery.signalR.js';
 
 @Component({
     selector: 'my-app',
@@ -21,26 +18,16 @@ export class AppComponent implements OnInit {
 
     constructor(
         private notificationsService: NotificationsService,
-        private signalR: SignalR
     ) { }
 
     ngOnInit() {
         this.notificationsService.subscribe(notification => {
+            console.log("new notification");
             if (this.isNotificationVisible) {
                 this.notificationsStack.push(notification);
             } else {
                 this.showNotification(notification);
             }
-        });
-
-        console.log('signalr connection...');
-        this.signalR.connect().then((c) => {
-            console.log('signalr connected...');
-
-            let onNotificationReceived$ = c.listenFor('notify');
-            onNotificationReceived$.subscribe((notification: NotificationViewModel) => {
-                this.notificationsService.notify(notification);
-            });
         });
     }
 
@@ -59,6 +46,8 @@ export class AppComponent implements OnInit {
     }
 
     private hideNotification() {
+        console.log("show notification");
+
         clearTimeout(this.currentNotificationTimeout);
         this.isNotificationVisible = false;
         if (this.notificationsStack.length > 0) {
@@ -70,6 +59,7 @@ export class AppComponent implements OnInit {
     }
 
     private showNotification(notification: NotificationViewModel) {
+        console.log("show notification");
         this.isNotificationVisible = true;
         this.appNotification.data = notification;
 

@@ -9,6 +9,7 @@ export class NotificationsService {
     constructor() { }
 
     notify(notification: NotificationViewModel) {
+        console.log("notification", notification);
         this.notificationHistory.push(notification);
         this.callbacks.forEach(c => c(notification));
     }

@@ -246,6 +246,7 @@
     </Compile>
     <Compile Include="Hubs\INotificationsHub.cs" />
     <Compile Include="Hubs\NotificationsHub.cs" />
+    <Compile Include="Hubs\NotificationsHubHelper.cs" />
     <Compile Include="Models\ChangeOrder\PresentInfoForEdit.cs" />
     <Compile Include="Models\ChangeOrder\OrderFullInfoForEditing.cs" />
     <Compile Include="Models\NewOrder\NewOrder.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />
     <Compile Include="Util\FileResult.cs" />
+    <Compile Include="Util\SignalR\QueryStringOAuthBearerProvider.cs" />
     <Compile Include="Util\SignalR\SignalRContractResolver.cs" />
     <Compile Include="Util\SignalR\CustomUserIdProvider.cs" />
     <Compile Include="Util\UploadMultipartMediaTypeFormatter.cs" />
