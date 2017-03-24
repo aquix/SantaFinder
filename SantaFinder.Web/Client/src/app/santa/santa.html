@@ -1,6 +1,8 @@
 <div class="sf-page santa-page">
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
-        <router-outlet></router-outlet>
+        <ng2-page-transition [scrollTop]="false">
+            <router-outlet></router-outlet>
+        </ng2-page-transition>
     </main>
 </div>

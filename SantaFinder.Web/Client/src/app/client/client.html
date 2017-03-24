@@ -1,6 +1,8 @@
 <div class="sf-page client-page">
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
-        <router-outlet></router-outlet>
+        <ng2-page-transition>
+            <router-outlet></router-outlet>
+        </ng2-page-transition>
     </main>
 </div>

@@ -10,6 +10,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PaginationModule } from 'ng2-pagination';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { MarkdownModule } from 'angular2-markdown';
+import { Ng2PageTransitionModule } from 'ng2-page-transition';
 
 import { AppConfig } from './app.config';
 
@@ -80,7 +81,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         }),
         Ng2PaginationModule,
         InfiniteScrollModule,
-        MarkdownModule.forRoot()
+        MarkdownModule.forRoot(),
+        Ng2PageTransitionModule
     ],
     declarations: [
         NavbarComponent,
