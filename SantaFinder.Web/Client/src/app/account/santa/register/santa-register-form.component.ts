@@ -67,9 +67,7 @@ export class SantaRegisterFormComponent implements OnInit {
                 password: value.passwords.password
             }, UserType.santa).subscribe(res => {
                 this.router.navigate(['/santa']);
-            }, err => {
-                console.log('error when login');
-            });
+            }, console.log);
         }, err => {
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');

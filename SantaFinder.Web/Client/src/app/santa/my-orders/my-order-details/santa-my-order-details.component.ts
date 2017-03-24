@@ -7,6 +7,7 @@ import { SantaOrdersService } from '../../../data-services/santa-orders.service'
 import { SantaOrdersListService } from '../santa-orders-list.service';
 import { NotificationsService } from '../../../shared/notifications/notifications.service';
 import { NotificationType } from '../../../shared/notifications/notification-type.enum';
+import { Location } from '../../../shared/models/location';
 
 @Component({
     selector: 'santa-my-order-details',
@@ -81,5 +82,9 @@ export class SantaMyOrderDetailsComponent implements OnInit {
         case OrderStatus.Completed:
             return 'order-status-completed';
         }
+    }
+
+    createDirectionLink(location: Location) {
+        return `https://www.google.com/maps/dir/Current+Location/${location.latitude},${location.longitude}`;
     }
 }

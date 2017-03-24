@@ -39,7 +39,6 @@ export class LoginFormComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: LoginModel }) {
-        console.log(this.userType);
         this.accountService.login(value, this.userType).subscribe(res => {
             this.router.navigate(['/']);
         }, err => {

@@ -90,7 +90,7 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
         if (this.ratingControl) {
             this.ratingControl.registerOnChange(() => {
                 this.rating = this.ratingControl.hovered;
-                this.clientOrdersService.rate(this.id, this.rating).subscribe(result => console.log);
+                this.clientOrdersService.rate(this.id, this.rating).subscribe(console.log);
             });
         }
     }

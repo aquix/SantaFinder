@@ -69,9 +69,7 @@ export class ClientRegisterFormComponent implements OnInit {
                 password: value.passwords.password
             }, UserType.client).subscribe(res => {
                 this.router.navigate(['/client']);
-            }, err => {
-                console.log('error when login');
-            });
+            }, console.log);
         }, err => {
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
