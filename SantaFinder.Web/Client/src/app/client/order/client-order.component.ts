@@ -91,7 +91,6 @@ export class ClientOrderComponent implements OnInit {
             });
             this.router.navigate(['../']);
         }, err => {
-            console.log(err);
             this.notificationsService.notify({
                 type: NotificationType.error,
                 content: err

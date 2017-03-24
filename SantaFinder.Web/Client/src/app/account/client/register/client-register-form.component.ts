@@ -64,7 +64,6 @@ export class ClientRegisterFormComponent implements OnInit {
 
     onSubmitClick({ value }: { value: ClientRegisterModel }) {
         this.accountService.register(value).subscribe(res => {
-            console.log('Registered', res);
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password

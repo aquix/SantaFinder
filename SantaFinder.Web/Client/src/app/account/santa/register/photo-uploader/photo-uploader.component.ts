@@ -22,7 +22,6 @@ export class PhotoUploaderComponent implements OnInit {
     }
 
     onPhotoChanged(event: any) {
-        console.log('photo changed');
         if (!event.target.files) {
             return;
         }

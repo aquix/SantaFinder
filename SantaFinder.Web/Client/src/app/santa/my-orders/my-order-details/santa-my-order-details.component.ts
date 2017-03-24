@@ -39,9 +39,7 @@ export class SantaMyOrderDetailsComponent implements OnInit {
             });
             this.santaOrdersListService.loadOrders(1);
             this.santaOrdersListService.selectOrder(-1);
-        }, err => {
-            console.log(err);
-        });
+        }, console.log);
     }
 
     onDiscardClick() {
@@ -53,9 +51,7 @@ export class SantaMyOrderDetailsComponent implements OnInit {
             });
             this.santaOrdersListService.loadOrders(1);
             this.santaOrdersListService.selectOrder(-1);
-        }, err => {
-            console.log(err);
-        });
+        }, console.log);
     }
 
     canCompleteOrder() {

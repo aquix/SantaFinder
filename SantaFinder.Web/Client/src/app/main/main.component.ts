@@ -11,12 +11,9 @@ export class MainComponent implements OnInit {
     constructor(
         private router: Router,
         private authInfoStorage: AuthInfoStorage
-    ) {
-        console.log('main ctor');
-    }
+    ) { }
 
     ngOnInit() {
-        console.log('main init');
         let userType = this.authInfoStorage.authInfo.userType;
         let redirectUri = '';
         if (userType === UserType.client) {

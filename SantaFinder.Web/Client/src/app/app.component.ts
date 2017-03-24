@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.notificationsService.subscribe(notification => {
-            console.log("new notification");
             if (this.isNotificationVisible) {
                 this.notificationsStack.push(notification);
             } else {
@@ -46,8 +45,6 @@ export class AppComponent implements OnInit {
     }
 
     private hideNotification() {
-        console.log("show notification");
-
         clearTimeout(this.currentNotificationTimeout);
         this.isNotificationVisible = false;
         if (this.notificationsStack.length > 0) {
@@ -59,7 +56,6 @@ export class AppComponent implements OnInit {
     }
 
     private showNotification(notification: NotificationViewModel) {
-        console.log("show notification");
         this.isNotificationVisible = true;
         this.appNotification.data = notification;
 

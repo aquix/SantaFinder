@@ -139,7 +139,6 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
                     type: NotificationType.error,
                     content: `An error occurred during updating order info`
                 });
-                console.log('error');
             }
         });
     }

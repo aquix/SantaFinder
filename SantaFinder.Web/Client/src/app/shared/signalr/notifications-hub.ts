@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { AppConfig } from '../../app.config';
 import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
-import { NotificationsHubClient } from './notifications-hub-client';
 import { NotificationsService } from '../notifications/notifications.service';
-import { NotificationViewModel } from "../notifications/notification.model";
+import { NotificationViewModel } from '../notifications/notification.model';
 
 @Injectable()
 export class NotificationsHub {
     private hub: any;
-    private client: NotificationsHubClient;
     private isConnected = false;
     private waitingActions: (() => void)[] = [];
 
@@ -25,13 +23,12 @@ export class NotificationsHub {
         $.connection.hub.url = `${AppConfig.SERVER}/signalr`;
         $.connection.hub.qs = { 'access_token': authInfoStorage.authInfo.token };
 
-        // this.client = new NotificationsHubClient(this.hub, this.notificationsService);
-        this.hub.client.notify =(notification: NotificationViewModel) => {
+        // Client actions
+        this.hub.client.notify = (notification: NotificationViewModel) => {
             this.notificationsService.notify(notification);
         };
 
         $.connection.hub.start().done(() => {
-            console.log('I am connected to hub');
             this.onConnected();
         });
     }

@@ -62,7 +62,6 @@ export class SantaRegisterFormComponent implements OnInit {
     onSubmitClick({ value }: { value: SantaRegisterModel }) {
         value.photo = this.photoUploader.photo;
         this.accountService.register(value).subscribe(res => {
-            console.log('Registered', res);
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
@@ -72,7 +71,6 @@ export class SantaRegisterFormComponent implements OnInit {
                 console.log('error when login');
             });
         }, err => {
-            console.log(err);
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });

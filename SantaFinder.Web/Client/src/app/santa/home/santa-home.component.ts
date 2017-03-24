@@ -25,12 +25,8 @@ export class SantaHomeComponent implements OnInit {
 
     ngOnInit() {
         this.ordersService.getOrderLocations().subscribe(res => {
-            if (res.status === 200) {
-                this.orders = res.json();
-            } else {
-                console.log('error', res);
-            }
-        });
+            this.orders = res.json();
+        }, console.log);
 
         this.selectOrderService.selectedOrder$.subscribe(id => {
             let orderIndex = this.orders.findIndex(o => o.id === id);
@@ -58,7 +54,10 @@ export class SantaHomeComponent implements OnInit {
                 let orderIndex = this.orders.findIndex(o => o.id === id);
                 this.orders.splice(orderIndex, 1);
             } else {
-                console.log('error taking order');
+                this.notificationsService.notify({
+                    type: NotificationType.error,
+                    content: `An error occurred while taking order. Please try again later`
+                });
             }
         });
     }

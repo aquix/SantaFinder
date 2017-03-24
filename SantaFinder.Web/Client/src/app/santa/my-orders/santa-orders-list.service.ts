@@ -29,9 +29,7 @@ export class SantaOrdersListService {
         this.santaOrdersService.getAll(this.filter.value, this.itemsPerPage, page - 1).subscribe((data: PagedResponse<SantaOrderPreview>) => {
             this.orders.next(data.items);
             this.totalItems.next(data.totalCount);
-        }, err => {
-            console.log(`error in getAll ${err}`);
-        });
+        }, console.log);
     }
 
     selectOrder(index: number) {
@@ -50,8 +48,6 @@ export class SantaOrdersListService {
 
         this.santaOrdersService.getDetails(selectedOrder.id).subscribe((orderInfo: OrderFullInfo) => {
             this.orderDetails.next(orderInfo);
-        }, err => {
-            console.log(`error in orderinfo ${err}`);
-        });
+        }, console.log);
     }
 }
