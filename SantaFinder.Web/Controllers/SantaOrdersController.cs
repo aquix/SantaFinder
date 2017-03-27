@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using SantaFinder.Web.Hubs;
 using SantaFinder.Web.Models.SantaOrders;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
 using SantaFinder.Web.Models.ServerNotifications;
+using SantaFinder.Web.Notifications.Hubs;
 
 namespace SantaFinder.Web.Controllers
 {

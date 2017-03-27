@@ -1,0 +1,14 @@
+.dynamic-chat-window {
+    min-width: 300px;
+    max-width: 500px;
+
+    height: 500px;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    background-color: #80CBC4;
+
+    overflow: auto;
+}

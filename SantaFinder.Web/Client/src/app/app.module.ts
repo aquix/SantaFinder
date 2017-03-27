@@ -63,9 +63,12 @@ import { ClientSantaInfoComponent } from './client/santa-info/client-santa-info.
 import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
 import { NotificationComponent } from './shared/notifications/notification.component';
+import { ChatWindowComponent } from './shared/chat-window/chat-window.component';
+import { DynamicChatComponent } from './shared/dynamic-chat-window/dynamic-chat-window.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
+import { ChatHub } from './shared/signalr/chat-hub';
 
 @NgModule({
     imports: [
@@ -116,6 +119,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientSantaInfoComponent,
         SantaPreviewCardComponent,
         NotificationComponent,
+        ChatWindowComponent,
+        DynamicChatComponent,
 
         AddressPipe,
         DatetimePipe
@@ -136,7 +141,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         LocationService,
         GeocodingService,
         NotificationsService,
-        NotificationsHub
+        NotificationsHub,
+        ChatHub
     ],
     bootstrap: [AppComponent],
 })

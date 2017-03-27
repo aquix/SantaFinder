@@ -51,6 +51,7 @@ namespace SantaFinder.Web.Services
             }
 
             _db.Orders.Add(order);
+
             try
             {
                 var itemsAffected = await _db.SaveChangesAsync();
@@ -59,6 +60,7 @@ namespace SantaFinder.Web.Services
                     return -1;
                 }
 
+                // Add related presents
                 var presents = newOrder.Presents.Select(p => new Present
                 {
                     OrderId = order.Id,
@@ -67,6 +69,19 @@ namespace SantaFinder.Web.Services
                 });
 
                 _db.Presents.AddRange(presents);
+
+                // Add comments
+                if (!string.IsNullOrEmpty(newOrder.Comments))
+                {
+                    _db.ChatMessages.Add(new ChatMessage
+                    {
+                        Body = newOrder.Comments,
+                        Datetime = DateTime.Now,
+                        OrderId = order.Id,
+                        SenderId = userId
+                    });
+                }
+
                 await _db.SaveChangesAsync();
 
                 return order.Id;
@@ -82,6 +97,7 @@ namespace SantaFinder.Web.Services
             return await _db.Orders
                 .Include(o => o.Presents)
                 .Include(o => o.Santa)
+                .Include(o => o.ChatMessages)
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
 

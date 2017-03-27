@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Order.cs" />

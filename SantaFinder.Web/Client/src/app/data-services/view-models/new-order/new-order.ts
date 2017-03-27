@@ -13,4 +13,5 @@ export interface NewOrder {
     childrenNames: string;
     presents: Present[];
     datetime: string;
+    comments: string;
 }

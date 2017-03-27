@@ -17,6 +17,7 @@ using SantaFinder.Data.Identity;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using SantaFinder.Web.Hubs;
+using SantaFinder.Web.Notifications.Hubs;
 
 namespace SantaFinder.Web.Util
 {

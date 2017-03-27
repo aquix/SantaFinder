@@ -85,4 +85,6 @@
             <button *ngIf="!editMode && somethingChanged" (click)="onSubmitClick(orderInfoForm)" class="sf-button sf-form__button">Submit changes</button>
         </div>
     </form>
+
+    <dynamic-chat-window [messages]="chatMessages" [orderId]="id"></dynamic-chat-window>
 </div>

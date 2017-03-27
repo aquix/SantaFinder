@@ -52,9 +52,15 @@ namespace SantaFinder.Web.Controllers
                     BuyBySanta = p.BuyBySanta,
                     Name = p.Name
                 }),
-                
+
                 Status = order.Status,
-                Rating = order.Rating
+                Rating = order.Rating,
+                ChatMessages = order.ChatMessages.Select(m => new ChatMessageViewModel
+                {
+                    Body = m.Body,
+                    Datetime = m.Datetime,
+                    SenderId = m.SenderId
+                })
             };
 
             if (orderViewModel.Status != OrderStatus.New)

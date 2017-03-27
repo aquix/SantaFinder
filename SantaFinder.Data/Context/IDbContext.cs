@@ -13,6 +13,7 @@ namespace SantaFinder.Data.Context
         DbSet<Santa> Santas { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<Present> Presents { get; set; }
+        DbSet<ChatMessage> ChatMessages { get; set; }
 
         int SaveChanges();
         Task<int> SaveChangesAsync();

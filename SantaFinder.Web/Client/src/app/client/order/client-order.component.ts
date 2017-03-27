@@ -40,7 +40,8 @@ export class ClientOrderComponent implements OnInit {
             datetime: ['', Validators.required],
             presents: this.formBuilder.array([
                 this.initNewPresent()
-            ])
+            ]),
+            comments: ['']
         });
 
         let addressGroup = this.orderForm.get('address');

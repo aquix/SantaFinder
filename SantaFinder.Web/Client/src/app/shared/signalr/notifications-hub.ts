@@ -1,59 +1,19 @@
 import { Injectable } from '@angular/core';
-
-import { AppConfig } from '../../app.config';
 import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationViewModel } from '../notifications/notification.model';
+import { SignalrHub } from './signalr-hub';
 
 @Injectable()
-export class NotificationsHub {
-    private hub: any;
-    private isConnected = false;
-    private waitingActions: (() => void)[] = [];
-
+export class NotificationsHub extends SignalrHub {
     constructor(
         private authInfoStorage: AuthInfoStorage,
         private notificationsService: NotificationsService
     ) {
-        if (window['$'] === undefined || window['$'].hubConnection === undefined) {
-            throw new Error('The variable $ or the .hubConnection() function are not defined...please check the SignalR scripts have been loaded properly');
-        }
-
-        this.hub = $.connection['notificationsHub'];
-        $.connection.hub.url = `${AppConfig.SERVER}/signalr`;
-        $.connection.hub.qs = { 'access_token': authInfoStorage.authInfo.token };
-
-        // Client actions
-        this.hub.client.notify = (notification: NotificationViewModel) => {
-            this.notificationsService.notify(notification);
-        };
-
-        $.connection.hub.start().done(() => {
-            this.onConnected();
+        super(authInfoStorage, 'notificationsHub', {
+            notify: (notification: NotificationViewModel) => {
+                this.notificationsService.notify(notification);
+            }
         });
-    }
-
-    // Server actions will be here
-    serverAction(params) {
-        this.doWhenConnected(() => {
-            this.hub.server.hello(params);
-        });
-    }
-
-    private doWhenConnected(action: () => void) {
-        if (this.isConnected) {
-            action();
-        } else {
-            this.waitingActions.push(action);
-        }
-    }
-
-    private onConnected() {
-        this.isConnected = true;
-        for (let action of this.waitingActions) {
-            setTimeout(action, 0);
-        }
-
-        this.waitingActions = [];
     }
 }

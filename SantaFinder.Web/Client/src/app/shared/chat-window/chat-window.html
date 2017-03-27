@@ -1,0 +1,16 @@
+<div class="chat-window">
+    <div *ngIf="messages.length > 0">
+        <div *ngFor="let message of messages" [ngClass]="['chat-window__bubble', getChatBubbleClass(message)]">
+            {{ message.body }}
+        </div>
+    </div>
+    <div *ngIf="messages.length == 0">
+        No messages yet
+    </div>
+    <div class="new-message-field">
+        <div class="new-message-field__input">
+            <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." />
+        </div>
+        <a href="javascript:;" class="new-message-field__send" (click)="onSendMessageButtonClick()"></a>
+    </div>
+</div>

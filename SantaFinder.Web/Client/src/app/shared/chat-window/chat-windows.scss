@@ -1,0 +1,163 @@
+@mixin calc ($property, $expression) {
+    #{$property}:    -moz-calc(#{$expression});
+    #{$property}: -webkit-calc(#{$expression});
+    #{$property}:      -o-calc(#{$expression});
+    #{$property}:         calc(#{$expression});
+}
+
+$white: #fff;
+$black: #000;
+$bg: #f8f8f8;
+$grey: #999;
+$dark: #1a1a1a;
+$light: #e6e6e6;
+$wrapper: 1000px;
+$blue: #00b0ff;
+
+.chat-window {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    padding: 0 35px 92px;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: $light;
+    @include calc(height, '100% - 48px');
+    justify-content: flex-end;
+    flex-direction: column;
+
+    .chat-window__bubble {
+        transition-timing-function: cubic-bezier(.4,-.04, 1, 1);
+        @for $i from 1 through 10 {
+            &:nth-of-type(#{$i}) {
+                animation-duration: .15s *$i;
+            }
+        }
+
+        font-size: 16px;
+        position: relative;
+        display: inline-block;
+        clear: both;
+        margin-bottom: 8px;
+        padding: 13px 14px;
+        vertical-align: top;
+        border-radius: 5px;
+        &:before {
+            position: absolute;
+            top: 19px;
+            display: block;
+            width: 8px;
+            height: 6px;
+            content: '\00a0';
+            transform: rotate(29deg ) skew( -35deg );
+        }
+        &_you {
+            float: left;
+            color: $white;
+            background-color: $blue;
+            align-self: flex-start;
+            animation-name: slideFromLeft;
+            &:before {
+                left: -3px;
+                background-color: $blue;
+            }
+        }
+        &_me {
+            float: right;
+            color: $dark;
+            background-color: #eceff1;
+            align-self: flex-end;
+            animation-name: slideFromRight;
+            &:before {
+                right: -3px;
+                background-color: #eceff1;
+            }
+        }
+    }
+}
+
+.new-message-field {
+    position: absolute;
+    bottom: 29px;
+    left: 30px;
+    height: 42px;
+    padding-left: 8px;
+    border: 1px solid $light;
+    background-color: #eceff1;
+    @include calc(width, '100% - 58px');
+    border-radius: 5px;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    &__input {
+        flex: 1;
+
+        input {
+            font-size: 16px;
+            float: left;
+            height: 40px;
+            padding: 0 10px;
+            color: $dark;
+            border: 0;
+            outline: none;
+            background-color: #eceff1;
+        }
+    }
+
+    &__send {
+        padding-right: 20px;
+        &:before {
+            display: inline-block;
+            width: 20px;
+            height: 42px;
+            margin-left: 11px;
+            content: '';
+            background-image: url('http://s30.postimg.org/nz9dho0pp/send.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}
+
+// Animations
+@keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+@keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}

@@ -15,7 +15,7 @@ using Microsoft.AspNet.SignalR.Infrastructure;
 using Autofac.Integration.SignalR;
 using Autofac.Features.AttributeFilters;
 
-namespace SantaFinder.Web.Hubs
+namespace SantaFinder.Web.Notifications.Hubs
 {
     public class NotificationsHub : Hub<INotificationsHub>
     {

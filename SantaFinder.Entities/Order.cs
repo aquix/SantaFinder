@@ -15,6 +15,7 @@ namespace SantaFinder.Entities
         public int? Rating { get; set; }
 
         public virtual ICollection<Present> Presents { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
         public string ClientId { get; set; }
         public virtual Client Client { get; set; }
         public string SantaId { get; set; }

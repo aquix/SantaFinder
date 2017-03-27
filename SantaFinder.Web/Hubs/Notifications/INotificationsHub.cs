@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SantaFinder.Web.Models.ServerNotifications;
 
-namespace SantaFinder.Web.Hubs
+namespace SantaFinder.Web.Notifications.Hubs
 {
     public interface INotificationsHub
     {
