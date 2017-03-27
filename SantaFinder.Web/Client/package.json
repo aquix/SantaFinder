@@ -56,6 +56,7 @@
     "typescript": "*",
     "typings": "*",
     "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2",
     "webpack-merge": "^1.1.1",
     "webpack-uglify-js-plugin": "^1.1.9"
   }

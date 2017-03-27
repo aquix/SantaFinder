@@ -33,6 +33,7 @@ module.exports = merge(commonConfig, {
         contentBase: path.join(__dirname, '..', 'dist'),
         historyApiFallback: true,
         inline: true,
+        compress: true,
         hot: true,
 
     },

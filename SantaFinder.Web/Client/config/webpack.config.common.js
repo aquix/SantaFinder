@@ -2,6 +2,7 @@
 
 const HtmlWebpack = require('html-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
@@ -11,7 +12,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: './dist'
+        path: path.join(__dirname, 'dist')
     },
 
     module: {
