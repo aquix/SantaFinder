@@ -1,7 +1,7 @@
 <div class="dynamic-chat-window">
     <header class="dynamic-chat-window__header">
         <div class="dynamic-chat-window__header-text">{{ header }}</div>
-        <div class="dynamic-chat-window__open-close" (click)="isMaximized = !isMaximized">
+        <div class="dynamic-chat-window__open-close" (click)="toggleChatVisibility()">
             <span *ngIf="isMaximized">✖</span>
             <span *ngIf="!isMaximized">▲</span>
         </div>

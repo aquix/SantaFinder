@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
-import { ChatMessageViewModel } from '../models/chat-message.view-model';
-import { ChatHub } from '../signalr/chat-hub';
-import { AuthInfoStorage } from "../../auth/auth-info-storage.service";
+import { ChatMessageViewModel } from '../../models/chat-message.view-model';
+import { ChatHub } from '../../signalr/chat-hub';
+import { AuthInfoStorage } from '../../../auth/auth-info-storage.service';
 
 @Component({
     selector: 'chat-window',
@@ -17,7 +17,7 @@ export class ChatWindowComponent implements OnInit {
 
     constructor(
         private chatHub: ChatHub,
-        private authInfoStorage: AuthInfoStorage
+        private authInfoStorage: AuthInfoStorage,
     ) {
         this.myId = authInfoStorage.authInfo.id;
     }

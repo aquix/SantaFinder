@@ -15,5 +15,7 @@ export class NotificationsHub extends SignalrHub {
                 this.notificationsService.notify(notification);
             }
         });
+
+        console.log('notification hub ctor');
     }
 }
