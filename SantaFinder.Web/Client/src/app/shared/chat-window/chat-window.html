@@ -4,13 +4,7 @@
             {{ message.body }}
         </div>
     </div>
-    <div *ngIf="messages.length == 0">
+    <div *ngIf="messages.length == 0" class="chat-window__no-messages">
         No messages yet
-    </div>
-    <div class="new-message-field">
-        <div class="new-message-field__input">
-            <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." />
-        </div>
-        <a href="javascript:;" class="new-message-field__send" (click)="onSendMessageButtonClick()"></a>
     </div>
 </div>

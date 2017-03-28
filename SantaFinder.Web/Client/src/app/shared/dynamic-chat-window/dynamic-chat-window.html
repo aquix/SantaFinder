@@ -1,3 +1,25 @@
 <div class="dynamic-chat-window">
-    <chat-window [messages]="messages" [orderId]="orderId"></chat-window>
+    <header class="dynamic-chat-window__header">
+        <div class="dynamic-chat-window__header-text">{{ header }}</div>
+        <div class="dynamic-chat-window__open-close" (click)="isMaximized = !isMaximized">
+            <span *ngIf="isMaximized">✖</span>
+            <span *ngIf="!isMaximized">▲</span>
+        </div>
+    </header>
+    <div [ngClass]="{'dynamic-chat-window_hidden': !isMaximized}">
+        <section #chatWindowWrapper class="dynamic-chat-window__chat">
+            <chat-window #chatWindow [messages]="messages" [orderId]="orderId"
+                        (onMessageReceived)="onMessageReceived()">
+            </chat-window>
+        </section>
+        <footer class="new-message-field">
+            <div class="new-message-field__input">
+                <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." />
+            </div>
+            <button (click)="onSendMessageButtonClick()" class="new-message-field__send"
+                    [disabled]="!newMessage">
+                <img src="http://s30.postimg.org/nz9dho0pp/send.png" alt="Send">
+            </button>
+        </footer>
+    </div>
 </div>

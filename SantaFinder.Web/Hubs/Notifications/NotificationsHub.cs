@@ -21,25 +21,22 @@ namespace SantaFinder.Web.Notifications.Hubs
     {
         private AppDbContext _dbContext;
 
-        public NotificationsHub(AppDbContext dbContext)
-        {
-            Debug.Print("hub ctor");
-            _dbContext = dbContext;
-        }
-
         public override Task OnConnected()
         {
-            Debug.Print($"User connected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
-            Clients.All.Test(123);
-
+            Debug.Print($"NotificationsHub connected {Context.User.Identity.GetUserName()}");
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            Debug.Print($"User diconnected {Context.ConnectionId} {Context.User.Identity.GetUserId()}");
-
+            Debug.Print($"NotificationsHub disconnected {Context.User.Identity.GetUserName()}");
             return base.OnDisconnected(stopCalled);
+        }
+
+        public override Task OnReconnected()
+        {
+            Debug.Print($"NotificationsHub reconnected {Context.User.Identity.GetUserName()}");
+            return base.OnReconnected();
         }
     }
 }

@@ -22,6 +22,24 @@ namespace SantaFinder.Web.Hubs.Chat
             _db = dbContext;
         }
 
+        public override Task OnConnected()
+        {
+            Debug.Print($"ChatHub connected {Context.User.Identity.GetUserName()}");
+            return base.OnConnected();
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            Debug.Print($"ChatHub disconnected {Context.User.Identity.GetUserName()}");
+            return base.OnDisconnected(stopCalled);
+        }
+
+        public override Task OnReconnected()
+        {
+            Debug.Print($"ChatHub reconnected {Context.User.Identity.GetUserName()}");
+            return base.OnReconnected();
+        }
+
         public async Task SendMessage(NewMessageViewModel newMessageViewModel)
         {
             var order = await _db.Orders.FindAsync(newMessageViewModel.OrderId);
@@ -41,7 +59,13 @@ namespace SantaFinder.Web.Hubs.Chat
 
             if (itemsAffected == 0) return;
 
-            Clients.Users(new List<string> { order.ClientId })
+            var usersInChat = new List<string> { order.ClientId };
+            if (order.SantaId != null)
+            {
+                usersInChat.Add(order.SantaId);
+            }
+
+            Clients.Users(usersInChat)
                 .OnMessageReceived(new ChatMessageViewModel
                 {
                     Body = newMessage.Body,

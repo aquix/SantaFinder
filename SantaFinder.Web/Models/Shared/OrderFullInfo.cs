@@ -20,6 +20,12 @@ namespace SantaFinder.Web.Models.Shared
             Location = order.Location;
             Presents = order.Presents.Select(p => new PresentInfo(p));
             Status = order.Status;
+            ChatMessages = order.ChatMessages.Select(m => new ChatMessageViewModel
+            {
+                Body = m.Body,
+                Datetime = m.Datetime,
+                SenderId = m.SenderId
+            });
         }
 
         public int Id { get; set; }
@@ -31,6 +37,7 @@ namespace SantaFinder.Web.Models.Shared
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
         public virtual IEnumerable<PresentInfo> Presents { get; set; }
+        public virtual IEnumerable<ChatMessageViewModel> ChatMessages { get; set; }
         public SantaShortInfo SantaInfo { get; set; }
     }
 }

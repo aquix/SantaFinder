@@ -86,5 +86,7 @@
         </div>
     </form>
 
-    <dynamic-chat-window [messages]="chatMessages" [orderId]="id"></dynamic-chat-window>
+    <dynamic-chat-window [messages]="chatMessages" [orderId]="id"
+                         [header]="orderStatus === OrderStatus.new ? 'Your comments' : 'Chat with santa'">
+    </dynamic-chat-window>
 </div>

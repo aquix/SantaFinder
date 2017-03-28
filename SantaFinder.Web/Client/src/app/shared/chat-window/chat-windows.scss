@@ -16,17 +16,12 @@ $blue: #00b0ff;
 
 .chat-window {
     position: relative;
-    display: flex;
-    overflow: hidden;
-    padding: 0 35px 92px;
-    border-width: 1px 1px 1px 0;
-    border-style: solid;
-    border-color: $light;
+    padding: 10px 20px;
     @include calc(height, '100% - 48px');
     justify-content: flex-end;
     flex-direction: column;
 
-    .chat-window__bubble {
+    &__bubble {
         transition-timing-function: cubic-bezier(.4,-.04, 1, 1);
         @for $i from 1 through 10 {
             &:nth-of-type(#{$i}) {
@@ -74,49 +69,15 @@ $blue: #00b0ff;
             }
         }
     }
-}
 
-.new-message-field {
-    position: absolute;
-    bottom: 29px;
-    left: 30px;
-    height: 42px;
-    padding-left: 8px;
-    border: 1px solid $light;
-    background-color: #eceff1;
-    @include calc(width, '100% - 58px');
-    border-radius: 5px;
+    &__no-messages {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
 
-    display: flex;
-    flex-flow: row nowrap;
-
-    &__input {
-        flex: 1;
-
-        input {
-            font-size: 16px;
-            float: left;
-            height: 40px;
-            padding: 0 10px;
-            color: $dark;
-            border: 0;
-            outline: none;
-            background-color: #eceff1;
-        }
-    }
-
-    &__send {
-        padding-right: 20px;
-        &:before {
-            display: inline-block;
-            width: 20px;
-            height: 42px;
-            margin-left: 11px;
-            content: '';
-            background-image: url('http://s30.postimg.org/nz9dho0pp/send.png');
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+        font-style: italic;
+        color: #37474F;
     }
 }
 
