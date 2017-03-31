@@ -40,7 +40,7 @@ export class ClientRegisterFormComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             passwords: this.formBuilder.group({
                 password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']
@@ -64,15 +64,12 @@ export class ClientRegisterFormComponent implements OnInit {
 
     onSubmitClick({ value }: { value: ClientRegisterModel }) {
         this.accountService.register(value).subscribe(res => {
-            console.log('Registered', res);
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
             }, UserType.client).subscribe(res => {
                 this.router.navigate(['/client']);
-            }, err => {
-                console.log('error when login');
-            });
+            }, console.log);
         }, err => {
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');

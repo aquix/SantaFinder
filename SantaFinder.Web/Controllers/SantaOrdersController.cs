@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using SantaFinder.Web.Models.SantaOrders;
 using SantaFinder.Web.Models.Shared;
 using SantaFinder.Web.Services;
+using SantaFinder.Web.Models.ServerNotifications;
+using SantaFinder.Web.Notifications.Hubs;
 
 namespace SantaFinder.Web.Controllers
 {
@@ -11,10 +13,14 @@ namespace SantaFinder.Web.Controllers
     public class SantaOrdersController : ApiController
     {
         private SantaOrdersService _santaOrdersService;
+        private NotificationsHubHelper _notificationsHub;
 
-        public SantaOrdersController(SantaOrdersService ordersService)
+        public SantaOrdersController(
+            SantaOrdersService ordersService,
+            NotificationsHubHelper notificationsHub)
         {
             _santaOrdersService = ordersService;
+            _notificationsHub = notificationsHub;
         }
 
         [HttpGet]
@@ -40,7 +46,20 @@ namespace SantaFinder.Web.Controllers
         [Route("api/santaOrders/discard/{id}")]
         public async Task<bool> DiscardOrder(int id)
         {
-            return await _santaOrdersService.DiscardOrder(id);
+            var result = await _santaOrdersService.DiscardOrder(id);
+            var success = result.Item1;
+            var order = result.Item2;
+
+            if (success)
+            {
+                _notificationsHub.SendNotificationToUser(order.ClientId, new Notification
+                {
+                    Type = NotificationType.Error,
+                    Content = $"Order #{order.Id} was rejected"
+                });
+            }
+
+            return success;
         }
 
         [HttpPut]
@@ -48,7 +67,20 @@ namespace SantaFinder.Web.Controllers
         public async Task<bool> TakeOrder(int id)
         {
             var userId = User.Identity.GetUserId();
-            return await _santaOrdersService.TakeOrder(userId, id);
+            var result = await _santaOrdersService.TakeOrder(userId, id);
+            var success = result.Item1;
+            var order = result.Item2;
+
+            if (success)
+            {
+                _notificationsHub.SendNotificationToUser(order.ClientId, new Notification
+                {
+                    Type = NotificationType.Success,
+                    Content = $"Order #{order.Id} accepted by santa {order.Santa?.Name}"
+                });
+            }
+
+            return success;
         }
     }
 }

@@ -3,8 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
+using SantaFinder.Web.Hubs;
 using SantaFinder.Web.Models.SantaOrders;
+using SantaFinder.Web.Models.ServerNotifications;
 using SantaFinder.Web.Models.Shared;
+using System;
 
 namespace SantaFinder.Web.Services
 {
@@ -85,7 +88,7 @@ namespace SantaFinder.Web.Services
             }
         }
 
-        public async Task<bool> DiscardOrder(int orderId)
+        public async Task<Tuple<bool, Order>> DiscardOrder(int orderId)
         {
             var order = await _db.Orders.FindAsync(orderId);
             if (order != null)
@@ -94,15 +97,15 @@ namespace SantaFinder.Web.Services
                 order.Santa = null;
                 order.SantaId = null;
                 await _db.SaveChangesAsync();
-                return true;
+                return Tuple.Create(true, order);
             }
             else
             {
-                return false;
+                return Tuple.Create<bool, Order>(false, null);
             }
         }
 
-        public async Task<bool> TakeOrder(string santaId, int orderId)
+        public async Task<Tuple<bool, Order>> TakeOrder(string santaId, int orderId)
         {
             var order = await _db.Orders.FindAsync(orderId);
 
@@ -110,11 +113,12 @@ namespace SantaFinder.Web.Services
             {
                 ApproveOrder(order, santaId);
                 await _db.SaveChangesAsync();
-                return true;
+
+                return Tuple.Create(true, order);
             }
             else
             {
-                return false;
+                return Tuple.Create<bool, Order>(false, null);
             }
         }
 

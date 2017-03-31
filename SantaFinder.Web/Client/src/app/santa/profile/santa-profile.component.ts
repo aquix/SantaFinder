@@ -7,6 +7,8 @@ import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { SantaProfileModel } from './santa-profile.model';
 import { SantaProfileChangeModel } from './santa-profile-change.model';
+import { NotificationsService } from "../../shared/notifications/notifications.service";
+import { NotificationType } from "../../shared/notifications/notification-type.enum";
 
 @Component({
     selector: 'santa-profile',
@@ -27,7 +29,6 @@ import { SantaProfileChangeModel } from './santa-profile-change.model';
         )
     ]
 })
-
 export class SantaProfileComponent implements OnInit {
     profileForm: FormGroup;
 
@@ -36,12 +37,13 @@ export class SantaProfileComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private accountService: AccountService,
-        private router: Router
+        private router: Router,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             name: ['', Validators.required],
             password: ['', [CustomValidators.password]],
             newPassword: this.formBuilder.group({
@@ -59,6 +61,10 @@ export class SantaProfileComponent implements OnInit {
 
     onSubmitClick({ value }: { value: SantaProfileChangeModel }) {
         this.accountService.changeSantaProfile(value).subscribe(res => {
+            this.notificationsService.notify({
+                type: NotificationType.info,
+                content: `Profile settings successfully changed`
+            });
             this.router.navigate(['/santa']);
         }, err => {
             let errors: string[] = err.json()['modelState'][''];

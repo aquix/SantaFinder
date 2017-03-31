@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,12 +58,24 @@
       <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac.Integration.SignalR, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.SignalR2.4.0.0\lib\net45\Autofac.Integration.SignalR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.0.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.Owin.4.0.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -205,6 +217,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\Startup.Autofac.cs" />
     <Compile Include="App_Start\Startup.Cors.cs" />
+    <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="App_Start\Startup.WebApi.cs" />
     <Compile Include="Areas\Auth\AuthAreaRegistration.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
@@ -221,6 +234,7 @@
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\ChangeProfileException.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
+    <Compile Include="Controllers\ChatMessagesController.cs" />
     <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -231,6 +245,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\Chat\ChatHub.cs" />
+    <Compile Include="Hubs\Chat\IChatHub.cs" />
+    <Compile Include="Hubs\Chat\NewMessageViewModel.cs" />
+    <Compile Include="Hubs\Notifications\INotificationsHub.cs" />
+    <Compile Include="Hubs\Notifications\NotificationsHub.cs" />
+    <Compile Include="Hubs\Notifications\NotificationsHubHelper.cs" />
     <Compile Include="Models\ChangeOrder\PresentInfoForEdit.cs" />
     <Compile Include="Models\ChangeOrder\OrderFullInfoForEditing.cs" />
     <Compile Include="Models\NewOrder\NewOrder.cs" />
@@ -241,6 +261,9 @@
     <Compile Include="Models\Santas\FeedbackItem.cs" />
     <Compile Include="Models\Santas\SantaFullInfoForClient.cs" />
     <Compile Include="Models\Santas\SantaInfoForClient.cs" />
+    <Compile Include="Models\ServerNotifications\Notification.cs" />
+    <Compile Include="Models\ServerNotifications\NotificationType.cs" />
+    <Compile Include="Models\Shared\ChatMessageViewModel.cs" />
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
@@ -260,6 +283,9 @@
     <Compile Include="Util\AutofacConfig.cs" />
     <Compile Include="Util\FileModel.cs" />
     <Compile Include="Util\FileResult.cs" />
+    <Compile Include="Util\SignalR\QueryStringOAuthBearerProvider.cs" />
+    <Compile Include="Util\SignalR\SignalRContractResolver.cs" />
+    <Compile Include="Util\SignalR\CustomUserIdProvider.cs" />
     <Compile Include="Util\UploadMultipartMediaTypeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,11 +8,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(commonConfig, {
      module: {
-        loaders: [{
-            loaders: [ExtractTextPlugin.extract('style', 'css'), 'to-string', 'css', 'sass'],
-            test: /\.scss$/,
-            exclude: /node_modules/
-        }]
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader'] }),
+                    'to-string-loader',
+                    'css-loader',
+                    'sass-loader'
+                ],
+            }
+        ]
     },
 
      plugins: [

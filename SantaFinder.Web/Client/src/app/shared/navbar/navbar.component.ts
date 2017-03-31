@@ -11,7 +11,6 @@ export class NavbarComponent implements OnInit {
     @Input() links: Link[];
     @Input()
     set theme(value: string) {
-        console.log(value);
         if (this.themes.indexOf(value) === -1) {
             return;
         }

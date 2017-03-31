@@ -9,4 +9,5 @@ export interface NewOrderViewModel {
     childrenNames: string;
     presents: Present[];
     datetime: string;
+    comments: string;
 }

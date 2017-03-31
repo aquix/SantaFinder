@@ -1,6 +1,15 @@
 <div class="sf-page santa-page">
+    <sf-notification #appNotification
+                     class="app-notification" [ngClass]="{'app-notification_hidden': !isNotificationVisible}"
+                     (close)="onNotificationCloseButtonClick()"
+                     (mouseover)="onNotificationMouseOver()"
+                     (mouseleave)="onNotificationMouseLeave()">
+        {{currentNotificationText}}
+    </sf-notification>
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
-        <router-outlet></router-outlet>
+        <ng2-page-transition [scrollTop]="false">
+            <router-outlet></router-outlet>
+        </ng2-page-transition>
     </main>
 </div>

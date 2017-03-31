@@ -10,5 +10,6 @@ namespace SantaFinder.Web.Models
         public string ChildrenNames { get; set; }
         public List<PresentInfo> Presents { get; set; }
         public DateTime Datetime { get; set; }
+        public string Comments { get; set; }
     }
 }

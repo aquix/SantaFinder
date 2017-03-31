@@ -52,9 +52,19 @@ namespace SantaFinder.Web.Controllers
                     BuyBySanta = p.BuyBySanta,
                     Name = p.Name
                 }),
-                
+
                 Status = order.Status,
-                Rating = order.Rating
+                Rating = order.Rating,
+                ChatMessages = order.ChatMessages
+                    .OrderByDescending(m => m.Datetime)
+                    .Select(m => new ChatMessageViewModel
+                    {
+                        Body = m.Body,
+                        Datetime = m.Datetime,
+                        SenderId = m.SenderId
+                    })
+                    .Take(20)
+                    .Reverse()
             };
 
             if (orderViewModel.Status != OrderStatus.New)
@@ -75,15 +85,13 @@ namespace SantaFinder.Web.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> CreateOrder(NewOrder order)
         {
-            var success = await _ordersService.CreateOrder(order, User.Identity.GetUserId());
-            if (success)
-            {
-                return Ok();
-            }
-            else
+            var newOrderId = await _ordersService.CreateOrder(order, User.Identity.GetUserId());
+            if (newOrderId == -1)
             {
                 return InternalServerError();
             }
+
+            return Json(newOrderId);
         }
 
         [HttpPut]

@@ -1,0 +1,51 @@
+.sf-notification {
+    &_info {
+        background-color: #81D4FA;
+    }
+
+    &_error {
+        background-color: #FF8A65;
+    }
+
+    &_success {
+        background-color: #A5D6A7;
+    }
+
+    position: relative;
+    max-width: 250px;
+    min-height: 70px;
+    max-height: 150px;
+    display: flex;
+    flex-flow: row nowrap;
+    opacity: 0.7;
+
+    border-radius: 5px;
+    padding: 5px;
+
+    &__picture {
+        flex: 1 0 1;
+    }
+
+    &__body {
+        flex: 3;
+        min-width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 30px 10px 10px;
+    }
+
+    &__close-button {
+        position: absolute;
+        color: #777;
+        font: 18px/100% arial, sans-serif;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #fff;
+        top: 15px;
+        right: 15px;
+
+        &:after {
+            content: '✖';
+        }
+    }
+}

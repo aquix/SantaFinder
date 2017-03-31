@@ -15,5 +15,6 @@ namespace SantaFinder.Data.Context
         public DbSet<Santa> Santas { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Present> Presents { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
     }
 }

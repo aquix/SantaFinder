@@ -44,6 +44,13 @@
         <span [class]="getStatusColor(order.status)">{{ OrderStatus[order.status] }}</span>
     </div>
     <div class="my-order-detailed-info__actions my-order-detailed-info__row">
+        <a *ngIf="canCompleteOrder()"
+            class="sf-button my-order-button my-order-go-button"
+            target="_blank" [href]="createDirectionLink(order.location)">
+            Go with Google maps
+        </a>
+    </div>
+    <div class="my-order-detailed-info__actions my-order-detailed-info__row">
         <button *ngIf="canCompleteOrder()" (click)="onCompleteClick()"
                 class="sf-button my-order-button my-order-complete-button">
             Mark as completed
@@ -53,6 +60,10 @@
             Discard
         </button>
     </div>
+    <dynamic-chat-window [messages]="order.chatMessages" [orderId]="order.id"
+                         header="Chat with client"
+                         [isMaximized]="true">
+    </dynamic-chat-window>
 </div>
 <div *ngIf="!order" class="no-order-info">
     <div>Select order from left pane</div>

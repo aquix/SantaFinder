@@ -1,0 +1,16 @@
+<div class="sf-notification"
+     [ngClass]="getTypeClassName()">
+    <div class="sf-notification__picture">
+
+    </div>
+    <div class="sf-notification__body">
+        <markdown [data]="data.content">
+        </markdown>
+    </div>
+    <a href="javascript:void(0)"
+       class="sf-notification__close-button"
+       (click)="onCloseButtonClick()"
+       (mouseover)="onMouseOver()"
+       (mouseleave)="onMouseLeave()">
+    </a>
+</div>

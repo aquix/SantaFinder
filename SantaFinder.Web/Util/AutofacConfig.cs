@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Web;
 using Autofac;
+using Autofac.Integration.SignalR;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataProtection;
@@ -13,6 +14,10 @@ using SantaFinder.Data.Context;
 using SantaFinder.Web.Services;
 using SantaFinder.Entities;
 using SantaFinder.Data.Identity;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Infrastructure;
+using SantaFinder.Web.Hubs;
+using SantaFinder.Web.Notifications.Hubs;
 
 namespace SantaFinder.Web.Util
 {
@@ -25,6 +30,7 @@ namespace SantaFinder.Web.Util
             RegisterTypes(builder, app);
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterHubs(Assembly.GetExecutingAssembly());
 
             return builder.Build();
         }
@@ -60,6 +66,19 @@ namespace SantaFinder.Web.Util
                 .AsSelf();
             builder.RegisterType<StaticService>()
                 .AsSelf();
+        }
+
+        public static ContainerBuilder RegisterHubTypes(AutofacDependencyResolver resolver)
+        {
+            var builder = new ContainerBuilder();
+            builder.Register(context => resolver.Resolve<IConnect‌​ionManager>()
+                                                .GetHub‌​Context<NotificationsHub>()
+            ).ExternallyOwned();
+
+            builder.RegisterType<NotificationsHubHelper>()
+                .AsSelf();
+
+            return builder;
         }
     }
 }

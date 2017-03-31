@@ -25,7 +25,7 @@ namespace SantaFinder.Web.Services
             _db = db;
         }
 
-        public async Task<bool> CreateOrder(NewOrder newOrder, string userId)
+        public async Task<int> CreateOrder(NewOrder newOrder, string userId)
         {
             var order = new Order
             {
@@ -51,14 +51,16 @@ namespace SantaFinder.Web.Services
             }
 
             _db.Orders.Add(order);
+
             try
             {
                 var itemsAffected = await _db.SaveChangesAsync();
                 if (itemsAffected == 0)
                 {
-                    return false;
+                    return -1;
                 }
 
+                // Add related presents
                 var presents = newOrder.Presents.Select(p => new Present
                 {
                     OrderId = order.Id,
@@ -67,13 +69,26 @@ namespace SantaFinder.Web.Services
                 });
 
                 _db.Presents.AddRange(presents);
+
+                // Add comments
+                if (!string.IsNullOrEmpty(newOrder.Comments))
+                {
+                    _db.ChatMessages.Add(new ChatMessage
+                    {
+                        Body = newOrder.Comments,
+                        Datetime = DateTime.Now,
+                        OrderId = order.Id,
+                        SenderId = userId
+                    });
+                }
+
                 await _db.SaveChangesAsync();
 
-                return true;
+                return order.Id;
             }
             catch (DbEntityValidationException)
             {
-                return false;
+                return -1;
             }
         }
 
@@ -82,6 +97,7 @@ namespace SantaFinder.Web.Services
             return await _db.Orders
                 .Include(o => o.Presents)
                 .Include(o => o.Santa)
+                .Include(o => o.ChatMessages)
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
 

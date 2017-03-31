@@ -2,6 +2,7 @@
 
 const HtmlWebpack = require('html-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
@@ -11,17 +12,24 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: './dist'
+        path: path.join(__dirname, 'dist')
     },
 
     module: {
-        loaders: [
+        rules: [
             {
-                loader: 'raw',
+                use: 'raw-loader',
                 test: /\.html$/
             },
             {
-                loader: 'ts!angular2-template',
+                use: [
+                    {
+                        loader: 'ts-loader'
+                    },
+                    {
+                        loader: 'angular2-template-loader'
+                    }
+                ],
                 test: /\.ts$/,
                 exclude: /node_modules/
             }
@@ -41,10 +49,15 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: './src/static'
-        }])
+        }]),
+        // Need to hack Angular dynamic imports
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)bundles/,
+        __dirname
+        ),
     ],
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['.js', '.ts']
     }
 };
 

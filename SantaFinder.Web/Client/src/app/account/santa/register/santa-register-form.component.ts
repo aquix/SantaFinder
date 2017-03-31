@@ -43,7 +43,7 @@ export class SantaRegisterFormComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, EmailValidators.simple()]],
+            email: ['', [Validators.required, EmailValidators.simple]],
             passwords: this.formBuilder.group({
                 password: ['', [Validators.required, CustomValidators.password]],
                 passwordConfirmation: ['']
@@ -62,17 +62,13 @@ export class SantaRegisterFormComponent implements OnInit {
     onSubmitClick({ value }: { value: SantaRegisterModel }) {
         value.photo = this.photoUploader.photo;
         this.accountService.register(value).subscribe(res => {
-            console.log('Registered', res);
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
             }, UserType.santa).subscribe(res => {
                 this.router.navigate(['/santa']);
-            }, err => {
-                console.log('error when login');
-            });
+            }, console.log);
         }, err => {
-            console.log(err);
             let errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });

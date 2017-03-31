@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, ViewChild, QueryList } from '@angular/core';
 import { SebmGoogleMapMarker, SebmGoogleMapInfoWindow, MarkerManager, GoogleMapsAPIWrapper, } from 'angular2-google-maps/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { OrderLocationInfo } from '../../../data-services/view-models/orders-on-map/order-location-info';
 import { Location } from '../../../shared/models/location';

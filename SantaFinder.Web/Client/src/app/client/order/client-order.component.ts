@@ -6,6 +6,8 @@ import * as moment from 'moment/moment';
 
 import { OrdersService } from '../../data-services/orders.service';
 import { NewOrderViewModel } from '../../data-services/view-models/new-order/order.view-model';
+import { NotificationsService } from '../../shared/notifications/notifications.service';
+import { NotificationType } from '../../shared/notifications/notification-type.enum';
 
 @Component({
     selector: 'client-order',
@@ -19,7 +21,8 @@ export class ClientOrderComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private ordersService: OrdersService
+        private ordersService: OrdersService,
+        private notificationsService: NotificationsService
     ) { }
 
     ngOnInit() {
@@ -37,7 +40,8 @@ export class ClientOrderComponent implements OnInit {
             datetime: ['', Validators.required],
             presents: this.formBuilder.array([
                 this.initNewPresent()
-            ])
+            ]),
+            comments: ['']
         });
 
         let addressGroup = this.orderForm.get('address');
@@ -79,12 +83,19 @@ export class ClientOrderComponent implements OnInit {
         let datetime = moment(value.datetime);
         value.datetime = datetime.toJSON();
 
-        this.ordersService.createOrder(value).subscribe(success => {
-            if (success) {
-                this.router.navigate(['../']);
-            } else {
-                console.log('error');
-            }
+        this.ordersService.createOrder(value).subscribe(orderId => {
+            let redirectUrl = `/client/orderinfo/${orderId}`;
+            this.notificationsService.notify({
+                type: NotificationType.success,
+                content: `New order successfully created.
+                    Click [here](${redirectUrl}) for more details`
+            });
+            this.router.navigate(['../']);
+        }, err => {
+            this.notificationsService.notify({
+                type: NotificationType.error,
+                content: err
+            });
         });
     }
 }
