@@ -34,6 +34,7 @@ import { NotificationsService } from './shared/notifications/notifications.servi
 import { NotificationsHub } from './shared/signalr/notifications-hub';
 import { ChatHub } from './shared/signalr/chat-hub';
 import { ChatWindowTrackerService } from './shared/chat/chat-window-tracker.service';
+import { ChatMessagesService } from './data-services/chat-messages.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -86,7 +87,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         Ng2PaginationModule,
         InfiniteScrollModule,
         MarkdownModule.forRoot(),
-        Ng2PageTransitionModule
+        Ng2PageTransitionModule,
     ],
     declarations: [
         NavbarComponent,
@@ -144,7 +145,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         NotificationsService,
         NotificationsHub,
         ChatHub,
-        ChatWindowTrackerService
+        ChatWindowTrackerService,
+        ChatMessagesService
     ],
     bootstrap: [AppComponent],
 })

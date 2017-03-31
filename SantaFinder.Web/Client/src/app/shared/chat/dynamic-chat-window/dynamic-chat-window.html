@@ -7,11 +7,16 @@
         </div>
     </header>
     <div [ngClass]="{'dynamic-chat-window_hidden': !isMaximized}">
-        <section #chatWindowWrapper class="dynamic-chat-window__chat">
-            <chat-window #chatWindow [messages]="messages" [orderId]="orderId"
-                        (onMessageReceived)="onMessageReceived()">
-            </chat-window>
-        </section>
+        <div class="dynamic-chat-window__chat-scrollable">
+            <section #chatWindowWrapper class="dynamic-chat-window__chat with-pretty-scrollbar"
+                     infinite-scroll (scrolledUp)="onChatTopReached()"
+                     [infiniteScrollUpDistance]="0.5"
+                     [scrollWindow]="false">
+                <chat-window #chatWindow [messages]="messages" [orderId]="orderId"
+                            (onMessageReceived)="onMessageReceived()">
+                </chat-window>
+            </section>
+        </div>
         <footer class="new-message-field">
             <div class="new-message-field__input">
                 <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." />

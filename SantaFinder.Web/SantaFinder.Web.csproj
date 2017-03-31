@@ -234,6 +234,7 @@
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\ChangeProfileException.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
+    <Compile Include="Controllers\ChatMessagesController.cs" />
     <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />

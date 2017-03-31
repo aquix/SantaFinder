@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Input, ViewChild, ViewEnca
 import { ChatMessageViewModel } from '../../models/chat-message.view-model';
 import { ChatWindowComponent } from '../chat-window/chat-window.component';
 import { ChatWindowTrackerService } from '../chat-window-tracker.service';
+import { ChatMessagesService } from '../../../data-services/chat-messages.service';
 
 @Component({
     selector: 'dynamic-chat-window',
@@ -22,6 +23,7 @@ export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private chatWindowTrackerService: ChatWindowTrackerService,
+        private chatMessagesService: ChatMessagesService
     ) { }
 
     ngOnInit() {
@@ -67,5 +69,14 @@ export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
             this.chatWindowTrackerService.openedChatId = -1;
         }
+    }
+
+    onChatTopReached() {
+        console.log('chat scrolled');
+        this.chatMessagesService
+            .getMessagesFromOrder(this.orderId, this.messages.length)
+            .subscribe((res: ChatMessageViewModel[]) => {
+                this.messages = res.concat(this.messages);
+            });
     }
 }

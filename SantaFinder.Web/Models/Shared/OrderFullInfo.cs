@@ -20,12 +20,16 @@ namespace SantaFinder.Web.Models.Shared
             Location = order.Location;
             Presents = order.Presents.Select(p => new PresentInfo(p));
             Status = order.Status;
-            ChatMessages = order.ChatMessages.Select(m => new ChatMessageViewModel
-            {
-                Body = m.Body,
-                Datetime = m.Datetime,
-                SenderId = m.SenderId
-            });
+            ChatMessages = order.ChatMessages
+                .OrderByDescending(m => m.Datetime)
+                .Select(m => new ChatMessageViewModel
+                {
+                    Body = m.Body,
+                    Datetime = m.Datetime,
+                    SenderId = m.SenderId
+                })
+                .Take(20)
+                .Reverse();
         }
 
         public int Id { get; set; }

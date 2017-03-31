@@ -55,12 +55,16 @@ namespace SantaFinder.Web.Controllers
 
                 Status = order.Status,
                 Rating = order.Rating,
-                ChatMessages = order.ChatMessages.Select(m => new ChatMessageViewModel
-                {
-                    Body = m.Body,
-                    Datetime = m.Datetime,
-                    SenderId = m.SenderId
-                })
+                ChatMessages = order.ChatMessages
+                    .OrderByDescending(m => m.Datetime)
+                    .Select(m => new ChatMessageViewModel
+                    {
+                        Body = m.Body,
+                        Datetime = m.Datetime,
+                        SenderId = m.SenderId
+                    })
+                    .Take(20)
+                    .Reverse()
             };
 
             if (orderViewModel.Status != OrderStatus.New)
