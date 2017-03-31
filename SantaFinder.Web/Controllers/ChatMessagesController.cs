@@ -25,22 +25,21 @@ namespace SantaFinder.Web.Controllers
         [Route("{orderId:int}")]
         public async Task<IEnumerable<ChatMessageViewModel>> GetMessagesFromOrder(int orderId, int startIndex, int count=20)
         {
-            var messages = _db.ChatMessages
+            var messages = await _db.ChatMessages
                 .Where(m => m.OrderId == orderId)
-                .OrderByDescending(m => m.Datetime).ToList();
-            var messagesVMs = messages
+                .OrderByDescending(m => m.Datetime)
+                .Skip(startIndex)
+                .Take(count)
                 .Select(m => new ChatMessageViewModel
                 {
                     Body = m.Body,
                     Datetime = m.Datetime,
                     SenderId = m.SenderId
-                });
-            var result = messagesVMs
-                .Skip(startIndex)
-                .Take(count)
-                .Reverse();
+                })
+                .ToListAsync();
 
-            return result;
+            messages.Reverse();
+            return messages;
         }
     }
 }

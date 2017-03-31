@@ -37,7 +37,7 @@ export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
     ngAfterViewInit() {
         setTimeout(() => {
             this.scrollToBottom();
-        }, 100);
+        }, 300);
     }
 
     ngOnDestroy() {

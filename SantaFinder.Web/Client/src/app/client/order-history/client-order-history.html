@@ -6,33 +6,30 @@
     <div *ngIf="orders.length > 0" class="orders-history">
         <ul class="orders-list">
             <li *ngFor="let order of orders | paginate: paginationConfig">
-                <div class="sf-card order-item" (click)="onOrderItemClick(order)">
+                <div class="sf-card order-item" [ngClass]="getOrderClass(order)" (click)="onOrderItemClick(order)">
                     <div class="order-item__line order-item__common-info">
-                        <div class="order-item__id">
+                        <div class="order-item__id order-item__bold-text">
                             # {{ order.id }}
-                        </div>
-                        <div>
-                            {{ orderStatus[order.status] }}
                         </div>
                         <div *ngIf="order.status !== orderStatus.new" class="order-item__line order-item__santa-info">
                             <div>
                                 <img [src]="order.santaInfo.photoUrl" alt="Santa's photo'">
                             </div>
-                            <div>
+                            <div class="order-item__santa-info-text">
                                 {{ order.santaInfo.name }}
                             </div>
                         </div>
                     </div>
                     <div class="order-item__line order-item__chidren-names">
-                        For:
+                        <span class="order-item__bold-text">For:</span>
                         <span>{{ order.childrenNames }}</span>
                     </div>
                     <div class="order-item__line order-item__address">
-                        Address:
+                        <span class="order-item__bold-text">Address:</span>
                         <span>{{ order.address | address }}</span>
                     </div>
                     <div class="order-item__line order-item__datetime">
-                        Time:
+                        <span class="order-item__bold-text">Time:</span>
                         <span>{{ order.datetime | datetime }}</span>
                     </div>
                 </div>

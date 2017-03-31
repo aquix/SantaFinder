@@ -235,7 +235,9 @@ ul {
     padding: 10px;
     border: none;
     border-radius: 1em;
-    background: #EEEEEE;
+    background-color: #EEEEEE;
+
+    transition: background-color 1s;
 }
 
 .sf-select {

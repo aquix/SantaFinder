@@ -41,6 +41,20 @@ export class ClientOrderHistoryComponent implements OnInit {
          this.loadCurrentPage();
     }
 
+    getOrderClass(order: OrderShortInfo) {
+        switch (order.status) {
+            case OrderStatus.approved:
+                return 'order-item_approved';
+            case OrderStatus.new:
+                return 'order-item_new';
+            case OrderStatus.completed:
+                return 'order-item_completed';
+
+            default:
+                break;
+        }
+    }
+
     private loadCurrentPage() {
         this.ordersService.getAll(this.paginationConfig.itemsPerPage,
                 this.paginationConfig.currentPage - 1)

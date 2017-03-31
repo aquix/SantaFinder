@@ -22,11 +22,13 @@
     align-items: flex-start;
     margin: 20px auto;
     padding-left: 30px;
+    padding-right: 30px;
 
     &__common-info {
-        width: 70%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     &__line {
@@ -34,15 +36,51 @@
     }
 
     &__santa-info {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
         img {
             width: 30px;
             height: 30px;
         }
     }
 
+    &__santa-info-text {
+        padding-left: 10px;
+    }
+
     &:hover {
         cursor: pointer;
         background-color: #E0E0E0;
+    }
+
+    &_new {
+        background-color: #81D4FA;
+
+        &:hover {
+            background-color: #4FC3F7;
+
+        }
+    }
+
+    &_approved {
+        background-color: #81C784;
+
+        &:hover {
+            background-color: #66BB6A;
+        }
+    }
+
+    &_completed {
+        background-color: #E0E0E0;
+
+        &:hover {
+           background-color: #BDBDBD;
+        }
+    }
+
+    &__bold-text {
+        font-weight: bold;
     }
 }
 
