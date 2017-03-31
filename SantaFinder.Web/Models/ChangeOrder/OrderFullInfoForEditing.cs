@@ -18,6 +18,7 @@ namespace SantaFinder.Web.Models.ChangeOrder
         public Location Location { get; set; }
         public OrderStatus Status { get; set; }
         public IEnumerable<PresentInfoForEdit> Presents { get; set; }
+        public IEnumerable<ChatMessageViewModel> ChatMessages { get; set; }
         public SantaInfoForClient SantaInfo { get; set; }
         public int? Rating { get; set; }
     }

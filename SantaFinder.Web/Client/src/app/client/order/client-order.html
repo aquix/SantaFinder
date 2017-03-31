@@ -65,6 +65,13 @@
             </div>
         </div>
         <div>
+            <div>
+                <textarea formControlName="comments" class="sf-form__control"
+                          placeholder="Your comments here (optional)">
+                </textarea>
+            </div>
+        </div>
+        <div>
             <button type="submit" (click)="onSubmitClick(orderForm)"
                     [disabled]="orderForm.invalid" class="sf-button sf-form__button">Order</button>
         </div>

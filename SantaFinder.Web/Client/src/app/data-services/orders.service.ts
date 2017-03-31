@@ -21,7 +21,8 @@ export class OrdersService {
             address: {
                 useDefaultAddress: orderViewModel.address.useDefaultAddress,
                 customAddress: null
-            }
+            },
+            comments: orderViewModel.comments
         };
 
         if (!orderViewModel.address.useDefaultAddress) {
@@ -50,7 +51,7 @@ export class OrdersService {
     }
 
     getOrderFullInfo(id: number) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => res.json(), err => `My error is ${err}`);
+        return this.authHttp.get(`${AppConfig.API_PATH}/orders/${id}`).map(res => res.json());
     }
 
     takeOrder(id: number) {

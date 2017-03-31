@@ -60,6 +60,10 @@
             Discard
         </button>
     </div>
+    <dynamic-chat-window [messages]="order.chatMessages" [orderId]="order.id"
+                         header="Chat with client"
+                         [isMaximized]="true">
+    </dynamic-chat-window>
 </div>
 <div *ngIf="!order" class="no-order-info">
     <div>Select order from left pane</div>

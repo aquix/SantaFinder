@@ -1,4 +1,11 @@
 <div class="sf-page client-page">
+    <sf-notification #appNotification
+                     class="app-notification" [ngClass]="{'app-notification_hidden': !isNotificationVisible}"
+                     (close)="onNotificationCloseButtonClick()"
+                     (mouseover)="onNotificationMouseOver()"
+                     (mouseleave)="onNotificationMouseLeave()">
+        {{currentNotificationText}}
+    </sf-notification>
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
         <ng2-page-transition>

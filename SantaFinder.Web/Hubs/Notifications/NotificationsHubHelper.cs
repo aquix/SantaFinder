@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace SantaFinder.Web.Hubs
+namespace SantaFinder.Web.Notifications.Hubs
 {
     public class NotificationsHubHelper
     {

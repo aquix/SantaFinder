@@ -32,6 +32,9 @@ import { LocationService } from './shared/services/location.service';
 import { GeocodingService } from './shared/services/geocoding.service';
 import { NotificationsService } from './shared/notifications/notifications.service';
 import { NotificationsHub } from './shared/signalr/notifications-hub';
+import { ChatHub } from './shared/signalr/chat-hub';
+import { ChatWindowTrackerService } from './shared/chat/chat-window-tracker.service';
+import { ChatMessagesService } from './data-services/chat-messages.service';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { MainComponent } from './main/main.component';
@@ -63,6 +66,8 @@ import { ClientSantaInfoComponent } from './client/santa-info/client-santa-info.
 import { SantaProfileComponent } from './santa/profile/santa-profile.component';
 import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
 import { NotificationComponent } from './shared/notifications/notification.component';
+import { ChatWindowComponent } from './shared/chat/chat-window/chat-window.component';
+import { DynamicChatComponent } from './shared/chat/dynamic-chat-window/dynamic-chat-window.component';
 
 import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
@@ -82,7 +87,7 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         Ng2PaginationModule,
         InfiniteScrollModule,
         MarkdownModule.forRoot(),
-        Ng2PageTransitionModule
+        Ng2PageTransitionModule,
     ],
     declarations: [
         NavbarComponent,
@@ -116,6 +121,8 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         ClientSantaInfoComponent,
         SantaPreviewCardComponent,
         NotificationComponent,
+        ChatWindowComponent,
+        DynamicChatComponent,
 
         AddressPipe,
         DatetimePipe
@@ -136,7 +143,10 @@ import { DatetimePipe } from './shared/pipes/datetime.pipe';
         LocationService,
         GeocodingService,
         NotificationsService,
-        NotificationsHub
+        NotificationsHub,
+        ChatHub,
+        ChatWindowTrackerService,
+        ChatMessagesService
     ],
     bootstrap: [AppComponent],
 })

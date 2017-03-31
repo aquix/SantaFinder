@@ -234,6 +234,7 @@
     <Compile Include="Areas\Auth\Models\RegisterSantaModel.cs" />
     <Compile Include="Areas\Auth\Utils\ChangeProfileException.cs" />
     <Compile Include="Areas\Auth\Utils\UserType.cs" />
+    <Compile Include="Controllers\ChatMessagesController.cs" />
     <Compile Include="Controllers\ClientOrdersController.cs" />
     <Compile Include="Controllers\OrderLocationsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -244,9 +245,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\INotificationsHub.cs" />
-    <Compile Include="Hubs\NotificationsHub.cs" />
-    <Compile Include="Hubs\NotificationsHubHelper.cs" />
+    <Compile Include="Hubs\Chat\ChatHub.cs" />
+    <Compile Include="Hubs\Chat\IChatHub.cs" />
+    <Compile Include="Hubs\Chat\NewMessageViewModel.cs" />
+    <Compile Include="Hubs\Notifications\INotificationsHub.cs" />
+    <Compile Include="Hubs\Notifications\NotificationsHub.cs" />
+    <Compile Include="Hubs\Notifications\NotificationsHubHelper.cs" />
     <Compile Include="Models\ChangeOrder\PresentInfoForEdit.cs" />
     <Compile Include="Models\ChangeOrder\OrderFullInfoForEditing.cs" />
     <Compile Include="Models\NewOrder\NewOrder.cs" />
@@ -259,6 +263,7 @@
     <Compile Include="Models\Santas\SantaInfoForClient.cs" />
     <Compile Include="Models\ServerNotifications\Notification.cs" />
     <Compile Include="Models\ServerNotifications\NotificationType.cs" />
+    <Compile Include="Models\Shared\ChatMessageViewModel.cs" />
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
     <Compile Include="Models\Shared\AddressWithLocation.cs" />
@@ -285,11 +290,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

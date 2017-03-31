@@ -12,6 +12,7 @@ import { OrderPostInfo } from '../../data-services/view-models/change-order/orde
 import { OrderFullInfoForEditing } from '../../data-services/view-models/change-order/order-full-info-for-editing';
 import { NotificationsService } from '../../shared/notifications/notifications.service';
 import { NotificationType } from '../../shared/notifications/notification-type.enum';
+import { ChatMessageViewModel } from '../../shared/models/chat-message.view-model';
 
 @Component({
     selector: 'order-info-page',
@@ -28,6 +29,7 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     orderStatus: OrderStatus;
     santaInfo: Santa = null;
     rating: number;
+    chatMessages: ChatMessageViewModel[] = [];
 
     editMode: boolean = false;
     somethingChanged: boolean = false;
@@ -73,6 +75,8 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
             if (order.rating) {
                 this.rating = order.rating;
             }
+
+            this.chatMessages = order.chatMessages;
 
             this.santaInfo = order.santaInfo;
             this.orderStatus = order.status;
