@@ -1,4 +1,6 @@
-import { trigger, state, animate, style, transition, AnimationEntryMetadata } from '@angular/core';
+import { trigger, state, animate, style,
+    transition, AnimationEntryMetadata
+} from '@angular/core';
 
 export function routeChangeAnimation(): AnimationEntryMetadata {
     return slideOutAndIn();

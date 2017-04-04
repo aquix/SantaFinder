@@ -24,10 +24,13 @@ module.exports = {
             {
                 use: [
                     {
-                        loader: 'ts-loader'
+                        loader: 'awesome-typescript-loader'
                     },
                     {
                         loader: 'angular2-template-loader'
+                    },
+                    {
+                        loader: 'angular-router-loader'
                     }
                 ],
                 test: /\.ts$/,

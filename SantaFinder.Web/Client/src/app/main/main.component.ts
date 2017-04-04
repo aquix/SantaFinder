@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthInfoStorage } from '../auth/auth-info-storage.service';
 import { UserType } from '../shared/enums/user-type';
+import { AuthInfoStorage } from '../core/auth';
 
 @Component({
     templateUrl: './main.html'

@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { OrdersService } from '../../data-services/orders.service';
-import { OrderLocationInfo } from '../../data-services/view-models/orders-on-map/order-location-info';
 import { SelectOrderService } from './services/select-order.service';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationType } from "../../shared/notifications/notification-type.enum";
+import { OrderLocationInfo } from '../../core/data-services/view-models/orders-on-map/order-location-info';
+import { OrdersService } from '../../core/data-services';
+import { NotificationsService } from '../../core/notifications';
+import { NotificationType } from '../../core/notifications/notification-type.enum';
+
 
 @Component({
     selector: 'santa-home',

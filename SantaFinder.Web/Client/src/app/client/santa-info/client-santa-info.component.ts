@@ -2,9 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { SantasService } from '../../data-services/santas.service';
-import { SantaFullInfoForClient } from '../../data-services/view-models/santa-full-info/santa-full-info-for-client';
-import { FeedbackItem } from '../../data-services/view-models/santa-full-info/feedback-item';
+import { SantaFullInfoForClient } from '../../core/data-services/view-models/santa-full-info/santa-full-info-for-client';
+import { FeedbackItem } from '../../core/data-services/view-models/santa-full-info/feedback-item';
+import { SantasService } from '../../core/data-services';
 
 @Component({
     selector: 'client-santa-info-page',
@@ -45,6 +45,6 @@ export class ClientSantaInfoComponent implements OnInit {
             } else {
                 this.feedbacks = this.feedbacks.concat(data);
             }
-        })
+        });
     }
 }

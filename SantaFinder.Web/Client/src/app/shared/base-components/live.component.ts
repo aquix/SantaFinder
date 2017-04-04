@@ -1,12 +1,10 @@
 import { ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { NotificationComponent } from '../notifications/notification.component';
-import { NotificationViewModel } from '../notifications/notification.model';
-import { NotificationsService } from '../notifications/notifications.service';
-import { NotificationsHub } from '../signalr/notifications-hub';
-import { ChatHub } from '../signalr/chat-hub';
-import { NotificationType } from '../notifications/notification-type.enum';
-import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
-import { ChatWindowTrackerService } from '../chat/chat-window-tracker.service';
+
+import { AuthInfoStorage } from '../../core/auth';
+import { NotificationViewModel, NotificationsService, NotificationType } from '../../core/notifications/index';
+import { NotificationsHub, ChatHub } from '../../core/signalr/index';
+import { ChatWindowTrackerService } from '../../core/chat/chat-window-tracker.service';
+import { NotificationComponent } from '../../core/notifications/notification-component/notification.component';
 
 export class LiveComponent implements OnInit, OnDestroy {
     @ViewChild('appNotification') protected appNotification: NotificationComponent;

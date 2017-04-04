@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { SantaOrdersService } from '../../data-services/santa-orders.service';
-import { SantaOrderPreview } from '../../data-services/view-models/santa-orders/santa-order-preview.model';
 import { OrderFullInfo } from '../../shared/models/order-full-info.model';
 import { SantaOrderStatusFilter } from './santa-order-status-filter';
 import { PagedResponse } from '../../shared/models/paged-response';
+import { SantaOrderPreview } from '../../core/data-services/view-models/santa-orders/santa-order-preview.model';
+import { SantaOrdersService } from '../../core/data-services';
 
 @Injectable()
 export class SantaOrdersListService {
@@ -22,7 +22,7 @@ export class SantaOrdersListService {
     ) {
         this.filter.subscribe(value => {
             this.loadOrders(1);
-        })
+        });
     }
 
     loadOrders(page: number) {

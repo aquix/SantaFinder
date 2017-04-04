@@ -3,16 +3,15 @@ import * as moment from 'moment/moment';
 
 import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
 import { OrderStatus } from '../../../shared/enums/order-status';
-import { SantaOrdersService } from '../../../data-services/santa-orders.service';
 import { SantaOrdersListService } from '../santa-orders-list.service';
-import { NotificationsService } from '../../../shared/notifications/notifications.service';
-import { NotificationType } from '../../../shared/notifications/notification-type.enum';
 import { Location } from '../../../shared/models/location';
+import { SantaOrdersService } from '../../../core/data-services';
+import { NotificationsService, NotificationType } from '../../../core/notifications';
 
 @Component({
     selector: 'santa-my-order-details',
     templateUrl: 'santa-my-order-details.html',
-    styleUrls: ['./my-order-details.scss']
+    styleUrls: ['./santa-my-order-details.scss']
 })
 export class SantaMyOrderDetailsComponent implements OnInit {
     order: OrderFullInfo;

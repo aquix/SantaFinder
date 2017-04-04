@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationInstance } from 'ng2-pagination';
 
-import { Santa } from '../../../data-services/view-models/santa.view-model';
-import { SantasService } from '../../../data-services/santas.service';
 import { PagedResponse } from '../../../shared/models/paged-response';
+import { SantasService } from '../../../core/data-services';
+import { Santa } from '../../../core/data-services/view-models/santa.view-model';
 
 @Component({
     selector: 'santa-preview-list',

@@ -38,8 +38,9 @@
   },
   "devDependencies": {
     "@types/core-js": "^0.9.35",
+    "angular-router-loader": "^0.6.0",
     "angular2-template-loader": "^0.6.0",
-    "awesome-typescript-loader": "^3.0.0-beta.13",
+    "awesome-typescript-loader": "^3.1.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "*",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
@@ -50,7 +51,6 @@
     "sass-loader": "*",
     "style-loader": "*",
     "to-string-loader": "^1.1.5",
-    "ts-loader": "*",
     "tslint": "*",
     "tslint-loader": "*",
     "typescript": "*",

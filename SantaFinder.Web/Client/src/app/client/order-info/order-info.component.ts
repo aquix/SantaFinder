@@ -5,14 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Rating } from 'ngx-rating';
 import * as moment from 'moment/moment';
 
-import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
-import { Santa } from '../../data-services/view-models/santa.view-model';
-import { ClientOrdersService } from '../../data-services/client-orders.service';
-import { OrderPostInfo } from '../../data-services/view-models/change-order/order-post-info';
-import { OrderFullInfoForEditing } from '../../data-services/view-models/change-order/order-full-info-for-editing';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationType } from '../../shared/notifications/notification-type.enum';
 import { ChatMessageViewModel } from '../../shared/models/chat-message.view-model';
+import { OrderStatus } from '../../core/data-services/client-orders/models/orders-history/order-status';
+import { Santa } from '../../core/data-services/view-models/santa.view-model';
+import { OrderPostInfo } from '../../core/data-services/client-orders/models/change-order/order-post-info';
+import { ClientOrdersService } from '../../core/data-services';
+import { NotificationsService, NotificationType } from '../../core/notifications';
+import { OrderFullInfoForEditing } from '../../core/data-services/client-orders/models/change-order/order-full-info-for-editing';
 
 @Component({
     selector: 'order-info-page',

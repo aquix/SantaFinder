@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, ViewChild, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { SebmGoogleMapMarker, SebmGoogleMapInfoWindow, MarkerManager, GoogleMapsAPIWrapper, } from 'angular2-google-maps/core';
 import { Observable } from 'rxjs';
 
-import { OrderLocationInfo } from '../../../data-services/view-models/orders-on-map/order-location-info';
 import { Location } from '../../../shared/models/location';
-import { LocationService } from '../../../shared/services/location.service';
-import { GeocodingService } from '../../../shared/services/geocoding.service';
 import { SelectOrderService } from '../services/select-order.service';
 import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
+import { OrderLocationInfo } from '../../../core/data-services/view-models/orders-on-map/order-location-info';
+import { LocationService, GeocodingService } from '../../../core/helper-services/index';
 
 @Component({
     selector: 'map',

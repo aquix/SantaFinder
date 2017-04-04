@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationInstance } from 'ng2-pagination';
 
-import { SantaOrderPreview } from '../../../data-services/view-models/santa-orders/santa-order-preview.model';
 import { SantaOrderStatusFilter } from '../santa-order-status-filter';
 import { SantaOrdersListService } from '../santa-orders-list.service';
+import { SantaOrderPreview } from '../../../core/data-services/view-models/santa-orders/santa-order-preview.model';
 
 @Component({
     selector: 'santa-my-order-list',
     templateUrl: 'santa-my-order-list.html',
-    styleUrls: ['./my-order-list.scss'],
+    styleUrls: ['./santa-my-order-list.scss'],
 
 })
 export class SantaMyOrderListComponent implements OnInit {

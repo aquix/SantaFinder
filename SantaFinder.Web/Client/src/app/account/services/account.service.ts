@@ -3,29 +3,29 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { AppConfig } from '../../app.config';
-import { IAuthInfo } from '../../auth/auth-info';
-import { AuthInfoStorage } from '../../auth/auth-info-storage.service';
 import { LoginModel } from '../shared/login/login.model';
 import { UserType } from '../../shared/enums/user-type';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
-import { GeocodingService } from '../../shared/services/geocoding.service';
-import { AuthHttp } from '../../auth/auth-http.service';
 import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
-import { ClientProfileChangeModel } from '../../data-services/view-models/change-profile/client-profile-change.model';
+import { AuthHttp, AuthInfoStorage } from '../../core/auth/index';
+import { GeocodingService } from '../../core/helper-services';
+import { ClientProfileChangeModel } from '../../core/data-services/view-models/change-profile/client-profile-change.model';
+import { IAuthInfo } from '../../core/auth/auth-info-storage/auth-info';
 
 /**
  * Implement methods for all account roles
  */
 @Injectable()
 export class AccountService {
-    protected static TOKEN_PATH = `${AppConfig.SERVER}/token`;
+    protected TOKEN_PATH = `${this.config.server}/token`;
 
     constructor(
         private http: Http,
         private authHttp: AuthHttp,
         private authTokenService: AuthInfoStorage,
-        private geocodingService: GeocodingService
+        private geocodingService: GeocodingService,
+        private config: AppConfig
     ) { }
 
     register(regInfoRaw: ClientRegisterModel | SantaRegisterModel ) {
@@ -46,7 +46,7 @@ export class AccountService {
                     location: location
                 };
 
-                return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+                return this.http.post(`${this.config.apiPath}/account/${registerUri}`, registerBody)
                     .map(res => res.status);
             });
         } else {
@@ -66,28 +66,28 @@ export class AccountService {
             }
             registerBody = formData;
 
-            return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+            return this.http.post(`${this.config.apiPath}/account/${registerUri}`, registerBody)
                 .map(res => res.status);
         }
     }
 
-    getClientData(){
-        return this.authHttp.get(`${AppConfig.API_PATH}/account/client/profile`)
+    getClientData() {
+        return this.authHttp.get(`${this.config.apiPath}/account/client/profile`)
             .map(res => res.json());
     }
 
-    getSantaData(){
-        return this.authHttp.get(`${AppConfig.API_PATH}/account/santa/profile`)
+    getSantaData() {
+        return this.authHttp.get(`${this.config.apiPath}/account/santa/profile`)
             .map(res => res.json());
     }
 
     changeClientProfile(changeModel: ClientProfileChangeModel) {
-        return this.authHttp.post(`${AppConfig.API_PATH}/account/client/profile`, changeModel)
+        return this.authHttp.post(`${this.config.apiPath}/account/client/profile`, changeModel)
             .map(res => res.status);
     }
 
-    changeSantaProfile(changeModel: SantaProfileChangeModel){
-        return this.authHttp.post(`${AppConfig.API_PATH}/account/santa/profile`, changeModel)
+    changeSantaProfile(changeModel: SantaProfileChangeModel) {
+        return this.authHttp.post(`${this.config.apiPath}/account/santa/profile`, changeModel)
             .map(res => res.status);
     }
 
@@ -97,7 +97,7 @@ export class AccountService {
 
         let body = `grant_type=password&username=${loginInfo.email}&password=${loginInfo.password}&usertype=${userType}`;
 
-        return this.http.post(AccountService.TOKEN_PATH, body, {
+        return this.http.post(this.TOKEN_PATH, body, {
             headers: headers
         }).map(res => res.json()).map(data => {
             let tokenInfo: IAuthInfo = {
@@ -117,13 +117,7 @@ export class AccountService {
         this.authTokenService.authInfo = null;
     }
 
-    get isAuthorized() {
-        if (this.authTokenService.authInfo) {
-            return true;
-        }
 
-        return false;
-    }
 
     private getRegisterModelType(regInfo: ClientRegisterModel | SantaRegisterModel): UserType  {
         if ((regInfo as any).address !== undefined) {

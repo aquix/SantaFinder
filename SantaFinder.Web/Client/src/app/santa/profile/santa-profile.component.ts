@@ -7,8 +7,8 @@ import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { SantaProfileModel } from './santa-profile.model';
 import { SantaProfileChangeModel } from './santa-profile-change.model';
-import { NotificationsService } from "../../shared/notifications/notifications.service";
-import { NotificationType } from "../../shared/notifications/notification-type.enum";
+import { NotificationsService } from '../../core/notifications';
+import { NotificationType } from '../../core/notifications/notification-type.enum';
 
 @Component({
     selector: 'santa-profile',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Santa } from '../../../data-services/view-models/santa.view-model';
+import { Santa } from '../../../core/data-services/view-models/santa.view-model';
 
 @Component({
     selector: 'santa-preview-card',

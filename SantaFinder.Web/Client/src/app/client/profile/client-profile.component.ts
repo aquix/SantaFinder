@@ -7,10 +7,9 @@ import CustomValidators from '../../account/utils/custom-validators';
 import { AccountService } from '../../account/services/account.service';
 import { ClientProfileModel } from './client-profile.model';
 import { ClientProfileChangeFormModel } from './client-profile-change.form-model';
-import { ClientProfileChangeModel } from '../../data-services/view-models/change-profile/client-profile-change.model';
-import { GeocodingService } from '../../shared/services/geocoding.service';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationType } from '../../shared/notifications/notification-type.enum';
+import { GeocodingService } from '../../core/helper-services';
+import { NotificationsService, NotificationType } from '../../core/notifications';
+import { ClientProfileChangeModel } from '../../core/data-services/view-models/change-profile/client-profile-change.model';
 
 @Component({
     selector: 'client-profile',

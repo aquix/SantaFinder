@@ -3,11 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment/moment';
-
-import { OrdersService } from '../../data-services/orders.service';
-import { NewOrderViewModel } from '../../data-services/view-models/new-order/order.view-model';
-import { NotificationsService } from '../../shared/notifications/notifications.service';
-import { NotificationType } from '../../shared/notifications/notification-type.enum';
+import { OrdersService } from '../../core/data-services';
+import { NotificationsService, NotificationType } from '../../core/notifications';
+import { NewOrderViewModel } from '../../core/data-services/orders/models/new-order/order.view-model';
 
 @Component({
     selector: 'client-order',

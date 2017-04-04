@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaginationInstance } from 'ng2-pagination';
 
-import { OrderShortInfo } from '../../data-services/view-models/orders-history/order-short-info';
-import { OrdersService } from '../../data-services/orders.service';
-import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
 import { PagedResponse } from '../../shared/models/paged-response';
+import { OrderShortInfo } from '../../core/data-services/client-orders/models/orders-history/order-short-info';
+import { OrdersService } from '../../core/data-services';
+import { OrderStatus } from '../../core/data-services/client-orders/models/orders-history/order-status';
 
 @Component({
     selector: 'client-order-history',

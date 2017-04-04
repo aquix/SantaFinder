@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
-import { NotificationsHub } from '../shared/signalr/notifications-hub';
-import { ChatHub } from '../shared/signalr/chat-hub';
-import { NotificationsService } from '../shared/notifications/notifications.service';
 import { LiveComponent } from '../shared/base-components/live.component';
-import { AuthInfoStorage } from '../auth/auth-info-storage.service';
-import { ChatWindowTrackerService } from '../shared/chat/chat-window-tracker.service';
+import { NotificationsHub, ChatHub } from '../core/signalr/index';
+import { NotificationsService } from '../core/notifications/index';
+import { AuthInfoStorage } from '../core/auth/index';
+import { ChatWindowTrackerService } from '../core/chat/chat-window-tracker.service';
 
 @Component({
     selector: 'santa-page',
