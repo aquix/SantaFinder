@@ -1,6 +1,4 @@
-import { Present } from './present.view-model';
-import { Address } from '../../../../../shared/models/address.model';
-import { Location } from '../../../../../shared/models/location';
+import { Address, Location, Present } from '../../models';
 
 export interface NewOrder {
     address: {

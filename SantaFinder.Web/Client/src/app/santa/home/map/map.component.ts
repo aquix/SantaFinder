@@ -2,10 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList
 import { SebmGoogleMapMarker, SebmGoogleMapInfoWindow, MarkerManager, GoogleMapsAPIWrapper, } from 'angular2-google-maps/core';
 import { Observable } from 'rxjs';
 
-import { Location } from '../../../shared/models/location';
+import { Location, OrderFullInfo } from '../../../core/models';
 import { SelectOrderService } from '../services/select-order.service';
-import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
-import { OrderLocationInfo } from '../../../core/data-services/view-models/orders-on-map/order-location-info';
+import { OrderLocationInfo } from '../order-location-info';
 import { LocationService, GeocodingService } from '../../../core/helper-services/index';
 
 @Component({

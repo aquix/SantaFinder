@@ -1,7 +1,6 @@
-import { Present } from './present.view-model';
-import { Address } from '../../../../../shared/models/address.model';
+import { Present, Address } from '../../core/models';
 
-export interface NewOrderViewModel {
+export interface NewOrder {
     address: {
         useDefaultAddress: boolean;
         customAddress: Address;

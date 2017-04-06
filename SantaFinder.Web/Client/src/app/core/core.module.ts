@@ -63,9 +63,6 @@ export class CoreModule {
                 AuthHttp,
                 AuthInfoStorage,
 
-                ChatHub,
-                NotificationsHub,
-
                 AuthGuard,
                 ClientAuthGuard,
                 OnlyAnonymousGuard,

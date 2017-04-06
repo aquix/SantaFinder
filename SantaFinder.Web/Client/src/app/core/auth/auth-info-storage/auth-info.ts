@@ -1,4 +1,4 @@
-import { UserType } from '../../../shared/enums/user-type';
+import { UserType } from '../../../core/enums';
 
 export interface IAuthInfo {
     token: string;

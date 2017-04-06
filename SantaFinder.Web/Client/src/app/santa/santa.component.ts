@@ -17,7 +17,7 @@ import { ChatWindowTrackerService } from '../core/chat/chat-window-tracker.servi
 export class SantaComponent extends LiveComponent {
     navbarLinks: Link[];
 
-        constructor(
+    constructor(
         notificationsHub: NotificationsHub,
         chatHub: ChatHub,
         notificationsService: NotificationsService,

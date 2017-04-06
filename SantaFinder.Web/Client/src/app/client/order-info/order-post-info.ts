@@ -1,6 +1,5 @@
-import { Address } from '../../../../../shared/models/address.model';
+import { Address, Location } from '../../core/models';
 import { PresentInfoForEditing } from './present-info-for-editing';
-import { Location } from '../../../../../shared/models/location';
 
 export interface OrderPostInfo {
     childrenNames: string;

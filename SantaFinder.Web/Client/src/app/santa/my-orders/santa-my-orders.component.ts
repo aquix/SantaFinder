@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { OrderFullInfo } from '../../shared/models/order-full-info.model';
+import { OrderFullInfo } from '../../core/models';
 import { SantaOrdersListService } from './santa-orders-list.service';
-import { SantaOrderPreview } from '../../core/data-services/view-models/santa-orders/santa-order-preview.model';
+import { SantaOrderPreview } from './santa-order-preview.model';
 import { SantaOrdersService } from '../../core/data-services/index';
 
 @Component({

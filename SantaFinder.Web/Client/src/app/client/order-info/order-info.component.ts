@@ -1,17 +1,16 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 import { Rating } from 'ngx-rating';
 import * as moment from 'moment/moment';
 
-import { ChatMessageViewModel } from '../../shared/models/chat-message.view-model';
-import { OrderStatus } from '../../core/data-services/client-orders/models/orders-history/order-status';
-import { Santa } from '../../core/data-services/view-models/santa.view-model';
-import { OrderPostInfo } from '../../core/data-services/client-orders/models/change-order/order-post-info';
+import { ChatMessage, Santa } from '../../core/models';
+import { OrderStatus } from '../../core/enums';
+import { OrderPostInfo } from './order-post-info';
+import { OrderFullInfoForEditing } from './order-full-info-for-editing';
 import { ClientOrdersService } from '../../core/data-services';
 import { NotificationsService, NotificationType } from '../../core/notifications';
-import { OrderFullInfoForEditing } from '../../core/data-services/client-orders/models/change-order/order-full-info-for-editing';
 
 @Component({
     selector: 'order-info-page',
@@ -28,7 +27,7 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     orderStatus: OrderStatus;
     santaInfo: Santa = null;
     rating: number;
-    chatMessages: ChatMessageViewModel[] = [];
+    chatMessages: ChatMessage[] = [];
 
     editMode: boolean = false;
     somethingChanged: boolean = false;
@@ -132,11 +131,12 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     onSubmitClick({ value }: { value: OrderFullInfoForEditing }) {
         this.clientOrdersService.changeOrder(this.id, value).subscribe(success => {
             if (success) {
+                console.log('notification from orderinfo');
                 this.notificationsService.notify({
                     type: NotificationType.info,
                     content: `Order info updated`
                 });
-                this.router.navigate(['../']);
+                this.router.navigate(['/client']);
             } else {
                 this.notificationsService.notify({
                     type: NotificationType.error,

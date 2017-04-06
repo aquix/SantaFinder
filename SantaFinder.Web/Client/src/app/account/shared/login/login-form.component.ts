@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmailValidators } from 'ng2-validators';
 
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../services';
 import { LoginModel } from './login.model';
-import { UserType } from '../../../shared/enums/user-type';
+import { UserType } from '../../../core/enums';
 
 @Component({
     selector: 'login-form',

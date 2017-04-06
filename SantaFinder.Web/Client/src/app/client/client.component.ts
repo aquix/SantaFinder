@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
-import { LiveComponent } from '../shared/base-components/live.component';
+import { LiveComponent } from '../shared/base-components';
 import { NotificationsHub, ChatHub } from '../core/signalr';
 import { AuthInfoStorage } from '../core/auth';
 import { NotificationsService } from '../core/notifications';

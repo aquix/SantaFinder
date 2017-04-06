@@ -1,20 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import { NotificationViewModel } from './notification.model';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class NotificationsService {
-    private callbacks: ((notification: NotificationViewModel) => void)[] = [];
+    public onNewNotification: Subject<NotificationViewModel> = new Subject<NotificationViewModel>();
+
     private notificationHistory: NotificationViewModel[] = [];
 
     constructor() { }
 
     notify(notification: NotificationViewModel) {
         this.notificationHistory.push(notification);
-        this.callbacks.forEach(c => c(notification));
-    }
-
-    subscribe(callback: (notification: NotificationViewModel) => void) {
-        this.callbacks.push(callback);
+        this.onNewNotification.next(notification);
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
 
-import { ChatMessageViewModel } from '../../../shared/models/chat-message.view-model';
+import { ChatMessage } from '../../../core/models';
 import { ChatHub } from '../../../core/signalr';
 import { AuthInfoStorage } from '../../../core/auth';
 
@@ -11,7 +11,7 @@ import { AuthInfoStorage } from '../../../core/auth';
     encapsulation: ViewEncapsulation.None
 })
 export class ChatWindowComponent implements OnInit {
-    @Input() messages: ChatMessageViewModel[] = [];
+    @Input() messages: ChatMessage[] = [];
     @Input() orderId: number = -1;
     @Output() onMessageReceived: EventEmitter<void> = new EventEmitter<void>();
     private myId: string;
@@ -37,7 +37,7 @@ export class ChatWindowComponent implements OnInit {
         });
     }
 
-    getChatBubbleClass(message: ChatMessageViewModel) {
+    getChatBubbleClass(message: ChatMessage) {
         if (message.senderId === this.myId) {
             return 'chat-window__bubble_me';
         } else {

@@ -5,6 +5,7 @@ import { NotificationViewModel, NotificationsService, NotificationType } from '.
 import { NotificationsHub, ChatHub } from '../../core/signalr/index';
 import { ChatWindowTrackerService } from '../../core/chat/chat-window-tracker.service';
 import { NotificationComponent } from '../../core/notifications/notification-component/notification.component';
+import { Subscription } from 'rxjs/Subscription';
 
 export class LiveComponent implements OnInit, OnDestroy {
     @ViewChild('appNotification') protected appNotification: NotificationComponent;
@@ -15,6 +16,8 @@ export class LiveComponent implements OnInit, OnDestroy {
 
     private userId: string;
 
+    private notificationSubscription: Subscription;
+
     constructor(
         private notificationsHub: NotificationsHub,
         private chatHub: ChatHub,
@@ -23,10 +26,12 @@ export class LiveComponent implements OnInit, OnDestroy {
         private chatWindowTrackerService: ChatWindowTrackerService,
     ) {
         this.userId = authInfoStorage.authInfo.id;
+        console.log('live component ctor');
     }
 
     ngOnInit() {
-        this.notificationsService.subscribe(notification => {
+        console.log('live component init');
+        this.notificationSubscription = this.notificationsService.onNewNotification.subscribe(notification => {
             if (this.isNotificationVisible) {
                 this.notificationsStack.push(notification);
             } else {
@@ -48,6 +53,7 @@ export class LiveComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.notificationsHub.dispose();
         this.chatHub.dispose();
+        this.notificationSubscription.unsubscribe();
     }
 
     protected onNotificationCloseButtonClick() {
@@ -76,6 +82,7 @@ export class LiveComponent implements OnInit, OnDestroy {
     }
 
     protected showNotification(notification: NotificationViewModel) {
+        console.log('show notification', notification);
         this.isNotificationVisible = true;
         this.appNotification.data = notification;
 

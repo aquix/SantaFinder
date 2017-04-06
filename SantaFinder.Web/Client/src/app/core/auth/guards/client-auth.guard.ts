@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 
 import { AuthInfoStorage } from '../auth-info-storage/auth-info-storage.service';
-import { UserType } from '../../../shared/enums/user-type';
+import { UserType } from '../../../core/enums';
 
 @Injectable()
 export class ClientAuthGuard implements CanActivate, CanActivateChild {

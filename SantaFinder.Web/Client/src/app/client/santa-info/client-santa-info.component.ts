@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
-import { SantaFullInfoForClient } from '../../core/data-services/view-models/santa-full-info/santa-full-info-for-client';
-import { FeedbackItem } from '../../core/data-services/view-models/santa-full-info/feedback-item';
+import { SantaFullInfoForClient } from './santa-full-info-for-client';
+import { FeedbackItem } from './feedback-item';
 import { SantasService } from '../../core/data-services';
 
 @Component({

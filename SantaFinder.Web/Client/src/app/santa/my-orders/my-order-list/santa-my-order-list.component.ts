@@ -3,7 +3,7 @@ import { PaginationInstance } from 'ng2-pagination';
 
 import { SantaOrderStatusFilter } from '../santa-order-status-filter';
 import { SantaOrdersListService } from '../santa-orders-list.service';
-import { SantaOrderPreview } from '../../../core/data-services/view-models/santa-orders/santa-order-preview.model';
+import { SantaOrderPreview } from '../santa-order-preview.model';
 
 @Component({
     selector: 'santa-my-order-list',

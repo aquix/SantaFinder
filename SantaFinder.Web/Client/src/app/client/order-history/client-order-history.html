@@ -11,7 +11,7 @@
                         <div class="order-item__id order-item__bold-text">
                             # {{ order.id }}
                         </div>
-                        <div *ngIf="order.status !== orderStatus.new" class="order-item__line order-item__santa-info">
+                        <div *ngIf="order.status !== OrderStatus.New" class="order-item__line order-item__santa-info">
                             <div>
                                 <img [src]="order.santaInfo.photoUrl" alt="Santa's photo'">
                             </div>

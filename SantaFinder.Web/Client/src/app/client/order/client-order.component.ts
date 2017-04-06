@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment/moment';
 import { OrdersService } from '../../core/data-services';
 import { NotificationsService, NotificationType } from '../../core/notifications';
-import { NewOrderViewModel } from '../../core/data-services/orders/models/new-order/order.view-model';
+import { NewOrder } from './new-order.model';
 
 @Component({
     selector: 'client-order',
@@ -77,7 +77,7 @@ export class ClientOrderComponent implements OnInit {
         control.removeAt(i);
     }
 
-    onSubmitClick({ value }: { value: NewOrderViewModel }) {
+    onSubmitClick({ value }: { value: NewOrder }) {
         let datetime = moment(value.datetime);
         value.datetime = datetime.toJSON();
 
@@ -88,7 +88,7 @@ export class ClientOrderComponent implements OnInit {
                 content: `New order successfully created.
                     Click [here](${redirectUrl}) for more details`
             });
-            this.router.navigate(['../']);
+            this.router.navigate(['/client']);
         }, err => {
             this.notificationsService.notify({
                 type: NotificationType.error,

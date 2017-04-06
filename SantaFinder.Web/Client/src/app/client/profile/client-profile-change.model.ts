@@ -1,6 +1,6 @@
-import { Address } from '../../shared/models/address.model';
+import { Address } from '../../core/models';
 
-export interface ClientProfileChangeFormModel {
+export interface ClientProfileChangeModel {
     email: string;
     name: string;
     address: Address;

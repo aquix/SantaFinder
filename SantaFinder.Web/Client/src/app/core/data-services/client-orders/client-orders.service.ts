@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from '../../auth/';
-import { OrderPostInfo } from './models/change-order/order-post-info';
+import { OrderPostInfo } from '../../../client/order-info/order-post-info';
 import { GeocodingService } from '../../helper-services/geocoding.service';
-import { OrderFullInfoForEditing } from './models/change-order/order-full-info-for-editing';
+import { OrderFullInfoForEditing } from '../../../client/order-info/order-full-info-for-editing';
 import { AppConfig } from '../../../app.config';
 
 @Injectable()

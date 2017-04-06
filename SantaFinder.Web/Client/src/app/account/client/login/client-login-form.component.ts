@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserType } from '../../../shared/enums/user-type';
+import { UserType } from '../../../core/enums';
 
 @Component({
     selector: 'client-login-form',

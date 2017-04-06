@@ -3,8 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { AppConfig } from '../../app.config';
-import { Address } from '../../shared/models/address.model';
-import { Location } from '../../shared/models/location';
+import { Address, Location } from '../models';
 
 @Injectable()
 export class GeocodingService {

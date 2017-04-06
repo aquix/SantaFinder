@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { AuthHttp } from '../../auth/';
-import { NewOrderViewModel } from './models/new-order/order.view-model';
+import { NewOrder } from '../../../client/order/new-order.model';
 import { GeocodingService } from '../../helper-services/geocoding.service';
-import { NewOrder } from './models/new-order/new-order';
 import { AppConfig } from '../../../app.config';
+import { NewOrderWithLocation } from './new-order-with-location.model';
 
 @Injectable()
 export class OrdersService {
@@ -14,7 +14,7 @@ export class OrdersService {
         private config: AppConfig,
     ) { }
 
-    createOrder(orderViewModel: NewOrderViewModel) {
+    createOrder(orderViewModel: NewOrder) {
         let order: NewOrder = {
             datetime: orderViewModel.datetime,
             presents: orderViewModel.presents,
@@ -28,14 +28,33 @@ export class OrdersService {
 
         if (!orderViewModel.address.useDefaultAddress) {
             return this.geocodingService.getCoordsFromAddress(orderViewModel.address.customAddress).switchMap(location => {
-                order.address.customAddress = {
-                    line: orderViewModel.address.customAddress,
-                    location: location
+                let data: NewOrderWithLocation = {
+                    address: {
+                        useDefaultAddress: order.address.useDefaultAddress,
+                        customAddress: {
+                            line: order.address.customAddress,
+                            location: location
+                        }
+                    },
+                    childrenNames: order.childrenNames,
+                    comments: order.comments,
+                    datetime: order.datetime,
+                    presents: order.presents
                 };
-                return this.createOrderSendRequest(order);
+
+                return this.createOrderSendRequest(data);
             });
         } else {
-            return this.createOrderSendRequest(order);
+            return this.createOrderSendRequest({
+                    address: {
+                        useDefaultAddress: order.address.useDefaultAddress,
+                        customAddress: null
+                    },
+                    childrenNames: order.childrenNames,
+                    comments: order.comments,
+                    datetime: order.datetime,
+                    presents: order.presents
+                });
         }
 
     }
@@ -59,7 +78,7 @@ export class OrdersService {
         return this.authHttp.put(`${this.config.apiPath}/santaOrders/take/${id}`).map(res => res.json());
     }
 
-    private createOrderSendRequest(order: NewOrder) {
+    private createOrderSendRequest(order: NewOrderWithLocation) {
         return this.authHttp.post(`${this.config.apiPath}/clientOrders`, order).map(res => {
             return res.json();
         });

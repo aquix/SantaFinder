@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { OrderFullInfo } from '../../shared/models/order-full-info.model';
+import { OrderFullInfo, PagedResponse } from '../../core/models';
 import { SantaOrderStatusFilter } from './santa-order-status-filter';
-import { PagedResponse } from '../../shared/models/paged-response';
-import { SantaOrderPreview } from '../../core/data-services/view-models/santa-orders/santa-order-preview.model';
+import { SantaOrderPreview } from './santa-order-preview.model';
 import { SantaOrdersService } from '../../core/data-services';
 
 @Injectable()

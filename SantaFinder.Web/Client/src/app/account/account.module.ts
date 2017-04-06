@@ -4,7 +4,7 @@ import { AccountRoutingModule } from './account.routing';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 
-import { AccountService } from './services/account.service';
+import { AccountService } from './services';
 import { ClientAccountComponent } from './client/client-account.component';
 import { SantaAccountComponent } from './santa/santa-account.component';
 import { LogoutComponent } from './logout/logout.component';

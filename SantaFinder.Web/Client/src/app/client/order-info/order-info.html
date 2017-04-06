@@ -1,5 +1,5 @@
 <div class="sf-form order-form order-info-form">
-    <div class="edit-buttons" *ngIf="orderStatus === OrderStatus.new">
+    <div class="edit-buttons" *ngIf="orderStatus === OrderStatus.New">
         <div *ngIf="!editMode">
             <button class="edit-button" (click)="enableEditing()">
                 <img src="/images/edit.png" alt="Edit" />
@@ -14,12 +14,12 @@
             </button>
         </div>
     </div>
-    <div *ngIf="orderStatus !== OrderStatus.new && santaInfo" class="order-info-form__santa-info">
+    <div *ngIf="orderStatus !== OrderStatus.New && santaInfo" class="order-info-form__santa-info">
         <a [routerLink]="['/client/santainfo', santaInfo.id]" class="transparent-link">
             <santa-preview-card [santa]="santaInfo"></santa-preview-card>
         </a>
     </div>
-    <div [ngClass]="{'order-info-form__rating_hidden': orderStatus !== OrderStatus.completed}"
+    <div [ngClass]="{'order-info-form__rating_hidden': orderStatus !== OrderStatus.Completed}"
          class="order-info-form__rating">
         <span class="order-info-form__rating-text">Rate this order:</span>
         <rating #ratingControl [(ngModel)]="rating"
@@ -87,6 +87,6 @@
     </form>
 
     <dynamic-chat-window [messages]="chatMessages" [orderId]="id"
-                         [header]="orderStatus === OrderStatus.new ? 'Your comments' : 'Chat with santa'">
+                         [header]="orderStatus === OrderStatus.New ? 'Your comments' : 'Chat with santa'">
     </dynamic-chat-window>
 </div>

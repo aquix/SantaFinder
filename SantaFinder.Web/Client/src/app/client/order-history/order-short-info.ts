@@ -1,5 +1,5 @@
-import { OrderStatus } from './order-status';
-import { Santa } from '../../../view-models/santa.view-model';
+import { Santa } from '../../core/models';
+import { OrderStatus } from '../../core/enums';
 
 export interface OrderShortInfo {
     id: number;

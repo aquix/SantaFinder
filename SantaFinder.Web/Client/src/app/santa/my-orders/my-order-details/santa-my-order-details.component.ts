@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment/moment';
 
-import { OrderFullInfo } from '../../../shared/models/order-full-info.model';
-import { OrderStatus } from '../../../shared/enums/order-status';
+import { OrderFullInfo, Location } from '../../../core/models';
+import { OrderStatus } from '../../../core/enums';
 import { SantaOrdersListService } from '../santa-orders-list.service';
-import { Location } from '../../../shared/models/location';
 import { SantaOrdersService } from '../../../core/data-services';
 import { NotificationsService, NotificationType } from '../../../core/notifications';
 

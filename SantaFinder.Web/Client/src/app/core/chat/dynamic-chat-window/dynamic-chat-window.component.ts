@@ -3,10 +3,10 @@ import { Component, OnInit, AfterViewInit,
     ViewEncapsulation, ElementRef
 } from '@angular/core';
 
-import { ChatMessageViewModel } from '../../../shared/models/chat-message.view-model';
+import { ChatMessage } from '../../../core/models';
 import { ChatWindowComponent } from '../chat-window/chat-window.component';
 import { ChatWindowTrackerService } from '../chat-window-tracker.service';
-import { ChatMessagesService } from '../../../core/data-services/index';
+import { ChatMessagesService } from '../../../core/data-services';
 
 @Component({
     selector: 'dynamic-chat-window',
@@ -15,7 +15,7 @@ import { ChatMessagesService } from '../../../core/data-services/index';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
-    @Input() messages: ChatMessageViewModel[] = [];
+    @Input() messages: ChatMessage[] = [];
     @Input() orderId: number = -1;
     @Input() header: string = 'Chat';
     @Input() isMaximized: boolean;
@@ -79,7 +79,7 @@ export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('chat scrolled');
         this.chatMessagesService
             .getMessagesFromOrder(this.orderId, this.messages.length)
-            .subscribe((res: ChatMessageViewModel[]) => {
+            .subscribe((res: ChatMessage[]) => {
                 this.messages = res.concat(this.messages);
             });
     }

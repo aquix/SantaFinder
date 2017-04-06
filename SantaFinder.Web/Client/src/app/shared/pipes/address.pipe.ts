@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Address } from '../models/address.model';
+import { Address } from '../../core/models/address.model';
 
 @Pipe({
     name: 'address'

@@ -1,5 +1,6 @@
-import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 import { ClientAccountComponent } from './client/client-account.component';
 import { SantaAccountComponent } from './santa/santa-account.component';
 import { LogoutComponent } from './logout/logout.component';

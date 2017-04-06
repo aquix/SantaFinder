@@ -1,8 +1,7 @@
 import { Address } from './address.model';
-import { Location } from './location';
+import { Location } from './';
 import { OrderStatus } from '../enums/order-status';
-import { ChatMessageViewModel } from './chat-message.view-model';
-import { Present } from '../../core/data-services/orders/models/new-order/present.view-model';
+import { ChatMessage, Present } from './';
 
 export interface OrderFullInfo {
     id: number;
@@ -13,5 +12,5 @@ export interface OrderFullInfo {
     status: OrderStatus;
     clientName: string;
     presents: Present[];
-    chatMessages: ChatMessageViewModel[];
+    chatMessages: ChatMessage[];
 }

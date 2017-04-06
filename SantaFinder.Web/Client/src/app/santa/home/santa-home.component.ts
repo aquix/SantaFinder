@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { SelectOrderService } from './services/select-order.service';
-import { OrderLocationInfo } from '../../core/data-services/view-models/orders-on-map/order-location-info';
+import { OrderLocationInfo } from './order-location-info';
 import { OrdersService } from '../../core/data-services';
-import { NotificationsService } from '../../core/notifications';
-import { NotificationType } from '../../core/notifications/notification-type.enum';
+import { NotificationsService, NotificationType } from '../../core/notifications';
 
 
 @Component({

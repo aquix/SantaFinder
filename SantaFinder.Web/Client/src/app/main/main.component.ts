@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserType } from '../shared/enums/user-type';
+import { UserType } from '../core/enums';
 import { AuthInfoStorage } from '../core/auth';
 
 @Component({

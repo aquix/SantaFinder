@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaginationInstance } from 'ng2-pagination';
 
-import { PagedResponse } from '../../shared/models/paged-response';
-import { OrderShortInfo } from '../../core/data-services/client-orders/models/orders-history/order-short-info';
+import { PagedResponse } from '../../core/models';
+import { OrderStatus } from '../../core/enums';
+import { OrderShortInfo } from './order-short-info';
 import { OrdersService } from '../../core/data-services';
-import { OrderStatus } from '../../core/data-services/client-orders/models/orders-history/order-status';
 
 @Component({
     selector: 'client-order-history',
@@ -13,7 +13,7 @@ import { OrderStatus } from '../../core/data-services/client-orders/models/order
     styleUrls: ['./client-order-history.scss']
 })
 export class ClientOrderHistoryComponent implements OnInit {
-    public orderStatus = OrderStatus;
+    OrderStatus = OrderStatus;
 
     orders: OrderShortInfo[] = [];
     errorMessage: string;
@@ -43,11 +43,11 @@ export class ClientOrderHistoryComponent implements OnInit {
 
     getOrderClass(order: OrderShortInfo) {
         switch (order.status) {
-            case OrderStatus.approved:
+            case OrderStatus.Approved:
                 return 'order-item_approved';
-            case OrderStatus.new:
+            case OrderStatus.New:
                 return 'order-item_new';
-            case OrderStatus.completed:
+            case OrderStatus.Completed:
                 return 'order-item_completed';
 
             default:

@@ -4,14 +4,13 @@ import 'rxjs/add/operator/map';
 
 import { AppConfig } from '../../app.config';
 import { LoginModel } from '../shared/login/login.model';
-import { UserType } from '../../shared/enums/user-type';
+import { UserType } from '../../core/enums';
 import { ClientRegisterModel } from '../client/register/client-register.model';
 import { SantaRegisterModel } from '../santa/register/santa-register.model';
-import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
-import { AuthHttp, AuthInfoStorage } from '../../core/auth/index';
+import { AuthHttp, AuthInfoStorage, IAuthInfo } from '../../core/auth';
 import { GeocodingService } from '../../core/helper-services';
-import { ClientProfileChangeModel } from '../../core/data-services/view-models/change-profile/client-profile-change.model';
-import { IAuthInfo } from '../../core/auth/auth-info-storage/auth-info';
+import { SantaProfileChangeModel } from '../../santa/profile/santa-profile-change.model';
+import { ClientProfileChangeModel } from '../../client/profile/client-profile-change.model';
 
 /**
  * Implement methods for all account roles
@@ -81,9 +80,22 @@ export class AccountService {
             .map(res => res.json());
     }
 
-    changeClientProfile(changeModel: ClientProfileChangeModel) {
-        return this.authHttp.post(`${this.config.apiPath}/account/client/profile`, changeModel)
-            .map(res => res.status);
+    changeClientProfile(model: ClientProfileChangeModel) {
+        return this.geocodingService.getCoordsFromAddress(model.address).switchMap(location => {
+            let data = {
+                email: model.email,
+                name: model.name,
+                address: {
+                    line: model.address,
+                    location: location
+                },
+                password: model.password,
+                newPassword: model.newPassword
+            };
+            return this.authHttp.post(`${this.config.apiPath}/account/client/profile`, data)
+                .map(res => res.status);
+        });
+
     }
 
     changeSantaProfile(changeModel: SantaProfileChangeModel) {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { Link } from '../shared/navbar/link.model';
+import { Link } from '../shared/navbar';
 
 @Component({
     selector: 'account-page',

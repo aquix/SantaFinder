@@ -1,5 +1,5 @@
-import { Address } from '../../../../shared/models/address.model';
-import { OrderStatus } from '../../../../shared/enums/order-status';
+import { Address } from '../../core/models';
+import { OrderStatus } from '../../core/enums';
 
 export interface SantaOrderPreview {
     id: number;

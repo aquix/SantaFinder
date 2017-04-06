@@ -4,9 +4,9 @@ import { EmailValidators, PasswordValidators } from 'ng2-validators';
 import { Router } from '@angular/router';
 
 import CustomValidators from '../../utils/custom-validators';
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../services';
 import { SantaRegisterModel } from './santa-register.model';
-import { UserType } from '../../../shared/enums/user-type';
+import { UserType } from '../../../core/enums';
 import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
 
 @Component({
