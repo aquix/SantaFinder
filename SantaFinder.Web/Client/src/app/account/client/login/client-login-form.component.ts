@@ -7,7 +7,7 @@ import { UserType } from '../../../core/enums';
     templateUrl: './client-login-form.html'
 })
 export class ClientLoginFormComponent implements OnInit {
-    private UserType = UserType;
+    UserType = UserType;
 
     constructor() { };
 

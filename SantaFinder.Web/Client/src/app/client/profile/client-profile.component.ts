@@ -74,7 +74,7 @@ export class ClientProfileComponent implements OnInit {
             });
             this.router.navigate(['/client']);
         }, err => {
-            let errors: string[] = err.json()['modelState'][''];
+            const errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });
     }

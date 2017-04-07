@@ -2,15 +2,15 @@
     <div class="edit-buttons" *ngIf="orderStatus === OrderStatus.New">
         <div *ngIf="!editMode">
             <button class="edit-button" (click)="enableEditing()">
-                <img src="/images/edit.png" alt="Edit" />
+                <img src="/assets/images/edit.png" alt="Edit" />
             </button>
         </div>
         <div *ngIf="editMode">
             <button class="save-button" (click)="saveChanges()" [disabled]="orderInfoForm.invalid">
-                <img src="/images/order-save.png" alt="Save" />
+                <img src="/assets/images/order-save.png" alt="Save" />
             </button>
             <button class="cancel-button" (click)="cancelChanges()">
-                <img src="/images/order-cancel.png" alt="Cancel" />
+                <img src="/assets/images/order-cancel.png" alt="Cancel" />
             </button>
         </div>
     </div>
@@ -57,11 +57,11 @@
                 <label class="sf-form__label">Presents</label>
             </div>
             <div formArrayName="presents">
-                <div *ngFor="let present of orderInfoForm.controls.presents.controls; let i=index">
+                <div *ngFor="let present of orderInfoForm.get('presents')['controls']; let i=index">
                     <div [formGroupName]="i">
                         <input type="text" formControlName="id" hidden />
                         <input type="text" formControlName="name" class="sf-form__control order-form__present-name" />
-                        <a *ngIf="editMode && orderInfoForm.controls.presents.controls.length > 1" (click)="removePresent(i)" href="javascript:void(0)"
+                        <a *ngIf="editMode && orderInfoForm.get('presents')['controls'].length > 1" (click)="removePresent(i)" href="javascript:void(0)"
                             class="sf-corner-delete order-form__corner-delete"></a>
                             <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i" class="sf-form__checkbox" />
                             <label [for]="'present' + i">Buy by santa</label>

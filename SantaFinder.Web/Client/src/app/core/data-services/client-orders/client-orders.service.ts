@@ -21,7 +21,7 @@ export class ClientOrdersService {
 
     changeOrder(id: number, changeModel: OrderFullInfoForEditing) {
         return this.geocodingService.getCoordsFromAddress(changeModel.address).switchMap(location => {
-            let model: OrderPostInfo = {
+            const model: OrderPostInfo = {
                 childrenNames: changeModel.childrenNames,
                 datetime: changeModel.datetime,
                 address: {

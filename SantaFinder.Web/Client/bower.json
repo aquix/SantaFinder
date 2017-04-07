@@ -20,6 +20,6 @@
     "signalr": "^2.2.1"
   },
   "install": {
-    "path": "dist/lib"
+    "path": "lib"
   }
 }

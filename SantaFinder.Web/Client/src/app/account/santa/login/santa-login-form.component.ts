@@ -7,7 +7,7 @@ import { UserType } from '../../../core/enums';
     templateUrl: './santa-login-form.html'
 })
 export class SantaLoginFormComponent implements OnInit {
-    private UserType = UserType;
+    UserType = UserType;
 
     constructor() { }
 

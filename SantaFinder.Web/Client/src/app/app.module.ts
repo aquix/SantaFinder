@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieModule } from 'ngx-cookie';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 import { AppRoutingModule } from './app.routing';
@@ -19,12 +20,13 @@ import { MainComponent } from './main/main.component';
 import { NotificationsModule } from './core/notifications/notifications.module';
 
 // Read configuration
-const appConfig: AppConfig = require('json-loader!./app.config.json');
-appConfig.gmapsApiKey = require('json-loader!../secretconfig.json').gmapsApiKey;
+const appConfig: AppConfig = require('./app.config.json');
+appConfig.gmapsApiKey = require('../secretconfig.json').gmapsApiKey;
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
@@ -32,7 +34,7 @@ appConfig.gmapsApiKey = require('json-loader!../secretconfig.json').gmapsApiKey;
         AgmCoreModule.forRoot({
             apiKey: appConfig.gmapsApiKey
         }),
-
+        CookieModule.forRoot(),
         CoreModule.forRoot(appConfig),
         AccountModule,
         ClientModule,
@@ -43,9 +45,7 @@ appConfig.gmapsApiKey = require('json-loader!../secretconfig.json').gmapsApiKey;
         AppComponent,
         MainComponent,
     ],
-    providers: [
-        CookieService,
-    ],
+    providers: [],
     bootstrap: [AppComponent],
 })
 export class AppModule { }

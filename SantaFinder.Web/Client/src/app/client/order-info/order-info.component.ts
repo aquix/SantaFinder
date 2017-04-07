@@ -29,8 +29,8 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     rating: number;
     chatMessages: ChatMessage[] = [];
 
-    editMode: boolean = false;
-    somethingChanged: boolean = false;
+    editMode = false;
+    somethingChanged = false;
     formPreviousState: OrderPostInfo;
 
     @ViewChild('ratingControl') ratingControl: Rating;
@@ -63,7 +63,7 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
         });
 
         this.clientOrdersService.getOrder(this.id).subscribe((order: OrderFullInfoForEditing) => {
-            let formData = {
+            const formData = {
                 childrenNames: order.childrenNames,
                 datetime: order.datetime,
                 address: order.address,
@@ -98,7 +98,7 @@ export class ClientOrderInfoComponent implements OnInit, AfterViewInit {
     }
 
     initNewPresent() {
-        let presentControl = this.formBuilder.group({
+        const presentControl = this.formBuilder.group({
             id: [0],
             name: [{ value: '', disabled: !this.editMode }, Validators.required],
             buyBySanta: [{ value: false, disabled: !this.editMode }]

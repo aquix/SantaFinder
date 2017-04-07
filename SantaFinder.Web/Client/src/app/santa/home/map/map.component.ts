@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { SebmGoogleMapMarker, SebmGoogleMapInfoWindow, MarkerManager, GoogleMapsAPIWrapper, } from 'angular2-google-maps/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { Location, OrderFullInfo } from '../../../core/models';
 import { SelectOrderService } from '../services/select-order.service';
@@ -50,7 +50,7 @@ export class MapComponent implements OnInit {
                 return;
             }
 
-            let windowIndex = this.orders.findIndex(o => o.id === id);
+            const windowIndex = this.orders.findIndex(o => o.id === id);
             this.infoWindows.find((w, i) => i === windowIndex).open();
 
             this.orderFullInfo = null;

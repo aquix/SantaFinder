@@ -67,11 +67,11 @@ export class ClientRegisterFormComponent implements OnInit {
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
-            }, UserType.client).subscribe(res => {
+            }, UserType.client).subscribe(() => {
                 this.router.navigate(['/client']);
             }, console.log);
         }, err => {
-            let errors: string[] = err.json()['modelState'][''];
+            const errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });
     }

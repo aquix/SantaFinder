@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let userType = this.authInfoStorage.authInfo.userType;
+        const userType = this.authInfoStorage.authInfo.userType;
         let redirectUri = '';
         if (userType === UserType.client) {
             redirectUri = '/client';

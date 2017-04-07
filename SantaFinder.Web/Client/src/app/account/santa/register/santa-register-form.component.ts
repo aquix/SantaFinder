@@ -65,11 +65,11 @@ export class SantaRegisterFormComponent implements OnInit {
             return this.accountService.login({
                 email: value.email,
                 password: value.passwords.password
-            }, UserType.santa).subscribe(res => {
+            }, UserType.santa).subscribe(() => {
                 this.router.navigate(['/santa']);
             }, console.log);
         }, err => {
-            let errors: string[] = err.json()['modelState'][''];
+            const errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });
     }

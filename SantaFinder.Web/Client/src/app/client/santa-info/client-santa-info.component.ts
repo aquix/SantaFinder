@@ -16,7 +16,7 @@ export class ClientSantaInfoComponent implements OnInit {
     id: string;
     santaInfo: SantaFullInfoForClient;
     feedbacks: FeedbackItem[];
-    allFeedbacksLoaded: boolean = false;
+    allFeedbacksLoaded = false;
 
     constructor(
         private route: ActivatedRoute,

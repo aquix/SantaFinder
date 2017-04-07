@@ -36,10 +36,10 @@
                 <label class="sf-form__label">Presents</label>
             </div>
             <div formArrayName="presents">
-                <div *ngFor="let present of orderForm.controls.presents.controls; let i=index">
+                <div *ngFor="let present of orderForm.get('presents')['controls']; let i=index">
                     <div [formGroupName]="i">
                         <input type="text" formControlName="name" class="sf-form__control order-form__present-name">
-                        <a *ngIf="orderForm.controls.presents.controls.length > 1" (click)="removePresent(i)"
+                        <a *ngIf="orderForm.get('presents')['controls'].length > 1" (click)="removePresent(i)"
                             href="javascript:void(0)" class="sf-corner-delete order-form__corner-delete"></a>
                         <input type="checkbox" formControlName="buyBySanta" [id]="'present' + i"
                                class="sf-form__checkbox"/>

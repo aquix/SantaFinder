@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../../app.config';
 import { Address, Location } from '../models';
@@ -15,14 +15,14 @@ export class GeocodingService {
     ) { }
 
     getCoordsFromAddress(address: Address) {
-        let query = `${address.city}+${address.street}+${address.house}`;
+        const query = `${address.city}+${address.street}+${address.house}`;
         return this.getCoords(query);
     }
 
     getCoords(query: string): Observable<Location> {
-        let uri = `${GeocodingService.apiPath}/json?address=${query}&key=${this.config.gmapsApiKey}`;
+        const uri = `${GeocodingService.apiPath}/json?address=${query}&key=${this.config.gmapsApiKey}`;
         return this.http.get(uri).map(res => {
-            let content = res.json();
+            const content = res.json();
             if (content.status !== 'OK') {
                 return {
                     latitude: 0,
@@ -30,7 +30,7 @@ export class GeocodingService {
                 };
             }
 
-            let location = content.results[0].geometry.location;
+            const location = content.results[0].geometry.location;
             return {
                 latitude: location.lat,
                 longitude: location.lng

@@ -1,6 +1,7 @@
 import { AuthInfoStorage } from '../../auth';
 import { AppConfig } from '../../../app.config';
 
+// tslint:disable-next-line:interface-over-type-literal
 type clientMethods = { [methodName: string]: (...params) => void };
 
 export abstract class SignalrHub {
@@ -14,9 +15,9 @@ export abstract class SignalrHub {
         hubName: string,
         clientMethods: clientMethods
     ) {
-
         if (window['$'] === undefined || window['$'].hubConnection === undefined) {
-            throw new Error('The variable $ or the .hubConnection() function are not defined...please check the SignalR scripts have been loaded properly');
+            throw new Error(`The variable $ or the .hubConnection() function are not defined...
+                please check the SignalR scripts have been loaded properly`);
         }
 
         this.hub = $.connection[hubName];
@@ -38,7 +39,7 @@ export abstract class SignalrHub {
     }
 
     protected registerClientMethods(clientMethods: clientMethods) {
-        for (let methodName in clientMethods) {
+        for (const methodName in clientMethods) {
             this.hub.client[methodName] = clientMethods[methodName];
         }
     }
@@ -60,7 +61,7 @@ export abstract class SignalrHub {
 
     private onConnected() {
         this.isConnected = true;
-        for (let action of this.waitingActions) {
+        for (const action of this.waitingActions) {
             setTimeout(action, 0);
         }
 

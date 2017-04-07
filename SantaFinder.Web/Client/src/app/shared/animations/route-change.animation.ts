@@ -1,12 +1,12 @@
 import { trigger, state, animate, style,
-    transition, AnimationEntryMetadata
-} from '@angular/core';
+    transition
+} from '@angular/animations';
 
-export function routeChangeAnimation(): AnimationEntryMetadata {
+export function routeChangeAnimation() {
     return slideOutAndIn();
 }
 
-function slideOutAndIn(): AnimationEntryMetadata {
+function slideOutAndIn() {
     return trigger('routeChangeAnimation', [
         state('void', style({ position: 'fixed', width: '100%' })),
         state('*', style({ position: 'fixed', width: '100%' })),

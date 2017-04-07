@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 
 import { Link } from '../shared/navbar/link.model';
 import { LiveComponent } from '../shared/base-components';
@@ -14,7 +14,7 @@ import { ChatWindowTrackerService } from '../core/chat/chat-window-tracker.servi
     encapsulation: ViewEncapsulation.None,
     providers: [NotificationsHub, ChatHub]
 })
-export class ClientComponent extends LiveComponent {
+export class ClientComponent extends LiveComponent implements OnInit {
     navbarLinks: Link[];
 
     constructor(

@@ -67,7 +67,7 @@ export class SantaProfileComponent implements OnInit {
             });
             this.router.navigate(['/santa']);
         }, err => {
-            let errors: string[] = err.json()['modelState'][''];
+            const errors: string[] = err.json()['modelState'][''];
             this.errorMessage = errors.join('\n');
         });
     }

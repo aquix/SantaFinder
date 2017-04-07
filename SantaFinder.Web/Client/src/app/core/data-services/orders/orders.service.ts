@@ -15,7 +15,7 @@ export class OrdersService {
     ) { }
 
     createOrder(orderViewModel: NewOrder) {
-        let order: NewOrder = {
+        const order: NewOrder = {
             datetime: orderViewModel.datetime,
             presents: orderViewModel.presents,
             childrenNames: orderViewModel.childrenNames,
@@ -28,7 +28,7 @@ export class OrdersService {
 
         if (!orderViewModel.address.useDefaultAddress) {
             return this.geocodingService.getCoordsFromAddress(orderViewModel.address.customAddress).switchMap(location => {
-                let data: NewOrderWithLocation = {
+                const data: NewOrderWithLocation = {
                     address: {
                         useDefaultAddress: order.address.useDefaultAddress,
                         customAddress: {

@@ -15,7 +15,7 @@ import { UserType } from '../../../core/enums';
 })
 export class LoginFormComponent implements OnInit {
     @Input() userType: UserType;
-    @Input() title: string = 'Login';
+    @Input() title = 'Login';
 
     loginForm: FormGroup;
     errorMessage: string;

@@ -58,8 +58,8 @@ export class SantaMyOrderDetailsComponent implements OnInit {
             return false;
         }
 
-        let now = moment();
-        let orderTime = moment(this.order.datetime);
+        const now = moment();
+        const orderTime = moment(this.order.datetime);
         if (now.isAfter(orderTime)) {
             return true;
         } else {

@@ -8,7 +8,7 @@ export class LocationService {
     constructor() {
         if (!navigator.geolocation) {
             navigator.geolocation.watchPosition((pos) => {
-                for (let listener of this._locationListeners) {
+                for (const listener of this._locationListeners) {
                     listener({
                         latitude: pos.coords.latitude,
                         longitude: pos.coords.longitude
@@ -56,7 +56,7 @@ export class LocationService {
     }
 
     removeLocationChangeListener(listener: (location: Location) => void) {
-        let listenerIndex = this._locationListeners.indexOf(listener);
+        const listenerIndex = this._locationListeners.indexOf(listener);
         if (listenerIndex > -1) {
             this._locationListeners.splice(listenerIndex, 1);
         }

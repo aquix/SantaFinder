@@ -29,7 +29,7 @@ export class SantaHomeComponent implements OnInit {
         }, console.log);
 
         this.selectOrderService.selectedOrder$.subscribe(id => {
-            let orderIndex = this.orders.findIndex(o => o.id === id);
+            const orderIndex = this.orders.findIndex(o => o.id === id);
             this.selectedOrderIndex = orderIndex;
         });
     }
@@ -51,7 +51,7 @@ export class SantaHomeComponent implements OnInit {
                     content: `You have successfully accepted the order #${id}.
                         Click [here](/santa/myorders) for details`
                 });
-                let orderIndex = this.orders.findIndex(o => o.id === id);
+                const orderIndex = this.orders.findIndex(o => o.id === id);
                 this.orders.splice(orderIndex, 1);
             } else {
                 this.notificationsService.notify({

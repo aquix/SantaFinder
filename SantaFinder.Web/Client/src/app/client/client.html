@@ -4,12 +4,9 @@
                      (close)="onNotificationCloseButtonClick()"
                      (mouseover)="onNotificationMouseOver()"
                      (mouseleave)="onNotificationMouseLeave()">
-        {{currentNotificationText}}
     </sf-notification>
     <sf-navbar [links]="navbarLinks"></sf-navbar>
     <main>
-        <ng2-page-transition>
-            <router-outlet></router-outlet>
-        </ng2-page-transition>
+        <router-outlet></router-outlet>
     </main>
 </div>

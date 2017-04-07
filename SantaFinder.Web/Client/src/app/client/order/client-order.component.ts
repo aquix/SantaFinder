@@ -42,17 +42,17 @@ export class ClientOrderComponent implements OnInit {
             comments: ['']
         });
 
-        let addressGroup = this.orderForm.get('address');
+        const addressGroup = this.orderForm.get('address');
         addressGroup.get('useDefaultAddress').valueChanges.subscribe(value => {
-            let customAddressGroup = addressGroup.get('customAddress');
-            let fieldNames = ['city', 'street', 'house', 'apartment'];
+            const customAddressGroup = addressGroup.get('customAddress');
+            const fieldNames = ['city', 'street', 'house', 'apartment'];
             if (value) {
-                for (let fieldName of fieldNames) {
+                for (const fieldName of fieldNames) {
                     customAddressGroup.get(fieldName).clearValidators();
                     customAddressGroup.get(fieldName).updateValueAndValidity();
                 }
             } else {
-                for (let fieldName of fieldNames) {
+                for (const fieldName of fieldNames) {
                     customAddressGroup.get(fieldName).setValidators(Validators.required);
                     customAddressGroup.get(fieldName).updateValueAndValidity();
                 }
@@ -78,11 +78,11 @@ export class ClientOrderComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: NewOrder }) {
-        let datetime = moment(value.datetime);
+        const datetime = moment(value.datetime);
         value.datetime = datetime.toJSON();
 
         this.ordersService.createOrder(value).subscribe(orderId => {
-            let redirectUrl = `/client/orderinfo/${orderId}`;
+            const redirectUrl = `/client/orderinfo/${orderId}`;
             this.notificationsService.notify({
                 type: NotificationType.success,
                 content: `New order successfully created.

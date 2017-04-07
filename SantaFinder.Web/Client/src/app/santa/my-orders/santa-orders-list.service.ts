@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { OrderFullInfo, PagedResponse } from '../../core/models';
 import { SantaOrderStatusFilter } from './santa-order-status-filter';
@@ -13,7 +13,7 @@ export class SantaOrdersListService {
     filter: BehaviorSubject<SantaOrderStatusFilter> = new BehaviorSubject(SantaOrderStatusFilter.All);
 
     selectedOrderIndex: BehaviorSubject<number> = new BehaviorSubject(-1);
-    readonly itemsPerPage: number = 5;
+    readonly itemsPerPage = 5;
     totalItems: BehaviorSubject<number> = new BehaviorSubject(0);
 
     constructor(
@@ -25,10 +25,12 @@ export class SantaOrdersListService {
     }
 
     loadOrders(page: number) {
-        this.santaOrdersService.getAll(this.filter.value, this.itemsPerPage, page - 1).subscribe((data: PagedResponse<SantaOrderPreview>) => {
-            this.orders.next(data.items);
-            this.totalItems.next(data.totalCount);
-        }, console.log);
+        this.santaOrdersService
+            .getAll(this.filter.value, this.itemsPerPage, page - 1)
+            .subscribe((data: PagedResponse<SantaOrderPreview>) => {
+                this.orders.next(data.items);
+                this.totalItems.next(data.totalCount);
+            }, console.log);
     }
 
     selectOrder(index: number) {
@@ -39,7 +41,7 @@ export class SantaOrdersListService {
             return;
         }
 
-        let selectedOrder = this.orders.value[index];
+        const selectedOrder = this.orders.value[index];
         if (!selectedOrder) {
             this.orderDetails.next(null);
             return;

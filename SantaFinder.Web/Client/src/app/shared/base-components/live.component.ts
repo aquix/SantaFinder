@@ -9,10 +9,10 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class LiveComponent implements OnInit, OnDestroy {
     @ViewChild('appNotification') protected appNotification: NotificationComponent;
-    protected isNotificationVisible: boolean = false;
+    isNotificationVisible = false;
 
     protected notificationsStack: NotificationViewModel[] = [];
-    protected currentNotificationTimeout: number;
+    currentNotificationTimeout: number;
 
     private userId: string;
 
@@ -56,32 +56,32 @@ export class LiveComponent implements OnInit, OnDestroy {
         this.notificationSubscription.unsubscribe();
     }
 
-    protected onNotificationCloseButtonClick() {
+    onNotificationCloseButtonClick() {
         this.hideNotification();
     }
 
-    protected onNotificationMouseOver() {
+    onNotificationMouseOver() {
         clearTimeout(this.currentNotificationTimeout);
     }
 
-    protected onNotificationMouseLeave() {
+    onNotificationMouseLeave() {
         this.currentNotificationTimeout = window.setTimeout(() => {
             this.hideNotification();
         }, 1500);
     }
 
-    protected hideNotification() {
+    hideNotification() {
         clearTimeout(this.currentNotificationTimeout);
         this.isNotificationVisible = false;
         if (this.notificationsStack.length > 0) {
             setTimeout(() => {
-                let nextNotification = this.notificationsStack.shift();
+                const nextNotification = this.notificationsStack.shift();
                 this.showNotification(nextNotification);
             }, 1000);
         }
     }
 
-    protected showNotification(notification: NotificationViewModel) {
+    showNotification(notification: NotificationViewModel) {
         console.log('show notification', notification);
         this.isNotificationVisible = true;
         this.appNotification.data = notification;

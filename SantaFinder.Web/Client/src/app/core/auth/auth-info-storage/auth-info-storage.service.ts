@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'ngx-cookie';
 
 import { IAuthInfo } from './auth-info';
 
@@ -10,7 +10,7 @@ export class AuthInfoStorage {
     constructor(
         private cookies: CookieService
     ) {
-        let authInfoJson = cookies.get('auth-info');
+        const authInfoJson = cookies.get('auth-info');
         try {
             this._authInfo = JSON.parse(authInfoJson);
         } catch (ex) { }

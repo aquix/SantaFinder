@@ -17,13 +17,13 @@ import { ChatMessagesService } from '../../../core/data-services';
 export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() messages: ChatMessage[] = [];
     @Input() orderId: number = -1;
-    @Input() header: string = 'Chat';
+    @Input() header = 'Chat';
     @Input() isMaximized: boolean;
 
     @ViewChild('chatWindow') chatWindow: ChatWindowComponent;
     @ViewChild('chatWindowWrapper') chatWindowWrapper: ElementRef;
 
-    private newMessage: string;
+    newMessage: string;
 
     constructor(
         private chatWindowTrackerService: ChatWindowTrackerService,

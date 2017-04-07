@@ -6,7 +6,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
     styleUrls: ['./photo-uploader.scss']
 })
 export class PhotoUploaderComponent implements OnInit {
-    @Input() caption: string = '';
+    @Input() caption = '';
     preview: string;
 
     @ViewChild('fileInput') fileInput: ElementRef;
@@ -26,12 +26,12 @@ export class PhotoUploaderComponent implements OnInit {
             return;
         }
 
-        let file = event.target.files[0];
+        const file = event.target.files[0];
         if (!file) {
             return;
         }
 
-        let reader = new FileReader();
+        const reader = new FileReader();
 
         reader.onload = (e) => {
             this.preview = e.target['result'];

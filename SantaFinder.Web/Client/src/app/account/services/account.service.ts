@@ -33,7 +33,7 @@ export class AccountService {
 
         // todo register body for different types
         if (this.getRegisterModelType(regInfoRaw) === UserType.client) {
-            let clientRegInfo = <ClientRegisterModel>regInfoRaw;
+            const clientRegInfo = <ClientRegisterModel>regInfoRaw;
             registerUri = 'client/register';
             return this.geocodingService.getCoordsFromAddress(clientRegInfo.address).switchMap(location => {
                 registerBody = {
@@ -49,9 +49,9 @@ export class AccountService {
                     .map(res => res.status);
             });
         } else {
-            let santaRegInfo = <SantaRegisterModel>regInfoRaw;
+            const santaRegInfo = <SantaRegisterModel>regInfoRaw;
             registerUri = 'santa/register';
-            let formDataContent = {
+            const formDataContent = {
                 email: santaRegInfo.email,
                 password: santaRegInfo.passwords.password,
                 confirmPassword: santaRegInfo.passwords.passwordConfirmation,
@@ -59,8 +59,8 @@ export class AccountService {
                 photo: santaRegInfo.photo
             };
 
-            let formData = new FormData();
-            for (let key in formDataContent) {
+            const formData = new FormData();
+            for (const key in formDataContent) {
                 formData.append(key, formDataContent[key]);
             }
             registerBody = formData;
@@ -82,7 +82,7 @@ export class AccountService {
 
     changeClientProfile(model: ClientProfileChangeModel) {
         return this.geocodingService.getCoordsFromAddress(model.address).switchMap(location => {
-            let data = {
+            const data = {
                 email: model.email,
                 name: model.name,
                 address: {
@@ -104,15 +104,15 @@ export class AccountService {
     }
 
     login(loginInfo: LoginModel, userType: UserType) {
-        let headers = new Headers();
+        const headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        let body = `grant_type=password&username=${loginInfo.email}&password=${loginInfo.password}&usertype=${userType}`;
+        const body = `grant_type=password&username=${loginInfo.email}&password=${loginInfo.password}&usertype=${userType}`;
 
         return this.http.post(this.TOKEN_PATH, body, {
             headers: headers
         }).map(res => res.json()).map(data => {
-            let tokenInfo: IAuthInfo = {
+            const tokenInfo: IAuthInfo = {
                 token: data['access_token'],
                 tokenType: data['token_type'],
                 email: data['email'],

@@ -4,4 +4,4 @@ export * from './location.model';
 export * from './order-full-info.model';
 export * from './paged-response.model';
 export * from './present.model';
-export * from './santa.model'
+export * from './santa.model';
