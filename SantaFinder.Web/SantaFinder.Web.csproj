@@ -219,6 +219,11 @@
     <Compile Include="App_Start\Startup.Cors.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="App_Start\Startup.WebApi.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SantasController.cs" />
     <Compile Include="Areas\Auth\AuthAreaRegistration.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\ClientAccountController.cs" />
@@ -316,6 +321,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\santafinder-api - Web Deploy.pubxml" />

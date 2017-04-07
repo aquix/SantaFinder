@@ -11,6 +11,7 @@ namespace SantaFinder.Data.Context
         IDbSet<IdentityRole> Roles { get; set; }
         DbSet<Client> Clients { get; set; }
         DbSet<Santa> Santas { get; set; }
+        DbSet<Admin> Admins { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<Present> Presents { get; set; }
         DbSet<ChatMessage> ChatMessages { get; set; }
