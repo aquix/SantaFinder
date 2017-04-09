@@ -9,6 +9,7 @@ using SantaFinder.Web.Services;
 namespace SantaFinder.Web.Controllers
 {
     [Authorize(Roles = "client")]
+    [RoutePrefix("api/santas")]
     public class SantasController : ApiController
     {
         private SantasService _santasService;
@@ -18,6 +19,7 @@ namespace SantaFinder.Web.Controllers
             _santasService = santasService;
         }
 
+        [Route("")]
         public async Task<PagedResponse<SantaInfoForClient>> Get(int count, int page = 0)
         {
             var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);

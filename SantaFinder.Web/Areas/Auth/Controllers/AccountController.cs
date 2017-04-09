@@ -12,7 +12,7 @@ using SantaFinder.Web.Areas.Auth.Utils;
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Account")]
+    [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";

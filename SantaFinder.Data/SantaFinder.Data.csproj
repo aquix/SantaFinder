@@ -66,9 +66,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -137,6 +136,10 @@
     <Compile Include="Migrations\201703271235060_AddChatMessageModel.Designer.cs">
       <DependentUpon>201703271235060_AddChatMessageModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704091540386_AddAdminModel.cs" />
+    <Compile Include="Migrations\201704091540386_AddAdminModel.Designer.cs">
+      <DependentUpon>201704091540386_AddAdminModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -180,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703271235060_AddChatMessageModel.resx">
       <DependentUpon>201703271235060_AddChatMessageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704091540386_AddAdminModel.resx">
+      <DependentUpon>201704091540386_AddAdminModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
