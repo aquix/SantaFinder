@@ -21,7 +21,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
 
         // GET: api/Santas
         [Route("")]
-        public IQueryable<Santa> GetUsers()
+        public IQueryable<Santa> GetSantas()
         {
             return db.Santas;
         }

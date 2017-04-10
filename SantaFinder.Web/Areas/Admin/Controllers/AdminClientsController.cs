@@ -19,7 +19,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: api/Clients
-        public IQueryable<Client> GetUsers()
+        public IQueryable<Client> GetClients()
         {
             return db.Clients;
         }

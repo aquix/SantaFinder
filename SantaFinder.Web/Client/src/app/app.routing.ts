@@ -9,6 +9,7 @@ const appRoutes: Routes = [
     { path: 'account', loadChildren: './account/account.module#AccountModule' },
     { path: 'client', loadChildren: './client/client.module#ClientModule', canActivate: [ClientAuthGuard] },
     { path: 'santa', loadChildren: './santa/santa.module#SantaModule', canActivate: [SantaAuthGuard] },
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     { path: '**', redirectTo: '' }
 ];
 

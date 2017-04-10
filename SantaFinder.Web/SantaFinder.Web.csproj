@@ -217,10 +217,10 @@
     <Compile Include="App_Start\Startup.Cors.cs" />
     <Compile Include="App_Start\Startup.SignalR.cs" />
     <Compile Include="App_Start\Startup.WebApi.cs" />
-    <Compile Include="Controllers\Admin\AdminAdminsController.cs" />
-    <Compile Include="Controllers\Admin\AdminClientsController.cs" />
-    <Compile Include="Controllers\Admin\AdminOrdersController.cs" />
-    <Compile Include="Controllers\Admin\AdminSantasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminAdminsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminClientsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminOrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminSantasController.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\ClientAccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\SantaAccountController.cs" />
@@ -291,11 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -322,11 +317,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\santafinder-api - Web Deploy.pubxml" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
