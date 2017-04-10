@@ -21,7 +21,7 @@ export class OrdersService {
             childrenNames: orderViewModel.childrenNames,
             address: {
                 useDefaultAddress: orderViewModel.address.useDefaultAddress,
-                customAddress: null
+                customAddress: orderViewModel.address.customAddress
             },
             comments: orderViewModel.comments
         };
