@@ -39,14 +39,14 @@ namespace SantaFinder.Data.Migrations
 
             var userManager = new AppUserManager<Admin>(new UserStore<Admin>(context));
 
-            if (userManager.FindByName("admin") == null)
+            if (userManager.FindByEmail("admin") == null)
             {
                 var admin = new Admin
                 {
-                    UserName = "admin",
-                    Email = "admin@adminemail.com"
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com"
                 };
-                var adminPassword = "adminpass";
+                var adminPassword = "admin123";
                 userManager.Create(admin, adminPassword);
                 userManager.AddToRole(admin.Id, "admin");
             }

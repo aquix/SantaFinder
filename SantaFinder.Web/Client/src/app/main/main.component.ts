@@ -18,8 +18,10 @@ export class MainComponent implements OnInit {
         let redirectUri = '';
         if (userType === UserType.client) {
             redirectUri = '/client';
-        } else {
+        } else if (userType === UserType.santa) {
             redirectUri = '/santa';
+        } else {
+            redirectUri = '/admin';
         }
         this.router.navigate([redirectUri]);
     }

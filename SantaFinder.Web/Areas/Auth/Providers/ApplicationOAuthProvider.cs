@@ -31,6 +31,7 @@ namespace SantaFinder.Web.Auth.Providers
             var autofacLifetimeScope = Autofac.Integration.Owin.OwinContextExtensions.GetAutofacLifetimeScope(context.OwinContext);
             var clientManager = autofacLifetimeScope.Resolve<AppUserManager<Client>>();
             var santaManager = autofacLifetimeScope.Resolve<AppUserManager<Santa>>();
+            var adminManager = autofacLifetimeScope.Resolve<AppUserManager<Admin>>();
             var userType = context.OwinContext.Get<UserType>("usertype");
 
             ClaimsIdentity oAuthIdentity = null;
@@ -48,7 +49,7 @@ namespace SantaFinder.Web.Auth.Providers
 
                 user = client;
             }
-            else
+            else if (userType == UserType.Santa)
             {
                 var santa = await santaManager.FindAsync(context.UserName, context.Password);
                 if (santa != null)
@@ -58,6 +59,17 @@ namespace SantaFinder.Web.Auth.Providers
                 }
 
                 user = santa;
+            }
+            else
+            {
+                var admin = await adminManager.FindAsync(context.UserName, context.Password);
+                if (admin != null)
+                {
+                    oAuthIdentity = await adminManager.GenerateUserIdentityAsync(admin, OAuthDefaults.AuthenticationType);
+                    cookiesIdentity = await adminManager.GenerateUserIdentityAsync(admin, CookieAuthenticationDefaults.AuthenticationType);
+                }
+
+                user = admin;
             }
 
             if (user == null)

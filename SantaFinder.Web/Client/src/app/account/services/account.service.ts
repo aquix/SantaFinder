@@ -129,8 +129,6 @@ export class AccountService {
         this.authTokenService.authInfo = null;
     }
 
-
-
     private getRegisterModelType(regInfo: ClientRegisterModel | SantaRegisterModel): UserType  {
         if ((regInfo as any).address !== undefined) {
             return UserType.client;

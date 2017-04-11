@@ -33,7 +33,9 @@
   ],
   "defaults": {
     "styleExt": "scss",
-    "component": {},
+    "component": {
+        "spec": false
+    },
     "serve": {
       "port": 9000
     }

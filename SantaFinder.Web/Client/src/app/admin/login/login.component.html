@@ -1,0 +1,22 @@
+<div class="sf-form login-form">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmitClick(loginForm)">
+        <h1 class="sf-form__title">
+            Login as administrator
+        </h1>
+        <div [hidden]="!errorMessage" class="error-message">
+            <span>{{ errorMessage }}</span>
+        </div>
+        <div>
+            <input type="email" formControlName="email"
+                class="sf-form__control sf-form__control_with-validation" name="email"
+                value="" placeholder="Email">
+        </div>
+        <div>
+            <input type="password" formControlName="password"
+                class="sf-form__control" name="password"
+                value="" placeholder="Password">
+
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid" class="sf-button sf-form__button">Log in</button>
+    </form>
+</div>

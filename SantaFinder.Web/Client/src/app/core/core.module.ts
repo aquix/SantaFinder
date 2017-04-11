@@ -22,9 +22,9 @@ import {
     AuthGuard,
     ClientAuthGuard,
     OnlyAnonymousGuard,
-    SantaAuthGuard
+    SantaAuthGuard,
+    AdminAuthGuard
 } from './auth/guards';
-
 
 @NgModule({
     imports: [
@@ -67,6 +67,7 @@ export class CoreModule {
                 ClientAuthGuard,
                 OnlyAnonymousGuard,
                 SantaAuthGuard,
+                AdminAuthGuard,
 
                 ...ChatModule.forRoot().providers,
                 ...NotificationsModule.forRoot().providers
