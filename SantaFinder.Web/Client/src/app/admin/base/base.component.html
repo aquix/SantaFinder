@@ -1,4 +1,12 @@
 <div class="sf-page">
-  <sf-navbar [links]="navbarLinks"></sf-navbar>
-  <router-outlet></router-outlet>
+    <sf-notification #appNotification
+                     class="app-notification" [ngClass]="{'app-notification_hidden': !isNotificationVisible}"
+                     (close)="onNotificationCloseButtonClick()"
+                     (mouseover)="onNotificationMouseOver()"
+                     (mouseleave)="onNotificationMouseLeave()">
+    </sf-notification>
+    <sf-navbar [links]="navbarLinks"></sf-navbar>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
 </div>

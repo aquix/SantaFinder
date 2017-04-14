@@ -22,7 +22,7 @@
                         class="sf-form__control" name="passwordConfirmation"
                         value="" placeholder="Confirm password">
                 <span class="error-icon">
-                    <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
+                    <img *ngIf="arePasswordsMismatched()" [@slideFromLeft]="arePasswordsMismatched()"
                             src="/assets/images/exclamation.png" alt="Passwords don't match" class="error-icon__image">
                     <span class="error-icon__tooltip-text">Passwords don't match</span>
                 </span>

@@ -1,0 +1,18 @@
+.modal-window {
+    width: 500px;
+    height: 200px;
+
+    &__close-button {
+        position: absolute;
+        color: #777;
+        font: 18px/100% arial, sans-serif;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #fff;
+        top: 15px;
+        right: 15px;
+
+        &:after {
+            content: '✖';
+        }
+    }
+}

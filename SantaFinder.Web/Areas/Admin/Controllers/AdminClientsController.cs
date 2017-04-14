@@ -11,111 +11,151 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
+using SantaFinder.Web.Models.Shared;
+using SantaFinder.Web.Areas.Admin.Models.Clients;
+using SantaFinder.Data.Identity;
 
 namespace SantaFinder.Web.Areas.Admin.Controllers
 {
+    [RoutePrefix("api/admin/clients")]
     public class AdminClientsController : ApiController
     {
         private AppDbContext db = new AppDbContext();
 
-        // GET: api/Clients
-        public IQueryable<Client> GetClients()
+        private AppUserManager<Client> _clientManager;
+
+        public AdminClientsController(AppUserManager<Client> clientManager)
         {
-            return db.Clients;
+            _clientManager = clientManager;
+        }
+
+        // GET: api/Clients
+        [Route("")]
+        public async Task<PagedResponse<ClientPreview>> GetClients(int startIndex = 0, int count = 0)
+        {
+            var clients = await db.Clients
+                .OrderBy(c => c.Name)
+                .Skip(startIndex)
+                .Take(count)
+                .Select(c => new ClientPreview
+                {
+                    Id = c.Id,
+                    Email = c.Email,
+                    Name = c.Name
+                })
+                .ToListAsync();
+
+            return new PagedResponse<ClientPreview>
+            {
+                Items = clients,
+                TotalCount = await db.Clients.CountAsync()
+            };
         }
 
         // GET: api/Clients/5
-        [ResponseType(typeof(Client))]
+        [Route("{id}")]
+        [ResponseType(typeof(ClientModel))]
         public async Task<IHttpActionResult> GetClient(string id)
         {
-            Client client = await db.Clients.FindAsync(id);
+            var client = await db.Clients.FindAsync(id);
             if (client == null)
             {
                 return NotFound();
             }
 
-            return Ok(client);
+            return Ok(new ClientModel
+            {
+                Id = client.Id,
+                Name = client.Name,
+                Address = client.Address,
+                Location = client.Location,
+                Email = client.Email,
+                NewPassword = new Models.Shared.NewPassword()
+            });
         }
 
         // PUT: api/Clients/5
+        [Route("{id}")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutClient(string id, Client client)
+        public async Task<IHttpActionResult> PutClient(string id, ClientModel clientModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != client.Id)
+            if (id != clientModel.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(client).State = EntityState.Modified;
+            if (!string.IsNullOrEmpty(clientModel.NewPassword.Password) &&
+                clientModel.NewPassword.Password != clientModel.NewPassword.Confirmation)
+            {
+                return BadRequest();
+            }
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var client = await _clientManager.FindByIdAsync(id);
+
+            client.Name = clientModel.Name;
+            client.Email = clientModel.Email;
+            client.Address = clientModel.Address;
+            client.Location = clientModel.Location;
+            client.PasswordHash = _clientManager.PasswordHasher.HashPassword(clientModel.NewPassword.Password);
+
+            await _clientManager.UpdateAsync(client);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Clients
-        [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> PostClient(Client client)
+        [Route("")]
+        public async Task<IHttpActionResult> PostClient(ClientModel clientModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Clients.Add(client);
-
-            try
+            if (string.IsNullOrEmpty(clientModel.NewPassword.Password))
             {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ClientExists(client.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest("Client must have a password");
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = client.Id }, client);
+            if (clientModel.NewPassword.Password != clientModel.NewPassword.Confirmation)
+            {
+                return BadRequest("Password must be the same");
+            }
+
+            var client = new Client
+            {
+                Name = clientModel.Name,
+                Email = clientModel.Email,
+                Address = clientModel.Address,
+                Location = clientModel.Location
+            };
+
+            await _clientManager.CreateAsync(client, clientModel.NewPassword.Password);
+
+            return Ok(client.Id);
         }
 
         // DELETE: api/Clients/5
+        [Route("{id}")]
         [ResponseType(typeof(Client))]
         public async Task<IHttpActionResult> DeleteClient(string id)
         {
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            var client = await _clientManager.FindByIdAsync(id);
+
+            if (client != null)
+            {
+                await _clientManager.DeleteAsync(client);
+                return Ok(client);
+            }
+            else
             {
                 return NotFound();
             }
-
-            db.Clients.Remove(client);
-            await db.SaveChangesAsync();
-
-            return Ok(client);
         }
 
         protected override void Dispose(bool disposing)

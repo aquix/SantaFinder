@@ -14,7 +14,7 @@ using SantaFinder.Entities;
 
 namespace SantaFinder.Web.Areas.Admin.Controllers
 {
-    [RoutePrefix("admin/api/santas")]
+    [RoutePrefix("api/admin/santas")]
     public class AdminSantasController : ApiController
     {
         private AppDbContext db = new AppDbContext();

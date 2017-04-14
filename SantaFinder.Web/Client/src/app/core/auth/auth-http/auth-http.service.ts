@@ -24,6 +24,11 @@ export class AuthHttp {
         return this.http.put(url, body, options);
     }
 
+    delete(url: string, options: RequestOptionsArgs = {}) {
+        this.appendAuthHeaders(options);
+        return this.http.delete(url, options);
+    }
+
     private appendAuthHeaders(options: RequestOptionsArgs) {
         if (!options.headers) {
             options.headers = new Headers();

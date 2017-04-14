@@ -221,6 +221,9 @@
     <Compile Include="Areas\Admin\Controllers\AdminClientsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminOrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminSantasController.cs" />
+    <Compile Include="Areas\Admin\Models\Clients\ClientModel.cs" />
+    <Compile Include="Areas\Admin\Models\Clients\ClientPreview.cs" />
+    <Compile Include="Areas\Admin\Models\Shared\NewPassword.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\ClientAccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\SantaAccountController.cs" />
@@ -317,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>

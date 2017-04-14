@@ -7,24 +7,14 @@ import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services';
 import { ClientRegisterModel } from './client-register.model';
 import { UserType } from '../../../core/enums';
+import { slideFromLeft } from 'app/shared/animations';
 
 @Component({
     selector: 'register-form',
     templateUrl: './client-register-form.html',
     styleUrls: ['./client-register-form.scss'],
     animations: [
-        trigger(
-            'errorHint', [
-                transition(':enter', [
-                    style({ transform: 'translateX(100%)', opacity: 0 }),
-                    animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
-                ]),
-                transition(':leave', [
-                    style({ transform: 'translateX(0)', 'opacity': 1 }),
-                    animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
-                ])
-            ]
-        )
+        slideFromLeft()
     ]
 })
 export class ClientRegisterFormComponent implements OnInit {

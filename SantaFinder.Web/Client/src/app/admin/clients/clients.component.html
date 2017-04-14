@@ -1,0 +1,32 @@
+<div>
+    <div *ngIf="clients.length > 0; else noClients">
+        <table class="model-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients | paginate: paginationConfig">
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>
+                        <a href="javascript:void(0)" [routerLink]="[client.id]">Edit</a>
+                        <a href="javascript:void(0)" (click)="onDeleteClientClick(client.id)">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <ng-template #noClients class="sf-empty-list-placeholder">
+        No clients :(
+    </ng-template>
+    <div>
+        <button class="sf-button" (click)="onCreateNewClientClick()">Create new client</button>
+    </div>
+</div>

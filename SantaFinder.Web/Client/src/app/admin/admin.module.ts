@@ -9,12 +9,17 @@ import { LoginService } from './login/login.service';
 import { BaseComponent } from './base/base.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { LogoutComponent } from './login/logout.component';
+import { SantasComponent } from './santas/santas.component';
+import { AdminsComponent } from './admins/admins.component';
+import { OrdersComponent } from './orders/orders.component';
+import { ClientsModule } from 'app/admin/clients/clients.module';
 
 @NgModule({
     imports: [
         AdminRoutingModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        ClientsModule
     ],
     exports: [],
     declarations: [
@@ -22,9 +27,13 @@ import { LogoutComponent } from './login/logout.component';
         LoginComponent,
         LogoutComponent,
         HomeComponent,
-        BaseComponent],
+        BaseComponent,
+        SantasComponent,
+        AdminsComponent,
+        OrdersComponent
+    ],
     providers: [
-        LoginService
+        LoginService,
     ],
 })
 export class AdminModule { }

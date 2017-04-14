@@ -1,6 +1,6 @@
 <nav #nav class="sf-navbar">
     <div class="sf-navbar__logo">
-        <a routerLink="['']"><img src="/assets/images/logo.png" alt="Santa finder"></a>
+        <a [routerLink]="['']"><img src="/assets/images/logo.png" alt="Santa finder"></a>
     </div>
     <ul [ngClass]="{ 'links-visible': showLinks }" class="sf-navbar__links" (click)="showLinks = false">
         <li *ngFor="let link of links" class="sf-navbar__link">

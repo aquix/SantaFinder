@@ -14,17 +14,20 @@ using SantaFinder.Entities;
 
 namespace SantaFinder.Web.Areas.Admin.Controllers
 {
+    [RoutePrefix("api/admin/admins")]
     public class AdminAdminsController : ApiController
     {
         private AppDbContext db = new AppDbContext();
 
         // GET: api/Admins
+        [Route("")]
         public IQueryable<Entities.Admin> GetAdmins()
         {
             return db.Admins;
         }
 
         // GET: api/Admins/5
+        [Route("{id}")]
         [ResponseType(typeof(Entities.Admin))]
         public async Task<IHttpActionResult> GetAdmin(string id)
         {
@@ -38,6 +41,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // PUT: api/Admins/5
+        [Route("{id}")]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutAdmin(string id, Entities.Admin admin)
         {
@@ -73,6 +77,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // POST: api/Admins
+        [Route("")]
         [ResponseType(typeof(Entities.Admin))]
         public async Task<IHttpActionResult> PostAdmin(Entities.Admin admin)
         {
@@ -103,6 +108,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // DELETE: api/Admins/5
+        [Route("{id}")]
         [ResponseType(typeof(Entities.Admin))]
         public async Task<IHttpActionResult> DeleteAdmin(string id)
         {

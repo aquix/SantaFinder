@@ -14,17 +14,20 @@ using SantaFinder.Entities;
 
 namespace SantaFinder.Web.Areas.Admin.Controllers
 {
+    [RoutePrefix("api/admin/orders")]
     public class AdminOrdersController : ApiController
     {
         private AppDbContext db = new AppDbContext();
 
         // GET: api/Orders
+        [Route("")]
         public IQueryable<Order> GetOrders()
         {
             return db.Orders;
         }
 
         // GET: api/Orders/5
+        [Route("{id}")]
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> GetOrder(int id)
         {
@@ -38,6 +41,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // PUT: api/Orders/5
+        [Route("{id}")]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutOrder(int id, Order order)
         {
@@ -73,6 +77,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // POST: api/Orders
+        [Route("")]
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> PostOrder(Order order)
         {
@@ -88,6 +93,7 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
         }
 
         // DELETE: api/Orders/5
+        [Route("{id}")]
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> DeleteOrder(int id)
         {

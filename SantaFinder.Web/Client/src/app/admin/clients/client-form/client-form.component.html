@@ -1,0 +1,87 @@
+<form [formGroup]="clientForm" (ngSubmit)="onSubmitClick(clientForm)" novalidate>
+    <div [hidden]="!errorMessage" class="error-message">
+        <span>{{ errorMessage }}</span>
+    </div>
+    <div>
+        <div class="clearfix">
+            <label class="sf-form__label">Id:</label>
+        </div>
+        <input type="email" formControlName="id"
+            class="sf-form__control" name="id"
+            value="" placeholder="Id" readonly>
+    </div>
+    <div>
+        <div class="clearfix">
+            <label class="sf-form__label">Email:</label>
+        </div>
+        <input type="email" formControlName="email"
+            class="sf-form__control sf-form__control_with-validation" name="email"
+            value="" placeholder="Email">
+    </div>
+    <div>
+        <div class="clearfix">
+            <label class="sf-form__label">Name:</label>
+        </div>
+        <input type="text" formControlName="name"
+            class="sf-form__control sf-form__control_with-validation" name="name"
+            value="" placeholder="Your name">
+    </div>
+
+    <div formGroupName="address">
+        <div class="clearfix">
+            <label class="sf-form__label">Address:</label>
+        </div>
+        <div>
+            <input type="text" formControlName="city"
+                class="sf-form__control sf-form__control_with-validation" name="city"
+                value="" placeholder="City">
+        </div>
+        <div>
+            <input type="text" formControlName="street"
+                class="sf-form__control client-form__control_street sf-form__control_with-validation" name="street"
+                value="" placeholder="Street">
+            <input type="text" formControlName="house"
+                class="sf-form__control client-form__control_house sf-form__control_with-validation" name="house"
+                value="" placeholder="House">
+            <input type="text" formControlName="apartment"
+                class="sf-form__control client-form__control_apart sf-form__control_with-validation" name="apartment"
+                value="" placeholder="Apart.">
+        </div>
+    </div>
+    <div formGroupName="location">
+        <div class="clearfix">
+            <label class="sf-form__label">Location:</label>
+        </div>
+        <div>
+            <input type="text" formControlName="latitude" name="latitude"
+                    class="sf-form__control client-form__control_half-width" readonly>
+            <input type="text" formControlName="longitude" name="longitude"
+                    class="sf-form__control client-form__control_half-width" readonly>
+        </div>
+    </div>
+    <div formGroupName="newPassword">
+        <div class="clearfix">
+            <label class="sf-form__label">Password change:</label>
+        </div>
+
+        <div>
+            <input type="password" formControlName="password"
+                class="sf-form__control sf-form__control_with-validation" name="password"
+                value="" placeholder="New password">
+        </div>
+        <div>
+            <input type="password" formControlName="confirmation"
+                class="sf-form__control" name="confirmation"
+                value="" placeholder="Confirm password">
+            <span class="error-icon">
+                <img *ngIf="arePasswordsMismatched()" [@slideFromLeft]="arePasswordsMismatched()"
+                        src="/assets/images/exclamation.png" alt="Passwords don't match" class="error-icon__image">
+                <span class="error-icon__tooltip-text">Passwords don't match</span>
+            </span>
+
+        </div>
+    </div>
+    <button type="submit" [disabled]="clientForm.invalid" class="sf-button sf-form__button">
+        {{ submitButtonText }}
+    </button>
+</form>

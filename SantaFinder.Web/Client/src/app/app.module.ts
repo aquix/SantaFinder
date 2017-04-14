@@ -36,6 +36,7 @@ appConfig.gmapsApiKey = require('../secretconfig.json').gmapsApiKey;
             apiKey: appConfig.gmapsApiKey
         }),
         CookieModule.forRoot(),
+
         CoreModule.forRoot(appConfig),
         AccountModule,
         ClientModule,

@@ -6,25 +6,15 @@ import { Router } from '@angular/router';
 import CustomValidators from '../../utils/custom-validators';
 import { AccountService } from '../../services';
 import { SantaRegisterModel } from './santa-register.model';
-import { UserType } from '../../../core/enums';
+import { UserType } from 'app/core/enums';
 import { PhotoUploaderComponent } from './photo-uploader/photo-uploader.component';
+import { slideFromLeft } from 'app/shared/animations';
 
 @Component({
     selector: 'register-form',
     templateUrl: './santa-register-form.html',
     animations: [
-        trigger(
-            'errorHint', [
-                transition(':enter', [
-                    style({ transform: 'translateX(100%)', opacity: 0 }),
-                    animate('500ms', style({ transform: 'translateX(0)', opacity: 1 }))
-                ]),
-                transition(':leave', [
-                    style({ transform: 'translateX(0)', 'opacity': 1 }),
-                    animate('500ms', style({ transform: 'translateX(100%)', opacity: 0 }))
-                ])
-            ]
-        )
+        slideFromLeft()
     ],
     styleUrls: ['./santa-register-form.scss']
 })
