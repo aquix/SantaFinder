@@ -19,11 +19,8 @@ export class ChatHub extends SignalrHub {
         super(authInfoStorage, config, 'chatHub', {
             onMessageReceived: (message: ChatMessage) => {
                 this.onMessageReceived.next(message);
-                console.log(message);
             }
         });
-
-        console.log('chat hub ctor');
     }
 
     sendMessage(message: NewChatMessageViewModel) {

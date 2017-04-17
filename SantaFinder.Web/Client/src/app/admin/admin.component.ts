@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalWindowsService } from 'app/core/modal-windows/modal-windows.service';
 
 @Component({
     selector: 'sf-admin',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-    constructor() { }
+    constructor() {
+    }
 
     ngOnInit() {
     }

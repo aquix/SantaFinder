@@ -131,13 +131,21 @@ namespace SantaFinder.Web.Areas.Admin.Controllers
             {
                 Name = clientModel.Name,
                 Email = clientModel.Email,
+                UserName = clientModel.Email,
                 Address = clientModel.Address,
                 Location = clientModel.Location
             };
 
-            await _clientManager.CreateAsync(client, clientModel.NewPassword.Password);
+            var result = await _clientManager.CreateAsync(client, clientModel.NewPassword.Password);
 
-            return Ok(client.Id);
+            if (result.Succeeded)
+            {
+                return Ok(client.Id);
+            }
+            else
+            {
+                return BadRequest(string.Join("\n", result.Errors));
+            }
         }
 
         // DELETE: api/Clients/5

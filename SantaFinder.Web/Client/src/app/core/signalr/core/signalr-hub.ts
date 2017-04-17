@@ -26,15 +26,12 @@ export abstract class SignalrHub {
 
         this.registerClientMethods(clientMethods);
 
-        console.log(`${hubName} connecting`);
         $.connection.hub.start().done(() => {
             this.onConnected();
-            console.log(`${hubName} connected`);
         });
     }
 
     public dispose() {
-        console.log('hub dispose');
         $.connection.hub.stop();
     }
 

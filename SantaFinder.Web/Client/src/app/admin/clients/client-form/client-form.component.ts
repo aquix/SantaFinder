@@ -57,9 +57,7 @@ export class ClientFormComponent implements OnInit {
         });
 
         this.clientForm.get('address').valueChanges.debounceTime(1000).subscribe(value => {
-            console.log(`update address ${value}`);
             this.geocodingService.getCoordsFromAddress(value).subscribe(location => {
-                console.log(`new coords ${location}`);
                 this.clientForm.get('location').setValue(location);
             });
         });

@@ -8,6 +8,7 @@ import { AdminClientsService } from './clients.service';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { NewClientComponent } from './new-client/new-client.component';
 import { ClientFormComponent } from './client-form/client-form.component';
+import { ModalWindowsModule } from 'app/core/modal-windows/modal-windows.module';
 
 @NgModule({
     imports: [

@@ -13,13 +13,16 @@ import { SantasComponent } from './santas/santas.component';
 import { AdminsComponent } from './admins/admins.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ClientsModule } from 'app/admin/clients/clients.module';
+import { ModalWindowsModule } from 'app/core/modal-windows/modal-windows.module';
 
 @NgModule({
     imports: [
         AdminRoutingModule,
         CoreModule,
         SharedModule,
-        ClientsModule
+        ClientsModule,
+
+        ModalWindowsModule
     ],
     exports: [],
     declarations: [

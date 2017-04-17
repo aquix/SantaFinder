@@ -1,0 +1,16 @@
+.confirmation-window {
+    &__body {
+        padding: 20px;
+        text-align: center;
+    }
+
+    &__buttons-line {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__button {
+        margin: 10px;
+    }
+
+}

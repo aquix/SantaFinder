@@ -76,7 +76,6 @@ export class DynamicChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     onChatTopReached() {
-        console.log('chat scrolled');
         this.chatMessagesService
             .getMessagesFromOrder(this.orderId, this.messages.length)
             .subscribe((res: ChatMessage[]) => {

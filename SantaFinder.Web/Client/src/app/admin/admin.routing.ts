@@ -11,7 +11,7 @@ import { AdminsComponent } from './admins/admins.component';
 import { ClientsComponent } from './clients/clients.component';
 import { SantasComponent } from './santas/santas.component';
 import { OrdersComponent } from './orders/orders.component';
-import { NewClientComponent } from "app/admin/clients/new-client/new-client.component";
+import { NewClientComponent } from 'app/admin/clients/new-client/new-client.component';
 
 const routes: Routes = [
     { path: '', component: AdminComponent, children: [

@@ -21,13 +21,10 @@ export class LiveComponent extends WithNotificationsComponent implements OnInit,
         super(notificationsService);
 
         this.userId = authInfoStorage.authInfo.id;
-        console.log('live component ctor');
     }
 
     ngOnInit() {
         super.ngOnInit();
-
-        console.log('live component init');
 
         this.chatHub.onMessageReceived.subscribe(m => {
             if (this.userId !== m.senderId && this.chatWindowTrackerService.openedChatId === -1) {

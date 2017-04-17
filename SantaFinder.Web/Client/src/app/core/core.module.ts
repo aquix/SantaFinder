@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { ChatModule } from './chat/chat.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { ModalWindowsModule } from './modal-windows/modal-windows.module';
 
 import { AppConfig } from '../app.config';
 
@@ -70,7 +71,8 @@ export class CoreModule {
                 AdminAuthGuard,
 
                 ...ChatModule.forRoot().providers,
-                ...NotificationsModule.forRoot().providers
+                ...NotificationsModule.forRoot().providers,
+                ...ModalWindowsModule.forRoot().providers
             ]
         };
     }

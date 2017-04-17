@@ -62,7 +62,6 @@ export class WithNotificationsComponent implements OnInit, OnDestroy {
     }
 
     showNotification(notification: NotificationViewModel) {
-        console.log('show notification', notification);
         this.isNotificationVisible = true;
         this.appNotification.data = notification;
 

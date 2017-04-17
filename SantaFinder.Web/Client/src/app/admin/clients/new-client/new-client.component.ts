@@ -26,7 +26,7 @@ export class NewClientComponent implements OnInit {
             });
         }, err => {
             this.notificationsService.notify({
-                content: err,
+                content: err.json().message,
                 type: NotificationType.error
             });
         });

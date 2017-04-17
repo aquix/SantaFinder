@@ -139,7 +139,7 @@ ul {
     border-radius: 3px;
     box-shadow: none;
     transition: 0.25s;
-    display: block;
+    display: inline-block;
 
     &:hover {
         background-color: darken($button-color, 30%);

@@ -1,0 +1,15 @@
+<div>
+    <div class="confirmation-window__body">
+        {{ text }}
+    </div>
+    <div class="confirmation-window__buttons-line">
+        <div class="confirmation-window__buttons">
+            <button (click)="onOkButtonClick()" class="sf-button confirmation-window__button">
+                {{ okText }}
+            </button>
+            <button (click)="onCancelButtonClick()" class="sf-button confirmation-window__button">
+                {{ cancelText }}
+            </button>
+        </div>
+    </div>
+</div>

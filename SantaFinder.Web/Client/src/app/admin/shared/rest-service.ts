@@ -1,6 +1,7 @@
+import { Observable } from 'rxjs/Observable';
+
 import { AuthHttp } from 'app/core/auth';
 import { AppConfig } from 'app/app.config';
-import { Observable } from "rxjs/Observable";
 
 export abstract class RestService {
     protected resourceUrl: string;
@@ -29,7 +30,7 @@ export abstract class RestService {
     protected createAny(newModel) {
         return this.authHttp
             .post(this.resourceUrl, newModel)
-            .map(res => res.json());
+            .switchMap(res => res.json());
     }
 
     abstract edit(model): Observable<any>;
@@ -42,7 +43,7 @@ export abstract class RestService {
 
     public delete(id: string) {
         return this.authHttp
-            .delete(this.resourceUrl)
+            .delete(`${this.resourceUrl}/${id}`)
             .map(res => res.json());
     }
 }
