@@ -26,7 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -206,8 +206,8 @@
     <Compile Include="App_Start\Startup.Autofac.cs" />
     <Compile Include="App_Start\Startup.Cors.cs" />
     <Compile Include="App_Start\Startup.WebApi.cs" />
-    <Compile Include="Areas\Admins\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admins\Controllers\ClientsController.cs" />
+    <Compile Include="Areas\Admins\Service\ClientService.cs" />
     <Compile Include="Areas\Auth\AuthAreaRegistration.cs" />
     <Compile Include="Areas\Auth\Controllers\AccountController.cs" />
     <Compile Include="Areas\Auth\Controllers\AdminAccountController.cs" />
@@ -244,6 +244,7 @@
     <Compile Include="Models\SantaOrders\MyOrderPreview.cs" />
     <Compile Include="Models\Santas\FeedbackItem.cs" />
     <Compile Include="Models\Santas\SantaFullInfoForClient.cs" />
+    <Compile Include="Models\Santas\SantaInfo.cs" />
     <Compile Include="Models\Santas\SantaInfoForClient.cs" />
     <Compile Include="Models\Shared\OrderFullInfo.cs" />
     <Compile Include="Models\OrdersOnMap\OrderLocationInfo.cs" />
@@ -295,12 +296,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admins\Models\" />
-    <Folder Include="Areas\Admins\Views\Clients\" />
-    <Folder Include="Areas\Admins\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admins\Views\web.config" />
     <None Include="Properties\PublishProfiles\santafinder-api - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>

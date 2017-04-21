@@ -1,0 +1,23 @@
+<div class="santas-history-wrapper">
+    <div class="error-message santas-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="santas.length > 0" class="santas-history">
+        <ul class="santas-list">
+            <li *ngFor="let santa of santas | paginate: paginationConfig">
+                <div class="sf-card santa-item" (click)="onClientItemClick(santa)">
+                        <span class = "santa-item__common-info">Client name: {{ santa.name }}</span>
+                        <span class = "santa-item__common-info">Email: {{ santa.email }}</span>
+                        <span class = "santa-item__common-info">Photo Url: {{ santa.photoUrl }}</span>
+                </div>
+            </li>
+        </ul>
+        <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <div *ngIf="santas.length === 0" class="sf-empty-list-placeholder">
+        <div>
+            You have no orders yet
+        </div>
+    </div>
+</div>

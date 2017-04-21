@@ -17,5 +17,6 @@ namespace SantaFinder.Data.Context
 
         int SaveChanges();
         Task<int> SaveChangesAsync();
+        void Dispose();
     }
 }

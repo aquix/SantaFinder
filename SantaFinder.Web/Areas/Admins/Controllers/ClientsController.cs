@@ -10,130 +10,32 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SantaFinder.Data.Context;
 using SantaFinder.Entities;
+using System.Threading.Tasks;
+using SantaFinder.Web.Models.Shared;
+using SantaFinder.Web.Models.UsersList;
+using Microsoft.AspNet.Identity;
+using SantaFinder.Web.Areas.Admins.Service;
 
-namespace SantaFinder.Web.Areas.Admin.Controllers
+namespace SantaFinder.Web.Areas.Admins.Controllers
 {
+    [Authorize(Roles = "admin")]
+    [RoutePrefix("api/admin")]
     public class ClientsController : ApiController
     {
-        private AppDbContext _db;
+        private ClientService _clientService;
 
-        public ClientsController(AppDbContext db)
+        public ClientsController(ClientService clientService)
         {
-            _db = db;
+            _clientService = clientService;
         }
 
-        // GET: api/Clients
-        public IQueryable<Client> GetUsers()
+
+        [HttpGet]
+        [Route("clientlist")]
+        public async Task<PagedResponse<ClientInfo>> GetClientsList(int count, int page = 0)
         {
-            return _db.Clients;
-        }
-
-        // GET: api/Clients/5
-        [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClient(string id)
-        {
-            Client client = _db.Clients.Find(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(client);
-        }
-
-        // PUT: api/Clients/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutClient(string id, Client client)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != client.Id)
-            {
-                return BadRequest();
-            }
-
-            _db.Entry(client).State = EntityState.Modified;
-
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Clients
-        [ResponseType(typeof(Client))]
-        public IHttpActionResult PostClient(Client client)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _db.Users.Add(client);
-
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ClientExists(client.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = client.Id }, client);
-        }
-
-        // DELETE: api/Clients/5
-        [ResponseType(typeof(Client))]
-        public IHttpActionResult DeleteClient(string id)
-        {
-            Client client = _db.Clients.Find(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
-
-            _db.Users.Remove(client);
-            _db.SaveChanges();
-
-            return Ok(client);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ClientExists(string id)
-        {
-            return _db.Users.Count(e => e.Id == id) > 0;
+            var serverUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+            return await _clientService.GetClientList(User.Identity.GetUserId(), count, page, serverUrl);
         }
     }
 }

@@ -7,20 +7,14 @@
             <span>{{ errorMessage }}</span>
         </div>
         <div>
-            <input type="email" formControlName="email"
-                class="sf-form__control sf-form__control_with-validation" name="email"
-                value="" placeholder="Email">
+            <input type="email" formControlName="email" class="sf-form__control sf-form__control_with-validation" name="email" value="" placeholder="Email">
         </div>
         <div formGroupName="passwords">
             <div>
-                <input type="password" formControlName="password"
-                    class="sf-form__control sf-form__control_with-validation" name="password"
-                    value="" placeholder="Password">
+                <input type="password" formControlName="password" class="sf-form__control sf-form__control_with-validation" name="password" value="" placeholder="Password">
             </div>
             <div>
-                <input type="password" formControlName="passwordConfirmation"
-                    class="sf-form__control" name="passwordConfirmation"
-                    value="" placeholder="Confirm password">
+                <input type="password" formControlName="passwordConfirmation" class="sf-form__control" name="passwordConfirmation" value="" placeholder="Confirm password">
                 <span class="error-icon">
                     <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
                             src="/images/exclamation.png" alt="Passwords don't match" class="error-icon__image">
@@ -30,33 +24,22 @@
             </div>
         </div>
         <div>
-            <input type="text" formControlName="name"
-                class="sf-form__control sf-form__control_with-validation" name="name"
-                value="" placeholder="Your name">
+            <input type="text" formControlName="name" class="sf-form__control sf-form__control_with-validation" name="name" value="" placeholder="Your name">
         </div>
-        <div formGroupName="address">
+        <!--<div formGroupName="address">
             <div>
                 <label class="sf-form__label">Address:</label>
             </div>
             <div>
-                <input type="text" formControlName="city"
-                    class="sf-form__control sf-form__control_with-validation" name="city"
-                    value="" placeholder="City">
+                <input type="text" formControlName="city" class="sf-form__control sf-form__control_with-validation" name="city" value="" placeholder="City">
             </div>
             <div>
-                <input type="text" formControlName="street"
-                    class="sf-form__control client-register-form__control_street sf-form__control_with-validation" name="street"
-                    value="" placeholder="Street">
-                <input type="text" formControlName="house"
-                    class="sf-form__control client-register-form__control_house sf-form__control_with-validation" name="house"
-                    value="" placeholder="House">
-                <input type="text" formControlName="apartment"
-                    class="sf-form__control client-register-form__control_apart sf-form__control_with-validation" name="apartment"
-                    value="" placeholder="Apart.">
+                <input type="text" formControlName="street" class="sf-form__control client-register-form__control_street sf-form__control_with-validation" name="street" value="" placeholder="Street">
+                <input type="text" formControlName="house" class="sf-form__control client-register-form__control_house sf-form__control_with-validation" name="house" value="" placeholder="House">
+                <input type="text" formControlName="apartment" class="sf-form__control client-register-form__control_apart sf-form__control_with-validation" name="apartment" value="" placeholder="Apart.">
             </div>
-        </div>
-        <button type="submit" [disabled]="registerForm.invalid"
-            class="sf-button sf-form__button">
+        </div>-->
+        <button type="submit" [disabled]="registerForm.invalid" class="sf-button sf-form__button">
             Register
         </button>
     </form>

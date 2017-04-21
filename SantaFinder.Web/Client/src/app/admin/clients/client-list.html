@@ -1,1 +1,24 @@
-Hello
+<div class="clients-history-wrapper">
+    <div class="error-message clients-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="clients.length > 0" class="clients-history">
+        <ul class="clients-list">
+            <li *ngFor="let client of clients | paginate: paginationConfig">
+                <div class="sf-card client-item" (click)="onClientItemClick(client)">
+                        <span class = "client-item__common-info">Client name: {{ client.name }}</span>
+                        <span class = "client-item__common-info">Email: {{ client.email }}</span>
+                        <span class = "client-item__common-info">Address:</span>
+                        <span class = "client-item__common-info">{{ client.address | address }}</span>
+                </div>
+            </li>
+        </ul>
+        <pagination-controls [autoHide]="true" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+    <div *ngIf="clients.length === 0" class="sf-empty-list-placeholder">
+        <div>
+            You have no orders yet
+        </div>
+    </div>
+</div>

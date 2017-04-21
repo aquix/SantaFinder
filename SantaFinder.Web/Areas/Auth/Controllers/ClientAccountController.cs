@@ -12,17 +12,19 @@ using SantaFinder.Web.Areas.Auth.Models.ChangeProfile;
 namespace SantaFinder.Web.Areas.Auth.Controllers
 {
     [RoutePrefix("api/account/client")]
-    [Authorize(Roles ="client")]
+    //[Authorize(Roles ="client")]
     public class ClientAccountController : AccountController
     {
         private AppUserManager<Client> _clientManager;
         private AppUserManager<User> _userManager;
+        private AppUserManager<Entities.Admin> _adminManager;
 
-        public ClientAccountController(AppUserManager<Client> clientManager, AppUserManager<User> userManager,
+        public ClientAccountController(AppUserManager<Client> clientManager, AppUserManager<User> userManager, AppUserManager<Entities.Admin> adminManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat, userManager)
         {
             _clientManager = clientManager;
             _userManager = userManager;
+            _adminManager = adminManager;
         }
 
         [AllowAnonymous]
@@ -54,6 +56,44 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
             else
             {
                 result = await _clientManager.CreateAsync(client, model.Password);
+            }
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+
+        [AllowAnonymous]
+        [Route("registeradmin")]
+        [HttpPost]
+        public async Task<IHttpActionResult> RegisterAdmin(RegisterAdminModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var admin = new Entities.Admin
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Name = model.Name,
+            };
+
+            IdentityResult result;
+            var existingUser = await _userManager.FindByEmailAsync(admin.Email);
+
+            if (existingUser != null)
+            {
+                result = IdentityResult.Failed(new[] { "User with this email already exists" });
+            }
+            else
+            {
+                result = await _adminManager.CreateAsync(admin, model.Password);
             }
 
             if (!result.Succeeded)

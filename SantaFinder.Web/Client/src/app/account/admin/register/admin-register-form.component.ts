@@ -57,7 +57,6 @@ export class AdminRegisterFormComponent implements OnInit {
     }
 
     onSubmitClick({ value }: { value: AdminRegisterModel }) {
-        
         this.accountService.register(value).subscribe(res => {
             console.log('Registered', res);
             return this.accountService.login({

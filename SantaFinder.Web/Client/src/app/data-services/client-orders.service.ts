@@ -42,10 +42,10 @@ export class ClientOrdersService {
     }
 
     getClientList(count: number, page: number) {
-        return this.authHttp.get(`${AppConfig.API_PATH}/clientOrders/list?count=${count}&page=${page}`)
+            console.log('2');
+        return this.authHttp.get(`${AppConfig.API_PATH}/clientOrders/clientlist?count=${count}&page=${page}`)
             .map(res => res.json(), err => {
                 return ('error' + JSON.stringify(err));
             });
     }
-
 }

@@ -20,6 +20,7 @@ import { ClientSantaInfoComponent } from './client/santa-info/client-santa-info.
 import { SantaComponent } from './santa/santa.component';
 import { AdminComponent } from './admin/admin.component';
 import { ClientListComponent } from './admin/clients/client-list.component';
+import { SantaListComponent } from './admin/santas/santa-list.component';
 import { SantaHomeComponent } from './santa/home/santa-home.component';
 import { SantaMyOrdersComponent } from './santa/my-orders/santa-my-orders.component';
 import { SantaOrderDetailsComponent } from './santa/order-details/santa-order-details.component';
@@ -82,7 +83,8 @@ const santaRoutes: Routes = [
 const adminRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: AdminHomeComponent },
-    { path: 'clientsInfo', component: ClientListComponent }
+    { path: 'clientsInfo', component: ClientListComponent },
+    { path: 'santasInfo', component: SantaListComponent }
 ];
 
 const appRoutes: Routes = [

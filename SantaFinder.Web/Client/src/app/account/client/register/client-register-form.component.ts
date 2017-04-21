@@ -47,13 +47,7 @@ export class ClientRegisterFormComponent implements OnInit {
             }, {
                     validator: PasswordValidators.mismatchedPasswords('password', 'passwordConfirmation')
                 }),
-            name: ['', Validators.required],
-            address: this.formBuilder.group({
-                city: ['', [Validators.required]],
-                street: ['', [Validators.required]],
-                house: ['', [Validators.required]],
-                apartment: ['', [Validators.required]]
-            }),
+            name: ['', Validators.required]
         });
         this.registerForm.valueChanges.subscribe(data => {
             if (this.errorMessage) {

@@ -8,5 +8,5 @@ export interface ClientRegisterModel {
     };
 
     name: string;
-    address: Address;
+    //address: Address;
 }

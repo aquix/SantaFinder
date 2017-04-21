@@ -112,29 +112,6 @@ namespace SantaFinder.Web.Services
                 TotalCount = await allOrdersForClient.CountAsync()
             };
         }
-        public async Task<PagedResponse<ClientInfo>> GetClientList(string clientId, int count, int page, string serverUri)
-        {
-            var allOrdersForClient = _db.Clients
-                .Where(o => o.Id == clientId);
-
-            var clients = (await allOrdersForClient
-                .Skip(page * count)
-                .Take(count)
-                .ToListAsync())
-                .Select(o => new ClientInfo
-                {
-
-                    Email = o.Email,
-                    Name = o.Name,
-                    Address = o.Address
-                });
-
-            return new PagedResponse<ClientInfo>
-            {
-                Items = clients,
-                TotalCount = await allOrdersForClient.CountAsync()
-            };
-        }
 
         public IEnumerable<OrderLocationInfo> GetAvailableOrderLocations()
         {
@@ -311,6 +288,30 @@ namespace SantaFinder.Web.Services
             var numberOfOrders = santa.NumberOfOrders;
             var santaRating = santa.Rating ?? 0;
             return (numberOfOrders * santaRating - oldRating + newRating) / numberOfOrders;
+        }
+
+        public async Task<PagedResponse<ClientInfo>> GetClientList(int count, int page, string serverUri)
+        {
+            var listOfClients = _db.Clients;
+
+            var clients = (await listOfClients
+                .OrderByDescending(o => o.Name)
+                .Skip(page * count)
+                .Take(count)
+                .ToListAsync())
+                .Select(o => new ClientInfo
+                {
+                    Id = o.Id,
+                    Email = o.Email,
+                    Name = o.Name,
+                    Address = o.Address
+                });
+
+            return new PagedResponse<ClientInfo>
+            {
+                Items = clients,
+                TotalCount = await listOfClients.CountAsync()
+            };
         }
     }
 }

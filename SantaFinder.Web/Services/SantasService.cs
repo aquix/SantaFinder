@@ -75,5 +75,29 @@ namespace SantaFinder.Web.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<PagedResponse<SantaInfo>> GetSantaList(int count, int page, string serverUri)
+        {
+            var listOfSanta = _db.Santas;
+
+            var santas = (await listOfSanta
+                .OrderByDescending(o => o.Name)
+                .Skip(page * count)
+                .Take(count)
+                .ToListAsync())
+                .Select(o => new SantaInfo
+                {
+                    Id = o.Id,
+                    Email = o.Email,
+                    Name = o.Name,
+                    PhotoUrl = o.PhotoPath
+                });
+
+            return new PagedResponse<SantaInfo>
+            {
+                Items = santas,
+                TotalCount = await listOfSanta.CountAsync()
+            };
+        }
     }
 }

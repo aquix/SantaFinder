@@ -7,20 +7,14 @@
             <span>{{ errorMessage }}</span>
         </div>
         <div>
-            <input type="email" formControlName="email"
-                    class="sf-form__control sf-form__control_with-validation" name="email"
-                    value="" placeholder="Email">
+            <input type="email" formControlName="email" class="sf-form__control sf-form__control_with-validation" name="email" value="" placeholder="Email">
         </div>
         <div formGroupName="passwords">
             <div>
-                <input type="password" formControlName="password"
-                        class="sf-form__control sf-form__control_with-validation" name="password"
-                        value="" placeholder="Password">
+                <input type="password" formControlName="password" class="sf-form__control sf-form__control_with-validation" name="password" value="" placeholder="Password">
             </div>
             <div>
-                <input type="password" formControlName="passwordConfirmation"
-                        class="sf-form__control" name="passwordConfirmation"
-                        value="" placeholder="Confirm password">
+                <input type="password" formControlName="passwordConfirmation" class="sf-form__control" name="passwordConfirmation" value="" placeholder="Confirm password">
                 <span class="error-icon">
                     <img *ngIf="arePasswordsMismatched()" [@errorHint]="arePasswordsMismatched()"
                             src="/images/exclamation.png" alt="Passwords don't match" class="error-icon__image">
@@ -29,15 +23,12 @@
             </div>
         </div>
         <div>
-            <input type="text" formControlName="name"
-                    class="sf-form__control sf-form__control_with-validation" name="name"
-                    value="" placeholder="Your name">
+            <input type="text" formControlName="name" class="sf-form__control sf-form__control_with-validation" name="name" value="" placeholder="Your name">
         </div>
         <div class="sf-form__control santa-register-form__photo-uploader">
             <photo-uploader></photo-uploader>
         </div>
-        <button type="submit" [disabled]="registerForm.invalid || !photoUploader.photo"
-                (click)="onSubmitClick(registerForm)" class="sf-button sf-form__button">
+        <button type="submit" [disabled]="registerForm.invalid" (click)="onSubmitClick(registerForm)" class="sf-button sf-form__button">
             Register
         </button>
     </form>

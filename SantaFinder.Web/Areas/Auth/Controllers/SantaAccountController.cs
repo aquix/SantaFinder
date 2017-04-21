@@ -17,12 +17,14 @@ namespace SantaFinder.Web.Areas.Auth.Controllers
     {
         private AppUserManager<Santa> _santaManager;
         private AppUserManager<User> _userManager;
+        
 
         public SantaAccountController(AppUserManager<Santa> santaManager, AppUserManager<User> userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat) : base(accessTokenFormat, userManager)
         {
             _santaManager = santaManager;
             _userManager = userManager;
+            
         }
 
         [AllowAnonymous]

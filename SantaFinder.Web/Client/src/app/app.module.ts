@@ -35,6 +35,7 @@ import { ClientComponent } from './client/client.component';
 import { ClientHomeComponent } from './client/home/client-home.component';
 import { AdminHomeComponent } from './admin/home/admin-home.component';
 import { ClientListComponent } from './admin/clients/client-list.component';
+import { SantaListComponent } from './admin/santas/santa-list.component';
 import { ClientOrderComponent } from './client/order/client-order.component';
 import { ClientProfileComponent } from './client/profile/client-profile.component';
 import { ClientOrderHistoryComponent } from './client/order-history/client-order-history.component';
@@ -68,6 +69,7 @@ import { AddressPipe } from './shared/pipes/address.pipe';
 import { DatetimePipe } from './shared/pipes/datetime.pipe';
 import { SantaPreviewCardComponent } from './client/shared/santa-preview-card/santa-preview-card.component';
 import { ClientOrdersService } from './data-services/client-orders.service';
+import { AdminsService } from './data-services/admins.service';
 
 @NgModule({
     imports: [
@@ -98,6 +100,7 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         SantaComponent,
         AdminComponent,
         ClientListComponent,
+        SantaListComponent,
         SantaHomeComponent,
         SantaOrderDetailsComponent,
         SantaMyOrdersComponent,
@@ -139,6 +142,7 @@ import { ClientOrdersService } from './data-services/client-orders.service';
         SantaOrdersService,
         OrdersService,
         ClientOrdersService,
+        AdminsService,
         LocationService,
         GeocodingService
     ],

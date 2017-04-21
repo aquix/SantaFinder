@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaginationInstance } from 'ng2-pagination';
 
-import { ClientInfo } from '../../data-services/view-models/users-list/client-info';
+import { SantaInfo } from '../../data-services/view-models/santas-list/santa-info';
 import { AdminsService } from '../../data-services/admins.service';
 import { OrderStatus } from '../../data-services/view-models/orders-history/order-status';
 import { PagedResponse } from '../../shared/models/paged-response';
 
 @Component({
-    selector: 'client-list',
-    templateUrl: './client-list.html',
-    styleUrls: ['./client-list.scss']
+    selector: 'santa-list',
+    templateUrl: './santa-list.html',
+    styleUrls: ['./santa-list.scss']
 })
-export class ClientListComponent implements OnInit {
+export class SantaListComponent implements OnInit {
 
-    clients: ClientInfo[] = [];
+    santas: SantaInfo[] = [];
     errorMessage: string;
 
     paginationConfig: PaginationInstance = {
@@ -33,20 +33,20 @@ export class ClientListComponent implements OnInit {
     }
 
     onPageChanged(page: number) {
-        this.paginationConfig.currentPage = page;
-        this.loadCurrentPage();
+         this.paginationConfig.currentPage = page;
+         this.loadCurrentPage();
     }
 
-    onClientItemClick(client: ClientInfo) {
-        this.router.navigate(['/admin/clientinfo', client.id]);
+    onClientItemClick(santa: SantaInfo) {
+        this.router.navigate(['/admin/santainfo', santa.id]);
     }
 
     private loadCurrentPage() {
         console.log('1');
-        this.listService.getClientList(this.paginationConfig.itemsPerPage,
-            this.paginationConfig.currentPage - 1)
-            .subscribe((res: PagedResponse<ClientInfo>) => {
-                this.clients = res.items;
+        this.listService.getSantaList(this.paginationConfig.itemsPerPage,
+                this.paginationConfig.currentPage - 1)
+            .subscribe((res: PagedResponse<SantaInfo>) => {
+                this.santas = res.items;
                 this.paginationConfig.totalItems = res.totalCount;
             }, err => {
                 this.errorMessage = err;

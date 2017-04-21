@@ -34,54 +34,56 @@ export class AccountService {
         let registerUri = '';
 
         // todo register body for different types
-        if (this.getRegisterModelType(regInfoRaw) === UserType.client) {
-            let clientRegInfo = <ClientRegisterModel>regInfoRaw;
-            registerUri = 'client/register';
-            return this.geocodingService.getCoordsFromAddress(clientRegInfo.address).switchMap(location => {
+        //if (this.getRegisterModelType(regInfoRaw) === UserType.client) {
+            let clientRegInfo = <AdminRegisterModel>regInfoRaw;
+            registerUri = 'admin/register';
+            //return this.geocodingService.getCoordsFromAddress(clientRegInfo.address).switchMap(location => {
                 registerBody = {
                     email: clientRegInfo.email,
                     password: clientRegInfo.passwords.password,
                     confirmPassword: clientRegInfo.passwords.passwordConfirmation,
                     name: clientRegInfo.name,
-                    address: clientRegInfo.address,
-                    location: location
+                    // address: clientRegInfo.address,
+                    // location: location
                 };
+                console.log('3123');
                 return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
                     .map(res => res.status);
-            });
-        } else if (this.getRegisterModelType(regInfoRaw) === UserType.santa) {
-            let santaRegInfo = <SantaRegisterModel>regInfoRaw;
-            registerUri = 'santa/register';
-            let formDataContent = {
-                email: santaRegInfo.email,
-                password: santaRegInfo.passwords.password,
-                confirmPassword: santaRegInfo.passwords.passwordConfirmation,
-                name: santaRegInfo.name,
-                photo: santaRegInfo.photo
-            };
+            //});
+        // } else if (this.getRegisterModelType(regInfoRaw) === UserType.santa) {
+        //     let santaRegInfo = <SantaRegisterModel>regInfoRaw;
+        //     registerUri = 'santa/register';
+        //     let formDataContent = {
+        //         email: santaRegInfo.email,
+        //         password: santaRegInfo.passwords.password,
+        //         confirmPassword: santaRegInfo.passwords.passwordConfirmation,
+        //         name: santaRegInfo.name,
+        //         photo: santaRegInfo.photo
+        //     };
 
-            let formData = new FormData();
-            for (let key in formDataContent) {
-                formData.append(key, formDataContent[key]);
-            }
-            registerBody = formData;
-            return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
-                .map(res => res.status);
-        }
-        else if (this.getRegisterModelType(regInfoRaw) === UserType.admin) {
-            let adminRegInfo = <AdminRegisterModel>regInfoRaw;
-            registerUri = 'admin/register';
-            let formDataContent = {
-                email: adminRegInfo.email,
-                password: adminRegInfo.passwords.password,
-                confirmPassword: adminRegInfo.passwords.passwordConfirmation,
-                name: adminRegInfo.name,
-            };
+        //     let formData = new FormData();
+        //     for (let key in formDataContent) {
+        //         formData.append(key, formDataContent[key]);
+        //     }
+        //     registerBody = formData;
+        //     return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, registerBody)
+        //         .map(res => res.status);
+        // }
+        // else if (this.getRegisterModelType(regInfoRaw) === UserType.admin) {
+        //     console.log('3');
+        //     let adminRegInfo = <AdminRegisterModel>regInfoRaw;
+        //     registerUri = 'client/registeradmin';
+        //     let formDataContent = {
+        //         email: adminRegInfo.email,
+        //         password: adminRegInfo.passwords.password,
+        //         confirmPassword: adminRegInfo.passwords.passwordConfirmation,
+        //         name: adminRegInfo.name,
+        //     };
 
-            console.log(formDataContent);
-            return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, formDataContent)
-                .map(res => res.status);
-        }
+        //     console.log(formDataContent);
+        //     return this.http.post(`${AppConfig.API_PATH}/account/${registerUri}`, formDataContent)
+        //         .map(res => res.status);
+        // }
     }
 
     getClientData(){
